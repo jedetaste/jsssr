@@ -1,6 +1,6 @@
 {
-	"jsssr": {
-		"adobeflash": "Install Adobe Flash Player.sh",
-		"adobeflashppapi": "Install Adobe Flash Player PPAPI.sh",
-	}
+  "jsssr": {
+    "adobeflash": "Install Adobe Flash Player.sh",
+    "adobeflashppapi": "Install Adobe Flash Player PPAPI.sh"
+  }
 }
