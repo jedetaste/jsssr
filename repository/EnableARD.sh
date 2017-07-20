@@ -1,9 +1,4 @@
 #!/bin/bash
-#
-# enableARD
-# Activates AppleRemoteDesktop for User admin and if exists also for User "gucken"
-#
-# 20170512 - 15:58 - tobiaslinder
 
 	kickstart="/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart"
 	
