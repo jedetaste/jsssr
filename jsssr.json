@@ -1,6 +1,7 @@
 {
   "jsssr": {
     "adobeflash": "InstallAdobeFlashPlayer.sh",
-    "adobeflashppapi": "InstallAdobeFlashPlayerPPAPI.sh"
+    "adobeflashppapi": "InstallAdobeFlashPlayerPPAPI.sh",
+    "akypatch": "akyPatch.sh"
   }
 }
