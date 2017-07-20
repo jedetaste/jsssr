@@ -1,5 +1,6 @@
 {
   "jsssr": {
+    "adobeair": "InstallAdobeAIR.sh",
     "adobeflash": "InstallAdobeFlashPlayer.sh",
     "adobeflashppapi": "InstallAdobeFlashPlayerPPAPI.sh",
     "akypatch": "akyPatch.sh"
