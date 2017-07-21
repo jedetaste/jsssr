@@ -4,6 +4,7 @@
     "adobeflash": "InstallAdobeFlashPlayer.sh",
     "adobeflashppapi": "InstallAdobeFlashPlayerPPAPI.sh",
     "akypatch": "akyPatch.sh",
-    "enableard": "EnableARD.sh"
+    "enableard": "EnableARD.sh",
+    "firefoxbootstrap": "FirefoxBootstrap.sh"
   }
 }
