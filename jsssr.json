@@ -5,6 +5,9 @@
     "adobeflashppapi": "InstallAdobeFlashPlayerPPAPI.sh",
     "akypatch": "akyPatch.sh",
     "enableard": "EnableARD.sh",
-    "firefoxbootstrap": "FirefoxBootstrap.sh"
+    "firefoxbootstrap": "FirefoxBootstrap.sh",
+    "chromebootstrap": "ChromeBootstrap.sh",
+    "oraclejava": "OracleJava8Update.sh",
+    "oraclejavajdk": "OracleJava8UpdateJDK.sh
   }
 }
