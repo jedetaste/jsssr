@@ -6,7 +6,7 @@
     "akypatch": "akyPatch.sh",
     "enableard": "EnableARD.sh",
     "firefoxbootstrap": "FirefoxBootstrap.sh",
-    "chromebootstrap": "ChromeBootstrap.sh",
+    "googlechromebootstrap": "GoogleChromeBootstrap.sh",
     "oraclejava": "OracleJava8Update.sh",
     "oraclejavajdk": "OracleJava8UpdateJDK.sh
   }
