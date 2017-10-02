@@ -8,6 +8,7 @@
     "firefoxbootstrap": "FirefoxBootstrap.sh",
     "googlechromebootstrap": "GoogleChromeBootstrap.sh",
     "oraclejava": "OracleJava8Update.sh",
-    "oraclejavajdk": "OracleJava8UpdateJDK.sh"
+    "oraclejavajdk": "OracleJava8UpdateJDK.sh",
+    "silverlight": "SilverlightUpdate.sh"
   }
 }
