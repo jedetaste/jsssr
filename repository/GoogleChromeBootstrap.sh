@@ -38,8 +38,8 @@
 	echo '	]' >> "${GoogleChromeMasterPreferences}"
 	echo '}' >> "${GoogleChromeMasterPreferences}"
 	
-	if [ ! -d "/System/Library/User Template/German.lproj/Library/Application Support/Google/Chrome" ]; then
-		rm -rf "/System/Library/User Template/German.lproj/Library/Application Support/Google/"
+	if [ -d "/System/Library/User Template/German.lproj/Library/Application Support/Google" ]; then
+		rm -rf "/System/Library/User Template/German.lproj/Library/Application Support/Google"
 	fi
 	
 	mkdir -p "/System/Library/User Template/German.lproj/Library/Application Support/Google/Chrome/Default/"
