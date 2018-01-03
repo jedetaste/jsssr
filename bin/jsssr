@@ -20,20 +20,20 @@ if [ "${online}" == "true" ]; then
   
   repositoryURI="https://raw.githubusercontent.com/jedetaste/jsssr/master"
   
-  if [ -d "/usr/local/aky" ]; then
-    rm -rf "/usr/local/aky"
-    /bin/mkdir -p "/usr/local/aky"
+  if [ -d "/usr/local/jsssr" ]; then
+    rm -rf "/usr/local/jsssr"
+    /bin/mkdir -p "/usr/local/jsssr"
   else
-    /bin/mkdir -p "/usr/local/aky"
+    /bin/mkdir -p "/usr/local/jsssr"
   fi
   
   /usr/bin/curl -sfko "${tmpDir}/index" "${repositoryURI}/index"
   
   while read line; do 
-    /usr/bin/curl -sfko "/usr/local/aky/${line}" "${repositoryURI}/Library/${line}"
-    /bin/chmod +x "/usr/local/aky/${line}"
+    /usr/bin/curl -sfko "/usr/local/jsssr/${line}" "${repositoryURI}/Library/${line}"
+    /bin/chmod +x "/usr/local/jsssr/${line}"
   done < "${tmpDir}/index"
   
 fi
 
-cd "/usr/local/aky" && ./"${scriptArg}"
+cd "/usr/local/jsssr" && ./"${scriptArg}"
