@@ -1,0 +1,39 @@
+#!/bin/bash
+
+progName=$(basename $0)
+
+scriptArg="${1}" && scriptArg=$(echo "${scriptArg}" | sed -e 's/ /%20/g' 2>/dev/null)
+
+if [ -z "${scriptArg}" ]; then
+  echo "${progName}: Argument missing" && exit 1
+fi
+
+if [ "$(/usr/bin/curl -sL -w "%{http_code}" "http://www.google.com/" -o /dev/null)" == "200" ]; then
+  online="true"
+else
+  online="false"
+fi
+
+if [ "${online}" == "true" ]; then
+  
+  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+  
+  repositoryURI="https://raw.githubusercontent.com/jedetaste/jsssr/master"
+  
+  if [ -d "/usr/local/aky" ]; then
+    rm -rf "/usr/local/aky"
+    /bin/mkdir -p "/usr/local/aky"
+  else
+    /bin/mkdir -p "/usr/local/aky"
+  fi
+  
+  /usr/bin/curl -sfko "${tmpDir}/index" "${repositoryURI}/index"
+  
+  while read line; do 
+    /usr/bin/curl -sfko "/usr/local/aky/${line}" "${repositoryURI}/Library/${line}"
+    /bin/chmod +x "/usr/local/aky/${line}"
+  done < "${tmpDir}/index"
+  
+fi
+
+cd "/usr/local/aky" && ./"${scriptArg}"
