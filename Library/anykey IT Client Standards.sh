@@ -434,6 +434,10 @@ defaults write "/Library/Preferences/com.apple.NetworkAuthorization" AllowUnknow
 
 /usr/bin/defaults write "/Library/Preferences/com.apple.screensaver" loginWindowIdleTime -integer 0
 
+# Set do_not_upgrade_jamf to false for Jamf Binary
+
+/usr/bin/defaults write "/Library/Preferences/com.jamfsoftware.jamf" do_not_upgrade_jamf -bool false
+
 # Disable automatic spelling in all User Template
 
 for USER_TEMPLATE in "/System/Library/User Template"/*; do
