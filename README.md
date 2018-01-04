@@ -12,5 +12,5 @@ $ chmod +x "/usr/local/bin/jsssr"
 
 
 ```
-rm -f index && ls -A Library/ >> index
+rm -f index && rm -f Library/.DS_Store && ls -A Library/ >> index
 ```
