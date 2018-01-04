@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Determine OS version and build version
+# as part of the following actions to disable
+# the iCloud and Diagnostic pop-up windows
+
+osvers=$(sw_vers -productVersion | awk -F. '{print $2}')
+sw_vers=$(sw_vers -productVersion)
+sw_build=$(sw_vers -buildVersion)
+
 # Make a symbolic link from /System/Library/CoreServices/Applications/Directory Utility.app 
 # to /Applications/Utilities so that Directory Utility.app is easier to access.
 
@@ -42,14 +50,6 @@ if [[ ! -e "/Users/admin/Desktop/jamf.log" ]]; then
   /bin/ln -s "/var/log/jamf.log" "/Users/admin/Desktop/jamf.log"
 fi
 
-# Determine OS version and build version
-# as part of the following actions to disable
-# the iCloud and Diagnostic pop-up windows
-
-osvers=$(sw_vers -productVersion | awk -F. '{print $2}')
-sw_vers=$(sw_vers -productVersion)
-sw_build=$(sw_vers -buildVersion)
-
 # Sets the "Show scroll bars" setting (in System Preferences: General)
 # to "Always" in your Mac's default user template and for all existing users.
 # Code adapted from DeployStudio's rc130 ds_finalize script, where it's 
@@ -60,8 +60,7 @@ sw_build=$(sw_vers -buildVersion)
 # it is created and then the "Show scroll bars" setting (in System 
 # Preferences: General) is set to "Always".
 
-for USER_TEMPLATE in "/System/Library/User Template"/*
-  do
+for USER_TEMPLATE in "/System/Library/User Template"/*; do
     if [ ! -d "${USER_TEMPLATE}"/Library/Preferences ]; then
       /bin/mkdir -p "${USER_TEMPLATE}"/Library/Preferences
     fi
@@ -78,8 +77,7 @@ for USER_TEMPLATE in "/System/Library/User Template"/*
 # it is created and then the "Show scroll bars" setting (in System 
 # Preferences: General) is set to "Always".
 
-for USER_HOME in /Users/*
-  do
+for USER_HOME in /Users/*; do
     USER_UID=$(basename "${USER_HOME}")
     if [ ! "${USER_UID}" = "Shared" ]; then 
       if [ ! -d "${USER_HOME}"/Library/Preferences ]; then
@@ -108,8 +106,7 @@ for USER_HOME in /Users/*
 
 if [[ ${osvers} -ge 7 ]]; then
 
- for USER_TEMPLATE in "/System/Library/User Template"/*
-  do
+ for USER_TEMPLATE in "/System/Library/User Template"/*; do
     /usr/bin/defaults write "${USER_TEMPLATE}"/Library/Preferences/com.apple.SetupAssistant DidSeeCloudSetup -bool true
     /usr/bin/defaults write "${USER_TEMPLATE}"/Library/Preferences/com.apple.SetupAssistant GestureMovieSeen none
     /usr/bin/defaults write "${USER_TEMPLATE}"/Library/Preferences/com.apple.SetupAssistant LastSeenCloudProductVersion "${sw_vers}"
@@ -124,8 +121,7 @@ if [[ ${osvers} -ge 7 ]]; then
  # If the directory is not found, it is created and then the
  # iCloud, Diagnostic and Siri pop-up settings are set to be disabled.
 
- for USER_HOME in /Users/*
-  do
+ for USER_HOME in /Users/*; do
     USER_UID=$(basename "${USER_HOME}")
     if [ ! "${USER_UID}" = "Shared" ]; then 
       if [ ! -d "${USER_HOME}"/Library/Preferences ]; then
@@ -188,7 +184,7 @@ fi
 
 # Disable Time Machine's pop-up message whenever an external drive is plugged in
 
-/usr/bin/defaults write /Library/Preferences/com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+/usr/bin/defaults write "/Library/Preferences/com.apple.TimeMachine" DoNotOfferNewDisksForBackup -bool true
 
 # Set the ability to  view additional system info at the Login window
 # The following will be reported when you click on the time display 
@@ -199,7 +195,7 @@ fi
 # IP address
 # This will remain visible for 60 seconds.
 
-/usr/bin/defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+/usr/bin/defaults write "/Library/Preferences/com.apple.loginwindow" AdminHostInfo HostName
 
 # Turn SSH on
 
@@ -419,8 +415,6 @@ END
 # Configure time settings
 
 /usr/sbin/systemsetup -setusingnetworktime on 
-/usr/sbin/systemsetup -getnetworktimeserver
-/usr/sbin/systemsetup -gettimezone
 /usr/sbin/ntpdate -u "time.euro.apple.com"
 
 # Reset admin user picture
