@@ -30,8 +30,8 @@ if [ "${online}" == "true" ]; then
   /usr/bin/curl -sfko "${tmpDir}/index" "${repositoryURI}/index"
   
   while read line; do
-    line=$(echo "${line}" | sed -e 's/ /%20/g' 2>/dev/null)
-    /usr/bin/curl -sfko "/usr/local/jsssr/${line}" "${repositoryURI}/Library/${line}"
+    linePurged=$(echo "${line}" | sed -e 's/ /%20/g' 2>/dev/null)
+    /usr/bin/curl -sfko "/usr/local/jsssr/${line}" "${repositoryURI}/Library/${linePurged}"
     /bin/chmod +x "/usr/local/jsssr/${line}"
   done < "${tmpDir}/index"
   
