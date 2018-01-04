@@ -272,11 +272,11 @@ fi
 # Set the Open and Save options in Office 2016 apps to default to "On My Mac" instead of "Online Locations".
 # This setting will apply to all users on this Mac.
 
-/usr/bin/defaults write /Library/Preferences/com.microsoft.office DefaultsToLocalOpenSave -bool true
+/usr/bin/defaults write "/Library/Preferences/com.microsoft.office" DefaultsToLocalOpenSave -bool true
 
 # Enabling automatic download and installation of Microsoft Office 2016 updates
 
-/usr/bin/defaults write /Library/Preferences/com.microsoft.autoupdate2 HowToCheck AutomaticDownload
+/usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" HowToCheck AutomaticDownload
 
 # This script checks to see if the /mach_kernel file is visible or hidden.
 # The /mach_kernel file should not be visible when viewed from the Finder, 
@@ -396,17 +396,40 @@ sleep 7
 
 # Enable location services
 
-UUID=$(/usr/sbin/system_profiler SPHardwareDataType | grep "Hardware UUID" | cut -c22-57)
+rm -f "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd"*
 
-/usr/sbin/systemsetup -setusingnetworktime off
-/usr/sbin/systemsetup -setnetworktimeserver "time.euro.apple.com"
+if [ "${osvers}" -gt 11 ]; then
 
-/usr/bin/defaults write "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd.${UUID}" LocationServicesEnabled -int 1
-/usr/sbin/chown -R _locationd:_locationd "/var/db/locationd"
+  /usr/libexec/PlistBuddy -c "Add :LocationServicesEnabled integer 1" "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd.plist"
+  /usr/libexec/PlistBuddy -c "Add :LocationServicesEnabled integer 1" "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd.notbackedup.plist"
+
+elif [ "${osvers}" -lt 12 ] && [ "${osvers}" -gt 9 ]; then
+
+  UUID=$(system_profiler -detailLevel full SPHardwareDataType | grep "Hardware UUID" | cut -f2 -d : | sed 's/^ *//g')
+
+  /usr/libexec/PlistBuddy -c "Add :LocationServicesEnabled integer 1" "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd.${UUID}.plist"
+  /usr/libexec/PlistBuddy -c "Add :LocationServicesEnabled integer 1" "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd.notbackedup.${UUID}.plist"
+
+fi
+
+/usr/sbin/chown -R _locationd:_locationd "/var/db/locationd/"
+
+/usr/bin/defaults write "/Library/Preferences/com.apple.timezone.auto.plist" Active -bool true
+
+/usr/bin/python << END
+from Foundation import NSBundle
+TZPP = NSBundle.bundleWithPath_("/System/Library/PreferencePanes/DateAndTime.prefPane/Contents/Resources/TimeZone.prefPane")
+TimeZonePref          = TZPP.classNamed_('TimeZonePref')
+ATZAdminPrefererences = TZPP.classNamed_('ATZAdminPrefererences')
+
+atzap  = ATZAdminPrefererences.defaultPreferences()
+pref   = TimeZonePref.alloc().init()
+atzap.addObserver_forKeyPath_options_context_(pref, "enabled", 0, 0)
+result = pref._startAutoTimeZoneDaemon_(0x1)
+END
 
 # Configure time settings
 
-/usr/bin/defaults write "/Library/Preferences/com.apple.timezone.auto" Active -bool true
 /usr/sbin/systemsetup -setusingnetworktime on 
 /usr/sbin/systemsetup -getnetworktimeserver
 /usr/sbin/systemsetup -gettimezone
