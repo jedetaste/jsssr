@@ -2,7 +2,7 @@
 
 progName=$(basename $0)
 
-scriptArg="${1}" && scriptArg=$(echo "${scriptArg}" | sed -e 's/ /%20/g' 2>/dev/null)
+scriptArg="${1}"
 
 if [ -z "${scriptArg}" ]; then
   echo "${progName}: Argument missing" && exit 1
@@ -29,7 +29,8 @@ if [ "${online}" == "true" ]; then
   
   /usr/bin/curl -sfko "${tmpDir}/index" "${repositoryURI}/index"
   
-  while read line; do 
+  while read line; do
+    line=$(echo "${line}" | sed -e 's/ /%20/g' 2>/dev/null)
     /usr/bin/curl -sfko "/usr/local/jsssr/${line}" "${repositoryURI}/Library/${line}"
     /bin/chmod +x "/usr/local/jsssr/${line}"
   done < "${tmpDir}/index"
