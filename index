@@ -1,28 +1,12 @@
-AdobeAIRUpdate.sh
-EnableARD.sh
-EnableFinderSyncExt.sh
-EnableLocationService.sh
-FirefoxBootstrap.sh
-GarageBandLoop.sh
-GoogleChromeBootstrap.sh
-HostNameLoginWindowText.sh
-InstallAdobeFlashPlayer.sh
-InstallAdobeFlashPlayerPPAPI.sh
-KerioConnectDisableAutoUpdate.sh
-LehrerOfficeLock.sh
-LehrerOfficeUnlock.sh
-Localisation.sh
-MicrosoftOffice2011Update.sh
-OracleJava8Update.sh
-OracleJava8UpdateJDK.sh
-RemoveAllMyFilesFavorite.sh
-RemoveAllPrinters.sh
-RemoveMicrosoftOffice2011.sh
-RemoveMicrosoftOffice2016.sh
-RenameBootVolume.sh
-SilverlightUpdate.sh
-updateGarageBand.sh
-updateKeynote.sh
-updateNumbers.sh
-updatePages.sh
-updateiMovie.sh
+Enable ARD.sh
+Firefox Bootstrap.sh
+Google Chrome Bootstrap.sh
+Install Adobe Flash Player PPAPI.sh
+Install Oracle Java 8 JDK.sh
+Install Oracle Java 8.sh
+Remove Finder All My Files Favorite.sh
+anykey IT Apple Software Update.sh
+anykey IT Client Logout.sh
+anykey IT Client Security.sh
+anykey IT Client Standards.sh
+anykey IT anytmp.sh
