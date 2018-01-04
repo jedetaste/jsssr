@@ -1,9 +1,5 @@
 #!/bin/bash
-  
-  # enableARD
-  # Activates AppleRemoteDesktop for User admin and if exists also for User "gucken"
-  # 20170512 - 15:58 - tobiaslinder
-  
+
   # Re-Configure ARD and activate for User admin and gucken 
   
   kickstart="/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart"
@@ -22,5 +18,3 @@
   # Deactivate Screen Sharing Request Login
   
   /usr/bin/defaults write /Library/Preferences/com.apple.RemoteManagement ScreenSharingReqPermEnabled -bool NO
-  
-exit 0
