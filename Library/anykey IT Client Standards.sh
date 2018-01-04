@@ -382,18 +382,6 @@ for HOME in /Users/*; do
     fi
 done
 
-# Get device interface for WiFi
-
-WiFiID=$(/usr/sbin/networksetup -listallhardwareports | grep -A1 Wi-Fi | grep Device | awk '{print $2}')
-
-# WiFi must be powered on to determine current location
-
-/usr/sbin/networksetup -setairportpower "${WiFiID}" on
-
-# Pause to enable location services to load properly
-
-sleep 7
-
 # Enable location services
 
 rm -f "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd"*
