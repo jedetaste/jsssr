@@ -14,26 +14,49 @@ else
   online="false"
 fi
 
-if [ "${online}" == "true" ]; then
-  
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
-  
-  repositoryURI="https://raw.githubusercontent.com/jedetaste/jsssr/master"
-  
-  if [ -d "/usr/local/jsssr" ]; then
-    rm -rf "/usr/local/jsssr"
-    /bin/mkdir -p "/usr/local/jsssr"
-  else
-    /bin/mkdir -p "/usr/local/jsssr"
+if [ -d "/usr/local/jsssr" ]; then
+  libraryExists="true"
+  cDate=$(GetFileInfo -d "/usr/local/jsssr")
+  cdateEpoch=$(date -j -f "%m/%d/%Y %H:%M:%S" "${cDate}" +%s | awk '{print $1}')
+  tenMinAgoEpoch=$(date -v -1M +%s)
+else
+  libraryExists="false"
+fi
+
+function updateLibrary() {
+
+  if [ ${tenMinAgoEpoch} -gt ${cdateEpoch} ] || [ ! -d "/usr/local/jsssr" ]; then
+
+    tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+
+    repositoryURI="https://raw.githubusercontent.com/jedetaste/jsssr/master"
+
+    if [ -d "/usr/local/jsssr" ]; then
+      rm -rf "/usr/local/jsssr"
+      /bin/mkdir -p "/usr/local/jsssr"
+    else
+      /bin/mkdir -p "/usr/local/jsssr"
+    fi
+
+    /usr/bin/curl -sfko "${tmpDir}/index" "${repositoryURI}/index"
+
+    while read line; do
+      linePurged=$(echo "${line}" | sed -e 's/ /%20/g' 2>/dev/null)
+      /usr/bin/curl -sfko "/usr/local/jsssr/${line}" "${repositoryURI}/Library/${linePurged}"
+      /bin/chmod +x "/usr/local/jsssr/${line}"
+    done < "${tmpDir}/index"
+
   fi
+
+}
+
+if [ "${online}" == "true" ] && [ ${tenMinAgoEpoch} -gt ${cdateEpoch} ]; then
   
-  /usr/bin/curl -sfko "${tmpDir}/index" "${repositoryURI}/index"
+  updateLibrary
   
-  while read line; do
-    linePurged=$(echo "${line}" | sed -e 's/ /%20/g' 2>/dev/null)
-    /usr/bin/curl -sfko "/usr/local/jsssr/${line}" "${repositoryURI}/Library/${linePurged}"
-    /bin/chmod +x "/usr/local/jsssr/${line}"
-  done < "${tmpDir}/index"
+elif [ "${online}" == "true" ] && [ "${libraryExists}" == "false" ]; then
+  
+  updateLibrary
   
 fi
 

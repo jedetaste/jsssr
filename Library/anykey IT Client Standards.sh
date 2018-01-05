@@ -273,6 +273,8 @@ fi
 # Enabling automatic download and installation of Microsoft Office 2016 updates
 
 /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" HowToCheck AutomaticDownload
+/usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" UpdateCheckFrequency -int 1440
+/usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" StartDaemonOnAppLaunch -bool true
 
 # This script checks to see if the /mach_kernel file is visible or hidden.
 # The /mach_kernel file should not be visible when viewed from the Finder, 
