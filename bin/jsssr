@@ -51,13 +51,9 @@ function updateLibrary() {
 }
 
 if [ "${online}" == "true" ] && [ ${tenMinAgoEpoch} -gt ${cDateEpoch} ]; then
-  
   updateLibrary
-  
 elif [ "${online}" == "true" ] && [ "${libraryExists}" == "false" ]; then
-  
   updateLibrary
-  
 fi
 
 cd "/usr/local/jsssr" && ./"${scriptArg}"
