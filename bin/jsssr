@@ -17,7 +17,7 @@ fi
 if [ -d "/usr/local/jsssr" ]; then
   libraryExists="true"
   cDate=$(GetFileInfo -d "/usr/local/jsssr")
-  cdateEpoch=$(date -j -f "%m/%d/%Y %H:%M:%S" "${cDate}" +%s | awk '{print $1}')
+  cDateEpoch=$(date -j -f "%m/%d/%Y %H:%M:%S" "${cDate}" +%s | awk '{print $1}')
   tenMinAgoEpoch=$(date -v -1M +%s)
 else
   libraryExists="false"
@@ -25,7 +25,7 @@ fi
 
 function updateLibrary() {
 
-  if [ ${tenMinAgoEpoch} -gt ${cdateEpoch} ] || [ ! -d "/usr/local/jsssr" ]; then
+  if [ ${tenMinAgoEpoch} -gt ${cDateEpoch} ] || [ ! -d "/usr/local/jsssr" ]; then
 
     tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
 
@@ -50,7 +50,7 @@ function updateLibrary() {
 
 }
 
-if [ "${online}" == "true" ] && [ ${tenMinAgoEpoch} -gt ${cdateEpoch} ]; then
+if [ "${online}" == "true" ] && [ ${tenMinAgoEpoch} -gt ${cDateEpoch} ]; then
   
   updateLibrary
   
