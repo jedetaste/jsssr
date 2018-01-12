@@ -55,4 +55,12 @@ elif [ "${online}" == "true" ] && [ "${libraryExists}" == "false" ]; then
   updateLibrary
 fi
 
-cd "/usr/local/jsssr" && ./"${scriptArg}"
+if [ -s "/usr/local/jsssr/${scriptArg}" ]; then
+  
+  cd "/usr/local/jsssr" && ./"${scriptArg}"
+  
+else
+  
+  echo "Script '${scriptArg}' not found" && exit 1
+  
+fi
