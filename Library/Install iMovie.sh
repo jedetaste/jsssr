@@ -10,7 +10,7 @@
 
     echo "CDN resolves to a local IP. Continuing..."
 
-    if [ "${osvers}" -eq 9 ]; then
+    if [ "${osvers}" -eq 9 ] || [ "${cloudCDN}" != "217.150.247.87" ]; then
       echo "Upgrading iMovie for Mavericks"
       /usr/local/bin/aky imovie10098080
     fi
@@ -35,7 +35,7 @@
       /usr/local/bin/aky imovie10138080
     fi
 
-  elif [ "${localCDN80}" == "200" ] || [ "${cloudCDN}" != "217.150.247.87"  ]; then
+  elif [ "${localCDN80}" == "200" ] || [ "${cloudCDN}" != "217.150.247.87" ]; then
 
     echo "CDN resolves to a local IP. Continuing..."
 
