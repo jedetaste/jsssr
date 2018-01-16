@@ -6,11 +6,11 @@
   
   osvers=$(/usr/bin/sw_vers -productVersion | awk -F. '{print $2}')
 
-  if [ "${localCDN8080}" == "200" ]; then
+  if [ "${localCDN8080}" == "200" ] && [ "${cloudCDN}" != "217.150.247.87" ]; then
 
     echo "CDN resolves to a local IP. Continuing..."
 
-    if [ "${osvers}" -eq 9 ] && [ "${cloudCDN}" != "217.150.247.87" ]; then
+    if [ "${osvers}" -eq 9 ]; then
       echo "Upgrading iMovie for Mavericks"
       /usr/local/bin/aky imovie10098080
     fi
