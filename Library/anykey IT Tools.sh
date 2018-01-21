@@ -23,3 +23,15 @@
 	/usr/sbin/chown root:wheel "/usr/local/bin/dockutil"
 	/bin/chmod 775 "/usr/local/bin/dockutil"
 	/bin/chmod +x "/usr/local/bin/dockutil"
+	
+	# currentuser
+	
+	if [ -s "/usr/local/bin/currentuser" ]; then
+		rm -f "/usr/local/bin/currentuser"
+	fi
+	
+	/usr/bin/curl -sfko "/usr/local/bin/dockutil" "https://cdn-aky.s3.amazonaws.com/helper/currentuser"
+	
+	/usr/sbin/chown root:wheel "/usr/local/bin/currentuser"
+	/bin/chmod 775 "/usr/local/bin/currentuser"
+	/bin/chmod +x "/usr/local/bin/currentuser"
