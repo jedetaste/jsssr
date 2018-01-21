@@ -135,3 +135,15 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/aky"
   /bin/chmod 775 "/usr/local/bin/aky"
   /bin/chmod +x "/usr/local/bin/aky"
+  
+  # Remove2011
+  
+  if [ -s "/usr/local/bin/Remove2011" ]; then
+  	rm -f "/usr/local/bin/Remove2011"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/Remove2011" "https://raw.githubusercontent.com/pbowden-msft/Remove2011/master/Remove2011"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/Remove2011"
+  /bin/chmod 775 "/usr/local/bin/Remove2011"
+  /bin/chmod +x "/usr/local/bin/Remove2011"
