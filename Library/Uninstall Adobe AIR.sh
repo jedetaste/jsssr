@@ -1,7 +1,7 @@
 #!/bin/bash
   
-  versionInstaller="458.0.1"
-  downloadInstaller="https://scratch.mit.edu/scratchr2/static/sa/Scratch-${versionInstaller}.dmg"
+  versionInstaller="28.0"
+  downloadInstaller="https://airdownload.adobe.com/air/mac/download/${versionInstaller}/AdobeAIR.dmg"
   
   tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
   
@@ -21,11 +21,9 @@
   
   installerVolume=$(/usr/bin/hdiutil attach -noautoopen -noverify -nobrowse "${filePath}.cdr" | egrep "Volumes" | grep -o "/Volumes/.*")
   
-  echo "Running installer at '${installerVolume}/Install Scratch 2.app/Contents/MacOS/Install Scratch 2'"
+  echo "Running installer at '${installerVolume}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer'"
   
-  /bin/cp -R "${installerVolume}/Install Scratch 2.app" "${tmpDir}"
-  
-  "${tmpDir}/Install Scratch 2.app/Contents/MacOS/Install Scratch 2" -silent
+  "${installerVolume}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer" -uninstall
   
   /usr/sbin/diskutil quiet eject "${installerVolume}" && sleep 2
   
