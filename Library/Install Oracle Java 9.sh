@@ -118,7 +118,7 @@ if [[ ${osvers} -ge 10 ]]; then
              echo "The downloaded Oracle Java 9 JRE installer package is signed by Oracle's Developer ID Installer certificate."
              echo "Proceeding with installation of the latest Oracle Java 9 JRE."
              # Install Oracle Java 9 JRE from the installer package stored inside the disk image
-             /usr/sbin/installer -dumplog -verbose -pkg "${pkg_path}" -target "/"
+             /usr/sbin/installer -pkg "${pkg_path}" -target "/"
 
              # Report on the currently installed version of the Oracle Java 9 JRE
              javaJREVersion=$(/usr/bin/defaults read "/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Info" CFBundleVersion)

@@ -118,7 +118,7 @@ if [[ ${osvers} -ge 10 ]]; then
              echo "The downloaded Oracle Java 9 JDK installer package is signed by Oracle's Developer ID Installer certificate."
              echo "Proceeding with installation of the latest Oracle Java 9 JDK."
              # Install Oracle Java 9 JDK from the installer package stored inside the disk image
-             /usr/sbin/installer -dumplog -verbose -pkg "${pkg_path}" -target "/"
+             /usr/sbin/installer -pkg "${pkg_path}" -target "/"
 
              # Report on the currently installed version of the Oracle Java 9 JDK
              javaJDKVersion=`/usr/bin/java -version 2>&1 | awk 'NR==1{ gsub(/"/,""); print $3 }'`
