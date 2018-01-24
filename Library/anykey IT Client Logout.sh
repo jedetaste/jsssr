@@ -15,7 +15,7 @@
   
   for ((i = 0; i < "${#userName[@]}"; i++)); do
     
-    if [ -d "/Users/${#userName[@]}/" ]; then
+    if [ -d "/Users/${#userName[@]}" ]; then
       /usr/bin/pwpolicy -u "${#userName[@]}" -setpolicy "canModifyPasswordforSelf=0"
       echo "Set password policy for user ${#userName[@]}"
     fi
@@ -32,7 +32,7 @@
   
   timeStamp=$(date +%Y-%m-%d-%H-%M-%S)
   
-  for ((i = 0; i < "${#userName[@]}/"; i++)); do
+  for ((i = 0; i < "${#userName[@]}"; i++)); do
     
     if [ -d "/Users/${#userName[@]}" ]; then
       /bin/mv "/Users/${#userName[@]}" "/Library/geloeschteHomes/${#userName[@]}-${timeStamp}"
