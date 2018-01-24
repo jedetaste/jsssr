@@ -15,7 +15,7 @@
   
   for ((i = 0; i < "${#userName[@]}"; i++)); do
     
-    if [ -d "/Users/${#userName[@]}" ]; then
+    if [ -d "/Users/${#userName[@]}/" ]; then
       /usr/bin/pwpolicy -u "${#userName[@]}" -setpolicy "canModifyPasswordforSelf=0"
       echo "Set password policy for user ${#userName[@]}"
     fi
@@ -25,15 +25,17 @@
   # Create directory geloeschteHomes in Library
   
   if [ ! -d "/Library/geloeschteHomes/" ]; then
-    mkdir /Library/geloeschteHomes
+    /bin/mkdir "/Library/geloeschteHomes"
   fi
   
   # Move home directory to Library
   
-  for ((i = 0; i < "${#userName[@]}"; i++)); do
+  timeStamp=$(date +%Y-%m-%d-%H-%M-%S)
+  
+  for ((i = 0; i < "${#userName[@]}/"; i++)); do
     
     if [ -d "/Users/${#userName[@]}" ]; then
-      mv "/Users/${#userName[@]}" "/Library/geloeschteHomes/${#userName[@]}-$(date +%Y-%m-%d--%H-%M-%S)"
+      /bin/mv "/Users/${#userName[@]}" "/Library/geloeschteHomes/${#userName[@]}-${timeStamp}"
       echo "Move home directory '/Users/${#userName[@]}' to Library"
     fi
     
@@ -41,8 +43,7 @@
   
   # Set permissions
   
-  chown -R admin "/Library/geloeschteHomes/"
-  chmod -R 700 "/Library/geloeschteHomes/"
+  chown -R admin "/Library/geloeschteHomes/" && chmod -R 700 "/Library/geloeschteHomes/"
 
   # Cancel all print jobs
   
@@ -55,10 +56,10 @@
   # Kill CloudKeychainProxy
   
   killall CloudKeychainProxy
-
+  
   # Repair user permissions
   
-  chmod 700 /Users/*
+  chmod 700 "/Users/"*
 
   # Repair shared folder
   
