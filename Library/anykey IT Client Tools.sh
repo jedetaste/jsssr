@@ -147,3 +147,27 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/Remove2011"
   /bin/chmod 775 "/usr/local/bin/Remove2011"
   /bin/chmod +x "/usr/local/bin/Remove2011"
+  
+  # adobe_prtk
+  
+  if [ -s "/usr/local/bin/adobe_prtk" ]; then
+  	rm -f "/usr/local/bin/adobe_prtk"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/adobe_prtk" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/adobe_prtk"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/adobe_prtk"
+  /bin/chmod 775 "/usr/local/bin/adobe_prtk"
+  /bin/chmod +x "/usr/local/bin/adobe_prtk"
+  
+  # AppStoreXtractor
+  
+  if [ -s "/usr/local/bin/AppStoreXtractor" ]; then
+  	rm -f "/usr/local/bin/AppStoreXtractor"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/AppStoreXtractor" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/AppStoreXtractor"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/AppStoreXtractor"
+  /bin/chmod 775 "/usr/local/bin/AppStoreXtractor"
+  /bin/chmod +x "/usr/local/bin/AppStoreXtractor"
