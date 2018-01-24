@@ -15,9 +15,9 @@
   
   for ((i = 0; i < "${#userName[@]}"; i++)); do
     
-    if [ -d "/Users/${#userName[@]}" ]; then
-      /usr/bin/pwpolicy -u "${#userName[@]}" -setpolicy "canModifyPasswordforSelf=0"
-      echo "Set password policy for user ${#userName[@]}"
+    if [ -d "/Users/${userName[$i]}" ]; then
+      /usr/bin/pwpolicy -u "${userName[$i]}" -setpolicy "canModifyPasswordforSelf=0"
+      echo "Set password policy for user ${userName[$i]}"
     fi
     
   done
@@ -34,9 +34,9 @@
   
   for ((i = 0; i < "${#userName[@]}"; i++)); do
     
-    if [ -d "/Users/${#userName[@]}" ]; then
-      /bin/mv "/Users/${#userName[@]}" "/Library/geloeschteHomes/${#userName[@]}-${timeStamp}"
-      echo "Move home directory '/Users/${#userName[@]}' to Library"
+    if [ -d "/Users/${userName[$i]}" ]; then
+      /bin/mv "/Users/${userName[$i]}" "/Library/geloeschteHomes/${userName[$i]}-${timeStamp}"
+      echo "Move home directory '/Users/${userName[$i]}' to Library"
     fi
     
   done
