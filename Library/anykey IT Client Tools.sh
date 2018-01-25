@@ -180,4 +180,4 @@
   
   cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/chilcote/outset/releases/download/v${outsetVersion}/outset-${outsetVersion}.pkg"
   
-  /usr/sbin/installer -pkg "${tmpDir}/outset-${outsetVersion}.pkg" -target / && rm -f "${tmpDir}"
+  /usr/sbin/installer -pkg "${tmpDir}/outset-${outsetVersion}.pkg" -target / && rm -rf "${tmpDir}"
