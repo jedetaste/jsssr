@@ -171,3 +171,13 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/AppStoreXtractor"
   /bin/chmod 775 "/usr/local/bin/AppStoreXtractor"
   /bin/chmod +x "/usr/local/bin/AppStoreXtractor"
+  
+  # outset
+  
+  outsetVersion="2.0.6"
+  
+  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+  
+  cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/chilcote/outset/releases/download/v${outsetVersion}/outset-${outsetVersion}.pkg"
+  
+  /usr/sbin/installer -pkg "${tmpDir}/outset-${outsetVersion}.pkg" -target / && rm -f "${tmpDir}"
