@@ -11,7 +11,7 @@
     'schule'
   )
   
-  # Set permissions on Accounts.prefPane
+  # Set password policy
   
   for ((i = 0; i < "${#userName[@]}"; i++)); do
     
