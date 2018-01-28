@@ -193,3 +193,15 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/SafariBookmarkEditor"
   /bin/chmod 775 "/usr/local/bin/SafariBookmarkEditor"
   /bin/chmod +x "/usr/local/bin/SafariBookmarkEditor"
+  
+  # FinderSidebarEditor
+  
+  if [ -s "/usr/local/bin/FinderSidebarEditor" ]; then
+  	rm -f "/usr/local/bin/FinderSidebarEditor"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/FinderSidebarEditor" "https://raw.githubusercontent.com/robperc/FinderSidebarEditor/master/FinderSidebarEditor.py"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/FinderSidebarEditor"
+  /bin/chmod 775 "/usr/local/bin/FinderSidebarEditor"
+  /bin/chmod +x "/usr/local/bin/FinderSidebarEditor"
