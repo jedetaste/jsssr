@@ -181,3 +181,15 @@
   cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/chilcote/outset/releases/download/v${outsetVersion}/outset-${outsetVersion}.pkg"
   
   /usr/sbin/installer -pkg "${tmpDir}/outset-${outsetVersion}.pkg" -target / && rm -rf "${tmpDir}"
+  
+  # SafariBookmarkEditor
+  
+  if [ -s "/usr/local/bin/SafariBookmarkEditor" ]; then
+  	rm -f "/usr/local/bin/SafariBookmarkEditor"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/SafariBookmarkEditor" "https://raw.githubusercontent.com/robperc/SafariBookmarkEditor/master/SafariBookmarkEditor.py"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/SafariBookmarkEditor"
+  /bin/chmod 775 "/usr/local/bin/SafariBookmarkEditor"
+  /bin/chmod +x "/usr/local/bin/SafariBookmarkEditor"
