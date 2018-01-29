@@ -182,6 +182,16 @@
   
   /usr/sbin/installer -pkg "${tmpDir}/outset-${outsetVersion}.pkg" -target / && rm -rf "${tmpDir}"
   
+  # offset
+  
+ 	offsetVersion="1.2.0"
+  
+  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+  
+  cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/aysiu/offset/releases/download/${offsetVersion}/Offset.pkg"
+  
+  /usr/sbin/installer -pkg "${tmpDir}/outset-${offsetVersion}.pkg" -target / && rm -rf "${tmpDir}"
+  
   # SafariBookmarkEditor
   
   if [ -s "/usr/local/bin/SafariBookmarkEditor" ]; then
