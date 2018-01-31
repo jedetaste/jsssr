@@ -190,7 +190,7 @@
   
   cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/aysiu/offset/releases/download/${offsetVersion}/Offset.pkg"
   
-  /usr/sbin/installer -pkg "${tmpDir}/outset-${offsetVersion}.pkg" -target / && rm -rf "${tmpDir}"
+  /usr/sbin/installer -pkg "${tmpDir}/Offset.pkg" -target / && rm -rf "${tmpDir}"
   
   # SafariBookmarkEditor
   
