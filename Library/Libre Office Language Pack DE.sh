@@ -4,7 +4,7 @@
   /bin/mkdir -p "${tmp}"
   
   language="de"
-  version="6.0.3"
+  version="6.0.0"
   
   cd "${tmp}" && /usr/bin/curl -# -O -J -L "http://download.documentfoundation.org/libreoffice/stable/${version}/mac/x86_64/LibreOffice_${version}_MacOS_x86-64_langpack_${language}.dmg" && cd
   
