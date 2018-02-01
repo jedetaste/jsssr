@@ -215,3 +215,15 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/FinderSidebarEditor"
   /bin/chmod 775 "/usr/local/bin/FinderSidebarEditor"
   /bin/chmod +x "/usr/local/bin/FinderSidebarEditor"
+  
+  # duti
+  
+  if [ -s "/usr/local/bin/duti" ]; then
+  	rm -f "/usr/local/bin/duti"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/duti" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/duti"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/duti"
+  /bin/chmod 775 "/usr/local/bin/duti"
+  /bin/chmod +x "/usr/local/bin/duti"
