@@ -54,7 +54,6 @@ EOL
     touch "${PreferencesFolder}/Chrome/First Run"
 
     chown -R root:wheel "${PreferencesFolder}"
-    chown -R root:wheel "${PreferencesFolder}"
 
     Preferences="${PreferencesFolder}/Chrome/Default/Preferences"
 
@@ -158,5 +157,3 @@ EOL
 EOL
 
   done
-
-exit 0
