@@ -276,6 +276,16 @@ fi
 /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" UpdateCheckFrequency -int 1440
 /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" StartDaemonOnAppLaunch -bool true
 
+# Define gatekeeper properties for 'Microsoft AU Daemon.app'
+
+dir="/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app/Contents/MacOS"
+bundle="Microsoft AU Daemon.app"
+
+/bin/chmod -RN "${dir}/${bundle}"
+/usr/bin/chflags -R nouchg "${dir}/${bundle}"
+/usr/bin/xattr -r -d -s com.apple.quarantine "${dir}/${bundle}"
+/usr/sbin/spctl --add "${dir}/${bundle}"
+
 # This script checks to see if the /mach_kernel file is visible or hidden.
 # The /mach_kernel file should not be visible when viewed from the Finder, 
 # so the script will use /usr/bin/chflags to set the /mach_kernel file to be hidden.
