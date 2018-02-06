@@ -29,5 +29,3 @@
   
   /usr/bin/hdiutil detach $(/bin/df | /usr/bin/grep "${volume}" | awk '{print $1}') -quiet -force
   /bin/rm -rf "${tmp}"
-
-exit 0

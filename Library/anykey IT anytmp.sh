@@ -5,17 +5,15 @@
   # Move .anytmp to tmp
   
   if [ -d "/.anytmp" ]; then
-    mv "/.anytmp" "/tmp/.anytmp_${creationdate}"
+    /bin/mv "/.anytmp" "/tmp/.anytmp_${creationdate}"
   fi
   
   # Create directory .anytmp
   
-  mkdir - "/.anytmp"
-  chown -R root:wheel "/.anytmp"
-  chmod -R 770 "/.anytmp"
+  /bin/mkdir - "/.anytmp"
+  /usr/sbin/chown -R root:wheel "/.anytmp"
+  /bin/chmod -R 770 "/.anytmp"
   
   # Move deleted home directories to .anytmp
   
-  mv "/Library/geloeschteHomes" "/.anytmp/"
-  
-exit 0
+  /bin/mv "/Library/geloeschteHomes" "/.anytmp/"
