@@ -274,17 +274,17 @@ fi
 
 /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" HowToCheck AutomaticDownload
 /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" UpdateCheckFrequency -int 1440
-/usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" StartDaemonOnAppLaunch -bool true
+/usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" StartDaemonOnAppLaunch -bool false
 
-# Define gatekeeper properties for 'Microsoft AU Daemon.app'
+# Register 'Microsoft AU Daemon.app' in LaunchServices
 
-dir="/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app/Contents/MacOS"
-bundle="Microsoft AU Daemon.app"
+if [ -e "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app" ]; then
+  "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister" -R -f -trusted "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app"
+fi
 
-/bin/chmod -RN "${dir}/${bundle}"
-/usr/bin/chflags -R nouchg "${dir}/${bundle}"
-/usr/bin/xattr -r -d -s com.apple.quarantine "${dir}/${bundle}"
-/usr/sbin/spctl --add "${dir}/${bundle}"
+if [ -e "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app/Contents/MacOS/Microsoft AU Daemon.app" ]; then
+  "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -R -f -trusted" "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app/Contents/MacOS/Microsoft AU Daemon.app"
+fi
 
 # This script checks to see if the /mach_kernel file is visible or hidden.
 # The /mach_kernel file should not be visible when viewed from the Finder, 
