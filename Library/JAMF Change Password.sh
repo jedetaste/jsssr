@@ -1,8 +1,8 @@
 #!/bin/bash
   
-  username="${1}"
-  password="${2}"
-  oldPassword="${3}"
+  readonly username="${1}"
+  readonly password="${2}"
+  readonly oldPassword="${3}"
   
   jamf="/usr/local/jamf/bin/jamf"
   
