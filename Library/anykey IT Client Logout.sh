@@ -9,6 +9,7 @@
     'schueler'
     'sus'
     'schule'
+    'student'
   )
   
   # Set password policy
