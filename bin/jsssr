@@ -4,6 +4,15 @@
   
   scriptArg="${1}"
   
+  passArg1="${2}"
+  passArg2="${3}"
+  passArg3="${4}"
+  passArg4="${5}"
+  passArg5="${6}"
+  passArg6="${7}"
+  passArg7="${8}"
+  passArg8="${9}"
+  
   if [ -z "${scriptArg}" ]; then
     echo "${progName}: Argument missing" && exit 1
   fi
@@ -56,7 +65,7 @@
   fi
   
   if [ -s "/usr/local/jsssr/${scriptArg}" ]; then
-    cd "/usr/local/jsssr" && ./"${scriptArg}"
+    cd "/usr/local/jsssr" && ./"${scriptArg}" "${2}" "${3}" "${4}" "${5}" "${6}" "${7}" "${8}" "${9}"
   else
     echo "Script '${scriptArg}' not found" && exit 1
   fi
