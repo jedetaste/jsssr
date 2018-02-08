@@ -6,7 +6,7 @@
   home="${4}"
   admin="${5}"
   
-  jamf="/usr/local/bin/jamf"
+  jamf="/usr/local/jamf/bin/jamf"
   
   if [ ! -z "$(id -u ${username} 2>/dev/null)" ]; then
   
