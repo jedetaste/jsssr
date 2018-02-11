@@ -6,6 +6,6 @@
   
   # Download optional content only if argument == optional
   
-  if [ "${2}" == "optional" ]; then
+  if [ "${1}" == "optional" ]; then
     "/usr/local/bin/appleLoops" --deployment --optional-only
   fi
