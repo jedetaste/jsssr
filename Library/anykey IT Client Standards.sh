@@ -309,14 +309,44 @@
   # Set computer language
   # Set the region
   
-  KEYBOARDNAME="Swiss German"
-  KEYBOARDCODE="19"
-  LANG="de"
-  REGION="de_CH"
+  if [ "${1}" == "Swiss German" ] || [ -z "${1}" ]; then
+    
+    KEYBOARDNAME="Swiss German"
+    KEYBOARDCODE="19"
+    LANG="de"
+    LANGSYSTEM="German"
+    REGION="de_CH"
+    
+  elif [ "${1}" == "Swiss French" ]; then
+    
+    KEYBOARDNAME="Swiss French"
+    KEYBOARDCODE="18"
+    LANG="fr"
+    LANGSYSTEM="French"
+    REGION="fr_CH"
+    
+  elif [ "${1}" == "English" ]; then
+    
+    KEYBOARDNAME="U.S."
+    KEYBOARDCODE="0"
+    LANG="en"
+    LANGSYSTEM="English"
+    REGION="en_US"
+    
+  elif [ "${1}" == "British" ]; then
+    
+    KEYBOARDNAME="British"
+    KEYBOARDCODE="2"
+    LANG="en"
+    LANGSYSTEM="English"
+    REGION="en_GB"
+    
+  fi
+  
   PLBUDDY="/usr/libexec/PlistBuddy"
   
   update_system_language() {
-    /usr/sbin/languagesetup -langspec German
+    /usr/sbin/languagesetup -langspec "${LANGSYSTEM}"
   }
   
   update_kdb_layout() {
@@ -359,7 +389,7 @@
   for HOME in /Users/*; do
       if [ -d "${HOME}"/Library/Preferences ]; then
         cd "${HOME}"/Library/Preferences
-        HITOOLBOX_FILES=`find . -name "com.apple.HIToolbox.*plist"`
+        HITOOLBOX_FILES=$(find . -name "com.apple.HIToolbox.*plist")
         for HITOOLBOX_FILE in ${HITOOLBOX_FILES}; do
           update_kdb_layout "${HITOOLBOX_FILE}" "${KEYBOARDNAME}" "${KEYBOARDCODE}"
         done
@@ -371,7 +401,7 @@
   for HOME in /Users/*; do
       if [ -d "${HOME}"/Library/Preferences ]; then
         cd "${HOME}"/Library/Preferences
-        GLOBALPREFERENCES_FILES=`find . -name "\.GlobalPreferences.*plist"`
+        GLOBALPREFERENCES_FILES=$(find . -name "\.GlobalPreferences.*plist")
         for GLOBALPREFERENCES_FILE in ${GLOBALPREFERENCES_FILES}; do
           update_language "${GLOBALPREFERENCES_FILE}" "${LANG}"
         done
@@ -383,7 +413,7 @@
   for HOME in /Users/*; do
       if [ -d "${HOME}"/Library/Preferences ]; then
         cd "${HOME}"/Library/Preferences
-        GLOBALPREFERENCES_FILES=`find . -name "\.GlobalPreferences.*plist"`
+        GLOBALPREFERENCES_FILES=$(find . -name "\.GlobalPreferences.*plist")
         for GLOBALPREFERENCES_FILE in ${GLOBALPREFERENCES_FILES}; do
           update_region "${GLOBALPREFERENCES_FILE}" "${REGION}"
         done
