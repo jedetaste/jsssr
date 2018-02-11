@@ -452,7 +452,7 @@
   pref   = TimeZonePref.alloc().init()
   atzap.addObserver_forKeyPath_options_context_(pref, "enabled", 0, 0)
   result = pref._startAutoTimeZoneDaemon_(0x1)
-  END
+END
   
   # Configure time settings
   
