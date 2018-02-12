@@ -1,7 +1,7 @@
 #!/bin/bash
 
-  localCDN8080=$(/usr/bin/curl -sL -w "%{http_code}" "http://cdn.anykeyit.ch:8080" -o /dev/null)
-  localCDN80=$(/usr/bin/curl -sL -w "%{http_code}" "http://cdn.anykeyit.ch" -o /dev/null)
+  localCDN8080=$(/usr/bin/curl -sL -w "%{http_code}" "http://cdn.anykeyit.ch:8080/CasperShare/HTTPCODE" -o /dev/null)
+  localCDN80=$(/usr/bin/curl -sL -w "%{http_code}" "http://cdn.anykeyit.ch/CasperShare/HTTPCODE" -o /dev/null)
   cloudCDN=$(/usr/bin/host cdn.anykeyit.ch | /usr/bin/awk '{print $NF}')
   
   osvers=$(/usr/bin/sw_vers -productVersion | awk -F. '{print $2}')
