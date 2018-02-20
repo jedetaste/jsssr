@@ -227,3 +227,15 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/duti"
   /bin/chmod 775 "/usr/local/bin/duti"
   /bin/chmod +x "/usr/local/bin/duti"
+  
+  # mas
+  
+  if [ -s "/usr/local/bin/mas" ]; then
+  	rm -f "/usr/local/bin/mas"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/mas" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/mas"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/mas"
+  /bin/chmod 775 "/usr/local/bin/mas"
+  /bin/chmod +x "/usr/local/bin/mas"
