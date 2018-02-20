@@ -8,7 +8,7 @@
     echo "${progName}: Argument missing" && exit 1
   fi
   
-  if [ "$(/usr/bin/curl -sL -w "%{http_code}" "https://google.com/" -o /dev/null)" == "200" ]; then
+  if [ "$(/usr/bin/curl -sL -w "%{http_code}" "http://google.com/" -o /dev/null)" == "200" ]; then
     online="true"
   else
     online="false"
