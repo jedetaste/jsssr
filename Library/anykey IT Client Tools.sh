@@ -239,3 +239,15 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/mas"
   /bin/chmod 775 "/usr/local/bin/mas"
   /bin/chmod +x "/usr/local/bin/mas"
+  
+  # reattach-to-user-namespace
+  
+  if [ -s "/usr/local/bin/reattach-to-user-namespace" ]; then
+  	rm -f "/usr/local/bin/reattach-to-user-namespace"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/reattach-to-user-namespace" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/reattach-to-user-namespace"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/reattach-to-user-namespace"
+  /bin/chmod 775 "/usr/local/bin/reattach-to-user-namespace"
+  /bin/chmod +x "/usr/local/bin/reattach-to-user-namespace"
