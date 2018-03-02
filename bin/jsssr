@@ -49,7 +49,7 @@
   
   }
   
-  if [ "${online}" == "true" ] && [ ${tenMinAgoEpoch} -gt ${cDateEpoch} ]; then
+  if [ "${online}" == "true" ] && [ "${thresholdTimestamp}" -gt "${cDate}" ]; then
     updateLibrary
   elif [ "${online}" == "true" ] && [ "${libraryExists}" == "false" ]; then
     updateLibrary
