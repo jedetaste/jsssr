@@ -1,10 +1,8 @@
 #!/bin/bash
-  
-  if [ ! -d "/usr/local/bin" ]; then
-    mkdir -p "/usr/local/bin"
-  fi
-  
+	
   # appleLoops
+  
+  echo "==> Install 'appleLoops'"
   
   if [ -s "/usr/local/bin/appleLoops" ]; then
     rm -f "/usr/local/bin/appleLoops"
@@ -18,6 +16,8 @@
 
   # dockutil
   
+  echo "==> Install 'dockutil'"
+  
   if [ -s "/usr/local/bin/dockutil" ]; then
     rm -f "/usr/local/bin/dockutil"
   fi
@@ -29,6 +29,8 @@
   /bin/chmod +x "/usr/local/bin/dockutil"
   
   # currentuser
+  
+  echo "==> Install 'currentuser'"
   
   if [ -s "/usr/local/bin/currentuser" ]; then
     rm -f "/usr/local/bin/currentuser"
@@ -42,6 +44,8 @@
   
   # csc
   
+  echo "==> Install 'csc'"
+  
   if [ -s "/usr/local/bin/csc" ]; then
     rm -f "/usr/local/bin/csc"
   fi
@@ -53,6 +57,8 @@
   /bin/chmod +x "/usr/local/bin/csc"
   
   # defaultbrowser
+  
+  echo "==> Install 'defaultbrowser'"
   
   if [ -s "/usr/local/bin/defaultbrowser" ]; then
     rm -f "/usr/local/bin/defaultbrowser"
@@ -66,6 +72,8 @@
   
   # mysides
   
+  echo "==> Install 'mysides'"
+  
   if [ -s "/usr/local/bin/mysides" ]; then
     rm -f "/usr/local/bin/mysides"
   fi
@@ -77,6 +85,8 @@
   /bin/chmod +x "/usr/local/bin/mysides"
   
   # pkgfixer
+  
+  echo "==> Install 'pkgfixer'"
   
   if [ -s "/usr/local/bin/pkgfixer" ]; then
     rm -f "/usr/local/bin/pkgfixer"
@@ -90,6 +100,8 @@
   
   # blueutil
   
+  echo "==> Install 'blueutil'"
+  
   if [ -s "/usr/local/bin/blueutil" ]; then
     rm -f "/usr/local/bin/blueutil"
   fi
@@ -101,6 +113,8 @@
   /bin/chmod +x "/usr/local/bin/blueutil"
   
   # rg
+  
+  echo "==> Install 'rg'"
   
   if [ -s "/usr/local/bin/rg" ]; then
   	rm -f "/usr/local/bin/rg"
@@ -114,6 +128,8 @@
   
   # jq
   
+  echo "==> Install 'jq'"
+  
   if [ -s "/usr/local/bin/jq" ]; then
   	rm -f "/usr/local/bin/jq"
   fi
@@ -125,6 +141,8 @@
   /bin/chmod +x "/usr/local/bin/jq"
   
   # aky
+  
+  echo "==> Install 'aky'"
   
   if [ ! -d "/usr/local/aky" ]; then
 	  /bin/mkdir -p "/usr/local/aky"
@@ -153,6 +171,8 @@
   
   # Remove2011
   
+  echo "==> Install 'Remove2011'"
+  
   if [ -s "/usr/local/bin/Remove2011" ]; then
   	rm -f "/usr/local/bin/Remove2011"
   fi
@@ -164,6 +184,8 @@
   /bin/chmod +x "/usr/local/bin/Remove2011"
   
   # adobe_prtk
+  
+  echo "==> Install 'adobe_prtk'"
   
   if [ -s "/usr/local/bin/adobe_prtk" ]; then
   	rm -f "/usr/local/bin/adobe_prtk"
@@ -177,6 +199,8 @@
   
   # AppStoreXtractor
   
+  echo "==> Install 'AppStoreXtractor'"
+  
   if [ -s "/usr/local/bin/AppStoreXtractor" ]; then
   	rm -f "/usr/local/bin/AppStoreXtractor"
   fi
@@ -189,15 +213,19 @@
   
   # outset
   
+  echo "==> Install 'outset'"
+  
   outsetVersion="2.0.6"
   
   tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
   
   cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/chilcote/outset/releases/download/v${outsetVersion}/outset-${outsetVersion}.pkg"
   
-  /usr/sbin/installer -pkg "${tmpDir}/outset-${outsetVersion}.pkg" -target / && rm -rf "${tmpDir}"
+  /usr/sbin/installer -pkg "${tmpDir}/outset-${outsetVersion}.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
   
   # offset
+  
+  echo "==> Install 'offset'"
   
   offsetVersion="1.2.0"
   
@@ -205,9 +233,11 @@
   
   cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/aysiu/offset/releases/download/${offsetVersion}/Offset.pkg"
   
-  /usr/sbin/installer -pkg "${tmpDir}/Offset.pkg" -target / && rm -rf "${tmpDir}"
+  /usr/sbin/installer -pkg "${tmpDir}/Offset.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
   
   # SafariBookmarkEditor
+  
+  echo "==> Install 'SafariBookmarkEditor'"
   
   if [ -s "/usr/local/bin/SafariBookmarkEditor" ]; then
   	rm -f "/usr/local/bin/SafariBookmarkEditor"
@@ -221,6 +251,8 @@
   
   # FinderSidebarEditor
   
+  echo "==> Install 'FinderSidebarEditor'"
+  
   if [ -s "/usr/local/bin/FinderSidebarEditor" ]; then
   	rm -f "/usr/local/bin/FinderSidebarEditor"
   fi
@@ -232,6 +264,8 @@
   /bin/chmod +x "/usr/local/bin/FinderSidebarEditor"
   
   # duti
+  
+  echo "==> Install 'duti'"
   
   if [ -s "/usr/local/bin/duti" ]; then
   	rm -f "/usr/local/bin/duti"
@@ -245,6 +279,8 @@
   
   # mas
   
+  echo "==> Install 'mas'"
+  
   if [ -s "/usr/local/bin/mas" ]; then
   	rm -f "/usr/local/bin/mas"
   fi
@@ -256,6 +292,8 @@
   /bin/chmod +x "/usr/local/bin/mas"
   
   # reattach-to-user-namespace
+  
+  echo "==> Install 'reattach-to-user-namespace'"
   
   if [ -s "/usr/local/bin/reattach-to-user-namespace" ]; then
   	rm -f "/usr/local/bin/reattach-to-user-namespace"
