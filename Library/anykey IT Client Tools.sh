@@ -100,18 +100,6 @@
   /bin/chmod 775 "/usr/local/bin/blueutil"
   /bin/chmod +x "/usr/local/bin/blueutil"
   
-  # jq
-  
-  if [ -s "/usr/local/bin/jq" ]; then
-  	rm -f "/usr/local/bin/jq"
-  fi
-  
-  /usr/bin/curl -sfko "/usr/local/bin/jq" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jq"
-  
-  /usr/sbin/chown root:wheel "/usr/local/bin/jq"
-  /bin/chmod 775 "/usr/local/bin/jq"
-  /bin/chmod +x "/usr/local/bin/jq"
-  
   # rg
   
   if [ -s "/usr/local/bin/rg" ]; then
@@ -124,17 +112,44 @@
   /bin/chmod 775 "/usr/local/bin/rg"
   /bin/chmod +x "/usr/local/bin/rg"
   
-  # aky
+  # jq
   
-  if [ -s "/usr/local/bin/aky" ]; then
-  	rm -f "/usr/local/bin/aky"
+  if [ -s "/usr/local/bin/jq" ]; then
+  	rm -f "/usr/local/bin/jq"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/aky" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aky"
+  /usr/bin/curl -sfko "/usr/local/bin/jq" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jq"
   
-  /usr/sbin/chown root:wheel "/usr/local/bin/aky"
-  /bin/chmod 775 "/usr/local/bin/aky"
-  /bin/chmod +x "/usr/local/bin/aky"
+  /usr/sbin/chown root:wheel "/usr/local/bin/jq"
+  /bin/chmod 775 "/usr/local/bin/jq"
+  /bin/chmod +x "/usr/local/bin/jq"
+  
+  # aky
+  
+  if [ ! -d "/usr/local/aky" ]; then
+	  /bin/mkdir -p "/usr/local/aky"
+	fi
+	
+	akyBinary=(
+		"aky"
+		"download-helper"
+		"install-helper"
+		"mas-helper"
+		"notification-helper"
+		"rg"
+		"versioning-helper"
+	)
+	
+	for ((i = 0; i < "${#akyBinary[@]}"; i++)); do
+		
+		/bin/rm -f "/usr/local/bin/${bin[$i]}"
+		/bin/rm -f "/usr/local/aky/${bin[$i]}"
+		/usr/bin/curl -sfko "/usr/local/aky/${bin[$i]}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/${bin[$i]}"
+		/usr/sbin/chown root:wheel "/usr/local/bin/${bin[$i]}"
+		/bin/chmod +x "/usr/local/bin/${bin[$i]}"
+		/bin/ln -s "/usr/local/aky/${bin[$i]}" "/usr/local/bin/${bin[$i]}"
+		
+	done
   
   # Remove2011
   
