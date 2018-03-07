@@ -1,5 +1,5 @@
 #!/bin/bash
-	
+  
   # appleLoops
   
   echo "==> Install 'appleLoops'"
@@ -117,7 +117,7 @@
   echo "==> Install 'rg'"
   
   if [ -s "/usr/local/bin/rg" ]; then
-  	rm -f "/usr/local/bin/rg"
+    rm -f "/usr/local/bin/rg"
   fi
   
   /usr/bin/curl -sfko "/usr/local/bin/rg" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/rg"
@@ -131,7 +131,7 @@
   echo "==> Install 'jq'"
   
   if [ -s "/usr/local/bin/jq" ]; then
-  	rm -f "/usr/local/bin/jq"
+    rm -f "/usr/local/bin/jq"
   fi
   
   /usr/bin/curl -sfko "/usr/local/bin/jq" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jq"
@@ -145,36 +145,36 @@
   echo "==> Install 'aky'"
   
   if [ ! -d "/usr/local/aky" ]; then
-	  /bin/mkdir -p "/usr/local/aky"
-	fi
-	
-	akyBinary=(
-		"aky"
-		"download-helper"
-		"install-helper"
-		"mas-helper"
-		"notification-helper"
-		"rg"
-		"versioning-helper"
-	)
-	
-	for ((i = 0; i < "${#akyBinary[@]}"; i++)); do
-		
-		/bin/rm -f "/usr/local/bin/${bin[$i]}"
-		/bin/rm -f "/usr/local/aky/${bin[$i]}"
-		/usr/bin/curl -sfko "/usr/local/aky/${bin[$i]}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/${bin[$i]}"
-		/usr/sbin/chown root:wheel "/usr/local/bin/${bin[$i]}"
-		/bin/chmod +x "/usr/local/bin/${bin[$i]}"
-		/bin/ln -s "/usr/local/aky/${bin[$i]}" "/usr/local/bin/${bin[$i]}"
-		
-	done
+    /bin/mkdir -p "/usr/local/aky"
+  fi
+  
+  akyBinary=(
+    "aky"
+    "download-helper"
+    "install-helper"
+    "mas-helper"
+    "notification-helper"
+    "rg"
+    "versioning-helper"
+  )
+  
+  for ((i = 0; i < "${#akyBinary[@]}"; i++)); do
+    
+    /bin/rm -f "/usr/local/bin/${bin[$i]}"
+    /bin/rm -f "/usr/local/aky/${bin[$i]}"
+    /usr/bin/curl -sfko "/usr/local/aky/${bin[$i]}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/${bin[$i]}"
+    /usr/sbin/chown root:wheel "/usr/local/bin/${bin[$i]}"
+    /bin/chmod +x "/usr/local/bin/${bin[$i]}"
+    /bin/ln -s "/usr/local/aky/${bin[$i]}" "/usr/local/bin/${bin[$i]}"
+    
+  done
   
   # Remove2011
   
   echo "==> Install 'Remove2011'"
   
   if [ -s "/usr/local/bin/Remove2011" ]; then
-  	rm -f "/usr/local/bin/Remove2011"
+    rm -f "/usr/local/bin/Remove2011"
   fi
   
   /usr/bin/curl -sfko "/usr/local/bin/Remove2011" "https://raw.githubusercontent.com/pbowden-msft/Remove2011/master/Remove2011"
@@ -188,7 +188,7 @@
   echo "==> Install 'adobe_prtk'"
   
   if [ -s "/usr/local/bin/adobe_prtk" ]; then
-  	rm -f "/usr/local/bin/adobe_prtk"
+    rm -f "/usr/local/bin/adobe_prtk"
   fi
   
   /usr/bin/curl -sfko "/usr/local/bin/adobe_prtk" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/adobe_prtk"
@@ -202,7 +202,7 @@
   echo "==> Install 'AppStoreXtractor'"
   
   if [ -s "/usr/local/bin/AppStoreXtractor" ]; then
-  	rm -f "/usr/local/bin/AppStoreXtractor"
+    rm -f "/usr/local/bin/AppStoreXtractor"
   fi
   
   /usr/bin/curl -sfko "/usr/local/bin/AppStoreXtractor" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/AppStoreXtractor"
@@ -240,7 +240,7 @@
   echo "==> Install 'SafariBookmarkEditor'"
   
   if [ -s "/usr/local/bin/SafariBookmarkEditor" ]; then
-  	rm -f "/usr/local/bin/SafariBookmarkEditor"
+    rm -f "/usr/local/bin/SafariBookmarkEditor"
   fi
   
   /usr/bin/curl -sfko "/usr/local/bin/SafariBookmarkEditor" "https://raw.githubusercontent.com/robperc/SafariBookmarkEditor/master/SafariBookmarkEditor.py"
@@ -254,7 +254,7 @@
   echo "==> Install 'FinderSidebarEditor'"
   
   if [ -s "/usr/local/bin/FinderSidebarEditor" ]; then
-  	rm -f "/usr/local/bin/FinderSidebarEditor"
+    rm -f "/usr/local/bin/FinderSidebarEditor"
   fi
   
   /usr/bin/curl -sfko "/usr/local/bin/FinderSidebarEditor" "https://raw.githubusercontent.com/robperc/FinderSidebarEditor/master/FinderSidebarEditor.py"
@@ -268,7 +268,7 @@
   echo "==> Install 'duti'"
   
   if [ -s "/usr/local/bin/duti" ]; then
-  	rm -f "/usr/local/bin/duti"
+    rm -f "/usr/local/bin/duti"
   fi
   
   /usr/bin/curl -sfko "/usr/local/bin/duti" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/duti"
@@ -282,7 +282,7 @@
   echo "==> Install 'mas'"
   
   if [ -s "/usr/local/bin/mas" ]; then
-  	rm -f "/usr/local/bin/mas"
+    rm -f "/usr/local/bin/mas"
   fi
   
   /usr/bin/curl -sfko "/usr/local/bin/mas" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/mas"
@@ -296,7 +296,7 @@
   echo "==> Install 'reattach-to-user-namespace'"
   
   if [ -s "/usr/local/bin/reattach-to-user-namespace" ]; then
-  	rm -f "/usr/local/bin/reattach-to-user-namespace"
+    rm -f "/usr/local/bin/reattach-to-user-namespace"
   fi
   
   /usr/bin/curl -sfko "/usr/local/bin/reattach-to-user-namespace" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/reattach-to-user-namespace"
