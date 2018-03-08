@@ -243,7 +243,7 @@
     rm -f "/usr/local/bin/SafariBookmarkEditor"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/SafariBookmarkEditor" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/SafariBookmarkEditor"
+  /usr/bin/curl -sfko "/usr/local/bin/SafariBookmarkEditor" "https://raw.githubusercontent.com/robperc/SafariBookmarkEditor/master/SafariBookmarkEditor.py"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/SafariBookmarkEditor"
   /bin/chmod 775 "/usr/local/bin/SafariBookmarkEditor"
