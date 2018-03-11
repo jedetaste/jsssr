@@ -197,6 +197,10 @@
   
   /usr/bin/defaults write "/Library/Preferences/com.apple.loginwindow" AdminHostInfo HostName
   
+  # Hide management account
+  
+  /usr/bin/defaults write "/Library/Preferences/com.apple.loginwindow" HiddenUsersList -array-add casper
+  
   # Turn SSH on
   
   /usr/sbin/systemsetup -setremotelogin on
@@ -216,8 +220,8 @@
   # Searches for locally installed printers and deactivates printer sharing for each of them
   
   for file in /etc/cups/ppd/*; do
-    path=${file%.ppd}
-    name=${path##*/}
+    path="${file%.ppd}"
+    name="${path##*/}"
     lpadmin -p "${name}" -o printer-is-shared=false
   done
   
@@ -227,41 +231,39 @@
   
   # Disable Microsofto Office 2016 first run
   
-  submit_diagnostic_data_to_microsoft=false
-  
   DisableOffice2016FirstRun() {
-  
-    /usr/bin/defaults write /Library/Preferences/com.microsoft."$app" kSubUIAppCompletedFirstRunSetup1507 -bool true
-    /usr/bin/defaults write /Library/Preferences/com.microsoft."$app" SendAllTelemetryEnabled -bool "$submit_diagnostic_data_to_microsoft"
-  
-    if [[ $app == "Outlook" ]] || [[ $app == "onenote.mac" ]]; then
-      /usr/bin/defaults write /Library/Preferences/com.microsoft."$app" FirstRunExperienceCompletedO15 -bool true
+    
+    /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" kSubUIAppCompletedFirstRunSetup1507 -bool true
+    /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" SendAllTelemetryEnabled -bool false
+    
+    if [[ "${app}" == "Outlook" ]] || [[ "${app}" == "onenote.mac" ]]; then
+      /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" FirstRunExperienceCompletedO15 -bool true
     fi
-  
+    
   }
   
   if [[ -e "/Applications/Microsoft Excel.app" ]]; then
-    app=Excel
+    app="Excel"
     DisableOffice2016FirstRun
   fi
   
   if [[ -e "/Applications/Microsoft OneNote.app" ]]; then
-    app=onenote.mac
+    app="onenote.mac"
     DisableOffice2016FirstRun
   fi
   
   if [[ -e "/Applications/Microsoft Outlook.app" ]]; then
-    app=Outlook
+    app="Outlook"
     DisableOffice2016FirstRun
   fi
   
   if [[ -e "/Applications/Microsoft PowerPoint.app" ]]; then
-    app=Powerpoint
+    app="Powerpoint"
     DisableOffice2016FirstRun
   fi
   
   if [[ -e "/Applications/Microsoft Word.app" ]]; then
-    app=Word
+    app="Word"
     DisableOffice2016FirstRun
   fi
   
@@ -270,20 +272,55 @@
   
   /usr/bin/defaults write "/Library/Preferences/com.microsoft.office" DefaultsToLocalOpenSave -bool true
   
-  # Enabling automatic download and installation of Microsoft Office 2016 updates
+  # Preparation for MAU4.0
+  # Set com.microsoft.autoupdate2 domain to fully-managed
   
-  /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" HowToCheck AutomaticDownload
-  /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" UpdateCheckFrequency -int 1440
+  #/usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" ChannelName Production
+  #/usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" HowToCheck Manual
+  #/usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" ChannelName Production
+  #/usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" EnableCheckForUpdatesButton -bool false
+  #/usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" StartDaemonOnAppLaunch -bool false
+  
+  # Set com.microsoft.autoupdate2 domain to semi-managed
+  
+  /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" ChannelName Production
+  /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" HowToCheck Manual
+  /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" ChannelName Production
+  /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" EnableCheckForUpdatesButton -bool true
   /usr/bin/defaults write "/Library/Preferences/com.microsoft.autoupdate2" StartDaemonOnAppLaunch -bool false
   
-  # Register 'Microsoft AU Daemon.app' in LaunchServices
+  # Register Office 2016 applications
   
-  if [ -e "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app" ]; then
-    "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister" -R -f -trusted "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app"
+  pathWord="/Applications/Microsoft Word.app"
+  pathExcel="/Applications/Microsoft Excel.app"
+  pathPowerPoint="/Applications/Microsoft PowerPoint.app"
+  pathOutlook="/Applications/Microsoft Outlook.app"
+  pathOneNote="/Applications/Microsoft OneNote.app"
+  
+  registerWord="MSWD15"
+  registerExcel="XCEL15"
+  registerPowerPoint="PPT315"
+  registerOutlook="OPIM15"
+  registerOneNote="ONMC15"
+  
+  currentUser=$(python -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");')
+  
+  if [ -z "${currentUser}" ]; then
+    cmdPrefix=""
+  else
+    cmdPrefix="sudo -u ${currentUser} "
   fi
   
-  if [ -e "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app/Contents/MacOS/Microsoft AU Daemon.app" ]; then
-    "/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -R -f -trusted" "/Library/Application Support/Microsoft/MAU2.0/Microsoft AutoUpdate.app/Contents/MacOS/Microsoft AU Daemon.app"
+  if [ -s "${pathWord}" ]; then
+    $(${cmdPrefix}/usr/bin/defaults write com.microsoft.autoupdate2 Applications -dict-add "${pathWord}" "{ 'Application ID' = '${registerWord}'; LCID = 1033 ; }")
+  elif [ -s "${pathExcel}" ]; then
+    $(${cmdPrefix}/usr/bin/defaults write com.microsoft.autoupdate2 Applications -dict-add "${pathExcel}" "{ 'Application ID' = '${registerExcel}'; LCID = 1033 ; }")
+  elif [ -s "${pathPowerPoint}" ]; then
+    $(${cmdPrefix}/usr/bin/defaults write com.microsoft.autoupdate2 Applications -dict-add "${patPowerPoint}" "{ 'Application ID' = '${registerPowerPoint}'; LCID = 1033 ; }")
+  elif [ -s "${pathOutlook}" ]; then
+    $(${cmdPrefix}/usr/bin/defaults write com.microsoft.autoupdate2 Applications -dict-add "${pathOutlook}" "{ 'Application ID' = '${registerOutlook}'; LCID = 1033 ; }")
+  elif [ -s "${pathOneNote}" ]; then
+    $(${cmdPrefix}/usr/bin/defaults write com.microsoft.autoupdate2 Applications -dict-add "${pathOneNote}" "{ 'Application ID' = '${registerOneNote}'; LCID = 1033 ; }")
   fi
   
   # This script checks to see if the /mach_kernel file is visible or hidden.
