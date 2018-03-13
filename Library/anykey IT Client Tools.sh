@@ -291,6 +291,20 @@
   /bin/chmod 775 "/usr/local/bin/mas"
   /bin/chmod +x "/usr/local/bin/mas"
   
+  # xmlstarlet
+  
+  echo "==> Install 'xmlstarlet'"
+  
+  if [ -s "/usr/local/bin/xmlstarlet" ]; then
+    rm -f "/usr/local/bin/xmlstarlet"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/xmlstarlet" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/xmlstarlet"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/xmlstarlet"
+  /bin/chmod 775 "/usr/local/bin/xmlstarlet"
+  /bin/chmod +x "/usr/local/bin/xmlstarlet"
+  
   # reattach-to-user-namespace
   
   echo "==> Install 'reattach-to-user-namespace'"
