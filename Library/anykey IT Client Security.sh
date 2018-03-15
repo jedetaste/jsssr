@@ -10,7 +10,7 @@ softwareupdate --background-critical
 defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool false
 
 # Repair user permissions
-chmod 700 '/Users/*'
+chmod 700 '/Users/'*
 
 # Repair shared folder
 chmod -R 777 '/Users/Shared/'
