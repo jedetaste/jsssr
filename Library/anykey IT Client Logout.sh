@@ -53,11 +53,3 @@
   # Kill CloudKeychainProxy
   
   killall CloudKeychainProxy
-  
-  # Repair user permissions
-  
-  chmod 700 "/Users/"*
-
-  # Repair shared folder
-  
-  chmod -R 777 "/Users/Shared/"
