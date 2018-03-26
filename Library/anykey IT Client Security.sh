@@ -9,6 +9,24 @@ defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabl
 softwareupdate --background-critical
 defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool false
 
+# Repair user permissions and shared folder
+for i in /Users/*
+do
+ u=`echo $i | cut -d/ -f3`
+ case $u in
+  Shared)
+   ;;
+  Temporary)
+   ;;
+  *)
+   /usr/sbin/chown $u:staff $i
+   /bin/chmod 700 $i
+  ;;
+ esac
+done
+/usr/sbin/chown -R root:wheel '/Users/Shared'
+/bin/chmod -R 777 '/Users/Shared'
+
 # Delete the OSX.PROTON virus pieces
 rm -rf '/Users/${currentUser}/Library/LaunchAgents/fr.handbrake.activity_agent.plist'
 rm -rf '/Users/${currentUser}/Library/RenderFiles/activity_agent.app'
