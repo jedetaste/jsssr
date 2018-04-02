@@ -42,6 +42,20 @@
   /bin/chmod 775 "/usr/local/bin/currentuser"
   /bin/chmod +x "/usr/local/bin/currentuser"
   
+  # tmpDir
+  
+  echo "==> Install 'tmpDir'"
+  
+  if [ -s "/usr/local/bin/tmpDir" ]; then
+    rm -f "/usr/local/bin/tmpDir"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/tmpDir" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/tmpDir"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/tmpDir"
+  /bin/chmod 775 "/usr/local/bin/tmpDir"
+  /bin/chmod +x "/usr/local/bin/tmpDir"
+  
   # csc
   
   echo "==> Install 'csc'"
