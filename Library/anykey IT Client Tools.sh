@@ -332,3 +332,17 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/reattach-to-user-namespace"
   /bin/chmod 775 "/usr/local/bin/reattach-to-user-namespace"
   /bin/chmod +x "/usr/local/bin/reattach-to-user-namespace"
+  
+  # RegMAU
+  
+  echo "==> Install 'RegMAU'"
+  
+  if [ -s "/usr/local/bin/RegMAU" ]; then
+    rm -f "/usr/local/bin/RegMAU"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/RegMAU" "https://raw.githubusercontent.com/pbowden-msft/RegMAU/master/RegMAU"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/RegMAU"
+  /bin/chmod 775 "/usr/local/bin/RegMAU"
+  /bin/chmod +x "/usr/local/bin/RegMAU"
