@@ -11,6 +11,7 @@ my $CHANCESTOUPDATE=5;
 my $COUNTFILE='/etc/SUScount.txt';
 my $UPDATECOUNT=0;
 
+system '/usr/sbin/softwareupdate --ignore "macOS High Sierra"';
 
 $AVAILABLEUPDATES=`/usr/sbin/softwareupdate --list`;
 chomp $AVAILABLEUPDATES;
