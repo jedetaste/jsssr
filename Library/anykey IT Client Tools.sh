@@ -346,3 +346,17 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/RegMAU"
   /bin/chmod 775 "/usr/local/bin/RegMAU"
   /bin/chmod +x "/usr/local/bin/RegMAU"
+  
+  # MSUpdateHelper
+  
+  echo "==> Install 'MSUpdateHelper'"
+  
+  if [ -s "/usr/local/bin/MSUpdateHelper" ]; then
+    rm -f "/usr/local/bin/MSUpdateHelper"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/MSUpdateHelper" "https://raw.githubusercontent.com/pbowden-msft/msupdatehelper/master/MSUpdateHelper4JamfPro.sh"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/MSUpdateHelper"
+  /bin/chmod 775 "/usr/local/bin/MSUpdateHelper"
+  /bin/chmod +x "/usr/local/bin/MSUpdateHelper"
