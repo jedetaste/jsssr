@@ -1,27 +1,25 @@
 #!/bin/bash
 
-# Re-Configure ARD and activate for User admin and gucken 
+  # Enable SSH and add admin to SSH group
 
-kickstart="/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart"
-
-if [ ! -z "$(id -u gucken)" ]; then
+  /usr/sbin/systemsetup -setremotelogin on
+  /usr/sbin/dseditgroup -o edit -n /Local/Default -a admin -t user com.apple.access_ssh
   
-  echo "User id gucken exists"
+  # Re-Configure ARD and activate for User admin and gucken 
   
-  "${kickstart}" -activate -configure -allowAccessFor -specifiedUsers
-  "${kickstart}" -configure -users admin,gucken -access -on -privs -all
+  kickstart="/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart"
   
-  /usr/bin/defaults write /Library/Preferences/com.apple.loginwindow HiddenUsersList -array-add gucken
-
-else
- 
-  echo "User id gucken does not exist"
+  if [ ! -z "$(id -u gucken)" ]; then
+    echo "User id gucken exists"
+    "${kickstart}" -activate -configure -allowAccessFor -specifiedUsers
+    "${kickstart}" -configure -users admin,gucken -access -on -privs -all
+    /usr/bin/defaults write /Library/Preferences/com.apple.loginwindow HiddenUsersList -array-add gucken
+  else
+    echo "User id gucken does not exist"
+    "${kickstart}" -activate -configure -allowAccessFor -specifiedUsers
+    "${kickstart}" -configure -users admin -access -on -privs -all
+  fi
   
-  "${kickstart}" -activate -configure -allowAccessFor -specifiedUsers
-  "${kickstart}" -configure -users admin -access -on -privs -all
+  # Deactivate Screen Sharing Request Login
   
-fi
-
-# Deactivate Screen Sharing Request Login
-
-/usr/bin/defaults write "/Library/Preferences/com.apple.RemoteManagement" ScreenSharingReqPermEnabled -bool NO
+  /usr/bin/defaults write "/Library/Preferences/com.apple.RemoteManagement" ScreenSharingReqPermEnabled -bool NO
