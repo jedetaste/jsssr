@@ -360,3 +360,17 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/MSUpdateHelper"
   /bin/chmod 775 "/usr/local/bin/MSUpdateHelper"
   /bin/chmod +x "/usr/local/bin/MSUpdateHelper"
+  
+  # alerter
+  
+  echo "==> Install 'alerter'"
+  
+  if [ -s "/usr/local/bin/alerter" ]; then
+    rm -f "/usr/local/bin/alerter"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/alerter" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/alerter"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/alerter"
+  /bin/chmod 775 "/usr/local/bin/alerter"
+  /bin/chmod +x "/usr/local/bin/alerter"
