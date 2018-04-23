@@ -1,7 +1,6 @@
 #!/bin/bash
 
   mkdir -p "/System/Library/User Template/Non_localized/Library/Application Support/Firefox/"
-  
   profiles="/System/Library/User Template/Non_localized/Library/Application Support/Firefox/profiles.ini"
   
   function profileCreator() {
@@ -17,22 +16,15 @@
   }
   
   if [ -e "${profiles}" ]; then
-    
     rm -rf "${profiles}"
     touch "${profiles}"
-    
     profileCreator
-    
   else
-    
     touch "${profiles}"
-    
     profileCreator
-    
   fi
   
   mkdir -p "/System/Library/User Template/Non_localized/Library/Application Support/Firefox/Profiles/any.default"
-  
   prefs="/System/Library/User Template/Non_localized/Library/Application Support/Firefox/Profiles/any.default/prefs.js"
   
   function prefCreator() {
@@ -42,6 +34,7 @@
     echo 'user_pref("app.update.auto", false);' >> "${prefs}"
     echo 'user_pref("app.update.enabled", false);' >> "${prefs}"
     echo 'user_pref("browser.shell.checkDefaultBrowser", false);' >> "${prefs}"
+    echo 'user_pref("browser.shell.didSkipDefaultBrowserCheckOnFirstRun", true);' >> "${prefs}"
     echo 'user_pref("browser.startup.homepage", "https://google.ch");' >> "${prefs}"
     echo 'user_pref("toolkit.telemetry.reportingpolicy.firstRun", false);' >> "${prefs}"
     echo 'user_pref("browser.bookmarks.restore_default_bookmarks", false);' >> "${prefs}"
@@ -50,18 +43,10 @@
   }
   
   if [ -e "${prefs}" ]; then
-    
     rm -rf "${prefs}"
     touch "${prefs}"
-    
     prefCreator
-      
   else
-    
     touch "${prefs}"
-    
     prefCreator
-    
   fi
-  
-exit 0
