@@ -9,6 +9,7 @@
     'schueler'
     'sus'
     'schule'
+    'stud'
     'student'
   )
   
