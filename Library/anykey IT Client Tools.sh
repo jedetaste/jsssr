@@ -374,3 +374,17 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/alerter"
   /bin/chmod 775 "/usr/local/bin/alerter"
   /bin/chmod +x "/usr/local/bin/alerter"
+  
+  # PrinterMapper
+  
+  echo "==> Install 'PrinterMapper'"
+  
+  if [ -s "/usr/local/bin/PrinterMapper" ]; then
+    rm -f "/usr/local/bin/PrinterMapper"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/PrinterMapper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/PrinterMapper"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/PrinterMapper"
+  /bin/chmod 775 "/usr/local/bin/PrinterMapper"
+  /bin/chmod +x "/usr/local/bin/PrinterMapper"
