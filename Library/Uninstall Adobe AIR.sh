@@ -40,7 +40,7 @@
     fi
   done
 
-  echo "==> Running installer at '${volumeName}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer'"
+  echo "==> Running uninstaller at '${volumeName}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer'"
 
   "${volumeName}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer" -uninstall
 
