@@ -473,3 +473,8 @@ END
   if [ -e "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin" ]; then
     /bin/rm -rf "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin"
   fi
+  
+  # Remove old, manually installed profiles
+  
+  /usr/bin/profiles -Rp "com.github.81927370-ef798a72-978d-4ffc-81a3-88ba36f52585.alacarte"
+  /usr/bin/profiles -Rp "com.github.c8d04bb6-91ca-4bc9-a5d7-c636fe132846.alacarte"
