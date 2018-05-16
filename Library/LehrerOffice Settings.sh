@@ -4,7 +4,7 @@
     echo "LehrerOffice is not installed" && exit 0
   fi
   
-  LOINIpath="/Applications/LehrerOffice/LehrerOffice.ini"
+  LOINIPath="/Applications/LehrerOffice/LehrerOffice.ini"
   LOBundlePath="/Applications/LehrerOffice/LehrerOffice.app"
   LOVersion=$(/usr/bin/defaults read "${LOBundlePath}/Contents/Info.plist" CFBundleShortVersionString)
   
@@ -14,48 +14,48 @@
   
   if [ ! -z "${1}" ]; then
     
-    if [ -s "${LOINIpath}" ]; then
-      rm -f "${LOINIpath}"
+    if [ -s "${LOINIPath}" ]; then
+      rm -f "${LOINIPath}"
     fi
     
-    echo "[application]" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "version=${LOVersion}" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "env=1" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "data=2" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "[update]" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "multi=0" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "[system]" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "open=%Programm%:${LHDPathArg}.lhd" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "[userdlg]" >> "${LOINIpath}"
+    echo "[application]" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "version=${LOVersion}" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "env=1" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "data=2" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "[update]" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "multi=0" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "[system]" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "open=%Programm%:${LHDPathArg}.lhd" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "[userdlg]" >> "${LOINIPath}"
     
   elif [ -z "${1}" ]; then
     
-    if [ -s "${LOINIpath}" ]; then
-      rm -f "${LOINIpath}"
+    if [ -s "${LOINIPath}" ]; then
+      rm -f "${LOINIPath}"
     fi
     
-    echo "[application]" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "version=${LOVersion}" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "env=1" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "data=2" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "[update]" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "multi=0" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "[system]" >> "${LOINIpath}"
-    echo >> "${LOINIpath}"
-    echo "[userdlg]" >> "${LOINIpath}"
+    echo "[application]" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "version=${LOVersion}" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "env=1" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "data=2" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "[update]" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "multi=0" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "[system]" >> "${LOINIPath}"
+    echo >> "${LOINIPath}"
+    echo "[userdlg]" >> "${LOINIPath}"
     
   fi
