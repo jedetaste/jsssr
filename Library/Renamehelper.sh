@@ -20,8 +20,7 @@
   				# Renaming Computer
 				jamf setComputerName -fromFile "$csvPath"
 				#delete the computernames.csv
-				rm "$csvPath"
-				
+				rm "$csvPath"		
   		fi	
 
 		#update Jamf Pro inventory
