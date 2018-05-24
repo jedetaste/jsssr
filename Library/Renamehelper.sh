@@ -12,10 +12,10 @@
 		else
 			# Check if CSV File exists and try to Download if necessary. 
  			if [ -f "$csvPath" ]; then
-    			echo "CSV File found. Continuing with local copy."
+    				echo "CSV File found. Continuing with local copy."
   			else
-    			echo "CSV File no found. Downloading"
-    			curl -L -o $csvPath $csvURL
+    				echo "CSV File no found. Downloading"
+    				curl -L -o $csvPath $csvURL
   			fi
   				# Renaming Computer
 				jamf setComputerName -fromFile "$csvPath"
