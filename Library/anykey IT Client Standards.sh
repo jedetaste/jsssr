@@ -406,15 +406,15 @@
   /usr/bin/defaults write "/Library/Preferences/com.apple.timezone.auto.plist" Active -bool true
   
   /usr/bin/python << END
-  from Foundation import NSBundle
-  TZPP = NSBundle.bundleWithPath_("/System/Library/PreferencePanes/DateAndTime.prefPane/Contents/Resources/TimeZone.prefPane")
-  TimeZonePref          = TZPP.classNamed_('TimeZonePref')
-  ATZAdminPrefererences = TZPP.classNamed_('ATZAdminPrefererences')
-  
-  atzap  = ATZAdminPrefererences.defaultPreferences()
-  pref   = TimeZonePref.alloc().init()
-  atzap.addObserver_forKeyPath_options_context_(pref, "enabled", 0, 0)
-  result = pref._startAutoTimeZoneDaemon_(0x1)
+from Foundation import NSBundle
+TZPP = NSBundle.bundleWithPath_("/System/Library/PreferencePanes/DateAndTime.prefPane/Contents/Resources/TimeZone.prefPane")
+TimeZonePref          = TZPP.classNamed_('TimeZonePref')
+ATZAdminPrefererences = TZPP.classNamed_('ATZAdminPrefererences')
+
+atzap  = ATZAdminPrefererences.defaultPreferences()
+pref   = TimeZonePref.alloc().init()
+atzap.addObserver_forKeyPath_options_context_(pref, "enabled", 0, 0)
+result = pref._startAutoTimeZoneDaemon_(0x1)
 END
   
   # Configure time settings
