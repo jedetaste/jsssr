@@ -341,7 +341,7 @@
     rm -f "/usr/local/bin/RegMAU"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/RegMAU" "https://raw.githubusercontent.com/jedetaste/helper/RegMAU"
+  /usr/bin/curl -sfko "/usr/local/bin/RegMAU" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/RegMAU"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/RegMAU"
   /bin/chmod 775 "/usr/local/bin/RegMAU"
