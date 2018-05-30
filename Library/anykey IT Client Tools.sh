@@ -388,3 +388,17 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/PrinterMapper"
   /bin/chmod 775 "/usr/local/bin/PrinterMapper"
   /bin/chmod +x "/usr/local/bin/PrinterMapper"
+  
+  # lohelper
+  
+  echo "==> Install 'lohelper'"
+  
+  if [ -s "/usr/local/bin/lohelper" ]; then
+    rm -f "/usr/local/bin/lohelper"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/lohelper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/lohelper"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/lohelper"
+  /bin/chmod 775 "/usr/local/bin/lohelper"
+  /bin/chmod +x "/usr/local/bin/lohelper"
