@@ -464,6 +464,10 @@ END
     /usr/bin/defaults write "${USER_TEMPLATE}/Library/Preferences/com.apple.mail" DisableInlineAttachmentViewing -bool yes
   done
   
+  # Disable Oracle Java Auto Update
+  
+  /usr/bin/defaults write "/Library/Preferences/com.oracle.java.Java-Updater" JavaAutoUpdateEnabled -bool false
+  
   # Delete Adobe Reader PlugIns
   
   if [ -e "/Library/Internet Plug-Ins/AdobePDFViewer.plugin" ]; then
