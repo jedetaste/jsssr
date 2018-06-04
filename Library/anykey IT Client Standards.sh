@@ -237,6 +237,44 @@
   
   /usr/bin/defaults write "/Library/Preferences/com.microsoft.office" DefaultsToLocalOpenSave -bool true
   
+  # Disable Microsofto Office 2016 first run
+ 
+	  DisableOffice2016FirstRun() {
+		
+	  /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" kSubUIAppCompletedFirstRunSetup1507 -bool TRUE
+		  /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" SendAllTelemetryEnabled -bool FALSE
+	 
+		  if [[ "${app}" == "Outlook" ]] || [[ "${app}" == "onenote.mac" ]]; then
+		  /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" FirstRunExperienceCompletedO15 -bool TRUE
+	 	  fi
+		
+	  }
+ 
+  if [[ -e "/Applications/Microsoft Excel.app" ]]; then
+	  app="Excel"
+		 DisableOffice2016FirstRun
+  fi
+ 
+  if [[ -e "/Applications/Microsoft OneNote.app" ]]; then
+	  app="onenote.mac"
+	  DisableOffice2016FirstRun
+  fi
+
+  if [[ -e "/Applications/Microsoft Outlook.app" ]]; then
+	  app="Outlook"
+		DisableOffice2016FirstRun
+  fi
+ 
+  if [[ -e "/Applications/Microsoft PowerPoint.app" ]]; then
+	  app="Powerpoint"
+	  DisableOffice2016FirstRun
+  fi
+ 
+  if [[ -e "/Applications/Microsoft Word.app" ]]; then
+	  app="Word"
+	  DisableOffice2016FirstRun
+  fi
+  
   # This script checks to see if the /mach_kernel file is visible or hidden.
   # The /mach_kernel file should not be visible when viewed from the Finder, 
   # so the script will use /usr/bin/chflags to set the /mach_kernel file to be hidden.
