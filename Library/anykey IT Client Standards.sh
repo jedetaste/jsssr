@@ -238,21 +238,19 @@
   /usr/bin/defaults write "/Library/Preferences/com.microsoft.office" DefaultsToLocalOpenSave -bool true
   
   # Disable Microsofto Office 2016 first run
- 
-	  DisableOffice2016FirstRun() {
-		
-	  /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" kSubUIAppCompletedFirstRunSetup1507 -bool TRUE
-		  /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" SendAllTelemetryEnabled -bool FALSE
-	 
-		  if [[ "${app}" == "Outlook" ]] || [[ "${app}" == "onenote.mac" ]]; then
-		  /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" FirstRunExperienceCompletedO15 -bool TRUE
-	 	  fi
-		
-	  }
- 
+  
+  DisableOffice2016FirstRun() {
+    /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" kSubUIAppCompletedFirstRunSetup1507 -bool TRUE
+    /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" SendAllTelemetryEnabled -bool FALSE
+    
+    if [[ "${app}" == "Outlook" ]] || [[ "${app}" == "onenote.mac" ]]; then
+    /usr/bin/defaults write "/Library/Preferences/com.microsoft.${app}" FirstRunExperienceCompletedO15 -bool TRUE
+    fi 
+  }
+    
   if [[ -e "/Applications/Microsoft Excel.app" ]]; then
-	  app="Excel"
-		 DisableOffice2016FirstRun
+    app="Excel"
+    DisableOffice2016FirstRun
   fi
  
   if [[ -e "/Applications/Microsoft OneNote.app" ]]; then
