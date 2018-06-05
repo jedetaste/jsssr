@@ -402,3 +402,17 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/lohelper"
   /bin/chmod 775 "/usr/local/bin/lohelper"
   /bin/chmod +x "/usr/local/bin/lohelper"
+  
+  # randomizer
+  
+  echo "==> Install 'randomizer'"
+  
+  if [ -s "/usr/local/bin/randomizer" ]; then
+    rm -f "/usr/local/bin/randomizer"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/randomizer" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/randomizer"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/randomizer"
+  /bin/chmod 775 "/usr/local/bin/randomizer"
+  /bin/chmod +x "/usr/local/bin/randomizer"
