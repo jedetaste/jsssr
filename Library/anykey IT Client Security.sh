@@ -10,6 +10,8 @@ defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabl
 softwareupdate --background-critical
 defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool false
 
+# Repair Access Rights on Users folder
+echo Reparing Users Access rights
 for i in /Users/*
 do
  u=`echo $i | cut -d/ -f3`
