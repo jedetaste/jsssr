@@ -5,6 +5,7 @@
 currentUser=$(python -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");')
 
 # Forcing XProtect blacklist updates
+echo Forcing XProtect blacklist updates
 defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 softwareupdate --background-critical
 defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool false
@@ -25,6 +26,9 @@ do
 done
 /usr/sbin/chown -R root:wheel '/Users/Shared'
 /bin/chmod -R 777 '/Users/Shared'
+
+# Delete Malware und Addware
+echo Removing Malware and Addware if found
 
 # Delete mshelper
 launchctl unload '/Library/LaunchDaemons/com.pplauncher.plist'
