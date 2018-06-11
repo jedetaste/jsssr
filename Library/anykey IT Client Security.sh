@@ -26,6 +26,12 @@ done
 /usr/sbin/chown -R root:wheel '/Users/Shared'
 /bin/chmod -R 777 '/Users/Shared'
 
+# Delete mshelper
+launchctl unload '/Library/LaunchDaemons/com.pplauncher.plist'
+rm -rf '/Library/Application Support/pplauncher'
+rm -rf '/Library/LaunchDaemons/com.pplauncher.plist'
+
+
 # Delete the OSX.PROTON virus pieces
 rm -rf '/Users/${currentUser}/Library/LaunchAgents/fr.handbrake.activity_agent.plist'
 rm -rf '/Users/${currentUser}/Library/RenderFiles/activity_agent.app'
@@ -90,7 +96,6 @@ rm -rf '/Users/${currentUser}/Library/LaunchAgents/com.webtools.uninstaller.plis
 # Delete the Premier Opinion malware pieces. 
 rm -rf '/Applications/PremierOpinion'
 rm -rf '/Library/LaunchDaemons/PremierOpinion.plist'
-
 
 # Delete MacKeeper
 rm -rf '/Applications/MacKeeper.app'
