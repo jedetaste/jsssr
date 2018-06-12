@@ -34,12 +34,12 @@
     
     # Logged In User
     
-    ExceptionListUser="$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security/exception.sites"
-    ExceptionListUserPath="$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security"
-    ExceptionListUserBasePath="$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security"
+    ExceptionListUser="/Users/$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security/exception.sites"
+    ExceptionListUserPath="/Users/$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security"
+    ExceptionListUserBasePath="/Users/$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security"
     
     /bin/mkdir -p "${ExceptionListUserPath}"
-    whitelistCheck=$(/bin/cat "$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security/exception.sites" | /usr/bin/grep ${URI})
+    whitelistCheck=$(/bin/cat "/Users/$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security/exception.sites" | /usr/bin/grep ${URI})
     
     if [[ -n "${whitelistCheck}" ]]; then
       echo "${URI}" >> "${ExceptionListUser}"
