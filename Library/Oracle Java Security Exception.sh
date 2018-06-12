@@ -24,7 +24,7 @@
       ExceptionListUserTemplatePath="${userTemplate}/Library/Application Support/Oracle/Java/Deployment/security"
       
       /bin/mkdir -p "${ExceptionListUserTemplatePath}" && touch "${ExceptionListUserTemplate}"
-      whitelistCheck=$(/bin/cat "${userTemplate}/Library/Application Support/Oracle/Java/Deployment/security/exception.sites" | /usr/bin/grep ${URI})
+      whitelistCheck=$(/bin/cat "${ExceptionListUserTemplate}" | /usr/bin/grep ${URI})
       
       if [[ -n "${whitelistCheck}" ]]; then
         echo "${URI}" >> "${ExceptionListUserTemplate}"
@@ -39,7 +39,7 @@
     ExceptionListUserBasePath="/Users/$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security"
     
     /bin/mkdir -p "${ExceptionListUserPath}" && touch "${ExceptionListUser}"
-    whitelistCheck=$(/bin/cat "/Users/$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security/exception.sites" | /usr/bin/grep ${URI})
+    whitelistCheck=$(/bin/cat "${ExceptionListUser}" | /usr/bin/grep ${URI})
     
     if [[ -n "${whitelistCheck}" ]]; then
       echo "${URI}" >> "${ExceptionListUser}"
