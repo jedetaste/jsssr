@@ -5,10 +5,13 @@
 currentUser=$(python -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");')
 
 # Forcing XProtect blacklist updates
+echo Forcing XProtect blacklist updates
 defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 softwareupdate --background-critical
 defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool false
 
+# Repair Access Rights on Users folder
+echo Reparing Users Access rights
 for i in /Users/*
 do
  u=`echo $i | cut -d/ -f3`
@@ -25,6 +28,15 @@ do
 done
 /usr/sbin/chown -R root:wheel '/Users/Shared'
 /bin/chmod -R 777 '/Users/Shared'
+
+# Delete Malware und Addware
+echo Removing Malware and Addware if found
+
+# Delete mshelper
+launchctl unload '/Library/LaunchDaemons/com.pplauncher.plist'
+rm -rf '/Library/Application Support/pplauncher'
+rm -rf '/Library/LaunchDaemons/com.pplauncher.plist'
+
 
 # Delete the OSX.PROTON virus pieces
 rm -rf '/Users/${currentUser}/Library/LaunchAgents/fr.handbrake.activity_agent.plist'
@@ -90,7 +102,6 @@ rm -rf '/Users/${currentUser}/Library/LaunchAgents/com.webtools.uninstaller.plis
 # Delete the Premier Opinion malware pieces. 
 rm -rf '/Applications/PremierOpinion'
 rm -rf '/Library/LaunchDaemons/PremierOpinion.plist'
-
 
 # Delete MacKeeper
 rm -rf '/Applications/MacKeeper.app'
