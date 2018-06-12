@@ -23,14 +23,11 @@
       ExceptionListUserTemplate="${userTemplate}/Library/Application Support/Oracle/Java/Deployment/security/exception.sites"
       ExceptionListUserTemplatePath="${userTemplate}/Library/Application Support/Oracle/Java/Deployment/security"
       
-      echo "Fill exception list at '${ExceptionListUserTemplate}'"
-      
       /bin/mkdir -p "${ExceptionListUserTemplatePath}" && touch "${ExceptionListUserTemplate}"
       whitelistCheck=$(/bin/cat "${ExceptionListUserTemplate}" | /usr/bin/grep ${URI})
       
-      if [[ -n "${whitelistCheck}" ]]; then
-        echo "${URI}" >> "${ExceptionListUserTemplate}"
-      fi
+      echo "Fill exception list at '${ExceptionListUserTemplate}'"
+			echo "${URI}" >> "${ExceptionListUserTemplate}"
       
     done
     
@@ -40,14 +37,11 @@
     ExceptionListUserPath="/Users/$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security"
     ExceptionListUserBasePath="/Users/$(/usr/local/bin/currentuser)/Library/Application Support/Oracle/Java/Deployment/security"
     
-    echo "Fill exception list at '${ExceptionListUser}'"
-    
     /bin/mkdir -p "${ExceptionListUserPath}" && touch "${ExceptionListUser}"
     whitelistCheck=$(/bin/cat "${ExceptionListUser}" | /usr/bin/grep ${URI})
     
-    if [[ -n "${whitelistCheck}" ]]; then
-      echo "${URI}" >> "${ExceptionListUser}"
-    fi
+    echo "Fill exception list at '${ExceptionListUser}'"
+		echo "${URI}" >> "${ExceptionListUser}"
     
     chown -R $(/usr/local/bin/currentuser) "${ExceptionListUserBasePath}" && chmod -R 700 "${ExceptionListUserBasePath}"
     
