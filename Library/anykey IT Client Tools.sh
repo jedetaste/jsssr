@@ -416,3 +416,17 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/randomizer"
   /bin/chmod 775 "/usr/local/bin/randomizer"
   /bin/chmod +x "/usr/local/bin/randomizer"
+  
+  # installinstallmacos
+  
+  echo "==> Install 'installinstallmacos'"
+  
+  if [ -s "/usr/local/bin/installinstallmacos" ]; then
+    rm -f "/usr/local/bin/installinstallmacos"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/installinstallmacos" "https://raw.githubusercontent.com/munki/macadmin-scripts/master/installinstallmacos.py"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/installinstallmacos"
+  /bin/chmod 775 "/usr/local/bin/installinstallmacos"
+  /bin/chmod +x "/usr/local/bin/installinstallmacos"
