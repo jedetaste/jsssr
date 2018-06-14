@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
   
   tmpFolder=$(getconf DARWIN_USER_CACHE_DIR)
   randString=$(/usr/bin/openssl rand -hex 5)
