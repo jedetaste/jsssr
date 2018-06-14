@@ -60,11 +60,12 @@
   installmacOSApp=$(/usr/bin/find ${workDir}/extractDownloadFile/Applications/Install*.app -d -maxdepth 0)
   installmacOSAppBasename=$(/usr/bin/basename "${installmacOSApp}")
   
+  echo "Move macOS Installer to '/Applications/${installmacOSAppBasename}'"
+  
   if [ -s "/Applications/${installmacOSAppBasename}" ]; then
     rm -rf "/Applications/${installmacOSAppBasename}"
   fi
   
-  echo "Move macOS Installer to '/Applications/${installmacOSAppBasename}'"
   /bin/mv "${installmacOSApp}" "/Applications/${installmacOSAppBasename}" && /usr/bin/chflags hidden "/Applications/${installmacOSAppBasename}"
   
   if [ ! -z "${volumeName}" ]; then
