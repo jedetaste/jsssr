@@ -74,6 +74,7 @@
     until [ ! -d "${volumeName}" ]; do
       echo "Remove Dev-Entry for '${volumeName}'"
       /usr/sbin/diskutil unmount force "${volumeName}" > /dev/null 2>&1
+      /usr/sbin/diskutil eject "/Volumes/InstallESD"
     done
   fi
     
@@ -83,6 +84,7 @@
     until [ ! -d "${volumeNameDevEntry}" ]; do
       echo "Remove Dev-Entry for '${volumeNameDevEntry}'"
       /usr/sbin/diskutil unmount force "${volumeNameDevEntry}" > /dev/null 2>&1
+      /usr/sbin/diskutil eject "/Volumes/InstallESD"
     done
   fi
   
