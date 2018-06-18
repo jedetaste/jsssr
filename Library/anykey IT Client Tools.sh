@@ -430,3 +430,17 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/installinstallmacos"
   /bin/chmod 775 "/usr/local/bin/installinstallmacos"
   /bin/chmod +x "/usr/local/bin/installinstallmacos"
+  
+  # kisp
+  
+  echo "==> Install 'kisp'"
+  
+  if [ -s "/usr/local/bin/kisp" ]; then
+    rm -f "/usr/local/bin/kisp"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/kisp" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/kisp"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/kisp"
+  /bin/chmod 775 "/usr/local/bin/kisp"
+  /bin/chmod +x "/usr/local/bin/kisp"
