@@ -3,7 +3,7 @@
   tmp="/private/tmp/libreoffice" && /bin/mkdir -p "${tmp}"
   
   language="de"
-  version="6.0.3"
+  version="6.0.5"
   url="http://download.documentfoundation.org/libreoffice/stable/${version}/mac/x86_64/LibreOffice_${version}_MacOS_x86-64_langpack_${language}.dmg"
   
   echo "==> Download '${url}'"
