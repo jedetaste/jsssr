@@ -431,6 +431,20 @@
   /bin/chmod 775 "/usr/local/bin/installinstallmacos"
   /bin/chmod +x "/usr/local/bin/installinstallmacos"
   
+  # aria2c
+  
+  echo "==> Install 'aria2c'"
+  
+  if [ -s "/usr/local/bin/aria2c" ]; then
+    rm -f "/usr/local/bin/aria2c"
+  fi
+  
+  /usr/bin/curl -sfko "/usr/local/bin/aria2c" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aria2c"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/aria2c"
+  /bin/chmod 775 "/usr/local/bin/aria2c"
+  /bin/chmod +x "/usr/local/bin/aria2c"
+  
   # kisp
   
   echo "==> Install 'kisp'"
