@@ -464,6 +464,14 @@ END
     /usr/bin/defaults write "${USER_TEMPLATE}/Library/Preferences/com.apple.mail" DisableInlineAttachmentViewing -bool yes
   done
   
+  # Disable Dockfixup
+  
+  if [ -d "/usr/local/outset/login-every/" ]; then
+    /usr/bin/curl \
+      --silent \
+      "https://raw.githubusercontent.com/jedetaste/jsssr/master/Library/Dockfixup.sh" > "/usr/local/outset/login-every/Dockfixup.sh" && chmod +x "/usr/local/outset/login-every/Dockfixup.sh"
+  fi
+  
   # Disable Oracle Java Auto Update
   
   /usr/bin/defaults write "/Library/Preferences/com.oracle.java.Java-Updater" JavaAutoUpdateEnabled -bool false
