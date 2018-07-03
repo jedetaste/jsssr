@@ -1,9 +1,9 @@
 #!/bin/bash
   
   progName=$(basename $0)
-  proVersion="1.1"
+  progVersion="1.1"
   
-  echo "${progName} v${proVersion}"
+  echo "${progName} v${progVersion}"
   
   scriptArg="${1}" && readonly scriptArg="${scriptArg}"
   
