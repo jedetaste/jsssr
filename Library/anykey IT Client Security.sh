@@ -29,8 +29,8 @@ done
 /usr/sbin/chown -R root:wheel '/Users/Shared'
 /bin/chmod -R 777 '/Users/Shared'
 
-# Delete Malware und Addware
-echo Removing Malware and Addware if found
+# Delete Malware und Adware
+echo Removing Malware and Adware if found
 
 # Delete mshelper
 launchctl unload '/Library/LaunchDaemons/com.pplauncher.plist'
