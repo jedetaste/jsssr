@@ -2,7 +2,7 @@
 
   downloadInstaller="https://fpdownload.macromedia.com/get/flashplayer/current/support/uninstall_flash_player_osx.dmg"
 
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+  tmpFolder=$(getconf DARWIN_USER_TEMP_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
 
   echo "==> Temporary Folder is '${tmpDir}'"
 

@@ -3,7 +3,7 @@
   versionInstaller="29.0"
   downloadInstaller="https://airdownload.adobe.com/air/mac/download/${versionInstaller}/AdobeAIR.dmg"
 
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+  tmpFolder=$(getconf DARWIN_USER_TEMP_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
 
   echo "==> Temporary Folder is '${tmpDir}'"
 

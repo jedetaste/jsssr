@@ -1,6 +1,6 @@
 #!/bin/bash
 
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR)
+  tmpFolder=$(getconf DARWIN_USER_TEMP_DIR)
   randString=$(/usr/bin/openssl rand -hex 5)
   workDir="${tmpFolder}${randString}" && /bin/mkdir -p "${workDir}"
 
