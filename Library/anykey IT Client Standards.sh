@@ -477,7 +477,3 @@ END
   if [ -e "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin" ]; then
     /bin/rm -rf "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin"
   fi
-  
-  # Remove Dockfixup Script
-  
-  rm -f "/usr/local/outset/login-every/Dockfixup.sh"
