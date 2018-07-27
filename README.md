@@ -2,7 +2,7 @@
 
 ### Install jsssr
 ```
-/bin/rm -f "/usr/local/bin/jsssr" && /usr/bin/curl -sfko "/usr/local/bin/jsssr" "https://raw.githubusercontent.com/jedetaste/jsssr/master/bin/jsssr" && /bin/chmod +x "/usr/local/bin/jsssr"
+/bin/rm -f "/usr/local/bin/jsssr" && /usr/bin/curl -so "/usr/local/bin/jsssr" "https://raw.githubusercontent.com/jedetaste/jsssr/master/bin/jsssr" && /bin/chmod +x "/usr/local/bin/jsssr"
 ```
 
 ### Update index
