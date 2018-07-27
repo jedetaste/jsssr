@@ -8,7 +8,7 @@
     rm -f "/usr/local/bin/appleLoops"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/appleLoops" "https://raw.githubusercontent.com/carlashley/appleLoops/master/appleLoops.py"
+  /usr/bin/curl -so "/usr/local/bin/appleLoops" "https://raw.githubusercontent.com/carlashley/appleLoops/master/appleLoops.py"
 
   /usr/sbin/chown root:wheel "/usr/local/bin/appleLoops"
   /bin/chmod 775 "/usr/local/bin/appleLoops"
@@ -22,7 +22,7 @@
     rm -f "/usr/local/bin/dockutil"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/dockutil" "https://raw.githubusercontent.com/kcrawford/dockutil/master/scripts/dockutil"
+  /usr/bin/curl -so "/usr/local/bin/dockutil" "https://raw.githubusercontent.com/kcrawford/dockutil/master/scripts/dockutil"
 
   /usr/sbin/chown root:wheel "/usr/local/bin/dockutil"
   /bin/chmod 775 "/usr/local/bin/dockutil"
@@ -36,7 +36,7 @@
     rm -f "/usr/local/bin/currentuser"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/currentuser" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/currentuser"
+  /usr/bin/curl -so "/usr/local/bin/currentuser" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/currentuser"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/currentuser"
   /bin/chmod 775 "/usr/local/bin/currentuser"
@@ -50,7 +50,7 @@
     rm -f "/usr/local/bin/tmpDir"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/tmpDir" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/tmpDir"
+  /usr/bin/curl -so "/usr/local/bin/tmpDir" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/tmpDir"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/tmpDir"
   /bin/chmod 775 "/usr/local/bin/tmpDir"
@@ -64,7 +64,7 @@
     rm -f "/usr/local/bin/csc"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/csc" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/csc"
+  /usr/bin/curl -so "/usr/local/bin/csc" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/csc"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/csc"
   /bin/chmod 775 "/usr/local/bin/csc"
@@ -78,7 +78,7 @@
     rm -f "/usr/local/bin/defaultbrowser"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/defaultbrowser" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/defaultbrowser"
+  /usr/bin/curl -so "/usr/local/bin/defaultbrowser" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/defaultbrowser"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/defaultbrowser"
   /bin/chmod 775 "/usr/local/bin/defaultbrowser"
@@ -92,7 +92,7 @@
     rm -f "/usr/local/bin/mysides"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/mysides" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/mysides"
+  /usr/bin/curl -so "/usr/local/bin/mysides" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/mysides"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/mysides"
   /bin/chmod 775 "/usr/local/bin/mysides"
@@ -106,7 +106,7 @@
     rm -f "/usr/local/bin/pkgfixer"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/pkgfixer" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/pkgfixer"
+  /usr/bin/curl -so "/usr/local/bin/pkgfixer" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/pkgfixer"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/pkgfixer"
   /bin/chmod 775 "/usr/local/bin/pkgfixer"
@@ -120,7 +120,7 @@
     rm -f "/usr/local/bin/blueutil"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/blueutil" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/blueutil"
+  /usr/bin/curl -so "/usr/local/bin/blueutil" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/blueutil"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/blueutil"
   /bin/chmod 775 "/usr/local/bin/blueutil"
@@ -134,7 +134,7 @@
     rm -f "/usr/local/bin/rg"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/rg" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/rg"
+  /usr/bin/curl -so "/usr/local/bin/rg" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/rg"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/rg"
   /bin/chmod 775 "/usr/local/bin/rg"
@@ -148,7 +148,7 @@
     rm -f "/usr/local/bin/jq"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/jq" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jq"
+  /usr/bin/curl -so "/usr/local/bin/jq" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jq"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/jq"
   /bin/chmod 775 "/usr/local/bin/jq"
@@ -176,7 +176,7 @@
     
     /bin/rm -f "/usr/local/bin/${akyBinary[$i]}"
     /bin/rm -f "/usr/local/aky/${akyBinary[$i]}"
-    /usr/bin/curl -sfko "/usr/local/aky/${akyBinary[$i]}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/${akyBinary[$i]}"
+    /usr/bin/curl -so "/usr/local/aky/${akyBinary[$i]}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/${akyBinary[$i]}"
     /usr/sbin/chown root:wheel "/usr/local/aky/${akyBinary[$i]}"
     /bin/chmod +x "/usr/local/aky/${akyBinary[$i]}"
     /bin/ln -s "/usr/local/aky/${akyBinary[$i]}" "/usr/local/bin/${akyBinary[$i]}"
@@ -191,7 +191,7 @@
     rm -f "/usr/local/bin/Remove2011"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/Remove2011" "https://raw.githubusercontent.com/pbowden-msft/Remove2011/master/Remove2011"
+  /usr/bin/curl -so "/usr/local/bin/Remove2011" "https://raw.githubusercontent.com/pbowden-msft/Remove2011/master/Remove2011"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/Remove2011"
   /bin/chmod 775 "/usr/local/bin/Remove2011"
@@ -205,7 +205,7 @@
     rm -f "/usr/local/bin/adobe_prtk"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/adobe_prtk" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/adobe_prtk"
+  /usr/bin/curl -so "/usr/local/bin/adobe_prtk" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/adobe_prtk"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/adobe_prtk"
   /bin/chmod 775 "/usr/local/bin/adobe_prtk"
@@ -219,7 +219,7 @@
     rm -f "/usr/local/bin/AppStoreXtractor"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/AppStoreXtractor" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/AppStoreXtractor"
+  /usr/bin/curl -so "/usr/local/bin/AppStoreXtractor" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/AppStoreXtractor"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/AppStoreXtractor"
   /bin/chmod 775 "/usr/local/bin/AppStoreXtractor"
@@ -257,7 +257,7 @@
     rm -f "/usr/local/bin/SafariBookmarkEditor"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/SafariBookmarkEditor" "https://raw.githubusercontent.com/robperc/SafariBookmarkEditor/master/SafariBookmarkEditor.py"
+  /usr/bin/curl -so "/usr/local/bin/SafariBookmarkEditor" "https://raw.githubusercontent.com/robperc/SafariBookmarkEditor/master/SafariBookmarkEditor.py"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/SafariBookmarkEditor"
   /bin/chmod 775 "/usr/local/bin/SafariBookmarkEditor"
@@ -271,7 +271,7 @@
     rm -f "/usr/local/bin/FinderSidebarEditor"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/FinderSidebarEditor" "https://raw.githubusercontent.com/robperc/FinderSidebarEditor/master/FinderSidebarEditor.py"
+  /usr/bin/curl -so "/usr/local/bin/FinderSidebarEditor" "https://raw.githubusercontent.com/robperc/FinderSidebarEditor/master/FinderSidebarEditor.py"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/FinderSidebarEditor"
   /bin/chmod 775 "/usr/local/bin/FinderSidebarEditor"
@@ -285,7 +285,7 @@
     rm -f "/usr/local/bin/duti"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/duti" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/duti"
+  /usr/bin/curl -so "/usr/local/bin/duti" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/duti"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/duti"
   /bin/chmod 775 "/usr/local/bin/duti"
@@ -299,7 +299,7 @@
     rm -f "/usr/local/bin/mas"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/mas" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/mas"
+  /usr/bin/curl -so "/usr/local/bin/mas" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/mas"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/mas"
   /bin/chmod 775 "/usr/local/bin/mas"
@@ -313,7 +313,7 @@
     rm -f "/usr/local/bin/xmlstarlet"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/xmlstarlet" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/xmlstarlet"
+  /usr/bin/curl -so "/usr/local/bin/xmlstarlet" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/xmlstarlet"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/xmlstarlet"
   /bin/chmod 775 "/usr/local/bin/xmlstarlet"
@@ -327,7 +327,7 @@
     rm -f "/usr/local/bin/reattach-to-user-namespace"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/reattach-to-user-namespace" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/reattach-to-user-namespace"
+  /usr/bin/curl -so "/usr/local/bin/reattach-to-user-namespace" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/reattach-to-user-namespace"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/reattach-to-user-namespace"
   /bin/chmod 775 "/usr/local/bin/reattach-to-user-namespace"
@@ -341,7 +341,7 @@
     rm -f "/usr/local/bin/RegMAU"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/RegMAU" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/RegMAU"
+  /usr/bin/curl -so "/usr/local/bin/RegMAU" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/RegMAU"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/RegMAU"
   /bin/chmod 775 "/usr/local/bin/RegMAU"
@@ -355,7 +355,7 @@
     rm -f "/usr/local/bin/MSUpdateHelper"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/MSUpdateHelper" "https://raw.githubusercontent.com/pbowden-msft/msupdatehelper/master/MSUpdateHelper4JamfPro.sh"
+  /usr/bin/curl -so "/usr/local/bin/MSUpdateHelper" "https://raw.githubusercontent.com/pbowden-msft/msupdatehelper/master/MSUpdateHelper4JamfPro.sh"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/MSUpdateHelper"
   /bin/chmod 775 "/usr/local/bin/MSUpdateHelper"
@@ -369,7 +369,7 @@
     rm -f "/usr/local/bin/alerter"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/alerter" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/alerter"
+  /usr/bin/curl -so "/usr/local/bin/alerter" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/alerter"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/alerter"
   /bin/chmod 775 "/usr/local/bin/alerter"
@@ -383,7 +383,7 @@
     rm -f "/usr/local/bin/PrinterMapper"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/PrinterMapper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/PrinterMapper"
+  /usr/bin/curl -so "/usr/local/bin/PrinterMapper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/PrinterMapper"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/PrinterMapper"
   /bin/chmod 775 "/usr/local/bin/PrinterMapper"
@@ -397,7 +397,7 @@
     rm -f "/usr/local/bin/lohelper"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/lohelper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/lohelper"
+  /usr/bin/curl -so "/usr/local/bin/lohelper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/lohelper"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/lohelper"
   /bin/chmod 775 "/usr/local/bin/lohelper"
@@ -411,7 +411,7 @@
     rm -f "/usr/local/bin/randomizer"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/randomizer" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/randomizer"
+  /usr/bin/curl -so "/usr/local/bin/randomizer" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/randomizer"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/randomizer"
   /bin/chmod 775 "/usr/local/bin/randomizer"
@@ -425,7 +425,7 @@
     rm -f "/usr/local/bin/installinstallmacos"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/installinstallmacos" "https://raw.githubusercontent.com/munki/macadmin-scripts/master/installinstallmacos.py"
+  /usr/bin/curl -so "/usr/local/bin/installinstallmacos" "https://raw.githubusercontent.com/munki/macadmin-scripts/master/installinstallmacos.py"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/installinstallmacos"
   /bin/chmod 775 "/usr/local/bin/installinstallmacos"
@@ -439,7 +439,7 @@
     rm -f "/usr/local/bin/aria2c"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/aria2c" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aria2c"
+  /usr/bin/curl -so "/usr/local/bin/aria2c" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aria2c"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/aria2c"
   /bin/chmod 775 "/usr/local/bin/aria2c"
@@ -453,7 +453,7 @@
     rm -f "/usr/local/bin/kisp"
   fi
   
-  /usr/bin/curl -sfko "/usr/local/bin/kisp" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/kisp"
+  /usr/bin/curl -so "/usr/local/bin/kisp" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/kisp"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/kisp"
   /bin/chmod 775 "/usr/local/bin/kisp"
