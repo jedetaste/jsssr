@@ -385,37 +385,7 @@
   
   # Enable location services
   
-  rm -f "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd"*
-  
-  if [ "${osvers}" -gt 11 ]; then
-  
-    /usr/libexec/PlistBuddy -c "Add :LocationServicesEnabled integer 1" "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd.plist"
-    /usr/libexec/PlistBuddy -c "Add :LocationServicesEnabled integer 1" "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd.notbackedup.plist"
-  
-  elif [ "${osvers}" -lt 12 ] && [ "${osvers}" -gt 9 ]; then
-  
-    UUID=$(system_profiler -detailLevel full SPHardwareDataType | grep "Hardware UUID" | cut -f2 -d : | sed 's/^ *//g')
-  
-    /usr/libexec/PlistBuddy -c "Add :LocationServicesEnabled integer 1" "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd.${UUID}.plist"
-    /usr/libexec/PlistBuddy -c "Add :LocationServicesEnabled integer 1" "/var/db/locationd/Library/Preferences/ByHost/com.apple.locationd.notbackedup.${UUID}.plist"
-  
-  fi
-  
-  /usr/sbin/chown -R _locationd:_locationd "/var/db/locationd/"
-  
   /usr/bin/defaults write "/Library/Preferences/com.apple.timezone.auto.plist" Active -bool true
-  
-  /usr/bin/python << END
-from Foundation import NSBundle
-TZPP = NSBundle.bundleWithPath_("/System/Library/PreferencePanes/DateAndTime.prefPane/Contents/Resources/TimeZone.prefPane")
-TimeZonePref          = TZPP.classNamed_('TimeZonePref')
-ATZAdminPrefererences = TZPP.classNamed_('ATZAdminPrefererences')
-
-atzap  = ATZAdminPrefererences.defaultPreferences()
-pref   = TimeZonePref.alloc().init()
-atzap.addObserver_forKeyPath_options_context_(pref, "enabled", 0, 0)
-result = pref._startAutoTimeZoneDaemon_(0x1)
-END
   
   # Configure time settings
   
