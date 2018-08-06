@@ -26,6 +26,6 @@
     restartDock="true"
   fi
   
-  if [ "${restartDock="true"}" == "true" ]; then
+  if [ "${restartDock}" == "true" ]; then
     su -l "$(/usr/local/bin/currentuser)" -c "osascript -e 'tell app \"Dock\" to quit'"
   fi
