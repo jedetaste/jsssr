@@ -436,7 +436,7 @@
   
   # Disable Oracle Java Auto Update
   
-  /usr/bin/defaults write "/Library/Preferences/com.oracle.java.Java-Updater" JavaAutoUpdateEnabled -bool false
+  /usr/bin/defaults write "/Library/Preferences/com.oracle.java.Java-Updater.plist" JavaAutoUpdateEnabled -bool false
   
   # Delete Adobe Reader PlugIns
   
