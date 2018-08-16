@@ -77,6 +77,11 @@
   echo "==> Add all users to 'lpadmin' group"
   /usr/sbin/dseditgroup -o edit -n /Local/Default -a everyone -t group lpadmin
   
+  # Enable CUPS web interface
+  
+  echo "==> Enable CUPS web interface"
+  /usr/sbin/cupsctl WebInterface=yes
+  
   # Make mach_kernel invisible
   
   echo "==> Make '/mach_kernel' invisible"
