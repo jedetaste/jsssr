@@ -140,20 +140,6 @@
   /bin/chmod 775 "/usr/local/bin/rg"
   /bin/chmod +x "/usr/local/bin/rg"
   
-  # jq
-  
-  echo "==> Install 'jq'"
-  
-  if [ -s "/usr/local/bin/jq" ]; then
-    rm -f "/usr/local/bin/jq"
-  fi
-  
-  /usr/bin/curl -so "/usr/local/bin/jq" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jq"
-  
-  /usr/sbin/chown root:wheel "/usr/local/bin/jq"
-  /bin/chmod 775 "/usr/local/bin/jq"
-  /bin/chmod +x "/usr/local/bin/jq"
-  
   # aky
   
   echo "==> Install 'aky'"
@@ -170,6 +156,8 @@
     "notification-helper"
     "rg"
     "versioning-helper"
+    "jq"
+    "aria2c"
   )
   
   for ((i = 0; i < "${#akyBinary[@]}"; i++)); do
@@ -430,20 +418,6 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/installinstallmacos"
   /bin/chmod 775 "/usr/local/bin/installinstallmacos"
   /bin/chmod +x "/usr/local/bin/installinstallmacos"
-  
-  # aria2c
-  
-  echo "==> Install 'aria2c'"
-  
-  if [ -s "/usr/local/bin/aria2c" ]; then
-    rm -f "/usr/local/bin/aria2c"
-  fi
-  
-  /usr/bin/curl -so "/usr/local/bin/aria2c" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aria2c"
-  
-  /usr/sbin/chown root:wheel "/usr/local/bin/aria2c"
-  /bin/chmod 775 "/usr/local/bin/aria2c"
-  /bin/chmod +x "/usr/local/bin/aria2c"
   
   # kisp
   
