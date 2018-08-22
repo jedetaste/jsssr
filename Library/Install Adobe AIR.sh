@@ -1,31 +1,37 @@
 #!/bin/bash
+
+  tmpFolder=$(getconf DARWIN_USER_TEMP_DIR)
+  randString=$(/usr/bin/openssl rand -hex 5)
+  workDir="${tmpFolder}${randString}" && /bin/mkdir -p "${workDir}"
   
   versionInstaller="30.0"
   downloadInstaller="https://airdownload.adobe.com/air/mac/download/${versionInstaller}/AdobeAIR.dmg"
   
-  tmpFolder=$(getconf DARWIN_USER_TEMP_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+  echo "==> Download '${url}'"
   
-  echo "==> Temporary Folder is '${tmpDir}'"
+  /usr/bin/curl \
+    --show-error \
+    --fail \
+    --location \
+    --remote-time \
+    --output "${workDir}/HINClient_macos_${versionDotsToUnderscore}.dmg" \
+    --silent \
+    "${url}" \
   
-  cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "${downloadInstaller}"
+  if [ -s "${workDir}/${fileName}" ]; then
+    echo "==> Download was successful"
+  else
+    echo "==> Download failed, as no appropriate data was found"
+    rm -rf "${workDir}" && exit 1
+  fi
   
-  filePath=$(/usr/bin/find "${tmpDir}" -name "*.dmg")
+  echo "==> Prepare DMG '${workDir}/HINClient_macos_${versionDotsToUnderscore}.dmg'"
   
-  fileName=$(/usr/bin/basename "${filePath}")
-  extension="${fileName##*.}"
-  id="${fileName%.*}"
+  mountPoint="${workDir}/mountPoint" && /bin/mkdir "${mountPoint}"
+  dmg="${workDir}/HINClient_macos_${versionDotsToUnderscore}.dmg"
+  tmpMountPointFile=$(mktemp /${workDir}/dmg.XXX) &&
   
-  echo "==> Installer downloaded to '${filePath}'"
-  
-  /usr/bin/hdiutil convert -quiet "${filePath}" -format UDTO -o "${filePath}.cdr"
-  
-  echo "==> Mount CDR '${filePath}.cdr' and grep volume name"
-  
-  mountPoint="${tmpDir}/mountPoint" && /bin/mkdir "${mountPoint}"
-  cdr="${filePath}.cdr"
-  tmpMountPointFile=$(mktemp /${tmpDir}/cdr.XXX) &&
-  
-  /usr/bin/hdiutil attach -plist -nobrowse -readonly -noidme -mountrandom "${mountPoint}" "${cdr}" > "${tmpMountPointFile}" &&
+  /usr/bin/hdiutil attach -plist -nobrowse -readonly -noidme -mountrandom "${mountPoint}" "${dmg}" > "${tmpMountPointFile}" &&
   
   loc=":system-entities:"
   num=$(/usr/libexec/PlistBuddy -c "Print :system-entities:" ${tmpMountPointFile} | /usr/bin/grep -c Dict 2>/dev/null)
@@ -41,8 +47,9 @@
   done
   
   echo "==> Running installer at '${volumeName}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer'"
-  
   "${volumeName}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer" -silent
+  
+  echo "==> Remove Installer"
   
   if [ ! -z "${volumeName}" ]; then
     echo "==> Eject volume '${volumeName}'"
@@ -52,7 +59,7 @@
       /usr/sbin/diskutil unmount force "${volumeName}" > /dev/null 2>&1
     done
   fi
-    
+  
   if [ ! -z "${volumeNameDevEntry}" ]; then
     echo "==> Eject volume '${volumeNameDevEntry}'"
     /usr/sbin/diskutil eject "${volumeNameDevEntry}" > /dev/null 2>&1
@@ -62,4 +69,4 @@
     done
   fi
   
-  rm -rf "${tmpDir}"
+  /bin/rm -rf "${workDir}"
