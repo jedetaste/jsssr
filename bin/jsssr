@@ -58,6 +58,8 @@
     updateLibrary
   elif [ "${online}" == "true" ] && [ "${libraryExists}" == "false" ]; then
     updateLibrary
+  else
+    echo "==> Libray index is up-to-date"
   fi
   
   if [ -s "/usr/local/jsssr/${scriptArg}" ]; then
