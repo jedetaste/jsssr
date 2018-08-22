@@ -83,7 +83,7 @@
   /usr/bin/chflags -R nouchg "/Applications/Parallels Desktop.app"
   
   echo "==> Unhide application '/Applications/Parallels Desktop.app'"
-  /usr/bin/chflags -R nouchg "/Applications/Parallels Desktop.app"
+  /usr/bin/chflags -R nohidden "/Applications/Parallels Desktop.app"
   
   echo "==> Remove bundle '/Applications/Parallels Desktop.app' from gatekeeper quarantine"
   /usr/bin/xattr -r -d -s com.apple.quarantine "/Applications/Parallels Desktop.app"
