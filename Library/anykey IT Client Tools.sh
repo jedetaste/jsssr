@@ -126,20 +126,6 @@
   /bin/chmod 775 "/usr/local/bin/blueutil"
   /bin/chmod +x "/usr/local/bin/blueutil"
   
-  # rg
-  
-  echo "==> Install 'rg'"
-  
-  if [ -s "/usr/local/bin/rg" ]; then
-    rm -f "/usr/local/bin/rg"
-  fi
-  
-  /usr/bin/curl -so "/usr/local/bin/rg" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/rg"
-  
-  /usr/sbin/chown root:wheel "/usr/local/bin/rg"
-  /bin/chmod 775 "/usr/local/bin/rg"
-  /bin/chmod +x "/usr/local/bin/rg"
-  
   # aky
   
   echo "==> Install 'aky'"
@@ -430,3 +416,17 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/kisp"
   /bin/chmod 775 "/usr/local/bin/kisp"
   /bin/chmod +x "/usr/local/bin/kisp"
+  
+  # adobe_prtk
+  
+  echo "==> Install 'assimilateownership'"
+  
+  if [ -s "/usr/local/bin/assimilateownership" ]; then
+    rm -f "/usr/local/bin/assimilateownership"
+  fi
+  
+  /usr/bin/curl -so "/usr/local/bin/assimilateownership" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/assimilateownership"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/assimilateownership"
+  /bin/chmod 775 "/usr/local/bin/assimilateownership"
+  /bin/chmod +x "/usr/local/bin/assimilateownership"
