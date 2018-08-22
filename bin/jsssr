@@ -3,7 +3,7 @@
   progName=$(basename $0)
   progVersion="1.1"
   
-  echo "${progName} v${progVersion}"
+  echo "==> ${progName} v${progVersion}"
   
   scriptArg="${1}" && readonly scriptArg="${scriptArg}"
   
@@ -40,9 +40,11 @@
         /bin/mkdir -p "/usr/local/jsssr"
       fi
       
+      echo "==> Pull latest index"
       /usr/bin/curl -so "${tmpDir}/index" "${repositoryURI}/index"
   
       while read line && [ ! -z "${line}" ]; do
+        echo "==> Pull '${line}'"
         linePurged=$(echo "${line}" | sed -e 's/ /%20/g' 2>/dev/null)
         /usr/bin/curl -so "/usr/local/jsssr/${line}" "${repositoryURI}/Library/${linePurged}"
         /bin/chmod +x "/usr/local/jsssr/${line}"
@@ -59,8 +61,8 @@
   fi
   
   if [ -s "/usr/local/jsssr/${scriptArg}" ]; then
-    echo "Run script '${scriptArg}'"
+    echo "==> Run script '${scriptArg}'"
     cd "/usr/local/jsssr" && shift && ./"${scriptArg}" "${1}" "${2}" "${3}" "${4}" "${5}" "${6}" "${7}" "${8}" "${9}" "${10}"
   else
-    echo "Script '${scriptArg}' not found" && exit 1
+    echo "Error: Script '${scriptArg}' not found" && exit 1
   fi
