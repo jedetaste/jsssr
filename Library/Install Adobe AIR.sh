@@ -14,7 +14,7 @@
     --fail \
     --location \
     --remote-time \
-    --output "${workDir}/HINClient_macos_${versionDotsToUnderscore}.dmg" \
+    --output "${workDir}/AdobeAIR.dmg" \
     --silent \
     "${url}" \
   
@@ -25,10 +25,10 @@
     rm -rf "${workDir}" && exit 1
   fi
   
-  echo "==> Prepare DMG '${workDir}/HINClient_macos_${versionDotsToUnderscore}.dmg'"
+  echo "==> Prepare DMG '${workDir}/AdobeAIR.dmg'"
   
   mountPoint="${workDir}/mountPoint" && /bin/mkdir "${mountPoint}"
-  dmg="${workDir}/HINClient_macos_${versionDotsToUnderscore}.dmg"
+  dmg="${workDir}/AdobeAIR.dmg"
   tmpMountPointFile=$(mktemp /${workDir}/dmg.XXX) &&
   
   /usr/bin/hdiutil attach -plist -nobrowse -readonly -noidme -mountrandom "${mountPoint}" "${dmg}" > "${tmpMountPointFile}" &&
