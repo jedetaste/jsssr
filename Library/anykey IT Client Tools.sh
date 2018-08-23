@@ -425,6 +425,14 @@
     rm -f "/usr/local/bin/assimilateownership"
   fi
   
+  # assimilateownership
+  
+  echo "==> Install 'assimilateownership'"
+  
+  if [ -s "/usr/local/bin/assimilateownership" ]; then
+    rm -f "/usr/local/bin/assimilateownership"
+  fi
+  
   /usr/bin/curl -so "/usr/local/bin/assimilateownership" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/assimilateownership"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/assimilateownership"
