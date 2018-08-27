@@ -217,6 +217,19 @@ rm -rf '/Users/${currentUser}/Library/Application Support/Spigot/'
 # Delete the SaveKeep malware pieces. 
 rm -rf '/Applications/Savekeep.app'
 
+# Delete the OSX/Dok malware pieces. 
+rm -rf '/Users/${currentUser}/Downloads/Dok.zip'
+rm -rf '/Users/${currentUser}/Downloads/Dok/Dokument/Contents'
+rm -rf '/Users/${currentUser}/Library/Containers/.bella/Bella'
+rm -rf '/Users/${currentUser}/Library/Containers/.bella/bella.db'
+rm -rf '/Users/${currentUser}/Library/LaunchAgents/com.apple.iTunes.plist'
+rm -rf '/Users/${currentUser}/Library/LaunchAgents/com.apple.Safari.pac.plist'
+rm -rf '/Users/${currentUser}/Library/LaunchAgents/com.apple.Safari.proxy.plist'
+rm -rf '/Library/Containers/.bella/Bella'
+rm -rf '/Library/Containers/.bella/bella.db'
+rm -rf '/usr/local/bin/SafariProxy'
+rm -rf '/Users/Shared/AppStore.app'
+
 # Delete different malware
 rm -rf '/Applications/SearchProtect/'
 rm -rf '/Users/${currentUser}/Library/Application Support/Firefox/Profiles/*/searchplugins/my-homepage.xml'
