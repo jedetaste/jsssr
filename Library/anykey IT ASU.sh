@@ -56,10 +56,10 @@
   
   if [[ ${checkAvailableASUResult} != *"No new software available"* ]]; then
     
-    echo "Download ASU for caching"
+    echo "==> Download ASU for caching"
     downloadASU
     
-    echo "Check if ASU requires a restart"
+    echo "==> Check if ASU requires a restart"
     checkRestartASUResult=$(checkRestartASU)
     
     if [[ ${checkRestartASUResult} = *"restart"* || ${checkRestartASUResult} = *"shut down"* ]]; then
@@ -70,7 +70,7 @@
         
         if [ "${notificationUserResult}" == "Yes" ] || [ "${notificationUserResult}" == "Ja" ] || [ "${notificationUserResult}" == "Oui" ]; then
           
-          echo "Install ASU"
+          echo "==> Install ASU"
           
           currentuser=$(/usr/local/bin/currentuser)
           userLanguage=$(/usr/bin/defaults read "/Users/${currentuser}/Library/Preferences/.GlobalPreferences" AppleLanguages 2>/dev/null)
@@ -144,7 +144,7 @@
           runASU && /usr/local/bin/jamf policy -event "anykey IT ASU Restart" && exit 0
           
         else
-          echo "User said no to ASU" && exit 0
+          echo "==> User said no to ASU" && exit 0
         fi
         
       elif [ -z "$(/usr/local/bin/currentuser)" ]; then
@@ -152,10 +152,10 @@
       fi
       
     elif [[ ${checkRestartASUResult} != *"restart"* || ${checkRestartASUResult} != *"shut down"* ]]; then
-      echo "Install ASU, as no restart is required"
+      echo "==> Install ASU, as no restart is required"
       runASU && exit 0
     fi
     
   elif [[ ${checkAvailableASUResult} = *"No new software available"* ]]; then
-    echo "There is no ASU available" && exit 0
+    echo "==> There is no ASU available" && exit 0
   fi
