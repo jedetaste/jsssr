@@ -129,11 +129,11 @@
   [[ $1 == "cache" || $4 == "cache" ]] && cache_only="yes" || cache_only="no"
   
   # Display full screen message if this screen is running on Jamf Pro
-  jamfHelper="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
-  
-  if [[ -f "${jamfHelper}" && ${cache_only} != "yes" ]]; then
-      "${jamfHelper}" -windowType fs -title "Erasing macOS" -alignHeading center -heading "Erasing macOS" -alignDescription center -description "This computer is now being erased and is locked until rebuilt" -icon /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/Lock.jpg &
-  fi
+  #jamfHelper="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
+  #
+  #if [[ -f "${jamfHelper}" && ${cache_only} != "yes" ]]; then
+  #    "${jamfHelper}" -windowType fs -title "Erasing macOS" -alignHeading center -heading "Erasing macOS" -alignDescription center -description "This computer is now being erased and is locked until rebuilt" -icon /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/Lock.jpg &
+  #fi
   
   # Look for the installer, download it if it is not present
   find_existing_installer
