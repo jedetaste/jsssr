@@ -417,14 +417,6 @@
   /bin/chmod 775 "/usr/local/bin/kisp"
   /bin/chmod +x "/usr/local/bin/kisp"
   
-  # adobe_prtk
-  
-  echo "==> Install 'assimilateownership'"
-  
-  if [ -s "/usr/local/bin/assimilateownership" ]; then
-    rm -f "/usr/local/bin/assimilateownership"
-  fi
-  
   # assimilateownership
   
   echo "==> Install 'assimilateownership'"
