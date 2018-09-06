@@ -433,6 +433,8 @@
   
   # jamfprocheck
   
+  echo "==> Install 'jamfprocheck'"
+  
   LaunchDaemon="/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist"
   
   if [ -s "${LaunchDaemon}" ]; then
