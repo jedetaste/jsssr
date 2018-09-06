@@ -461,7 +461,7 @@
   <key>RunAtLoad</key>
   <true/>
   <key>StartInterval</key>
-  <integer>3600</integer>
+  <integer>1800</integer>
   <key>StartOnMount</key>
   <false/>
 </dict>
