@@ -451,7 +451,7 @@
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>ch.anykey.jamfprocheck</string>
+  <string>ch.anykey.jpscheck</string>
   <key>ProgramArguments</key>
   <array>
     <string>/bin/sh</string>
