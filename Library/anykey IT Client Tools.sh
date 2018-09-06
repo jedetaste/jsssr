@@ -471,8 +471,8 @@ EOF
   /bin/launchctl unload -w "${LaunchDaemon}"
   /bin/launchctl load -w "${LaunchDaemon}"
   
-  #/usr/bin/curl -so "/usr/local/bin/jpscheck" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jpscheck"
+  /usr/bin/curl -so "/usr/local/bin/jpscheck" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jpscheck"
   
-  #/usr/sbin/chown root:wheel "/usr/local/bin/jpscheck"
-  #/bin/chmod 775 "/usr/local/bin/jpscheck"
-  #/bin/chmod +x "/usr/local/bin/jpscheck"
+  /usr/sbin/chown root:wheel "/usr/local/bin/jpscheck"
+  /bin/chmod 775 "/usr/local/bin/jpscheck"
+  /bin/chmod +x "/usr/local/bin/jpscheck"
