@@ -430,3 +430,35 @@
   /usr/sbin/chown root:wheel "/usr/local/bin/assimilateownership"
   /bin/chmod 775 "/usr/local/bin/assimilateownership"
   /bin/chmod +x "/usr/local/bin/assimilateownership"
+  
+  # jamfprocheck
+  
+  LaunchDaemon="/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist"
+  
+  if [ -s "${LaunchDaemon}" ]; then
+    rm -rf "${LaunchDaemon}"
+  fi
+  
+  cat >> "${LaunchDaemon}" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>ch.anykey.jamfprocheck</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/sh</string>
+    <string>/Library/Scripts/JamfProCheck.sh</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>StartInterval</key>
+  <integer>3600</integer>
+  <key>StartOnMount</key>
+  <false/>
+</dict>
+</plist>
+EOF
+
+  /bin/launchctl load -w "${LaunchDaemon}"
