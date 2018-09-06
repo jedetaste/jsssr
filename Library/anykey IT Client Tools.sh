@@ -431,11 +431,15 @@
   /bin/chmod 775 "/usr/local/bin/assimilateownership"
   /bin/chmod +x "/usr/local/bin/assimilateownership"
   
-  # jamfprocheck
+  # jpscheck
   
-  echo "==> Install 'jamfprocheck'"
+  echo "==> Install 'jpscheck'"
   
-  LaunchDaemon="/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist"
+  if [ -s "/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist" ]; then
+    rm -rf "/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist"
+  fi
+  
+  LaunchDaemon="/Library/LaunchDaemons/ch.anykey.jpscheck.plist"
   
   if [ -s "${LaunchDaemon}" ]; then
     rm -rf "${LaunchDaemon}"
@@ -451,7 +455,7 @@
   <key>ProgramArguments</key>
   <array>
     <string>/bin/sh</string>
-    <string>/Library/Scripts/JamfProCheck.sh</string>
+    <string>/usr/local/bin/jpscheck</string>
   </array>
   <key>RunAtLoad</key>
   <true/>
@@ -465,8 +469,8 @@ EOF
 
   /bin/launchctl load -w "${LaunchDaemon}"
   
-  #/usr/bin/curl -so "/Library/Scripts/JamfProCheck.sh" "https://raw.githubusercontent.com/jedetaste/jsssr/master/Library/Jamf%20Pro%20Check.sh"
+  #/usr/bin/curl -so "/usr/local/bin/jpscheck" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jpscheck"
   
-  #/usr/sbin/chown root:wheel "/Library/Scripts/JamfProCheck.sh"
-  #/bin/chmod 775 "/Library/Scripts/JamfProCheck.sh"
-  #/bin/chmod +x "/Library/Scripts/JamfProCheck.sh"
+  #/usr/sbin/chown root:wheel "/usr/local/bin/jpscheck"
+  #/bin/chmod 775 "/usr/local/bin/jpscheck"
+  #/bin/chmod +x "/usr/local/bin/jpscheck"
