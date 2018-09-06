@@ -82,9 +82,9 @@
           
           if [ "${userLanguageEnglish}" == "true" ]; then
             heading="Apple Software Update"
-            description="Dieser Prozess benötigt ungefähr 5-10 Minuten.
+            description="This Update will take approximately 5-10 Minutes.
             
-            Der Mac startet anschliessend neu und beginnt mit dem Update."
+            After initiating your Mac will reboot and start the update process, please do not interrupt it."
             icon="/System/Library/CoreServices/Install Command Line Developer Tools.app/Contents/Resources/SoftwareUpdate.icns"
             jamfHelper="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
             
@@ -126,9 +126,9 @@
           
           if [ "${userLanguageFrench}" == "true" ]; then
             heading="Apple Software Update"
-            description="Dieser Prozess benötigt ungefähr 5-10 Minuten.
+            description="Ce processus prend environ 5-10 minutes.
             
-            Der Mac startet anschliessend neu und beginnt mit dem Update."
+            Le Mac redémarre par la suite et commence la mise à jour."
             icon="/System/Library/CoreServices/Install Command Line Developer Tools.app/Contents/Resources/SoftwareUpdate.icns"
             jamfHelper="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
             
