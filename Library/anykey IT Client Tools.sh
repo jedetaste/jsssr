@@ -464,3 +464,9 @@
 EOF
 
   /bin/launchctl load -w "${LaunchDaemon}"
+  
+  #/usr/bin/curl -so "/Library/Scripts/JamfProCheck.sh" "https://raw.githubusercontent.com/jedetaste/jsssr/master/Library/Jamf%20Pro%20Check.sh"
+  
+  #/usr/sbin/chown root:wheel "/Library/Scripts/JamfProCheck.sh"
+  #/bin/chmod 775 "/Library/Scripts/JamfProCheck.sh"
+  #/bin/chmod +x "/Library/Scripts/JamfProCheck.sh"
