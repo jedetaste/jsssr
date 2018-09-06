@@ -436,6 +436,7 @@
   echo "==> Install 'jpscheck'"
   
   if [ -s "/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist" ]; then
+    /bin/launchctl unload -w "/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist"
     rm -rf "/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist"
   fi
   
@@ -467,6 +468,7 @@
 </plist>
 EOF
 
+  /bin/launchctl unload -w "${LaunchDaemon}"
   /bin/launchctl load -w "${LaunchDaemon}"
   
   #/usr/bin/curl -so "/usr/local/bin/jpscheck" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jpscheck"
