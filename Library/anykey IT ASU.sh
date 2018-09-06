@@ -82,7 +82,7 @@
           
           if [ "${userLanguageEnglish}" == "true" ]; then
             heading="Apple Software Update"
-            description="This Update will take approximately 5-10 Minutes.
+            description="This Update will take approximately 10-30 Minutes.
             
             After initiating your Mac will reboot and start the update process, please do not interrupt it."
             icon="/System/Library/CoreServices/Install Command Line Developer Tools.app/Contents/Resources/SoftwareUpdate.icns"
@@ -104,7 +104,7 @@
           
           if [ "${userLanguageGerman}" == "true" ]; then
             heading="Apple Software Update"
-            description="Dieser Prozess benötigt ungefähr 5-10 Minuten.
+            description="Dieser Prozess benötigt ungefähr 10-30 Minuten.
             
             Der Mac startet anschliessend neu und beginnt mit dem Update."
             icon="/System/Library/CoreServices/Install Command Line Developer Tools.app/Contents/Resources/SoftwareUpdate.icns"
@@ -126,7 +126,7 @@
           
           if [ "${userLanguageFrench}" == "true" ]; then
             heading="Apple Software Update"
-            description="Ce processus prend environ 5-10 minutes.
+            description="Ce processus prend environ 10-30 minutes.
             
             Le Mac redémarre par la suite et commence la mise à jour."
             icon="/System/Library/CoreServices/Install Command Line Developer Tools.app/Contents/Resources/SoftwareUpdate.icns"
