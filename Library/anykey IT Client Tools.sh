@@ -405,17 +405,11 @@
   
   # kisp
   
-  echo "==> Install 'kisp'"
+  echo "==> Uninstall 'kisp'"
   
   if [ -s "/usr/local/bin/kisp" ]; then
     rm -f "/usr/local/bin/kisp"
   fi
-  
-  /usr/bin/curl -so "/usr/local/bin/kisp" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/kisp"
-  
-  /usr/sbin/chown root:wheel "/usr/local/bin/kisp"
-  /bin/chmod 775 "/usr/local/bin/kisp"
-  /bin/chmod +x "/usr/local/bin/kisp"
   
   # assimilateownership
   
