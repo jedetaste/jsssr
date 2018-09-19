@@ -42,9 +42,10 @@
       
       echo "==> Pull latest index"
       /usr/bin/curl -so "${tmpDir}/index" "${repositoryURI}/index"
-  
+      
+      echo "==> Parse index"
       while read line && [ ! -z "${line}" ]; do
-        echo "==> Pull '${line}'"
+        echo "==> Pull latest '${line}'"
         linePurged=$(echo "${line}" | sed -e 's/ /%20/g' 2>/dev/null)
         /usr/bin/curl -so "/usr/local/jsssr/${line}" "${repositoryURI}/Library/${linePurged}"
         /bin/chmod +x "/usr/local/jsssr/${line}"
