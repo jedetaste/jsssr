@@ -100,6 +100,7 @@
   
   # Enable location services
   
+  echo "==> Enable location services"
   sudo -u _locationd /usr/bin/defaults -currentHost write com.apple.locationd LocationServicesEnabled -int 1
   /usr/bin/defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
   
