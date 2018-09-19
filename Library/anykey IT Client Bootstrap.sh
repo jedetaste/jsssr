@@ -98,6 +98,11 @@
   /usr/sbin/systemsetup -setusingnetworktime on 
   /usr/sbin/ntpdate -u "time.euro.apple.com"
   
+  # Enable location services
+  
+  sudo -u _locationd /usr/bin/defaults -currentHost write com.apple.locationd LocationServicesEnabled -int 1
+  /usr/bin/defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
+  
   # Reset admin user picture
   
   echo "==> Reset admin user picture"
