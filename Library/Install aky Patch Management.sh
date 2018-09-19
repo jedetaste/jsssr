@@ -4,6 +4,10 @@
     /bin/mkdir -p "/usr/local/aky"
   fi
   
+  if [ ! -d "/usr/local/bin" ]; then
+    /bin/mkdir -p "/usr/local/bin"
+  fi
+  
   akyBinary=(
     "aky"
     "download-helper"
