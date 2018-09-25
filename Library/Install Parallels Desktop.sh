@@ -4,8 +4,8 @@
   randString=$(/usr/bin/openssl rand -hex 5)
   workDir="${tmpFolder}${randString}" && /bin/mkdir -p "${workDir}"
   
-  version="14.0.0"
-  build="45124"
+  version="14.0.1"
+  build="45154"
   versionMajor=$(echo ${version} | cut -d. -f1)
   versionMinor=$(echo ${version} | cut -d. -f2)
   versionRevision=$(echo ${version} | cut -d. -f3)
