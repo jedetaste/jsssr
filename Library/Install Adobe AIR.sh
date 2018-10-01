@@ -4,7 +4,7 @@
   randString=$(/usr/bin/openssl rand -hex 5)
   workDir="${tmpFolder}${randString}" && /bin/mkdir -p "${workDir}"
   
-  versionInstaller="30.0"
+  versionInstaller="31.0"
   url="https://airdownload.adobe.com/air/mac/download/${versionInstaller}/AdobeAIR.dmg"
   
   echo "==> Download '${url}'"
