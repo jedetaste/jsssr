@@ -136,14 +136,17 @@
   
   akyBinary=(
     "aky"
+    "aria2c@el_capitan"
+    "aria2c@high_sierra"
+    "aria2c@mojave"
+    "aria2c@sierra"
     "download-helper"
     "install-helper"
+    "jq"
     "mas-helper"
     "notification-helper"
     "rg"
     "versioning-helper"
-    "jq"
-    "aria2c"
   )
   
   for ((i = 0; i < "${#akyBinary[@]}"; i++)); do
