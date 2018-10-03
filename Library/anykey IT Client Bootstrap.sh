@@ -130,6 +130,13 @@
   echo "==> Disable Oracle Java Auto Update"
   /usr/bin/defaults write "/Library/Preferences/com.oracle.java.Java-Updater.plist" JavaAutoUpdateEnabled -bool false
   
+  # Disable Auto Update Adobe Flash Player
+
+  /bin/mkdir -p /Library/Application Support/Macromedia/ 2>/dev/null
+  echo "AutoUpdateDisable=1" > "/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
+  echo "SilentAutoUpdateEnable=0" >> "/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
+  echo "DisableAnalytics=1" >> "/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
+  
   # Delete Adobe Reader Plugins
   
   echo "==> Delete Adobe Reader Plugins"
