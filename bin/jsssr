@@ -20,7 +20,7 @@
   if [ -d "/usr/local/jsssr" ]; then
     libraryExists="true"
     cDate=$(/usr/bin/stat -f%B "/usr/local/jsssr")
-    thresholdTimestamp=$(/bin/date -j -v -10M +%s)
+    thresholdTimestamp=$(/bin/date -j -v -30M +%s)
   else
     libraryExists="false"
   fi
