@@ -104,6 +104,28 @@
   sudo -u _locationd /usr/bin/defaults -currentHost write com.apple.locationd LocationServicesEnabled -int 1
   /usr/bin/defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
   
+  # Localisation
+  
+  if [ "${1}" == "Swiss German" ] || [ -z "${1}" ]; then
+    langSystem="German"
+    localisation="true"
+  elif [ "${1}" == "Swiss French" ]; then
+    langSystem="French"
+    localisation="true"
+  elif [ "${1}" == "English" ]; then
+    langSystem="English"
+    localisation="true"
+  elif [ "${1}" == "British" ]; then
+    langSystem="English"
+    localisation="true"
+  elif [ "${1}" == "No Localisation" ]; then
+    localisation="false"
+  fi
+  
+  if [ "${localisation}" == "true" ]; then
+    /usr/sbin/languagesetup -langspec "${langSystem}"
+  fi
+  
   # Reset admin user picture
   
   echo "==> Reset admin user picture"
