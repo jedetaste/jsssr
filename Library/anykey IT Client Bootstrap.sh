@@ -123,7 +123,7 @@
   fi
   
   if [ "${localisation}" == "true" ]; then
-  	echo "==> Run localisation to '${langSystem}'"
+    echo "==> Run localisation to '${langSystem}'"
     /usr/sbin/languagesetup -langspec "${langSystem}"
   fi
   
