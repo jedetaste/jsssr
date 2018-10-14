@@ -25,7 +25,7 @@
     esac
     
     if [ "${userLanguageEnglish}" == "true" ]; then
-      su -l "${currentuser}" -c "'/usr/local/bin/alerter' -title 'Apple Software Update' -message 'Install new updates and restart now?' -actions 'Yes' -closeLabel 'No' -sender 'com.apple.dt.CommandLineTools.installondemand'"
+      su -l "${currentuser}" -c "'/usr/local/bin/alerter' -timeout '3600' -title 'Apple Software Update' -message 'Install new updates and restart now?' -actions 'Yes' -closeLabel 'No' -sender 'com.apple.dt.CommandLineTools.installondemand'"
     fi
     
     case "${userLanguage}" in 
@@ -34,7 +34,7 @@
     esac
     
     if [ "${userLanguageGerman}" == "true" ]; then
-      su -l "${currentuser}" -c "'/usr/local/bin/alerter' -title 'Apple Software Update' -message 'Neue Updates jetzt installieren und neu starten?' -actions 'Ja' -closeLabel 'Nein' -sender 'com.apple.dt.CommandLineTools.installondemand'"
+      su -l "${currentuser}" -c "'/usr/local/bin/alerter' -timeout '3600' -title 'Apple Software Update' -message 'Neue Updates jetzt installieren und neu starten?' -actions 'Ja' -closeLabel 'Nein' -sender 'com.apple.dt.CommandLineTools.installondemand'"
     fi
     
     case "${userLanguage}" in 
@@ -43,7 +43,7 @@
     esac
     
     if [ "${userLanguageFrench}" == "true" ]; then
-      su -l "${currentuser}" -c "'/usr/local/bin/alerter' -title 'Apple Software Update' -message 'Installer et redémarrer les mises à jour maintenant?' -actions 'Oui' -closeLabel 'Non' -sender 'com.apple.dt.CommandLineTools.installondemand'"
+      su -l "${currentuser}" -c "'/usr/local/bin/alerter' -timeout '3600' -title 'Apple Software Update' -message 'Installer et redémarrer les mises à jour maintenant?' -actions 'Oui' -closeLabel 'Non' -sender 'com.apple.dt.CommandLineTools.installondemand'"
     fi
     
   }
