@@ -406,14 +406,6 @@
   /bin/chmod 775 "/usr/local/bin/installinstallmacos"
   /bin/chmod +x "/usr/local/bin/installinstallmacos"
   
-  # kisp
-  
-  echo "==> Uninstall 'kisp'"
-  
-  if [ -s "/usr/local/bin/kisp" ]; then
-    rm -f "/usr/local/bin/kisp"
-  fi
-  
   # assimilateownership
   
   echo "==> Install 'assimilateownership'"
