@@ -141,14 +141,14 @@
               
           fi
           
-          runASU && /usr/local/bin/jamf policy -event "anykey IT ASU Restart" && exit 0
+          runASU && /usr/local/bin/jamf reboot -background -immediately && exit 0
           
         else
           echo "==> User said no to ASU" && exit 0
         fi
         
       elif [ -z "$(/usr/local/bin/currentuser)" ]; then
-        runASU && /usr/local/bin/jamf policy -event "anykey IT ASU Restart" && exit 0
+        runASU && /usr/local/bin/jamf reboot -background -immediately && exit 0
       fi
       
     elif [[ ${checkRestartASUResult} != *"restart"* || ${checkRestartASUResult} != *"shut down"* ]]; then
@@ -157,5 +157,6 @@
     fi
     
   elif [[ ${checkAvailableASUResult} = *"No new software available"* ]]; then
-    echo "==> There is no ASU available" && exit 0
+    echo "==> There is no ASU available"
+    /usr/local/bin/jamf recon && exit 0
   fi
