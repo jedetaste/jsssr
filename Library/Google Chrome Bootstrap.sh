@@ -130,7 +130,7 @@ EOL
   "exited_cleanly": true,
   "managed_user_id": "",
   "name": "First user",
-  "password_manager_enabled": false,
+  "password_manager_enabled": true,
   "per_host_zoom_levels": {
 
   }
