@@ -461,3 +461,10 @@
   if [ -e "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin" ]; then
     /bin/rm -rf "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin"
   fi
+
+  # Correct Permissions Adobe Folder
+
+  for user in $(ls /Users | grep -v Shared | grep -v Guest | grep -v '.localized'); do
+    chown -r ${user} "/Users/${user}/Library/Application Support/Adobe/"
+    chmod -r 700 "/Users/${user}/Library/Application Support/Adobe/"
+  done

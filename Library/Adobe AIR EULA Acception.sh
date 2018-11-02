@@ -8,13 +8,13 @@
       touch "/Users/${user}/Library/Application Support/Adobe/AIR/eulaAccepted"
       echo "3" >> "/Users/${user}/Library/Application Support/Adobe/AIR/eulaAccepted"
       chown -r ${user} "/Users/${user}/Library/Application Support/Adobe/"
-      chmod -r 700 "/Users/${user}/Library/Application Support/Adobe/AIR/eulaAccepted"
+      chmod -r 700 "/Users/${user}/Library/Application Support/Adobe/"
     else
       rm -f "/Users/${user}/Library/Application Support/Adobe/AIR/eulaAccepted"
       touch "/Users/${user}/Library/Application Support/Adobe/AIR/eulaAccepted"
       echo "3" >> "/Users/${user}/Library/Application Support/Adobe/AIR/eulaAccepted"
       chown -r ${user} "/Users/${user}/Library/Application Support/Adobe/"
-      chmod -r 700 "/Users/${user}/Library/Application Support/Adobe/AIR/eulaAccepted"
+      chmod -r 700 "/Users/${user}/Library/Application Support/Adobe/"
     fi
   done
   
