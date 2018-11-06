@@ -15,12 +15,12 @@
   
   # Set password policy
   
-  for ((i = 0; i < "${#userName[@]}"; i++)); do
-    if [ -d "/Users/${userName[$i]}" ]; then
-      echo "Set password policy for user ${userName[$i]}"
-      /usr/bin/pwpolicy -u "${userName[$i]}" -setpolicy "canModifyPasswordforSelf=0"
-    fi
-  done
+#  for ((i = 0; i < "${#userName[@]}"; i++)); do
+#    if [ -d "/Users/${userName[$i]}" ]; then
+#      echo "Set password policy for user ${userName[$i]}"
+#      /usr/bin/pwpolicy -u "${userName[$i]}" -setpolicy "canModifyPasswordforSelf=0"
+#    fi
+#  done
   
   # Create directory geloeschteHomes in Library
   
