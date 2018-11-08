@@ -6,6 +6,7 @@
     '/Applications/Lernprogramme/Blitzrechnen/'
     '/Applications/Lernprogramme/Clin dœil.app'
     '/Applications/Lernprogramme/Mille feuilles.app'
+    '/Applications/Lernprogramme/New Inspiration IC/'
   )
   
   for ((i = 0; i < "${#applicationPath[@]}"; i++)); do
