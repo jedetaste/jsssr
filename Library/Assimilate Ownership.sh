@@ -2,8 +2,7 @@
   
   applicationPath=(
     '/Applications/Scratch 2.app'
-    '/Applications/Lernprogramme/TastaBasta Training/FlyingSnails.app'
-    '/Applications/Lernprogramme/TastaBasta Training/TastaBasta Training.app'
+    '/Applications/Lernprogramme/TastaBasta Training/'
     '/Applications/Lernprogramme/Blitzrechnen/'
     '/Applications/Lernprogramme/Clin dœil.app'
     '/Applications/Lernprogramme/Mille feuilles.app'
