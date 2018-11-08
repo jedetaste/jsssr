@@ -10,7 +10,7 @@
   )
   
   for ((i = 0; i < "${#applicationPath[@]}"; i++)); do
-    if [ -s "${domainPlist[$i]}" ]; then
-      /usr/local/bin/assimilateownership --path "${domainPlist[$i]}"
+    if [ -s "${applicationPath[$i]}" ]; then
+      /usr/local/bin/assimilateownership --path "${applicationPath[$i]}"
     fi
   done
