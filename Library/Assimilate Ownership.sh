@@ -1,6 +1,7 @@
 #!/bin/bash
   
   applicationPath=(
+    '/Applications/Slack.app'
     '/Applications/Scratch 2.app'
     '/Applications/Lernprogramme/TastaBasta Training/'
     '/Applications/Lernprogramme/Blitzrechnen/'
