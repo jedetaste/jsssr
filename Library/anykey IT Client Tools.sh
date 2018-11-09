@@ -456,6 +456,9 @@
 </dict>
 </plist>
 EOF
+  
+  /usr/bin/xmllint --pretty 1 "${LaunchDaemon}" > "/private/tmp/tempjpscheck.plist"
+  /bin/mv "/private/tmp/tempjpscheck.plist" "${LaunchDaemon}" && rm -f "/private/tmp/tempjpscheck.plist"
 
   /bin/launchctl unload -w "${LaunchDaemon}"
   /bin/launchctl load -w "${LaunchDaemon}"
