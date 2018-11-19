@@ -468,11 +468,11 @@
     for usertemplate in "/System/Library/User Template"/*; do
       if [ ! -s "${usertemplate}/Library/Application Support/Spotify/prefs" ]; then
         mkdir -p "${usertemplate}/Library/Application Support/Spotify/"
-        echo "app.autostart-configured=true" >> "${usertemplate}/Library/Application Support/Spotify/prefs"
+        echo "app.autostart-configured=false" >> "${usertemplate}/Library/Application Support/Spotify/prefs"
       else
         rm -f "${usertemplate}/Library/Application Support/Spotify/prefs"
         mkdir -p "${usertemplate}/Library/Application Support/Spotify/"
-        echo "app.autostart-configured=true" >> "${usertemplate}/Library/Application Support/Spotify/prefs"
+        echo "app.autostart-configured=false" >> "${usertemplate}/Library/Application Support/Spotify/prefs"
       fi
     done
   fi
