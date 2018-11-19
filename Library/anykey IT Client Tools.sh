@@ -330,7 +330,7 @@
     rm -f "/usr/local/bin/MSUpdateHelper"
   fi
   
-  /usr/bin/curl -so "/usr/local/bin/MSUpdateHelper" "https://raw.githubusercontent.com/pbowden-msft/msupdatehelper/master/MSUpdateHelper4JamfPro.sh"
+  /usr/bin/curl -so "/usr/local/bin/MSUpdateHelper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/MSUpdateHelper"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/MSUpdateHelper"
   /bin/chmod 775 "/usr/local/bin/MSUpdateHelper"
