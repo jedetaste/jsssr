@@ -178,6 +178,22 @@
   if [ -e "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin" ]; then
     /bin/rm -rf "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin"
   fi
+  
+  # Disable Spotify AutoStart if installed
+  
+  echo "==> Disable Spotify AutoStart if installed"
+  if [ -e "/Applications/Spotify.app" ]; then
+    for usertemplate in "/System/Library/User Template"/*; do
+      if [ ! -s "${usertemplate}/Library/Application Support/Spotify/prefs" ]; then
+        mkdir -p "${usertemplate}/Library/Application Support/Spotify/"
+        echo "app.autostart-configured=true" >> "${usertemplate}/Library/Application Support/Spotify/prefs"
+      else
+        rm -f "${usertemplate}/Library/Application Support/Spotify/prefs"
+        mkdir -p "${usertemplate}/Library/Application Support/Spotify/"
+        echo "app.autostart-configured=true" >> "${usertemplate}/Library/Application Support/Spotify/prefs"
+      fi
+    done
+  fi
 
   # Correct Permissions Adobe Folder
 
