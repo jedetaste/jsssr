@@ -127,6 +127,13 @@
     /usr/sbin/languagesetup -langspec "${langSystem}"
   fi
   
+  # Install filter.anykey.ch SSL Root certificate
+  
+  echo "==> Install filter.anykey.ch SSL Root certificate"
+  /usr/bin/curl -so "/private/tmp/NetAlerts.cer" "https://filter.anykey.ch/certs/NetAlerts.cer"
+  /usr/bin/security add-trusted-cert -d -r trustRoot -p ssl -p basic -k "/Library/Keychains/System.keychain" "/private/tmp/NetAlerts.cer"
+  /bin/rm -f "/private/tmp/NetAlerts.cer"
+  
   # Reset admin user picture
   
   echo "==> Reset admin user picture"
