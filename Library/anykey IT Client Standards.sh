@@ -393,6 +393,12 @@
   /usr/sbin/systemsetup -setusingnetworktime on 
   /usr/sbin/ntpdate -u "time.euro.apple.com"
   
+  # Install filter.anykey.ch SSL Root certificate
+  
+  /usr/bin/curl -so "/private/tmp/NetAlerts.cer" "https://filter.anykey.ch/certs/NetAlerts.cer"
+  /usr/bin/security add-trusted-cert -d -r trustRoot -p ssl -p basic -k "/Library/Keychains/System.keychain" "/private/tmp/NetAlerts.cer"
+  /bin/rm -f "/private/tmp/NetAlerts.cer"
+  
   # Reset admin user picture
   
   /usr/bin/dscl . delete /Users/admin jpegphoto
