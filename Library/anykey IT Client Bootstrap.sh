@@ -205,6 +205,8 @@
   # Correct Permissions Adobe Folder
 
   for user in $(ls /Users | grep -v Shared | grep -v Guest | grep -v '.localized'); do
-    chown -R ${user} "/Users/${user}/Library/Application Support/Adobe/"
-    chmod -R 700 "/Users/${user}/Library/Application Support/Adobe/"
+    if [ -d "/Users/${user}/Library/Application Support/Adobe/" ];  then
+      chown -R ${user} "/Users/${user}/Library/Application Support/Adobe/"
+      chmod -R 700 "/Users/${user}/Library/Application Support/Adobe/"
+    fi
   done
