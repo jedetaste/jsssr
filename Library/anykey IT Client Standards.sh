@@ -390,8 +390,19 @@
   
   # Configure time settings
   
-  /usr/sbin/systemsetup -setusingnetworktime on 
-  /usr/sbin/ntpdate -u "time.euro.apple.com"
+  macos_vers() {
+    IFS='.' read -r major minor revision < <(/usr/bin/sw_vers -productVersion)
+  }
+  
+  macos_vers
+  
+  if [ ${minor} -gt 13 ]; then
+    /usr/sbin/systemsetup -setusingnetworktime on 
+    /usr/bin/sntp -sS "time.euro.apple.com"
+  else []; then
+    /usr/sbin/systemsetup -setusingnetworktime on 
+    /usr/sbin/ntpdate -u "time.euro.apple.com"
+  fi
   
   # Install filter.anykey.ch SSL Root certificate
   
