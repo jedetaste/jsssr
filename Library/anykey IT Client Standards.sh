@@ -399,7 +399,7 @@
   if [ ${minor} -gt 13 ]; then
     /usr/sbin/systemsetup -setusingnetworktime on 
     /usr/bin/sntp -sS "time.euro.apple.com"
-  else []; then
+  else
     /usr/sbin/systemsetup -setusingnetworktime on 
     /usr/sbin/ntpdate -u "time.euro.apple.com"
   fi
