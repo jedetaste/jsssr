@@ -3,19 +3,23 @@
   # Determine OS version and build version
   
   echo "==> Determine macOS Version"
-  OSVers=$(/usr/bin/sw_vers -productVersion)
-  OSVersMajor=$(echo ${OSVers} | cut -d. -f1)
-  OSVersMinor=$(echo ${OSVers} | cut -d. -f2)
-  OSVersRevision=$(echo ${OSVers} | cut -d. -f3)
   
-  echo "    macOS version: ${OSVers}"
-  echo "    macOS version Major: ${OSVersMajor}"
-  echo "    macOS version Minor: ${OSVersMinor}"
-  echo "    macOS version Revision: ${OSVersRevision}"
+  macos_vers() {
+    IFS='.' read -r major minor revision < <(/usr/bin/sw_vers -productVersion)
+  }
+  
+  macos_vers
+  
+  if [ ${minor} -gt 11 ]; then
+    echo "==> OS X ${major}.${major}.${major}"
+  else
+    echo "==> macOS ${major}.${major}.${major}"
+  fi
   
   # Symlink useful applications
   
   echo "==> Symlink useful applications"
+  
   echo "    Symlink 'Directory Utility.app'"
   if [[ ! -e "/Applications/Utilities/Directory Utility.app" ]]; then
     /bin/ln -s "/System/Library/CoreServices/Applications/Directory Utility.app" "/Applications/Utilities/Directory Utility.app"
@@ -54,16 +58,19 @@
   # Enable SSH
   
   echo "==> Enable SSH"
+  
   /usr/sbin/systemsetup -setremotelogin on
   
   # Enable Gatekeeper
   
   echo "==> Enable Gatekeeper"
+  
   /usr/sbin/spctl --master-enable
   
   # Disable printer sharing on all printer.
   
   echo "==> Disable printer sharing on all printer"
+  
   /usr/sbin/cupsctl --no-share-printers
   
   for file in /etc/cups/ppd/*; do
@@ -75,16 +82,19 @@
   # Adds all users to print admin group
   
   echo "==> Add all users to 'lpadmin' group"
+  
   /usr/sbin/dseditgroup -o edit -n /Local/Default -a everyone -t group lpadmin
   
   # Enable CUPS web interface
   
   echo "==> Enable CUPS web interface"
+  
   /usr/sbin/cupsctl WebInterface=yes
   
   # Make mach_kernel invisible
   
   echo "==> Make '/mach_kernel' invisible"
+  
   if [ -e /mach_kernel ]; then
     if ! /bin/ls -lO /mach_kernel | grep hidden > /dev/null; then
       echo "/mach_kernel not set to be hidden. Re-hiding."
@@ -95,12 +105,19 @@
   # Configure time settings
   
   echo "==> Set time server to 'time.euro.apple.com'"
-  /usr/sbin/systemsetup -setusingnetworktime on 
-  /usr/sbin/ntpdate -u "time.euro.apple.com"
+  
+  if [ ${minor} -gt 13 ]; then
+    /usr/sbin/systemsetup -setusingnetworktime on 
+    /usr/bin/sntp -sS "time.euro.apple.com"
+  else
+    /usr/sbin/systemsetup -setusingnetworktime on 
+    /usr/sbin/ntpdate -u "time.euro.apple.com"
+  fi
   
   # Enable location services
   
   echo "==> Enable location services"
+  
   sudo -u _locationd /usr/bin/defaults -currentHost write com.apple.locationd LocationServicesEnabled -int 1
   /usr/bin/defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
   
@@ -130,6 +147,7 @@
   # Install filter.anykey.ch SSL Root certificate
   
   echo "==> Install filter.anykey.ch SSL Root certificate"
+  
   /usr/bin/curl -so "/private/tmp/NetAlerts.cer" "https://filter.anykey.ch/certs/NetAlerts.cer"
   /usr/bin/security add-trusted-cert -d -r trustRoot -p ssl -p basic -k "/Library/Keychains/System.keychain" "/private/tmp/NetAlerts.cer"
   /bin/rm -f "/private/tmp/NetAlerts.cer"
@@ -137,32 +155,31 @@
   # Reset admin user picture
   
   echo "==> Reset admin user picture"
+  
   /usr/bin/dscl . delete /Users/admin jpegphoto
   /usr/bin/dscl . delete /Users/admin Pictures
-  
-  # Set do_not_upgrade_jamf to false for Jamf Binary
-  
-  echo "==> Set do_not_upgrade_jamf to false for Jamf Binary"
-  /usr/bin/defaults write "/Library/Preferences/com.jamfsoftware.jamf" do_not_upgrade_jamf -bool false
   
   # Disable Safari setup assistent in all User Template
   
   echo "==> Disable Safari setup assistent in all User Template"
+  
   safariversion=$(/usr/bin/defaults read /Applications/Safari.app/Contents/Info CFBundleShortVersionString | /usr/bin/awk '{print $1}')
   
   for USER_TEMPLATE in "/System/Library/User Template"/*; do
-    /usr/bin/defaults write "${USER_TEMPLATE}/Library/Preferences/com.apple.Safari" LastOSVersionSafariWasLaunchedOn -string "${osvers}"
+    /usr/bin/defaults write "${USER_TEMPLATE}/Library/Preferences/com.apple.Safari" LastOSVersionSafariWasLaunchedOn -string "${minor}"
     /usr/bin/defaults write "${USER_TEMPLATE}/Library/Preferences/com.apple.Safari" LastSafariVersionWithWelcomePage -string "${safariversion}"
   done
   
   # Disable Oracle Java Auto Update
   
   echo "==> Disable Oracle Java Auto Update"
+  
   /usr/bin/defaults write "/Library/Preferences/com.oracle.java.Java-Updater.plist" JavaAutoUpdateEnabled -bool false
   
   # Disable Auto Update Adobe Flash Player
 
   echo "==> Disable Auto Update Adobe Flash Player"
+  
   /bin/mkdir -p "/Library/Application Support/Macromedia/" 2>/dev/null
   echo "AutoUpdateDisable=1" > "/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
   echo "SilentAutoUpdateEnable=0" >> "/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
@@ -171,6 +188,7 @@
   # Disable Auto Update Adobe Acrobat Reader DC
   
   echo "==> Disable Auto Update Adobe Acrobat Reader DC"
+  
   if [ -d "/Applications/Adobe Acrobat Reader DC.app/Contents/Plugins/Updater.acroplugin" ]; then
     rm -rf "/Applications/Adobe Acrobat Reader DC.app/Contents/Plugins/Updater.acroplugin"
   fi
@@ -178,6 +196,7 @@
   # Delete Adobe Reader Plugins
   
   echo "==> Delete Adobe Reader Plugins"
+  
   if [ -e "/Library/Internet Plug-Ins/AdobePDFViewer.plugin" ]; then
     /bin/rm -rf "/Library/Internet Plug-Ins/AdobePDFViewer.plugin"
   fi
@@ -189,6 +208,7 @@
   # Disable Spotify AutoStart if installed
   
   echo "==> Disable Spotify AutoStart if installed"
+  
   if [ -e "/Applications/Spotify.app" ]; then
     for usertemplate in "/System/Library/User Template"/*; do
       if [ ! -s "${usertemplate}/Library/Application Support/Spotify/prefs" ]; then
@@ -203,7 +223,9 @@
   fi
 
   # Correct Permissions Adobe Folder
-
+  
+  echo "==> Correct Permissions Adobe Folder"
+  
   for user in $(ls /Users | grep -v Shared | grep -v Guest | grep -v '.localized'); do
     if [ -d "/Users/${user}/Library/Application Support/Adobe/" ];  then
       chown -R ${user} "/Users/${user}/Library/Application Support/Adobe/"
