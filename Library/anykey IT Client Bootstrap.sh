@@ -11,9 +11,9 @@
   macos_vers
   
   if [ ${minor} -gt 11 ]; then
-    echo "==> macOS ${major}.${major}.${major}"
+    echo "==> macOS ${major}.${minor}.${revision}"
   else
-    echo "==> OS X ${major}.${major}.${major}"
+    echo "==> OS X ${major}.${minor}.${revision}"
   fi
   
   # Symlink useful applications
