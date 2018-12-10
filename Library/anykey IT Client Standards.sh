@@ -502,3 +502,9 @@
     	chmod -R 700 "/Users/${user}/Library/Application Support/Adobe/"
     fi
   done
+  
+  # Remove wrongly saved Remove2011.log
+  
+  if [ -s "/Remove2011.log" ]; then
+    rm -f "/Remove2011.log"
+  fi
