@@ -22,56 +22,56 @@
   
   echo "    Symlink 'Directory Utility.app'"
   if [[ ! -e "/Applications/Utilities/Directory Utility.app" ]]; then
-    /bin/ln -s "/System/Library/CoreServices/Applications/Directory Utility.app" "/Applications/Utilities/Directory Utility.app"
+    ln -s "/System/Library/CoreServices/Applications/Directory Utility.app" "/Applications/Utilities/Directory Utility.app"
   fi
   
   if [[ -L "/Applications/Utilities/Directory Utility.app" ]]; then
-    /bin/rm "/Applications/Utilities/Directory Utility.app"
-    /bin/ln -s "/System/Library/CoreServices/Applications/Directory Utility.app" "/Applications/Utilities/Directory Utility.app"
+    rm "/Applications/Utilities/Directory Utility.app"
+    ln -s "/System/Library/CoreServices/Applications/Directory Utility.app" "/Applications/Utilities/Directory Utility.app"
   fi
   
   echo "    Symlink 'Network Utility.app'"
   if [[ ! -e "/Applications/Utilities/Network Utility.app" ]]; then
-    /bin/ln -s "/System/Library/CoreServices/Applications/Network Utility.app" "/Applications/Utilities/Network Utility.app"
+    ln -s "/System/Library/CoreServices/Applications/Network Utility.app" "/Applications/Utilities/Network Utility.app"
   fi
   
   if [[ -L "/Applications/Utilities/Network Utility.app" ]]; then
-    /bin/rm "/Applications/Utilities/Network Utility.app"
-    /bin/ln -s "/System/Library/CoreServices/Applications/Network Utility.app" "/Applications/Utilities/Network Utility.app"
+    rm "/Applications/Utilities/Network Utility.app"
+    ln -s "/System/Library/CoreServices/Applications/Network Utility.app" "/Applications/Utilities/Network Utility.app"
   fi
   
   echo "    Symlink 'Screen Sharing.app'"
   if [[ ! -e "/Applications/Utilities/Screen Sharing.app" ]]; then
-    /bin/ln -s "/System/Library/CoreServices/Applications/Screen Sharing.app" "/Applications/Utilities/Screen Sharing.app"
+    ln -s "/System/Library/CoreServices/Applications/Screen Sharing.app" "/Applications/Utilities/Screen Sharing.app"
   fi
   
   if [[ -L "/Applications/Utilities/Screen Sharing.app" ]]; then
-    /bin/rm "/Applications/Utilities/Screen Sharing.app"
-    /bin/ln -s "/System/Library/CoreServices/Applications/Screen Sharing.app" "/Applications/Utilities/Screen Sharing.app"
+    rm "/Applications/Utilities/Screen Sharing.app"
+    ln -s "/System/Library/CoreServices/Applications/Screen Sharing.app" "/Applications/Utilities/Screen Sharing.app"
   fi
   
   echo "    Symlink 'jamf.log'"
   if [[ ! -e "/Users/admin/Desktop/jamf.log" ]]; then
-    /bin/ln -s "/var/log/jamf.log" "/Users/admin/Desktop/jamf.log"
+    ln -s "/var/log/jamf.log" "/Users/admin/Desktop/jamf.log"
   fi
   
   # Enable SSH
   
   echo "==> Enable SSH"
   
-  /usr/sbin/systemsetup -setremotelogin on
+  systemsetup -setremotelogin on
   
   # Enable Gatekeeper
   
   echo "==> Enable Gatekeeper"
   
-  /usr/sbin/spctl --master-enable
+  spctl --master-enable
   
   # Disable printer sharing on all printer.
   
   echo "==> Disable printer sharing on all printer"
   
-  /usr/sbin/cupsctl --no-share-printers
+  cupsctl --no-share-printers
   
   for file in /etc/cups/ppd/*; do
     path="${file%.ppd}"
@@ -83,22 +83,22 @@
   
   echo "==> Add all users to 'lpadmin' group"
   
-  /usr/sbin/dseditgroup -o edit -n /Local/Default -a everyone -t group lpadmin
+  dseditgroup -o edit -n /Local/Default -a everyone -t group lpadmin
   
   # Enable CUPS web interface
   
   echo "==> Enable CUPS web interface"
   
-  /usr/sbin/cupsctl WebInterface=yes
+  cupsctl WebInterface=yes
   
   # Make mach_kernel invisible
   
   echo "==> Make '/mach_kernel' invisible"
   
-  if [ -e /mach_kernel ]; then
-    if ! /bin/ls -lO /mach_kernel | grep hidden > /dev/null; then
+  if [ -e "/mach_kernel" ]; then
+    if ! ls -lO /mach_kernel | grep hidden > /dev/null; then
       echo "/mach_kernel not set to be hidden. Re-hiding."
-      /usr/bin/chflags hidden /mach_kernel
+      chflags hidden "/mach_kernel"
     fi
   fi
   
@@ -107,19 +107,19 @@
   echo "==> Set time server to 'time.euro.apple.com'"
   
   if [ ${minor} -gt 13 ]; then
-    /usr/sbin/systemsetup -setusingnetworktime on 
-    /usr/bin/sntp -sS "time.euro.apple.com"
+    systemsetup -setusingnetworktime on 
+    sntp -sS "time.euro.apple.com"
   else
-    /usr/sbin/systemsetup -setusingnetworktime on 
-    /usr/sbin/ntpdate -u "time.euro.apple.com"
+    systemsetup -setusingnetworktime on 
+    ntpdate -u "time.euro.apple.com"
   fi
   
   # Enable location services
   
   echo "==> Enable location services"
   
-  sudo -u _locationd /usr/bin/defaults -currentHost write com.apple.locationd LocationServicesEnabled -int 1
-  /usr/bin/defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
+  sudo -u _locationd defaults -currentHost write com.apple.locationd LocationServicesEnabled -int 1
+  defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
   
   # Localisation
   
@@ -141,46 +141,46 @@
   
   if [ "${localisation}" == "true" ]; then
     echo "==> Run localisation to '${langSystem}'"
-    /usr/sbin/languagesetup -langspec "${langSystem}"
+    languagesetup -langspec "${langSystem}"
   fi
   
   # Install filter.anykey.ch SSL Root certificate
   
   echo "==> Install filter.anykey.ch SSL Root certificate"
   
-  /usr/bin/curl -so "/private/tmp/NetAlerts.cer" "https://filter.anykey.ch/certs/NetAlerts.cer"
-  /usr/bin/security add-trusted-cert -d -r trustRoot -p ssl -p basic -k "/Library/Keychains/System.keychain" "/private/tmp/NetAlerts.cer"
-  /bin/rm -f "/private/tmp/NetAlerts.cer"
+  curl -so "/private/tmp/NetAlerts.cer" "https://filter.anykey.ch/certs/NetAlerts.cer"
+  security add-trusted-cert -d -r trustRoot -p ssl -p basic -k "/Library/Keychains/System.keychain" "/private/tmp/NetAlerts.cer"
+  rm -f "/private/tmp/NetAlerts.cer"
   
   # Reset admin user picture
   
   echo "==> Reset admin user picture"
   
-  /usr/bin/dscl . delete /Users/admin jpegphoto
-  /usr/bin/dscl . delete /Users/admin Pictures
+  dscl . delete /Users/admin jpegphoto
+  dscl . delete /Users/admin Pictures
   
   # Disable Safari setup assistent in all User Template
   
   echo "==> Disable Safari setup assistent in all User Template"
   
-  safariversion=$(/usr/bin/defaults read /Applications/Safari.app/Contents/Info CFBundleShortVersionString | /usr/bin/awk '{print $1}')
+  safariversion=$(defaults read /Applications/Safari.app/Contents/Info CFBundleShortVersionString | /usr/bin/awk '{print $1}')
   
   for USER_TEMPLATE in "/System/Library/User Template"/*; do
-    /usr/bin/defaults write "${USER_TEMPLATE}/Library/Preferences/com.apple.Safari" LastOSVersionSafariWasLaunchedOn -string "${minor}"
-    /usr/bin/defaults write "${USER_TEMPLATE}/Library/Preferences/com.apple.Safari" LastSafariVersionWithWelcomePage -string "${safariversion}"
+    defaults write "${USER_TEMPLATE}/Library/Preferences/com.apple.Safari" LastOSVersionSafariWasLaunchedOn -string "${minor}"
+    defaults write "${USER_TEMPLATE}/Library/Preferences/com.apple.Safari" LastSafariVersionWithWelcomePage -string "${safariversion}"
   done
   
   # Disable Oracle Java Auto Update
   
   echo "==> Disable Oracle Java Auto Update"
   
-  /usr/bin/defaults write "/Library/Preferences/com.oracle.java.Java-Updater.plist" JavaAutoUpdateEnabled -bool false
+  defaults write "/Library/Preferences/com.oracle.java.Java-Updater.plist" JavaAutoUpdateEnabled -bool false
   
   # Disable Auto Update Adobe Flash Player
 
   echo "==> Disable Auto Update Adobe Flash Player"
   
-  /bin/mkdir -p "/Library/Application Support/Macromedia/" 2>/dev/null
+  mkdir -p "/Library/Application Support/Macromedia/" 2>/dev/null
   echo "AutoUpdateDisable=1" > "/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
   echo "SilentAutoUpdateEnable=0" >> "/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
   echo "DisableAnalytics=1" >> "/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
@@ -198,11 +198,11 @@
   echo "==> Delete Adobe Reader Plugins"
   
   if [ -e "/Library/Internet Plug-Ins/AdobePDFViewer.plugin" ]; then
-    /bin/rm -rf "/Library/Internet Plug-Ins/AdobePDFViewer.plugin"
+    rm -rf "/Library/Internet Plug-Ins/AdobePDFViewer.plugin"
   fi
   
   if [ -e "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin" ]; then
-    /bin/rm -rf "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin"
+    rm -rf "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin"
   fi
   
   # Disable Spotify AutoStart if installed
@@ -232,3 +232,11 @@
       chmod -R 700 "/Users/${user}/Library/Application Support/Adobe/"
     fi
   done
+  
+  # Remove wrongly saved Remove2011.log
+  
+  echo "==> Remove wrongly saved Remove2011.log"
+  
+  if [ -s "/Remove2011.log" ]; then
+    rm -f "/Remove2011.log"
+  fi
