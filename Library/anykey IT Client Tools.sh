@@ -360,6 +360,20 @@
   /bin/chmod 775 "/usr/local/bin/MSUpdateHelper"
   /bin/chmod +x "/usr/local/bin/MSUpdateHelper"
   
+  # MSUpdateHelper2019
+  
+  echo "==> Install 'MSUpdateHelper2019'"
+  
+  if [ -s "/usr/local/bin/MSUpdateHelper2019" ]; then
+    rm -f "/usr/local/bin/MSUpdateHelper2019"
+  fi
+  
+  /usr/bin/curl -so "/usr/local/bin/MSUpdateHelper2019" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/MSUpdateHelper2019"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/MSUpdateHelper2019"
+  /bin/chmod 775 "/usr/local/bin/MSUpdateHelper2019"
+  /bin/chmod +x "/usr/local/bin/MSUpdateHelper2019"
+  
   # alerter
   
   echo "==> Install 'alerter'"
