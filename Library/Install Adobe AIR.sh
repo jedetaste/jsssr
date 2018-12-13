@@ -16,7 +16,7 @@
     --remote-time \
     --output "${workDir}/AdobeAIR.dmg" \
     --silent \
-    "${url}" \
+    "${url}"
   
   if [ -s "${workDir}/${fileName}" ]; then
     echo "==> Download was successful"
