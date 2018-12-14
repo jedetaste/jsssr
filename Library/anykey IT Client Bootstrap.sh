@@ -67,9 +67,9 @@
   
   spctl --master-enable
   
-  # Disable printer sharing on all printer.
+  # Disable printer sharing on all printers
   
-  echo "==> Disable printer sharing on all printer"
+  echo "==> Disable printer sharing on all printers"
   
   cupsctl --no-share-printers
   
