@@ -347,6 +347,10 @@
   /bin/chmod +x "/usr/local/bin/RegMAU"
   
   # MSUpdateHelper
+
+  if [ -s "/usr/local/bin/MSUpdateHelper2019" ]; then
+  	rm -f "/usr/local/bin/MSUpdateHelper2019"
+  fi
   
   echo "==> Install 'MSUpdateHelper'"
   
