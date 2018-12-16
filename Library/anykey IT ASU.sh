@@ -1,5 +1,13 @@
 #!/bin/bash
   
+  if [ ! -s "/usr/local/bin/currentuser" ]; then
+    echo "Helper 'currentuser' could not be found" && exit 1
+  fi
+  
+  if [ ! -s "/usr/local/bin/alerter" ]; then
+    echo "Helper 'alerter' could not be found" && exit 1
+  fi
+  
   function checkAvailableASU() {
     /usr/sbin/softwareupdate --reset-ignored
     /usr/sbin/softwareupdate --list
