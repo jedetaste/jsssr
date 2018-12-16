@@ -1,15 +1,13 @@
 #!/bin/bash
 
-  downloadInstaller="https://fpdownload.macromedia.com/get/flashplayer/current/support/uninstall_flash_player_osx.dmg"
+  download="https://fpdownload.macromedia.com/get/flashplayer/current/support/uninstall_flash_player_osx.dmg"
 
-  tmpFolder=$(getconf DARWIN_USER_TEMP_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+  tmpDir=$(/usr/local/bin/tmpDir)
 
-  echo "==> Temporary Folder is '${tmpDir}'"
-
-  cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "${downloadInstaller}"
+  cd "${tmpDir}" && /usr/local/bin/aria2c "${download}" > /dev/null 2>&1
 
   filePath=$(/usr/bin/find "${tmpDir}" -name "*.dmg")
-
+  
   fileName=$(/usr/bin/basename "${filePath}")
   extension="${fileName##*.}"
   id="${fileName%.*}"
