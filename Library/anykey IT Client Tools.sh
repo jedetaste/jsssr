@@ -448,6 +448,20 @@
   /bin/chmod 775 "/usr/local/bin/assimilateownership"
   /bin/chmod +x "/usr/local/bin/assimilateownership"
   
+  # erase-install
+  
+  echo "==> Install 'erase-install'"
+  
+  if [ -s "/usr/local/bin/erase-install" ]; then
+    rm -f "/usr/local/bin/erase-install"
+  fi
+  
+  /usr/bin/curl -so "/usr/local/bin/erase-install" "https://raw.githubusercontent.com/grahampugh/erase-install/master/erase-install.sh"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/erase-install"
+  /bin/chmod 775 "/usr/local/bin/erase-install"
+  /bin/chmod +x "/usr/local/bin/erase-install"
+  
   # jpscheck
   
   echo "==> Install 'jpscheck'"
