@@ -128,8 +128,7 @@
   
   # aky
   
-  echo "==> Uninstall 'aky' v5.12"
-  echo "==> Install 'aky' v6.0"
+  echo "==> Install 'aky'"
   
   if [ -d "/usr/local/aky/" ]; then
     rm -rf "/usr/local/aky/"
