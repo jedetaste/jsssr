@@ -3,31 +3,24 @@
   tmp="/private/tmp/libreoffice" && /bin/mkdir -p "${tmp}"
   
   language="de"
-  version="6.1.3"
+  version="6.1.4"
   url="http://download.documentfoundation.org/libreoffice/stable/${version}/mac/x86_64/LibreOffice_${version}_MacOS_x86-64_langpack_${language}.dmg"
+  fileName="LibreOffice_${version}_MacOS_x86-64_langpack_${language}.dmg"
   
   echo "==> Download '${url}'"
-  
-  /usr/bin/curl \
-    --show-error \
-    --fail \
-    --location \
-    --remote-time \
-    --output "${tmp}/LibreOffice_${version}_MacOS_x86-64_langpack_${language}.dmg" \
-    --silent \
-    "${url}" \
+  cd "${tmp}" && /usr/local/bin/aria2c "${url}" > /dev/null 2>&1
     
-  if [ -s "${workDir}/${fileName}" ]; then
+  if [ -s "${tmp}/${fileName}" ]; then
     echo "==> Download was successful"
   else
     echo "==> Download failed, as no appropriate data was found"
     rm -rf "${tmp}" && exit 1
   fi
   
-  echo "==> Prepare DMG '${tmp}/LibreOffice_${version}_MacOS_x86-64_langpack_${language}.dmg'"
+  echo "==> Prepare DMG '${tmp}/${fileName}'"
   
   mountPoint="${tmp}/mountPoint" && /bin/mkdir "${mountPoint}"
-  dmg="${tmp}/LibreOffice_${version}_MacOS_x86-64_langpack_${language}.dmg"
+  dmg="${tmp}/${fileName}"
   tmpMountPointFile=$(mktemp /${tmp}/dmg.XXX) &&
   
   /usr/bin/hdiutil attach -plist -nobrowse -readonly -noidme -mountrandom "${mountPoint}" "${dmg}" > "${tmpMountPointFile}" &&
