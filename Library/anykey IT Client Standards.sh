@@ -385,8 +385,13 @@
   
   # Enable location services
   
-  sudo -u _locationd /usr/bin/defaults -currentHost write com.apple.locationd LocationServicesEnabled -int 1
-  /usr/bin/defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
+  if [ ${minor} -gt 13 ]; then
+    defaults write /var/db/locationd/Library/Preferences/ByHost/com.apple.locationd LocationServicesEnabled -int 1
+    defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
+  else
+    sudo -u _locationd defaults -currentHost write com.apple.locationd LocationServicesEnabled -int 1
+    defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
+  fi
   
   # Configure time settings
   
