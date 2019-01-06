@@ -2,6 +2,8 @@
   
   if [ -s "/Applications/GarageBand.app" ]; then
     
+    echo "==> GarageBand.app is installed"
+    
     # String handling for GarageBand version
     
     garageband_version=$(/usr/bin/mdls "/Applications/GarageBand.app" -name kMDItemVersion | awk -F'"' '{print $2}')
@@ -32,12 +34,12 @@
         
         # Download mandatory content only
         
-        "/usr/local/bin/appleLoops" --apps garageband --deployment --mandatory-only
+        "/usr/local/bin/appleLoops" --deployment --mandatory-only
         
         # Download optional content only if argument == optional
         
         if [ "${1}" == "optional" ]; then
-          "/usr/local/bin/appleLoops" --apps garageband --deployment --optional-only
+          "/usr/local/bin/appleLoops" --deployment --optional-only
         fi
         
       else
@@ -47,5 +49,9 @@
       fi
       
     fi
+    
+  else
+    
+    echo "==> GarageBand.app is not installed"
     
   fi
