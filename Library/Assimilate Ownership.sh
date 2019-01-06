@@ -4,6 +4,7 @@
     '/Applications/Slack.app'
     '/Applications/Scratch 2.app'
     '/Applications/Dropbox.app'
+    '/Applications/Minecraft.app'
     '/Applications/Lernprogramme/TastaBasta Training/'
     '/Applications/Lernprogramme/Blitzrechnen/'
     '/Applications/Lernprogramme/Clin dœil.app'
