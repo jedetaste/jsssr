@@ -14,6 +14,7 @@
   
   for ((i = 0; i < "${#applicationPath[@]}"; i++)); do
     if [ -s "${applicationPath[$i]}" ]; then
+      echo "Assimilate ownership for '${applicationPath[$i]}'"
       /usr/local/bin/assimilateownership --path "${applicationPath[$i]}"
     fi
   done
