@@ -1,5 +1,21 @@
 #!/bin/bash
   
+  # Determine macOS Version
+  
+  echo "==> Determine macOS Version"
+  
+  macos_vers() {
+    IFS='.' read -r major minor revision < <(/usr/bin/sw_vers -productVersion)
+  }
+  
+  macos_vers
+  
+  if [ ${minor} -gt 11 ]; then
+    echo "==> macOS ${major}.${minor}.${revision}"
+  else
+    echo "==> OS X ${major}.${minor}.${revision}"
+  fi
+  
   # appleLoops
   
   echo "==> Install 'appleLoops'"
@@ -291,15 +307,19 @@
   
   # mas
   
-  echo "==> Install 'mas'"
-  
-  masVersion="1.6.1"
-  
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
-  
-  cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/mas-cli/mas/releases/download/v1.6.1/mas.pkg"
-  
-  /usr/sbin/installer -pkg "${tmpDir}/mas.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
+  if [ ${minor} -ge 13 ]; then
+    
+    echo "==> Install 'mas'"
+    
+    masVersion="1.6.1"
+    
+    tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+    
+    cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/mas-cli/mas/releases/download/v1.6.1/mas.pkg"
+    
+    /usr/sbin/installer -pkg "${tmpDir}/mas.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
+    
+  fi
   
   # xmlstarlet
   
