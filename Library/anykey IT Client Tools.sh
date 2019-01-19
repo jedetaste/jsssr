@@ -439,9 +439,8 @@
   
   # installinstallmacos
   
-  echo "==> Uninstall 'installinstallmacos'"
-  
   if [ -s "/usr/local/bin/installinstallmacos" ]; then
+    echo "==> Uninstall 'installinstallmacos'"
     rm -f "/usr/local/bin/installinstallmacos"
   fi
   
