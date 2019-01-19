@@ -293,15 +293,13 @@
   
   echo "==> Install 'mas'"
   
-  if [ -s "/usr/local/bin/mas" ]; then
-    rm -f "/usr/local/bin/mas"
-  fi
+  masVersion="1.6.1"
   
-  /usr/bin/curl -so "/usr/local/bin/mas" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/mas"
+  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
   
-  /usr/sbin/chown root:wheel "/usr/local/bin/mas"
-  /bin/chmod 775 "/usr/local/bin/mas"
-  /bin/chmod +x "/usr/local/bin/mas"
+  cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/mas-cli/mas/releases/download/v1.6.1/mas.pkg"
+  
+  /usr/sbin/installer -pkg "${tmpDir}/mas.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
   
   # xmlstarlet
   
