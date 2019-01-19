@@ -2,8 +2,6 @@
   
   # Determine macOS Version
   
-  echo "==> Determine macOS Version"
-  
   macos_vers() {
     IFS='.' read -r major minor revision < <(/usr/bin/sw_vers -productVersion)
   }
@@ -11,9 +9,9 @@
   macos_vers
   
   if [ ${minor} -gt 11 ]; then
-    echo "==> macOS ${major}.${minor}.${revision}"
+    echo "==> macOS version is '${major}.${minor}.${revision}'"
   else
-    echo "==> OS X ${major}.${minor}.${revision}"
+    echo "==> OS X version is '${major}.${minor}.${revision}'"
   fi
   
   # appleLoops
