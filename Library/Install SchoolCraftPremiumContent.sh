@@ -21,6 +21,11 @@ EOF
     installer -pkg "${tmpDir}/SchoolCraftPremiumContent-flatten.pkg" -target /
   
     mkdir -p "/Library/Application Support/WorksheetCrafter"
+    
+    if [ -s "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle" ]; then
+      rm -rf "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle"
+    fi
+    
     mv "/private/tmp/SchoolCraft Premium Content.bundle" "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle"
   
     for user in $(ls /Users | grep -v Shared | grep -v Guest | grep -v '.localized'); do
