@@ -309,7 +309,7 @@
     
     echo "==> Install 'mas'"
     
-    masVersion="1.6.1"
+    masVersion="1.6.2"
     
     tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
     
