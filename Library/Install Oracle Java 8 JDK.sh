@@ -67,7 +67,7 @@ if [[ ${osvers} -ge 8 ]]; then
     #
     # By default, the script is set to install the CPU release.
 
-    Version=CPU
+    Version=PSU
 
     # Identify the URL of the latest Oracle Java 8 JDK software disk image
     # using the IdentifyLatestJDKRelease function.
