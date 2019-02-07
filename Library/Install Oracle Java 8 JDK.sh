@@ -10,9 +10,9 @@ IdentifyLatestJDKRelease(){
 
 # Determine the download URL for the latest CPU release or PSU release.
 
-Java_8_JDK_CPU_URL=`/usr/bin/curl -s https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | grep -ioE "http://download.oracle.com/otn-pub/java/jdk/.*?/jdk-8u.*?x64.dmg" | head -1`
+Java_8_JDK_CPU_URL=`/usr/bin/curl -s https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | grep -ioE "https://download.oracle.com/otn-pub/java/jdk/.*?/jdk-8u.*?x64.dmg" | head -1`
 
-Java_8_JDK_PSU_URL=`/usr/bin/curl -s https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | grep -ioE "http://download.oracle.com/otn-pub/java/jdk/.*?/jdk-8u.*?x64.dmg" | tail -1`
+Java_8_JDK_PSU_URL=`/usr/bin/curl -s https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html | grep -ioE "https://download.oracle.com/otn-pub/java/jdk/.*?/jdk-8u.*?x64.dmg" | tail -1`
 
 # Use the Version variable to determine if the script should install the latest CPU release or PSU release.
 
@@ -23,7 +23,7 @@ Java_8_JDK_PSU_URL=`/usr/bin/curl -s https://www.oracle.com/technetwork/java/jav
      /bin/echo "Unable to identify download URL for requested Oracle Java 8 JDK Patch Set Update (PSU). Exiting."
      exit 0
  fi
- 
+
  if [[ "$Version" = "CPU" ]] && [[ "$Java_8_JDK_CPU_URL" != "" ]]; then
     fileURL="$Java_8_JDK_CPU_URL"
     /bin/echo "Installing Oracle Java 8 JDK Critical Patch Update (CPU) -" "$Java_8_JDK_PSU_URL"
@@ -43,9 +43,9 @@ if [[ ${osvers} -ge 8 ]]; then
     # Specify name of downloaded disk image
 
     java_eight_jdk_dmg="/tmp/java_eight_jdk.dmg"
- 
 
-    
+
+
     # Use the Version variable to set if you want to download the latest CPU release or the latest PSU release.
     # The difference between CPU and PSU releases is as follows:
     #
@@ -66,14 +66,14 @@ if [[ ${osvers} -ge 8 ]]; then
     # Version=PSU
     #
     # By default, the script is set to install the CPU release.
-    
+
     Version=CPU
-    
+
     # Identify the URL of the latest Oracle Java 8 JDK software disk image
     # using the IdentifyLatestJDKRelease function.
-    
+
     IdentifyLatestJDKRelease
-    
+
     # Download the latest Oracle Java 8 JDK software disk image
     # The curl -L option is needed because there is a redirect 
     # that the requested page has moved to a different location.
@@ -81,11 +81,11 @@ if [[ ${osvers} -ge 8 ]]; then
     /usr/bin/curl --retry 3 -Lo "$java_eight_jdk_dmg" "$fileURL" -H "Cookie: oraclelicense=accept-securebackup-cookie"
 
     # Specify a /tmp/java_eight_jdk.XXXX mountpoint for the disk image
- 
+
     TMPMOUNT=`/usr/bin/mktemp -d /tmp/java_eight_jdk.XXXX`
 
     # Mount the latest Oracle Java 8 disk image to /tmp/java_eight_jdk.XXXX mountpoint
- 
+
     hdiutil attach "$java_eight_jdk_dmg" -mountpoint "$TMPMOUNT" -nobrowse -noverify -noautoopen
 
     # Install Oracle Java 8 JDK from the installer package. This installer may
@@ -96,11 +96,11 @@ if [[ ${osvers} -ge 8 ]]; then
     if [[ -e "$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*JDK*\.pkg -o -iname \*JDK*\.mpkg \))" ]]; then    
       pkg_path="$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*JDK*\.pkg -o -iname \*JDK*\.mpkg \))"
     fi
-         
+
     # Before installation, the installer's developer certificate is checked to
     # see if it has been signed by Oracle's developer certificate. Once the 
     # certificate check has been passed, the package is then installed.
-    
+
     if [[ "${pkg_path}" != "" ]]; then
         signature_check=`/usr/sbin/pkgutil --check-signature "$pkg_path" | awk /'Developer ID Installer/{ print $5 }'`
            if [[ ${signature_check} = "Oracle" ]]; then
@@ -108,22 +108,22 @@ if [[ ${osvers} -ge 8 ]]; then
              /bin/echo "Proceeding with installation of the latest Oracle Java 8 JDK."
              # Install Oracle Java 8 JDK from the installer package stored inside the disk image
              /usr/sbin/installer -dumplog -verbose -pkg "${pkg_path}" -target "/"
-             
+
              # Report on the currently installed version of the Oracle Java 8 JDK
              javaJDKVersion=`/usr/bin/java -version 2>&1 | awk 'NR==1{ gsub(/"/,""); print $3 }'`
              /bin/echo "Oracle Java 8 JDK $javaJDKVersion has been installed."
-             
+
            fi
     fi
 
     # Clean-up
- 
+
     # Unmount the Oracle Java 8 JDK disk image from /tmp/java_eight_jdk.XXXX
- 
+
     /usr/bin/hdiutil detach -force "$TMPMOUNT"
- 
+
     # Remove the /tmp/java_eight_jdk.XXXX mountpoint
- 
+
     /bin/rm -rf "$TMPMOUNT"
 
     # Remove the downloaded disk image
