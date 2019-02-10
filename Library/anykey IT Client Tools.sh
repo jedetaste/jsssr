@@ -474,45 +474,18 @@
   
   echo "==> Install 'jpscheck'"
   
-  if [ -s "/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist" ]; then
-    /bin/launchctl unload -w "/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist"
-    rm -rf "/Library/LaunchDaemons/ch.anykey.jamfprocheck.plist"
+  if [ -s "/Library/LaunchDaemons/ch.anykey.jpscheck.plist" ]; then
+    /bin/launchctl unload -w "/Library/LaunchDaemons/ch.anykey.jpscheck.plist"
+    rm -rf "/Library/LaunchDaemons/ch.anykey.jpscheck.plist"
   fi
   
-  LaunchDaemon="/Library/LaunchDaemons/ch.anykey.jpscheck.plist"
-  
-  if [ -s "${LaunchDaemon}" ]; then
-    rm -rf "${LaunchDaemon}"
-  fi
-  
-  cat >> "${LaunchDaemon}" <<EOF
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-  <key>Label</key>
-  <string>ch.anykey.jpscheck</string>
-  <key>ProgramArguments</key>
-  <array>
-    <string>/bin/sh</string>
-    <string>/usr/local/bin/jpscheck</string>
-  </array>
-  <key>RunAtLoad</key>
-  <true/>
-  <key>StartInterval</key>
-  <integer>1800</integer>
-  <key>StartOnMount</key>
-  <false/>
-</dict>
-</plist>
-EOF
-  
-  /usr/bin/xmllint --pretty 1 "${LaunchDaemon}" > "/private/tmp/tempjpscheck.plist"
-  /bin/mv "/private/tmp/tempjpscheck.plist" "${LaunchDaemon}" && rm -f "/private/tmp/tempjpscheck.plist"
-
-  /bin/launchctl unload -w "${LaunchDaemon}"
-  /bin/launchctl load -w "${LaunchDaemon}"
-  
+  /usr/local/bin/jamf scheduledTask \
+    -command "/usr/local/bin/jpscheck" \
+    -name "jpscheck" \
+    -user "root" \
+    -runAtLoad "true" \
+    -minute "*/30/"
+    
   /usr/bin/curl -so "/usr/local/bin/jpscheck" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jpscheck"
   
   /usr/sbin/chown root:wheel "/usr/local/bin/jpscheck"
