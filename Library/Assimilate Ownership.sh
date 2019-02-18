@@ -9,6 +9,7 @@
     '/Applications/Lernprogramme/Blitzrechnen/'
     '/Applications/Lernprogramme/Clin dœil.app'
     '/Applications/Lernprogramme/Mille feuilles.app'
+    '/Applications/Lernprogramme/New Headway'
     '/Applications/ClinDoeil.app'
     '/Applications/Millefeuilles.app'
     '/Applications/Lernprogramme/New Inspiration IC/'
