@@ -303,6 +303,20 @@
   /bin/chmod 775 "/usr/local/bin/duti"
   /bin/chmod +x "/usr/local/bin/duti"
   
+  # ncdu
+  
+  echo "==> Install 'ncdu'"
+  
+  if [ -s "/usr/local/bin/ncdu" ]; then
+    rm -f "/usr/local/bin/ncdu"
+  fi
+  
+  /usr/bin/curl -so "/usr/local/bin/ncdu" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/ncdu"
+  
+  /usr/sbin/chown root:wheel "/usr/local/bin/ncdu"
+  /bin/chmod 775 "/usr/local/bin/ncdu"
+  /bin/chmod +x "/usr/local/bin/ncdu"
+  
   # mas
   
   if [ ${minor} -ge 13 ]; then
