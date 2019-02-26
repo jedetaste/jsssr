@@ -3,7 +3,7 @@
   tmpDir=$(/usr/local/bin/tmpDir)
   
   echo "==> Download 'https://www.hidrive.strato.com/wget/HkgqjjRz'"
-  cd "${tmpDir}" && /usr/local/bin/aria2c "https://www.hidrive.strato.com/wget/HkgqjjRz"
+  curl -s -o "${tmpDir}/SchoolCraftPremiumContent.pkg" "https://www.hidrive.strato.com/wget/wXgqDkEH"
   
   if [ -s "${tmpDir}/SchoolCraftPremiumContent.pkg" ]; then
   
