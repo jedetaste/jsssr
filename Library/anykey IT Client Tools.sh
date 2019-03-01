@@ -378,7 +378,7 @@
   # MSUpdateHelper
 
   if [ -s "/usr/local/bin/MSUpdateHelper2019" ]; then
-  	rm -f "/usr/local/bin/MSUpdateHelper2019"
+    rm -f "/usr/local/bin/MSUpdateHelper2019"
   fi
   
   echo "==> Install 'MSUpdateHelper'"
