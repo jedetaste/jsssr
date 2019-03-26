@@ -9,7 +9,7 @@ cmd_line_tools_temp_file="/tmp/.com.apple.dt.CommandLineTools.installondemand.in
 
 if [[ "$osx_vers" -ge 9 ]]; then
 
-  # Create the placeholder file which is checked by the softwareupdate tool 
+  # Create the placeholder file which is checked by the softwareupdate tool
   # before allowing the installation of the Xcode command line tools.
 
   touch "$cmd_line_tools_temp_file"

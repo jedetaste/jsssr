@@ -7,7 +7,7 @@
   cd "${tmpDir}" && /usr/local/bin/aria2c "${download}" > /dev/null 2>&1
 
   filePath=$(/usr/bin/find "${tmpDir}" -name "*.dmg")
-  
+
   fileName=$(/usr/bin/basename "${filePath}")
   extension="${fileName##*.}"
   id="${fileName%.*}"

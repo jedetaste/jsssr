@@ -52,14 +52,14 @@ rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Listchack.download.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Listchack.update.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Listchack.ltvbit.plist"
 
-# Delete the Vidx malware pieces. 
+# Delete the Vidx malware pieces.
 rm -rf "/Applications/Vidx.app"
 rm -rf "/Applications/MacMin.app"
 rm -rf "/Library/Application Support/VidToMP3"
 rm -rf "/Library/Application Support/fa4e8.94b.550d413f"
 rm -rf "/Users/${consoleuser}/Library/Application Support/osxDownloader"
 
-# Delete the Bundlore malware pieces. 
+# Delete the Bundlore malware pieces.
 rm -rf "/Applications/WebTools.app"
 rm -rf "/Applications/WebShopper.app"
 rm -rf "/Users/${consoleuser}/Applications/WebTools.app"
@@ -75,7 +75,7 @@ rm -rf "/Users/${consoleuser}/Library/LaunchAgents/com.webhelper.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/com.webtools.update.agent.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/com.webtools.uninstaller.plist"
 
-# Delete the Premier Opinion malware pieces. 
+# Delete the Premier Opinion malware pieces.
 rm -rf "/Applications/PremierOpinion"
 rm -rf "/Library/LaunchDaemons/PremierOpinion.plist"
 
@@ -138,15 +138,15 @@ rm -rf "/System/Library/Frameworks/VSearch.framework"
 rm -rf "/Users/${consoleuser}/Library/Application Support/MPlayerX"
 rm -rf "/Applications/MPlayerX"
 
-# Delete the Javeview malware pieces. 
+# Delete the Javeview malware pieces.
 rm -rf "/Users/${consoleuser}/Library/Application Support/Javeview"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Javeview.update.plist"
 
-# Delete the Manroling malware pieces. 
+# Delete the Manroling malware pieces.
 rm -rf "/Users/${consoleuser}/Library/Application Support/Manroling"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Manroling.update.plist"
 
-# Delete the Myppes malware pieces. 
+# Delete the Myppes malware pieces.
 rm -rf "/Applications/Myppes"
 rm -rf "/Users/${consoleuser}/Library/Application Support/Myppes"
 rm -rf "/Users/${consoleuser}/Library/Safari/Extensions/Myppes.safariextz"
@@ -155,7 +155,7 @@ rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Myppes.download.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Myppes.ltvbit.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Myppes.update.plist"
 
-# Delete the Olivernetko malware pieces. 
+# Delete the Olivernetko malware pieces.
 rm -rf "/Applications/Olivernetko"
 rm -rf "/Users/${consoleuser}/Library/Application Support/Olivernetko"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Olivernetko.AppRemoval.plist"
@@ -163,7 +163,7 @@ rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Olivernetko.download.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Olivernetko.ltvbit.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Olivernetko.update.plist"
 
-# Delete the Youppes malware pieces. 
+# Delete the Youppes malware pieces.
 rm -rf "/Applications/Youppes"
 rm -rf "/Users/${consoleuser}/Library/Application Support/Youppes"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Youppes.AppRemoval.plist"
@@ -171,29 +171,29 @@ rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Youppes.download.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Youppes.ltvbit.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/Youppes.update.plist"
 
-# Delete the ChatZum malware pieces. 
+# Delete the ChatZum malware pieces.
 rm -rf "/Applications/ChatZumUninstaller.pkg"
 rm -rf "/Library/Application Support/SIMBL/Plugins/SafariOmnibar.bundle"
 rm -rf "/Library/Internet Plug-Ins/uid.plist"
 rm -rf "/Library/Internet Plug-Ins/zako.plugin"
 
-# Delete the FkCodec malware pieces. 
+# Delete the FkCodec malware pieces.
 rm -rf "/Users/${consoleuser}/Library/Application Support/Codec-M"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/com.codecm.uploader.plist"
 rm -rf "/Applications/Codec-M.app"
 
-# Delete the Yontoo malware pieces. 
+# Delete the Yontoo malware pieces.
 rm -rf "/Users/${consoleuser}/Library/Application Support/Google/Chrome/YontooLayers.crx"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/com.codecm.uploader.plist"
 rm -rf "/Applications/Codec-M.app"
 
-# Delete the Spigot malware pieces. 
+# Delete the Spigot malware pieces.
 rm -rf "/Users/${consoleuser}/Library/Application Support/Spigot/"
 
-# Delete the SaveKeep malware pieces. 
+# Delete the SaveKeep malware pieces.
 rm -rf "/Applications/Savekeep.app"
 
-# Delete the OSX/Dok malware pieces. 
+# Delete the OSX/Dok malware pieces.
 rm -rf "/Users/${consoleuser}/Downloads/Dok.zip"
 rm -rf "/Users/${consoleuser}/Downloads/Dok/Dokument/Contents"
 rm -rf "/Users/${consoleuser}/Library/Containers/.bella/Bella"

@@ -1,5 +1,5 @@
 #!/bin/bash
-  
+
   applicationPath=(
     '/Applications/Slack.app'
     '/Applications/Scratch 2.app'
@@ -14,7 +14,7 @@
     '/Applications/Millefeuilles.app'
     '/Applications/Lernprogramme/New Inspiration IC/'
   )
-  
+
   for ((i = 0; i < "${#applicationPath[@]}"; i++)); do
     if [ -s "${applicationPath[$i]}" ]; then
       echo "Assimilate ownership for '${applicationPath[$i]}'"

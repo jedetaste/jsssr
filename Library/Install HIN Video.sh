@@ -52,19 +52,19 @@
 
   echo "==> Reset ownership and permissions on bundle '/Applications/HIN Video.app'"
   /bin/chmod -RN "/Applications/HIN Video.app"
-    
+
   echo "==> Remove flags and locking on bundle '/Applications/HIN Video.app'"
   /usr/bin/chflags -R nouchg "/Applications/HIN Video.app"
-    
+
   echo "==> Remove bundle '/Applications/HIN Video.app' from gatekeeper quarantine"
   /usr/bin/xattr -r -d -s com.apple.quarantine "/Applications/HIN Video.app"
-    
+
   echo "==> Whitelist bundle '/Applications/HIN Video.app' for execution in the security assessment policy subsystem"
   /usr/sbin/spctl --add "/Applications/HIN Video.app"
-    
+
   echo "==> Set ownership on bundle '/Applications/HIN Video.app'"
   /usr/sbin/chown -R root:wheel "/Applications/HIN Video.app"
-    
+
   echo "==> Set permissions on bundle '/Applications/HIN Video.app'"
   /bin/chmod -R 755 "/Applications/HIN Video.app"
 

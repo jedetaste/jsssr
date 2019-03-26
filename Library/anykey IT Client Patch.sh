@@ -1,5 +1,5 @@
 #!/bin/bash
-  
+
   recipe=(
     "firefox"
     "adobereaderdc"
@@ -18,7 +18,7 @@
     "skype"
     "vlc"
   )
-  
+
   for ((i = 0; i < "${#recipe[@]}"; i++)); do
     /usr/local/bin/aky "${recipe[$i]}"
   done

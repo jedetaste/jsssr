@@ -51,7 +51,7 @@ if [[ ${osvers} -ge 8 ]]; then
     #
     # Critical Patch Update (CPU): contains both fixes to security vulnerabilities and critical bug fixes.
     #
-    # Patch Set Update (PSU): contains all the fixes in the corresponding CPU, plus additional fixes to non-critical problems. 
+    # Patch Set Update (PSU): contains all the fixes in the corresponding CPU, plus additional fixes to non-critical problems.
     #
     # For more details on the differences between CPU and PSU updates, please see the link below:
     #
@@ -75,7 +75,7 @@ if [[ ${osvers} -ge 8 ]]; then
     IdentifyLatestJDKRelease
 
     # Download the latest Oracle Java 8 JDK software disk image
-    # The curl -L option is needed because there is a redirect 
+    # The curl -L option is needed because there is a redirect
     # that the requested page has moved to a different location.
 
     /usr/bin/curl --retry 3 -Lo "$java_eight_jdk_dmg" "$fileURL" -H "Cookie: oraclelicense=accept-securebackup-cookie"
@@ -93,12 +93,12 @@ if [[ ${osvers} -ge 8 ]]; then
     # may be an installer package available at the root of the mounted disk
     # image.
 
-    if [[ -e "$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*JDK*\.pkg -o -iname \*JDK*\.mpkg \))" ]]; then    
+    if [[ -e "$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*JDK*\.pkg -o -iname \*JDK*\.mpkg \))" ]]; then
       pkg_path="$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*JDK*\.pkg -o -iname \*JDK*\.mpkg \))"
     fi
 
     # Before installation, the installer's developer certificate is checked to
-    # see if it has been signed by Oracle's developer certificate. Once the 
+    # see if it has been signed by Oracle's developer certificate. Once the
     # certificate check has been passed, the package is then installed.
 
     if [[ "${pkg_path}" != "" ]]; then
