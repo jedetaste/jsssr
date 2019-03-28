@@ -8,6 +8,7 @@ Disable AutoUpdate ActivInspire.sh
 Disable Notifications Lock Screen.sh
 Dockfixup.sh
 Enable ARD.sh
+erase-install.sh
 Firefox Bootstrap.sh
 Google Chrome Bootstrap.sh
 Google Chrome Enable Auto Update.py
@@ -16,7 +17,6 @@ Install Adobe Creative Cloud.sh
 Install Adobe Flash Player PPAPI.sh
 Install ClinDoeil.sh
 Install Command Line Tools.sh
-Install erase-install.sh
 Install GarageBand Loops.sh
 Install HIN Client.sh
 Install HIN Video.sh
