@@ -29,7 +29,7 @@
 
         curl -s -o "/tmp/First_Boot_Recon.pkg" "https://cdn-clients.anykeyit.ch/Static/First_Boot_Recon.pkg" && installer -pkg "/tmp/First_Boot_Recon.pkg" -target /
 
-        "${installer}/Contents/Resources/startosinstall" --agreetolicense --nointeraction --pidtosignal "${jamf_helper_pid}" &
+        "${installer}/Contents/Resources/startosinstall" --applicationpath "${installer}" --agreetolicense --nointeraction --pidtosignal "${jamf_helper_pid}" &
 
       fi
     else
