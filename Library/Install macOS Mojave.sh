@@ -17,7 +17,7 @@
   installer="/Applications/Install macOS Mojave.app"
   installer_name="Mojave"
 
-  if [ ! -s "${installer}" ]; then
+  if [ -s "${installer}" ]; then
     if [ ! -z "${current_user}" ] && finder_running; then
       if [ -s "${installer}" ]; then
 
