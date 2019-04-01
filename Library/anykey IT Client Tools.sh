@@ -329,7 +329,7 @@
 
     tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
 
-    cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/mas-cli/mas/releases/download/v1.6.1/mas.pkg"
+    cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/mas-cli/mas/releases/download/v1.6.3/mas.pkg"
 
     /usr/sbin/installer -pkg "${tmpDir}/mas.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
 
