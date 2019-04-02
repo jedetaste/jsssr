@@ -47,11 +47,9 @@ EOF
 
       chmod 644 "${plist}"
 
-      # Load the launchd plist only if installing on the boot volume
+      # Load the launchd plist
 
-      if [[ "" = "/" ]]; then
-        launchctl load -wF "${plist}"
-      fi
+      launchctl load -wF "${plist}"
 
     else
       error=1
