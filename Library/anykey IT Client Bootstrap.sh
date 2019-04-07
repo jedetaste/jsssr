@@ -173,6 +173,12 @@
     defaults write "${user_template}/Library/Preferences/com.apple.Safari" LastSafariVersionWithWelcomePage -string "${safariversion}"
   done
 
+  # Hide management account
+
+  echo "==> Hide management account"
+
+  defaults write "/Library/Preferences/com.apple.loginwindow" HiddenUsersList -array-add casper
+
   # Disable Oracle Java Auto Update
 
   echo "==> Disable Oracle Java Auto Update"
