@@ -230,7 +230,10 @@
 
   # Adds all users to print admin group
 
-  /usr/sbin/dseditgroup -o edit -n /Local/Default -a everyone -t group lpadmin
+  security authorizationdb write system.preferences.printing allow
+  security authorizationdb write system.print.operator allow
+  dseditgroup -o edit -n /Local/Default -a everyone -t group lpadmin
+  dseditgroup -o edit -n /Local/Default -a everyone -t group _lpadmin
 
   # Set the Open and Save options in Office 2016 apps to default to "On My Mac" instead of "Online Locations".
   # This setting will apply to all users on this Mac.
