@@ -83,7 +83,10 @@
 
   echo "==> Add all users to 'lpadmin' group"
 
+  security authorizationdb write system.preferences.printing allow
+  security authorizationdb write system.print.operator allow
   dseditgroup -o edit -n /Local/Default -a everyone -t group lpadmin
+  dseditgroup -o edit -n /Local/Default -a everyone -t group _lpadmin
 
   # Enable CUPS web interface
 
