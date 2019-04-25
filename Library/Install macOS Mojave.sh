@@ -27,6 +27,7 @@
           "${jamf_helper}" -windowType fs -title "macOS ${installer_name} Upgrade " -alignHeading center -heading "Bitte warten, das Upgrade macOS ${installer_name} wird ausgeführt" -alignDescription center -description "Dieser Prozess benötigt ungefähr 5-10 Minuten. Der Mac startet anschliessend neu und beginnt mit dem Update." -icon "${installer}/Contents/Resources/InstallAssistant.icns" &
         fi
 
+        echo "Download and Install 'First_Boot_Recon.pkg'"
         curl -s -o "/tmp/First_Boot_Recon.pkg" "https://cdn-clients.anykeyit.ch/Static/First_Boot_Recon.pkg" && installer -pkg "/tmp/First_Boot_Recon.pkg" -target /
 
         "${installer}/Contents/Resources/startosinstall" --agreetolicense --nointeraction --pidtosignal "${jamf_helper_pid}" &
