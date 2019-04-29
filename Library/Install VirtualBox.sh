@@ -9,7 +9,7 @@
     chmod u+s "/Applications/VirtualBox.app/Contents/MacOS/${bin}"
   done
 
-  version=$( curl --silent "https://download.virtualbox.org/virtualbox/LATEST.TXT" )
+  version=$( curl --silent --insecure "https://download.virtualbox.org/virtualbox/LATEST.TXT" )
   echo "==> Install 'VirtualBox ${version} Oracle VM VirtualBox Extension Pack'"
 
   curl \
