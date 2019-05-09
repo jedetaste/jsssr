@@ -7,6 +7,7 @@
     'mittelstufe'
     'unterstufe'
     'schueler'
+    'schuler'
     'sus'
     'schule'
     'stud'
