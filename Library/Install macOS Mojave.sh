@@ -1,7 +1,7 @@
 #!/bin/bash
 
   if [ -s "/usr/local/bin/erase-install" ]; then
-    /usr/local/bin/erase-install --move --version=10.14.4
+    /usr/local/bin/erase-install --move --os=10.14
   fi
 
   finder_running() {
