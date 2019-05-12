@@ -28,9 +28,9 @@
         fi
 
         echo "Download and Install 'First_Boot_Recon.pkg'"
-        curl -s -o "/tmp/First_Boot_Recon.pkg" "https://cdn-clients.anykeyit.ch/Static/First_Boot_Recon.pkg" && installer -pkg "/tmp/First_Boot_Recon.pkg" -target /
+        curl -s -o "/tmp/First_Boot_Recon.pkg" "https://cdn-clients.anykeyit.ch/Static/First_Boot_Recon.pkg"
 
-        "${installer}/Contents/Resources/startosinstall" --applicationpath "${installer}" --agreetolicense --nointeraction --pidtosignal "${jamf_helper_pid}" &
+        "${installer}/Contents/Resources/startosinstall" --applicationpath "${installer}" --agreetolicense --nointeraction --installpackage "/tmp/First_Boot_Recon.pkg" --pidtosignal "${jamf_helper_pid}" &
 
       fi
     else
