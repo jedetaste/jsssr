@@ -188,6 +188,22 @@
 
   defaults write "/Library/Preferences/com.oracle.java.Java-Updater.plist" JavaAutoUpdateEnabled -bool false
 
+  # Enable right click on AppleHIDMouse
+
+  echo "==> Enable right click on AppleHIDMouse"
+
+  for user_template in "/System/Library/User Template"/*; do
+    defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleHIDMouse" Button2 -int 2
+  done
+
+  # Enable right click on AppleBluetoothMultitouch
+
+  echo "==> Enable right click on AppleBluetoothMultitouch"
+
+  for user_template in "/System/Library/User Template"/*; do
+    defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleBluetoothMultitouch.mouse" MouseButtonMode -string TwoButton
+  done
+
   # Disable Auto Update Adobe Flash Player
 
   echo "==> Disable Auto Update Adobe Flash Player"
