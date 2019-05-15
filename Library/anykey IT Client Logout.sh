@@ -48,7 +48,7 @@
 
   cancel -a
 
-  # Start all cancelled print jobs
+  # Restart all disabled printers
 
   lpstat -p | grep "disabled" | awk '{print $2}' | xargs -n 1 -I{} sudo cupsenable {}
 
