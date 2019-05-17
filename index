@@ -34,6 +34,7 @@ JAMF Create Account.sh
 Libre Office Language Pack DE.sh
 Oracle Java Security Exception.sh
 Purge Legacy Apple Apps.sh
+Purge Unmanaged Configuration Profiles.sh
 Remove All CUPS Printer.sh
 Remove Finder All My Files Favorite.sh
 Renamehelper.sh
