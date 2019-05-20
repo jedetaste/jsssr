@@ -1,7 +1,11 @@
 #!/bin/bash
 
   if [ -s "/usr/local/bin/erase-install" ]; then
+    defaults write /Library/Preferences/com.apple.SoftwareUpdate CatalogURL "https://sus.anver.io/index.sucatalog"
     /usr/local/bin/erase-install --move --os=10.13
+    defaults delete /Library/Preferences/com.apple.SoftwareUpdate CatalogURL
+  else
+    echo "Binary 'erase-install' not found." && exit 1
   fi
 
   finder_running() {
