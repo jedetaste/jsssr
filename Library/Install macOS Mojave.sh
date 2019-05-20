@@ -2,6 +2,8 @@
 
   if [ -s "/usr/local/bin/erase-install" ]; then
     /usr/local/bin/erase-install --move --os=10.14
+  else
+    echo "Binary 'erase-install' not found." && exit 1
   fi
 
   finder_running() {
