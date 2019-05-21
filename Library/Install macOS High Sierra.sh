@@ -1,17 +1,5 @@
 #!/bin/bash
 
-  if [ -s "/usr/local/bin/erase-install" ]; then
-    defaults write /Library/Preferences/com.apple.SoftwareUpdate CatalogURL "https://sus.anver.io/index.sucatalog"
-    /usr/local/bin/erase-install --move --os=10.13
-    defaults delete /Library/Preferences/com.apple.SoftwareUpdate CatalogURL
-  else
-    echo "Binary 'erase-install' not found." && exit 1
-  fi
-
-  finder_running() {
-    pgrep -q Finder && return 0 || return 1
-  }
-
   current_user=$(scutil <<< "show State:/Users/ConsoleUser" | awk -F': ' '/[[:space:]]+Name[[:space:]]:/ { if ( $2 != "loginwindow" ) { print $2 }}')
   user_language=$(su -l "${current_user}" -c "/usr/libexec/PlistBuddy -c 'print AppleLanguages:0' ~/Library/Preferences/.GlobalPreferences.plist")
 
@@ -20,6 +8,20 @@
 
   installer="/Applications/Install macOS High Sierra.app"
   installer_name="High Sierra"
+
+  if [ -s "/usr/local/bin/erase-install" ]; then
+    /usr/local/bin/erase-install --move --os=10.13
+  else
+    echo "Binary 'erase-install' not found." && exit 1
+  fi
+
+  if [ ! -s "${installer}" ]; then
+    /usr/local/bin/aky installmacoshighsierra
+  fi
+
+  finder_running() {
+    pgrep -q Finder && return 0 || return 1
+  }
 
   if [ -s "${installer}" ]; then
     if [ ! -z "${current_user}" ] && finder_running; then
