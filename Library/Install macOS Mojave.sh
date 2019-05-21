@@ -1,5 +1,14 @@
 #!/bin/bash
 
+  current_user=$(scutil <<< "show State:/Users/ConsoleUser" | awk -F': ' '/[[:space:]]+Name[[:space:]]:/ { if ( $2 != "loginwindow" ) { print $2 }}')
+  user_language=$(su -l "${current_user}" -c "/usr/libexec/PlistBuddy -c 'print AppleLanguages:0' ~/Library/Preferences/.GlobalPreferences.plist")
+
+  jamf_helper="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
+  jamf_helper_pid=$!
+
+  installer="/Applications/Install macOS Mojave.app"
+  installer_name="Mojave"
+
   if [ -s "/usr/local/bin/erase-install" ]; then
     /usr/local/bin/erase-install --move --os=10.14
   else
@@ -10,14 +19,9 @@
     pgrep -q Finder && return 0 || return 1
   }
 
-  current_user=$(scutil <<< "show State:/Users/ConsoleUser" | awk -F': ' '/[[:space:]]+Name[[:space:]]:/ { if ( $2 != "loginwindow" ) { print $2 }}')
-  user_language=$(su -l "${current_user}" -c "/usr/libexec/PlistBuddy -c 'print AppleLanguages:0' ~/Library/Preferences/.GlobalPreferences.plist")
-
-  jamf_helper="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
-  jamf_helper_pid=$!
-
-  installer="/Applications/Install macOS Mojave.app"
-  installer_name="Mojave"
+  if [ ! -s "${installer}" ]; then
+    /usr/local/bin/aky installmacosmojave
+  fi
 
   if [ -s "${installer}" ]; then
     if [ ! -z "${current_user}" ] && finder_running; then
