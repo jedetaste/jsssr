@@ -528,7 +528,3 @@
   if [ -s "/Remove2011.log" ]; then
     rm -f "/Remove2011.log"
   fi
-
-  # Enable JAMF MDM capability
-  
-  /usr/local/bin/jamf mdm
