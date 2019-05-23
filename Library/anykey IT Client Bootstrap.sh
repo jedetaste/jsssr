@@ -248,8 +248,3 @@
     echo "==> Remove wrongly saved Remove2011.log"
     rm -f "/Remove2011.log"
   fi
-
-  # Enable JAMF MDM capability
-
-  echo "==> Enable JAMF MDM capability"
-  /usr/local/bin/jamf mdm
