@@ -9,6 +9,16 @@
   installer="/Applications/Install macOS Mojave.app"
   installer_name="Mojave"
 
+  if [ $(sw_vers -productVersion | awk -F. '{print $2}') -lt 11 ]; then
+    if [[ ${user_language} = en* ]]; then
+      echo "This Upgrade cannot be installed on a computer with OS X 10.10 or lower. Please install macOS ${installer_name} manually."
+      "${jamf_helper}" -windowType "utility" -description "This Upgrade cannot be installed on a computer with OS X 10.10 or lower. Please install macOS ${installer_name} manually." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -button2 "Cancel" -defaultButton "1" -cancelButton "1" && exit 1
+    elif [[ ${user_language} = de* ]]; then
+      echo "This Upgrade cannot be installed on a computer with OS X 10.10 or lower. Please install macOS ${installer_name} manually."
+      "${jamf_helper}" -windowType "utility" -description "Diese Installation ist auf einem Computer mit OS X 10.10 oder tiefer nicht möglich. Das Upgrade auf macOS ${installer_name} muss manuell gemacht werden." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -button2 "Abbrechen" -defaultButton "1" -cancelButton "1" && exit 1
+    fi
+  fi
+
   if [ -s "/usr/local/bin/erase-install" ]; then
     /usr/local/bin/erase-install --move --os=10.14
   else
