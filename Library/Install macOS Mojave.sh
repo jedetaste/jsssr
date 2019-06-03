@@ -8,6 +8,8 @@
 
   installer="/Applications/Install macOS Mojave.app"
   installer_name="Mojave"
+  installer_version="10.14"
+  installer_aky_recipe="installmacosmojave"
 
   if [ $(sw_vers -productVersion | awk -F. '{print $2}') -lt 11 ]; then
     if [[ ${user_language} = en* ]]; then
@@ -20,7 +22,7 @@
   fi
 
   if [ -s "/usr/local/bin/erase-install" ]; then
-    /usr/local/bin/erase-install --move --os=10.14
+    /usr/local/bin/erase-install --move --os=${installer_version}
   else
     echo "Binary 'erase-install' not found." && exit 1
   fi
@@ -30,7 +32,7 @@
   }
 
   if [ ! -s "${installer}" ]; then
-    /usr/local/bin/aky installmacosmojave
+    /usr/local/bin/aky "${installer_aky_recipe}"
   fi
 
   if [ -s "${installer}" ]; then
