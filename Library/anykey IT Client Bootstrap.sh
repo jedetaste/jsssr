@@ -204,6 +204,14 @@
     defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleBluetoothMultitouch.mouse" MouseButtonMode -string TwoButton
   done
 
+  # Enable tap to click on trackpad
+
+  echo "==> Enable tap to click on trackpad"
+
+  for user_template in "/System/Library/User Template"/*; do
+    defaults write "${user_template}/Library/Preferences/com.apple.AppleMultitouchTrackpad.plist" Clicking -bool true
+  done
+
   # Disable Auto Update Adobe Flash Player
 
   echo "==> Disable Auto Update Adobe Flash Player"
