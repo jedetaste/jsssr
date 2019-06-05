@@ -472,6 +472,12 @@
     defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleBluetoothMultitouch.mouse" MouseButtonMode -string TwoButton
   done
 
+  # Enable tap to click on trackpad
+
+  for user_template in "/System/Library/User Template"/*; do
+    defaults write "${user_template}/Library/Preferences/com.apple.AppleMultitouchTrackpad.plist" Clicking -bool true
+  done
+
   # Disable Oracle Java Auto Update
 
   /usr/bin/defaults write "/Library/Preferences/com.oracle.java.Java-Updater.plist" JavaAutoUpdateEnabled -bool false
