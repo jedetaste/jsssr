@@ -24,6 +24,13 @@
 
     echo "==> Required version is '${required_version}'"
 
+    echo "==> Search for local caching server"
+
+    if [ ! -z $(AssetCacheLocatorUtil 2>&1 | awk '/guid / { gsub(",", "", $4); print $4}' | uniq) ]; then
+        caching_server=$(AssetCacheLocatorUtil 2>&1 | awk '/guid / { gsub(",", "", $4); print $4}' | uniq)
+        echo "==> Found local caching server at '${caching_server}'"
+    fi
+
     # Check if scripts is executable
 
     if [ ${garageband_version_major} -ge ${required_version_major} ]; then
@@ -34,12 +41,18 @@
 
         # Download mandatory content only
 
-        "/usr/local/bin/appleLoops" --deployment --mandatory-only
+        if [ ! -z "${caching_server}" ]; then
+            "/usr/local/bin/appleLoops" --deployment --mandatory-only --cache-server "http://${caching_server}"
+        else
+            "/usr/local/bin/appleLoops" --deployment --mandatory-only
+        fi
 
         # Download optional content only if argument == optional
 
-        if [ "${1}" == "optional" ]; then
-          "/usr/local/bin/appleLoops" --deployment --optional-only
+        if [ ! -z "${caching_server}" ]; then
+            "/usr/local/bin/appleLoops" --deployment --optional-only --cache-server "http://${caching_server}"
+        else
+            "/usr/local/bin/appleLoops" --deployment --optional-only
         fi
 
       else
