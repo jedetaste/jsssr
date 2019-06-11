@@ -3,7 +3,7 @@
   # Determine macOS Version
 
   macos_vers() {
-    IFS='.' read -r major minor revision < <(/usr/bin/sw_vers -productVersion)
+    IFS='.' read -r major minor revision < <(sw_vers -productVersion)
   }
 
   macos_vers
@@ -22,11 +22,11 @@
     rm -f "/usr/local/bin/appleLoops"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/appleLoops" "https://raw.githubusercontent.com/carlashley/appleLoops/master/appleLoops.py"
+  curl -so "/usr/local/bin/appleLoops" "https://raw.githubusercontent.com/carlashley/appleLoops/master/appleLoops.py"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/appleLoops"
-  /bin/chmod 775 "/usr/local/bin/appleLoops"
-  /bin/chmod +x "/usr/local/bin/appleLoops"
+  chown root:wheel "/usr/local/bin/appleLoops"
+  chmod 775 "/usr/local/bin/appleLoops"
+  chmod +x "/usr/local/bin/appleLoops"
 
   # dockutil
 
@@ -36,11 +36,11 @@
     rm -f "/usr/local/bin/dockutil"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/dockutil" "https://raw.githubusercontent.com/kcrawford/dockutil/master/scripts/dockutil"
+  curl -so "/usr/local/bin/dockutil" "https://raw.githubusercontent.com/kcrawford/dockutil/master/scripts/dockutil"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/dockutil"
-  /bin/chmod 775 "/usr/local/bin/dockutil"
-  /bin/chmod +x "/usr/local/bin/dockutil"
+  chown root:wheel "/usr/local/bin/dockutil"
+  chmod 775 "/usr/local/bin/dockutil"
+  chmod +x "/usr/local/bin/dockutil"
 
   # currentuser
 
@@ -50,11 +50,11 @@
     rm -f "/usr/local/bin/currentuser"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/currentuser" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/currentuser"
+  curl -so "/usr/local/bin/currentuser" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/currentuser"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/currentuser"
-  /bin/chmod 775 "/usr/local/bin/currentuser"
-  /bin/chmod +x "/usr/local/bin/currentuser"
+  chown root:wheel "/usr/local/bin/currentuser"
+  chmod 775 "/usr/local/bin/currentuser"
+  chmod +x "/usr/local/bin/currentuser"
 
   # tmpDir
 
@@ -64,11 +64,11 @@
     rm -f "/usr/local/bin/tmpDir"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/tmpDir" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/tmpDir"
+  curl -so "/usr/local/bin/tmpDir" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/tmpDir"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/tmpDir"
-  /bin/chmod 775 "/usr/local/bin/tmpDir"
-  /bin/chmod +x "/usr/local/bin/tmpDir"
+  chown root:wheel "/usr/local/bin/tmpDir"
+  chmod 775 "/usr/local/bin/tmpDir"
+  chmod +x "/usr/local/bin/tmpDir"
 
   # csc
 
@@ -78,11 +78,11 @@
     rm -f "/usr/local/bin/csc"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/csc" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/csc"
+  curl -so "/usr/local/bin/csc" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/csc"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/csc"
-  /bin/chmod 775 "/usr/local/bin/csc"
-  /bin/chmod +x "/usr/local/bin/csc"
+  chown root:wheel "/usr/local/bin/csc"
+  chmod 775 "/usr/local/bin/csc"
+  chmod +x "/usr/local/bin/csc"
 
   # defaultbrowser
 
@@ -92,11 +92,11 @@
     rm -f "/usr/local/bin/defaultbrowser"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/defaultbrowser" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/defaultbrowser"
+  curl -so "/usr/local/bin/defaultbrowser" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/defaultbrowser"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/defaultbrowser"
-  /bin/chmod 775 "/usr/local/bin/defaultbrowser"
-  /bin/chmod +x "/usr/local/bin/defaultbrowser"
+  chown root:wheel "/usr/local/bin/defaultbrowser"
+  chmod 775 "/usr/local/bin/defaultbrowser"
+  chmod +x "/usr/local/bin/defaultbrowser"
 
   # mysides
 
@@ -104,11 +104,23 @@
 
   mysidesVersion="1.0.1"
 
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
 
-  cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/mosen/mysides/releases/download/v${mysidesVersion}/mysides-${mysidesVersion}.pkg"
+  cd "${tmpDir}" && curl -s -O -J -L "https://github.com/mosen/mysides/releases/download/v${mysidesVersion}/mysides-${mysidesVersion}.pkg"
 
-  /usr/sbin/installer -pkg "${tmpDir}/mysides-${mysidesVersion}.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
+  installer -pkg "${tmpDir}/mysides-${mysidesVersion}.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
+
+  # desktoppr
+
+  echo "==> Install 'desktoppr'"
+
+  desktopprVersion="0.1"
+
+  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
+
+  cd "${tmpDir}" && curl -s -O -J -L "https://github.com/scriptingosx/desktoppr/releases/download/v${desktopprVersion}/desktoppr-${desktopprVersion}.pkg"
+
+  installer -pkg "${tmpDir}/desktoppr-${desktopprVersion}.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
 
   # pkgfixer
 
@@ -118,11 +130,11 @@
     rm -f "/usr/local/bin/pkgfixer"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/pkgfixer" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/pkgfixer"
+  curl -so "/usr/local/bin/pkgfixer" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/pkgfixer"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/pkgfixer"
-  /bin/chmod 775 "/usr/local/bin/pkgfixer"
-  /bin/chmod +x "/usr/local/bin/pkgfixer"
+  chown root:wheel "/usr/local/bin/pkgfixer"
+  chmod 775 "/usr/local/bin/pkgfixer"
+  chmod +x "/usr/local/bin/pkgfixer"
 
   # blueutil
 
@@ -132,11 +144,11 @@
     rm -f "/usr/local/bin/blueutil"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/blueutil" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/blueutil"
+  curl -so "/usr/local/bin/blueutil" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/blueutil"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/blueutil"
-  /bin/chmod 775 "/usr/local/bin/blueutil"
-  /bin/chmod +x "/usr/local/bin/blueutil"
+  chown root:wheel "/usr/local/bin/blueutil"
+  chmod 775 "/usr/local/bin/blueutil"
+  chmod +x "/usr/local/bin/blueutil"
 
   # Purge legacy aky
 
@@ -176,7 +188,7 @@
   echo "==> Install 'aky'"
 
   if [ ! -d "/usr/local/bin" ]; then
-    /bin/mkdir -p "/usr/local/bin"
+    mkdir -p "/usr/local/bin"
   fi
 
   aky_binary=(
@@ -190,9 +202,9 @@
 
   for ((i = 0; i < "${#aky_binary[@]}"; i++)); do
     /bin/rm -f "/usr/local/bin/${aky_binary[$i]}"
-    /usr/bin/curl -so "/usr/local/bin/${aky_binary[$i]}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aky-src/${aky_binary[$i]}"
-    /usr/sbin/chown root:wheel "/usr/local/bin/${aky_binary[$i]}"
-    /bin/chmod +x "/usr/local/bin/${aky_binary[$i]}"
+    curl -so "/usr/local/bin/${aky_binary[$i]}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aky-src/${aky_binary[$i]}"
+    chown root:wheel "/usr/local/bin/${aky_binary[$i]}"
+    chmod +x "/usr/local/bin/${aky_binary[$i]}"
   done
 
   # Remove2011
@@ -203,11 +215,11 @@
     rm -f "/usr/local/bin/Remove2011"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/Remove2011" "https://raw.githubusercontent.com/pbowden-msft/Remove2011/master/Remove2011"
+  curl -so "/usr/local/bin/Remove2011" "https://raw.githubusercontent.com/pbowden-msft/Remove2011/master/Remove2011"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/Remove2011"
-  /bin/chmod 775 "/usr/local/bin/Remove2011"
-  /bin/chmod +x "/usr/local/bin/Remove2011"
+  chown root:wheel "/usr/local/bin/Remove2011"
+  chmod 775 "/usr/local/bin/Remove2011"
+  chmod +x "/usr/local/bin/Remove2011"
 
   # adobe_prtk
 
@@ -217,11 +229,11 @@
     rm -f "/usr/local/bin/adobe_prtk"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/adobe_prtk" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/adobe_prtk"
+  curl -so "/usr/local/bin/adobe_prtk" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/adobe_prtk"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/adobe_prtk"
-  /bin/chmod 775 "/usr/local/bin/adobe_prtk"
-  /bin/chmod +x "/usr/local/bin/adobe_prtk"
+  chown root:wheel "/usr/local/bin/adobe_prtk"
+  chmod 775 "/usr/local/bin/adobe_prtk"
+  chmod +x "/usr/local/bin/adobe_prtk"
 
   # AppStoreXtractor
 
@@ -231,11 +243,11 @@
     rm -f "/usr/local/bin/AppStoreXtractor"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/AppStoreXtractor" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/AppStoreXtractor"
+  curl -so "/usr/local/bin/AppStoreXtractor" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/AppStoreXtractor"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/AppStoreXtractor"
-  /bin/chmod 775 "/usr/local/bin/AppStoreXtractor"
-  /bin/chmod +x "/usr/local/bin/AppStoreXtractor"
+  chown root:wheel "/usr/local/bin/AppStoreXtractor"
+  chmod 775 "/usr/local/bin/AppStoreXtractor"
+  chmod +x "/usr/local/bin/AppStoreXtractor"
 
   # outset
 
@@ -243,11 +255,11 @@
 
   outsetVersion="2.0.6"
 
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
 
-  cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/chilcote/outset/releases/download/v${outsetVersion}/outset-${outsetVersion}.pkg"
+  cd "${tmpDir}" && curl -s -O -J -L "https://github.com/chilcote/outset/releases/download/v${outsetVersion}/outset-${outsetVersion}.pkg"
 
-  /usr/sbin/installer -pkg "${tmpDir}/outset-${outsetVersion}.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
+  installer -pkg "${tmpDir}/outset-${outsetVersion}.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
 
   # offset
 
@@ -255,11 +267,11 @@
 
   offsetVersion="1.4.1"
 
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
 
-  cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/aysiu/offset/releases/download/${offsetVersion}/Offset.pkg"
+  cd "${tmpDir}" && curl -s -O -J -L "https://github.com/aysiu/offset/releases/download/${offsetVersion}/Offset.pkg"
 
-  /usr/sbin/installer -pkg "${tmpDir}/Offset.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
+  installer -pkg "${tmpDir}/Offset.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
 
   # SafariBookmarkEditor
 
@@ -269,11 +281,11 @@
     rm -f "/usr/local/bin/SafariBookmarkEditor"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/SafariBookmarkEditor" "https://raw.githubusercontent.com/robperc/SafariBookmarkEditor/master/SafariBookmarkEditor.py"
+  curl -so "/usr/local/bin/SafariBookmarkEditor" "https://raw.githubusercontent.com/robperc/SafariBookmarkEditor/master/SafariBookmarkEditor.py"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/SafariBookmarkEditor"
-  /bin/chmod 775 "/usr/local/bin/SafariBookmarkEditor"
-  /bin/chmod +x "/usr/local/bin/SafariBookmarkEditor"
+  chown root:wheel "/usr/local/bin/SafariBookmarkEditor"
+  chmod 775 "/usr/local/bin/SafariBookmarkEditor"
+  chmod +x "/usr/local/bin/SafariBookmarkEditor"
 
   # FinderSidebarEditor
 
@@ -283,11 +295,11 @@
     rm -f "/usr/local/bin/FinderSidebarEditor"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/FinderSidebarEditor" "https://raw.githubusercontent.com/robperc/FinderSidebarEditor/master/FinderSidebarEditor.py"
+  curl -so "/usr/local/bin/FinderSidebarEditor" "https://raw.githubusercontent.com/robperc/FinderSidebarEditor/master/FinderSidebarEditor.py"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/FinderSidebarEditor"
-  /bin/chmod 775 "/usr/local/bin/FinderSidebarEditor"
-  /bin/chmod +x "/usr/local/bin/FinderSidebarEditor"
+  chown root:wheel "/usr/local/bin/FinderSidebarEditor"
+  chmod 775 "/usr/local/bin/FinderSidebarEditor"
+  chmod +x "/usr/local/bin/FinderSidebarEditor"
 
   # duti
 
@@ -297,11 +309,11 @@
     rm -f "/usr/local/bin/duti"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/duti" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/duti"
+  curl -so "/usr/local/bin/duti" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/duti"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/duti"
-  /bin/chmod 775 "/usr/local/bin/duti"
-  /bin/chmod +x "/usr/local/bin/duti"
+  chown root:wheel "/usr/local/bin/duti"
+  chmod 775 "/usr/local/bin/duti"
+  chmod +x "/usr/local/bin/duti"
 
   # ncdu
 
@@ -311,11 +323,11 @@
     rm -f "/usr/local/bin/ncdu"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/ncdu" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/ncdu"
+  curl -so "/usr/local/bin/ncdu" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/ncdu"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/ncdu"
-  /bin/chmod 775 "/usr/local/bin/ncdu"
-  /bin/chmod +x "/usr/local/bin/ncdu"
+  chown root:wheel "/usr/local/bin/ncdu"
+  chmod 775 "/usr/local/bin/ncdu"
+  chmod +x "/usr/local/bin/ncdu"
 
   # mas
 
@@ -325,11 +337,11 @@
 
     masVersion="1.6.2"
 
-    tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
+    tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
 
-    cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/mas-cli/mas/releases/download/v1.6.3/mas.pkg"
+    cd "${tmpDir}" && curl -s -O -J -L "https://github.com/mas-cli/mas/releases/download/v1.6.3/mas.pkg"
 
-    /usr/sbin/installer -pkg "${tmpDir}/mas.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
+    installer -pkg "${tmpDir}/mas.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
 
   fi
 
@@ -341,11 +353,11 @@
     rm -f "/usr/local/bin/xmlstarlet"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/xmlstarlet" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/xmlstarlet"
+  curl -so "/usr/local/bin/xmlstarlet" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/xmlstarlet"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/xmlstarlet"
-  /bin/chmod 775 "/usr/local/bin/xmlstarlet"
-  /bin/chmod +x "/usr/local/bin/xmlstarlet"
+  chown root:wheel "/usr/local/bin/xmlstarlet"
+  chmod 775 "/usr/local/bin/xmlstarlet"
+  chmod +x "/usr/local/bin/xmlstarlet"
 
   # reattach-to-user-namespace
 
@@ -355,11 +367,11 @@
     rm -f "/usr/local/bin/reattach-to-user-namespace"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/reattach-to-user-namespace" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/reattach-to-user-namespace"
+  curl -so "/usr/local/bin/reattach-to-user-namespace" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/reattach-to-user-namespace"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/reattach-to-user-namespace"
-  /bin/chmod 775 "/usr/local/bin/reattach-to-user-namespace"
-  /bin/chmod +x "/usr/local/bin/reattach-to-user-namespace"
+  chown root:wheel "/usr/local/bin/reattach-to-user-namespace"
+  chmod 775 "/usr/local/bin/reattach-to-user-namespace"
+  chmod +x "/usr/local/bin/reattach-to-user-namespace"
 
   # RegMAU
 
@@ -369,11 +381,11 @@
     rm -f "/usr/local/bin/RegMAU"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/RegMAU" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/RegMAU"
+  curl -so "/usr/local/bin/RegMAU" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/RegMAU"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/RegMAU"
-  /bin/chmod 775 "/usr/local/bin/RegMAU"
-  /bin/chmod +x "/usr/local/bin/RegMAU"
+  chown root:wheel "/usr/local/bin/RegMAU"
+  chmod 775 "/usr/local/bin/RegMAU"
+  chmod +x "/usr/local/bin/RegMAU"
 
   # MSUpdateHelper
 
@@ -387,11 +399,11 @@
     rm -f "/usr/local/bin/MSUpdateHelper"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/MSUpdateHelper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/MSUpdateHelper"
+  curl -so "/usr/local/bin/MSUpdateHelper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/MSUpdateHelper"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/MSUpdateHelper"
-  /bin/chmod 775 "/usr/local/bin/MSUpdateHelper"
-  /bin/chmod +x "/usr/local/bin/MSUpdateHelper"
+  chown root:wheel "/usr/local/bin/MSUpdateHelper"
+  chmod 775 "/usr/local/bin/MSUpdateHelper"
+  chmod +x "/usr/local/bin/MSUpdateHelper"
 
   # alerter
 
@@ -401,11 +413,11 @@
     rm -f "/usr/local/bin/alerter"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/alerter" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/alerter"
+  curl -so "/usr/local/bin/alerter" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/alerter"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/alerter"
-  /bin/chmod 775 "/usr/local/bin/alerter"
-  /bin/chmod +x "/usr/local/bin/alerter"
+  chown root:wheel "/usr/local/bin/alerter"
+  chmod 775 "/usr/local/bin/alerter"
+  chmod +x "/usr/local/bin/alerter"
 
   # PrinterMapper
 
@@ -415,11 +427,11 @@
     rm -f "/usr/local/bin/PrinterMapper"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/PrinterMapper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/PrinterMapper"
+  curl -so "/usr/local/bin/PrinterMapper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/PrinterMapper"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/PrinterMapper"
-  /bin/chmod 775 "/usr/local/bin/PrinterMapper"
-  /bin/chmod +x "/usr/local/bin/PrinterMapper"
+  chown root:wheel "/usr/local/bin/PrinterMapper"
+  chmod 775 "/usr/local/bin/PrinterMapper"
+  chmod +x "/usr/local/bin/PrinterMapper"
 
   # lohelper
 
@@ -429,11 +441,11 @@
     rm -f "/usr/local/bin/lohelper"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/lohelper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/lohelper"
+  curl -so "/usr/local/bin/lohelper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/lohelper"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/lohelper"
-  /bin/chmod 775 "/usr/local/bin/lohelper"
-  /bin/chmod +x "/usr/local/bin/lohelper"
+  chown root:wheel "/usr/local/bin/lohelper"
+  chmod 775 "/usr/local/bin/lohelper"
+  chmod +x "/usr/local/bin/lohelper"
 
   # randomizer
 
@@ -443,11 +455,11 @@
     rm -f "/usr/local/bin/randomizer"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/randomizer" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/randomizer"
+  curl -so "/usr/local/bin/randomizer" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/randomizer"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/randomizer"
-  /bin/chmod 775 "/usr/local/bin/randomizer"
-  /bin/chmod +x "/usr/local/bin/randomizer"
+  chown root:wheel "/usr/local/bin/randomizer"
+  chmod 775 "/usr/local/bin/randomizer"
+  chmod +x "/usr/local/bin/randomizer"
 
   # installinstallmacos
 
@@ -464,11 +476,11 @@
     rm -f "/usr/local/bin/assimilateownership"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/assimilateownership" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/assimilateownership"
+  curl -so "/usr/local/bin/assimilateownership" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/assimilateownership"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/assimilateownership"
-  /bin/chmod 775 "/usr/local/bin/assimilateownership"
-  /bin/chmod +x "/usr/local/bin/assimilateownership"
+  chown root:wheel "/usr/local/bin/assimilateownership"
+  chmod 775 "/usr/local/bin/assimilateownership"
+  chmod +x "/usr/local/bin/assimilateownership"
 
   # erase-install
 
@@ -478,18 +490,18 @@
     rm -f "/usr/local/bin/erase-install"
   fi
 
-  /usr/bin/curl -so "/usr/local/bin/erase-install" "https://raw.githubusercontent.com/grahampugh/erase-install/master/erase-install.sh"
+  curl -so "/usr/local/bin/erase-install" "https://raw.githubusercontent.com/grahampugh/erase-install/master/erase-install.sh"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/erase-install"
-  /bin/chmod 775 "/usr/local/bin/erase-install"
-  /bin/chmod +x "/usr/local/bin/erase-install"
+  chown root:wheel "/usr/local/bin/erase-install"
+  chmod 775 "/usr/local/bin/erase-install"
+  chmod +x "/usr/local/bin/erase-install"
 
   # jpscheck
 
   echo "==> Install 'jpscheck'"
 
   if [ -s "/Library/LaunchDaemons/ch.anykey.jpscheck.plist" ]; then
-    /bin/launchctl unload -w "/Library/LaunchDaemons/ch.anykey.jpscheck.plist"
+    launchctl unload -w "/Library/LaunchDaemons/ch.anykey.jpscheck.plist"
     rm -rf "/Library/LaunchDaemons/ch.anykey.jpscheck.plist"
   fi
 
@@ -500,8 +512,8 @@
     -runAtLoad "true" \
     -minute "*/30/"
 
-  /usr/bin/curl -so "/usr/local/bin/jpscheck" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jpscheck"
+  curl -so "/usr/local/bin/jpscheck" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jpscheck"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/jpscheck"
-  /bin/chmod 775 "/usr/local/bin/jpscheck"
-  /bin/chmod +x "/usr/local/bin/jpscheck"
+  chown root:wheel "/usr/local/bin/jpscheck"
+  chmod 775 "/usr/local/bin/jpscheck"
+  chmod +x "/usr/local/bin/jpscheck"
