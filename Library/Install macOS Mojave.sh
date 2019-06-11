@@ -56,8 +56,6 @@
 
       "${installer}/Contents/Resources/startosinstall" --agreetolicense --nointeraction --installpackage "/tmp/First_Boot_Recon.pkg"
 
-      echo "User is not logged in since the '${installer}/Contents/Resources/startosinstall' binary requires a user to be logged in." && exit 1
-
     fi
   else
     echo "Installer '${installer}' not found." && exit 1
