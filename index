@@ -1,14 +1,12 @@
 Adobe AIR EULA Acception.sh
 Assimilate Ownership.sh
 Change Hostname To Computer Name.sh
-Clear MCX.sh
 Create Privileges Helper.sh
 Disable ARD.sh
 Disable Adobe Flash Player Auto Update.sh
 Disable AutoUpdate ActivInspire.sh
 Disable Notifications Lock Screen.sh
 Disable Single User Mode.sh
-Dockfixup.sh
 Enable ARD.sh
 Enable Automatic Apple Software Update.sh
 Firefox Bootstrap.sh
@@ -48,7 +46,6 @@ Wifi Deactivate.sh
 anykey IT ASU.sh
 anykey IT Client Bootstrap.sh
 anykey IT Client Logout.sh
-anykey IT Client Patch.sh
 anykey IT Client Security.sh
 anykey IT Client Standards.sh
 anykey IT Client Tools.sh
