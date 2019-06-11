@@ -102,15 +102,13 @@
 
   echo "==> Install 'mysides'"
 
-  if [ -s "/usr/local/bin/mysides" ]; then
-    rm -f "/usr/local/bin/mysides"
-  fi
+  mysidesVersion="1.0.1"
 
-  /usr/bin/curl -so "/usr/local/bin/mysides" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/mysides"
+  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(/usr/bin/openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && /bin/mkdir -p "${tmpDir}"
 
-  /usr/sbin/chown root:wheel "/usr/local/bin/mysides"
-  /bin/chmod 775 "/usr/local/bin/mysides"
-  /bin/chmod +x "/usr/local/bin/mysides"
+  cd "${tmpDir}" && /usr/bin/curl -s -O -J -L "https://github.com/mosen/mysides/releases/download/v${mysidesVersion}/mysides-${mysidesVersion}.pkg"
+
+  /usr/sbin/installer -pkg "${tmpDir}/mysides-${mysidesVersion}.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
 
   # pkgfixer
 
