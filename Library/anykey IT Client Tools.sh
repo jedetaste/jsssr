@@ -265,7 +265,7 @@
 
   echo "==> Install 'offset'"
 
-  offsetVersion="1.4.1"
+  offsetVersion="1.4.2"
 
   tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
 
@@ -335,7 +335,7 @@
 
     echo "==> Install 'mas'"
 
-    masVersion="1.6.2"
+    masVersion="1.6.3"
 
     tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
 
