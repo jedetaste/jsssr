@@ -11,6 +11,7 @@
 
   if [[ "${major_os_version}" -ge 14 ]]; then
     defaults write "${property_list}" AutomaticallyInstallMacOSUpdates -bool true
+    defaults write "${property_list}" AutoUpdate -bool true
   fi
 
   property_list="/Library/Preferences/com.apple.commerce.plist"
