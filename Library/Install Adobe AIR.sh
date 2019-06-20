@@ -1,72 +1,66 @@
 #!/bin/bash
 
-  tmpFolder=$(getconf DARWIN_USER_TEMP_DIR)
-  randString=$(/usr/bin/openssl rand -hex 5)
-  workDir="${tmpFolder}${randString}" && /bin/mkdir -p "${workDir}"
+  version="32.0"
+  download="https://airdownload.adobe.com/air/mac/download/${version}/AdobeAIR.dmg"
+  tmpDir=$(/usr/local/bin/tmpDir)
 
-  versionInstaller="32.0"
-  url="https://airdownload.adobe.com/air/mac/download/${versionInstaller}/AdobeAIR.dmg"
+  install_adobe_air() {
 
-  echo "==> Download '${url}'"
+    curl -o "${tmpDir}/AdobeAIR.dmg" -s "${download}"
 
-  /usr/bin/curl \
-    --show-error \
-    --fail \
-    --location \
-    --remote-time \
-    --output "${workDir}/AdobeAIR.dmg" \
-    --silent \
-    "${url}"
+    mount_point="${tmpDir}/mount_point" && mkdir "${tmpDir}/mount_point"
+    dmg="${tmpDir}/AdobeAIR.dmg"
+    tmp_mount_point_file=$(mktemp /${tmpDir}/dmg.XXX) &&
 
-  if [ -s "${workDir}/${fileName}" ]; then
-    echo "==> Download was successful"
-  else
-    echo "==> Download failed, as no appropriate data was found"
-    rm -rf "${workDir}" && exit 1
-  fi
+    hdiutil attach -plist -nobrowse -readonly -noidme -mountrandom "${mount_point}" "${dmg}" > "${tmp_mount_point_file}" &&
 
-  echo "==> Prepare DMG '${workDir}/AdobeAIR.dmg'"
+    loc=":system-entities:"
+    num=$(/usr/libexec/PlistBuddy -c "Print :system-entities:" ${tmp_mount_point_file} | grep -c Dict 2>/dev/null)
 
-  mountPoint="${workDir}/mountPoint" && /bin/mkdir "${mountPoint}"
-  dmg="${workDir}/AdobeAIR.dmg"
-  tmpMountPointFile=$(mktemp /${workDir}/dmg.XXX) &&
+    for i in $(seq 0 $((num-1))) ; do
+      loc=":system-entities:${i}:mount-point"
+      loc_dev_entry=":system-entities:${i}:dev-entry"
+      volume_name="$(/usr/libexec/PlistBuddy -c "Print ${loc}" "${tmp_mount_point_file}" 2>/dev/null)"
+      volume_name_dev_entry="$(/usr/libexec/PlistBuddy -c "Print ${loc_dev_entry}" "${tmp_mount_point_file}" 2>/dev/null)"
+      if [ -n "${volume_name}" -a -z "$(echo ${volume_name} | grep 'Does Not Exist')" ]; then
+        break
+      fi
+    done
 
-  /usr/bin/hdiutil attach -plist -nobrowse -readonly -noidme -mountrandom "${mountPoint}" "${dmg}" > "${tmpMountPointFile}" &&
+    echo "=> Running installer at '${volume_name}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer'"
+    "${volume_name}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer" -silent
 
-  loc=":system-entities:"
-  num=$(/usr/libexec/PlistBuddy -c "Print :system-entities:" ${tmpMountPointFile} | /usr/bin/grep -c Dict 2>/dev/null)
+    echo "=> Remove Installer"
 
-  for i in $(seq 0 $((num-1))) ; do
-    loc=":system-entities:${i}:mount-point"
-    locDevEntry=":system-entities:${i}:dev-entry"
-    volumeName="$(/usr/libexec/PlistBuddy -c "Print ${loc}" "${tmpMountPointFile}" 2>/dev/null)"
-    volumeNameDevEntry="$(/usr/libexec/PlistBuddy -c "Print ${locDevEntry}" "${tmpMountPointFile}" 2>/dev/null)"
-    if [ -n "${volumeName}" -a -z "$(echo ${volumeName} | grep 'Does Not Exist')" ]; then
-      break
+    if [ ! -z "${volume_name}" ]; then
+      echo "=> Eject volume '${volume_name}'"
+      diskutil eject "${volume_name}" > /dev/null 2>&1
+      until [ ! -d "${volume_name}" ]; do
+        echo "=> Remove Dev-Entry for '${volume_name}'"
+        diskutil unmount force "${volume_name}" > /dev/null 2>&1
+      done
     fi
-  done
 
-  echo "==> Running installer at '${volumeName}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer'"
-  "${volumeName}/Adobe AIR Installer.app/Contents/MacOS/Adobe AIR Installer" -silent
+    if [ ! -z "${volume_name_dev_entry}" ]; then
+      echo "=> Eject volume '${volume_name_dev_entry}'"
+      diskutil eject "${volume_name_dev_entry}" > /dev/null 2>&1
+      until [ ! -d "${volume_name_dev_entry}" ]; do
+        echo "=> Remove Dev-Entry for '${volume_name_dev_entry}'"
+        diskutil unmount force "${volume_name_dev_entry}" > /dev/null 2>&1
+      done
+    fi
 
-  echo "==> Remove Installer"
+    rm -rf "${tmpDir}"
 
-  if [ ! -z "${volumeName}" ]; then
-    echo "==> Eject volume '${volumeName}'"
-    /usr/sbin/diskutil eject "${volumeName}" > /dev/null 2>&1
-    until [ ! -d "${volumeName}" ]; do
-      echo "==> Remove Dev-Entry for '${volumeName}'"
-      /usr/sbin/diskutil unmount force "${volumeName}" > /dev/null 2>&1
-    done
+  }
+
+  if [ -z $(defaults read "/Applications/Utilities/Adobe AIR Application Installer.app/Contents/Info.plist" CFBundleShortVersionString 2> /dev/null) ]; then
+    echo "=> Adobe AIR not installed"
+    install_adobe_air
+  elif [ ! $(defaults read "/Applications/Utilities/Adobe AIR Application Installer.app/Contents/Info.plist" CFBundleShortVersionString 2> /dev/null) = "${version}" ]; then
+    echo "=> Adobe AIR outdated"
+    install_adobe_air
+  else
+    echo "=> Adobe AIR installed and up-to-date (v${version})"
+    exit 0
   fi
-
-  if [ ! -z "${volumeNameDevEntry}" ]; then
-    echo "==> Eject volume '${volumeNameDevEntry}'"
-    /usr/sbin/diskutil eject "${volumeNameDevEntry}" > /dev/null 2>&1
-    until [ ! -d "${volumeNameDevEntry}" ]; do
-      echo "==> Remove Dev-Entry for '${volumeNameDevEntry}'"
-      /usr/sbin/diskutil unmount force "${volumeNameDevEntry}" > /dev/null 2>&1
-    done
-  fi
-
-  /bin/rm -rf "${workDir}"
