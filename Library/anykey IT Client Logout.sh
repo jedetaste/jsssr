@@ -2,6 +2,7 @@
 
   userName=(
     'gastschule'
+    'gastkonto'
     'lernende'
     'lokal'
     'mittelstufe'
