@@ -1,6 +1,6 @@
 #!/bin/bash
 
-  userName=(
+  username=(
     'gastschule'
     'gastkonto'
     'lernende'
@@ -17,10 +17,10 @@
 
   # Set password policy
 
-  for ((i = 0; i < "${#userName[@]}"; i++)); do
-    if [ -d "/Users/${userName[$i]}" ]; then
-      echo "Set password policy for user ${userName[$i]}"
-      pwpolicy -u "${userName[$i]}" -setpolicy "canModifyPasswordforSelf=0"
+  for ((i = 0; i < "${#username[@]}"; i++)); do
+    if [ -d "/Users/${username[$i]}" ]; then
+      echo "Set password policy for user ${username[$i]}"
+      pwpolicy -u "${username[$i]}" -setpolicy "canModifyPasswordforSelf=0"
     fi
   done
 
@@ -34,10 +34,10 @@
 
   timeStamp=$(date +%Y-%m-%d-%H-%M-%S)
 
-  for ((i = 0; i < "${#userName[@]}"; i++)); do
-    if [ -d "/Users/${userName[$i]}" ]; then
-      echo "Move home directory '/Users/${userName[$i]}' to Library"
-      mv "/Users/${userName[$i]}" "/Library/geloeschteHomes/${userName[$i]}-${timeStamp}"
+  for ((i = 0; i < "${#username[@]}"; i++)); do
+    if [ -d "/Users/${username[$i]}" ]; then
+      echo "Move home directory '/Users/${username[$i]}' to Library"
+      mv "/Users/${username[$i]}" "/Library/geloeschteHomes/${username[$i]}-${timeStamp}"
     fi
   done
 
