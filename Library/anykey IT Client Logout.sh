@@ -32,12 +32,12 @@
 
   # Move home directory to Library
 
-  timeStamp=$(date +%Y-%m-%d-%H-%M-%S)
+  timestamp=$(date +%Y-%m-%d-%H-%M-%S)
 
   for ((i = 0; i < "${#username[@]}"; i++)); do
     if [ -d "/Users/${username[$i]}" ]; then
       echo "Move home directory '/Users/${username[$i]}' to Library"
-      mv "/Users/${username[$i]}" "/Library/geloeschteHomes/${username[$i]}-${timeStamp}"
+      mv "/Users/${username[$i]}" "/Library/geloeschteHomes/${username[$i]}-${timestamp}"
     fi
   done
 
