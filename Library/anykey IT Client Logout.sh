@@ -20,14 +20,14 @@
   for ((i = 0; i < "${#userName[@]}"; i++)); do
     if [ -d "/Users/${userName[$i]}" ]; then
       echo "Set password policy for user ${userName[$i]}"
-      /usr/bin/pwpolicy -u "${userName[$i]}" -setpolicy "canModifyPasswordforSelf=0"
+      pwpolicy -u "${userName[$i]}" -setpolicy "canModifyPasswordforSelf=0"
     fi
   done
 
   # Create directory geloeschteHomes in Library
 
   if [ ! -d "/Library/geloeschteHomes/" ]; then
-    /bin/mkdir "/Library/geloeschteHomes"
+    mkdir -p "/Library/geloeschteHomes"
   fi
 
   # Move home directory to Library
@@ -37,7 +37,7 @@
   for ((i = 0; i < "${#userName[@]}"; i++)); do
     if [ -d "/Users/${userName[$i]}" ]; then
       echo "Move home directory '/Users/${userName[$i]}' to Library"
-      /bin/mv "/Users/${userName[$i]}" "/Library/geloeschteHomes/${userName[$i]}-${timeStamp}"
+      mv "/Users/${userName[$i]}" "/Library/geloeschteHomes/${userName[$i]}-${timeStamp}"
     fi
   done
 
