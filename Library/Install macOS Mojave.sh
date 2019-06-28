@@ -50,12 +50,7 @@
       "${installer}/Contents/Resources/startosinstall" --agreetolicense --nointeraction --installpackage "/tmp/First_Boot_Recon.pkg" --pidtosignal "${jamf_helper_pid}" &
 
     else
-
-      echo "Download and Install 'First_Boot_Recon.pkg'"
-      curl -s -o "/tmp/First_Boot_Recon.pkg" "https://cdn-clients.anykeyit.ch/Static/First_Boot_Recon.pkg"
-
-      "${installer}/Contents/Resources/startosinstall" --agreetolicense --nointeraction --installpackage "/tmp/First_Boot_Recon.pkg"
-
+      echo "User is not logged in since the '${installer}/Contents/Resources/startosinstall' binary requires a user to be logged in." && exit 1
     fi
   else
     echo "Installer '${installer}' not found." && exit 1
