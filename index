@@ -39,6 +39,7 @@ Purge Unmanaged Configuration Profiles.sh
 Remove All CUPS Printer.sh
 Remove Finder All My Files Favorite.sh
 Renamehelper.sh
+Set Mail UTI Default Application Outlook.sh
 Set PDF UTI Default Application.sh
 Uninstall Adobe AIR.sh
 Uninstall Adobe Flash Player.sh
