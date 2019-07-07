@@ -11,9 +11,9 @@
   macos_vers
 
   if [ ${minor} -gt 11 ]; then
-    echo "==> Computer is running macOS ${major}.${minor}.${revision}"
+    echo "==> Mac is running macOS ${major}.${minor}.${revision} ($(sw_vers -buildVersion))"
   else
-    echo "==> Computer is running OS X ${major}.${minor}.${revision}"
+    echo "==> Mac is running OS X ${major}.${minor}.${revision} ($(sw_vers -buildVersion))"
   fi
 
   # Symlink useful applications
@@ -150,6 +150,42 @@
     languagesetup -langspec "${langSystem}"
   fi
 
+  # Disable iCloud, Data & Privacy, Diagnostic, Touch ID and Siri pop-up settings
+
+  echo "==> Disable iCloud, Data & Privacy, Diagnostic, Touch ID and Siri pop-up settings"
+
+  if [ ${minor} -ge 7 ]; then
+
+    for user_template in "/System/Library/User Template"/*; do
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeCloudSetup -bool true
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" GestureMovieSeen none
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenCloudProductVersion "${major}.${minor}.${revision}"
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenBuddyBuildVersion "$(sw_vers -buildVersion)"
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeePrivacy -bool true
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeetrueTonePrivacy -bool true
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeTouchIDSetup -bool true
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeSiriSetup -bool true
+    done
+
+    for user_home in /Users/*; do
+      user_id=$(basename "${user_home}")
+      if [ ! "${user_id}" = "Shared" ]; then
+        if [ -d "${user_home}"/Library/Preferences ]; then
+          defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeCloudSetup -bool true
+          defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" GestureMovieSeen none
+          defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenCloudProductVersion "${major}.${minor}.${revision}"
+          defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenBuddyBuildVersion "$(sw_vers -buildVersion)"
+          defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeePrivacy -bool true
+          defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeetrueTonePrivacy -bool true
+          defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeTouchIDSetup -bool true
+          defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeSiriSetup -bool true
+          chown "${user_id}" "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist"
+        fi
+      fi
+    done
+
+  fi
+
   # Install filter.anykey.ch SSL Root certificate
 
   echo "==> Install filter.anykey.ch SSL Root certificate"
@@ -169,18 +205,38 @@
 
   echo "==> Disable Safari setup assistent in all user template"
 
-  safariversion=$(defaults read /Applications/Safari.app/Contents/Info CFBundleShortVersionString | /usr/bin/awk '{print $1}')
-
   for user_template in "/System/Library/User Template"/*; do
-    defaults write "${user_template}/Library/Preferences/com.apple.Safari" LastOSVersionSafariWasLaunchedOn -string "${minor}"
-    defaults write "${user_template}/Library/Preferences/com.apple.Safari" LastSafariVersionWithWelcomePage -string "${safariversion}"
+    defaults write "${user_template}/Library/Preferences/com.apple.Safari.plist" LastOSVersionSafariWasLaunchedOn -string "${minor}"
+    defaults write "${user_template}/Library/Preferences/com.apple.Safari.plist" LastSafariVersionWithWelcomePage -string "$(defaults read /Applications/Safari.app/Contents/Info.plist CFBundleShortVersionString)"
   done
 
   # Hide management account
 
   echo "==> Hide management account"
 
-  defaults write "/Library/Preferences/com.apple.loginwindow" HiddenUsersList -array-add casper
+  casper_added=$(defaults read /Library/Preferences/com.apple.loginwindow.plist HiddenUsersList casper 2> /dev/null)
+  admin_added=$(defaults read /Library/Preferences/com.apple.loginwindow.plist HiddenUsersList admin 2> /dev/null)
+  gucken_added=$(defaults read /Library/Preferences/com.apple.loginwindow.plist HiddenUsersList gucken 2> /dev/null)
+
+  if [ -n "${casper_added}" ]; then
+    if [ -n "${admin_added}" ]; then
+      if [ -n "${gucken_added}" ]; then
+        defaults delete "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList
+        defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add casper
+        defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add admin
+        defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add gucken
+      else
+        defaults delete "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList
+        defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add casper
+        defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add admin
+      fi
+    else
+      defaults delete "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList
+      defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add casper
+    fi
+  else
+    defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add casper
+  fi
 
   # Disable Oracle Java Auto Update
 
@@ -193,7 +249,7 @@
   echo "==> Enable right click on AppleHIDMouse"
 
   for user_template in "/System/Library/User Template"/*; do
-    defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleHIDMouse" Button2 -int 2
+    defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleHIDMouse.plist" Button2 -int 2
   done
 
   # Enable right click on AppleBluetoothMultitouch
@@ -201,7 +257,7 @@
   echo "==> Enable right click on AppleBluetoothMultitouch"
 
   for user_template in "/System/Library/User Template"/*; do
-    defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleBluetoothMultitouch.mouse" MouseButtonMode -string TwoButton
+    defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleBluetoothMultitouch.mouse.plist" MouseButtonMode -string TwoButton
   done
 
   # Enable tap to click on trackpad
@@ -231,12 +287,12 @@
   # Delete Adobe Reader Plugins
 
   if [ -e "/Library/Internet Plug-Ins/AdobePDFViewer.plugin" ]; then
-    echo "==> Delete Adobe Reader Plugins"
+    echo "==> Delete Adobe Reader Plugin 'AdobePDFViewer.plugin'"
     rm -rf "/Library/Internet Plug-Ins/AdobePDFViewer.plugin"
   fi
 
   if [ -e "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin" ]; then
-    echo "==> Delete Adobe Reader Plugins"
+    echo "==> Delete Adobe Reader Plugins 'AdobePDFViewerNPAPI'"
     rm -rf "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin"
   fi
 
@@ -244,7 +300,7 @@
 
   for user in $(ls /Users | grep -v Shared | grep -v Guest | grep -v '.localized'); do
     if [ -d "/Users/${user}/Library/Application Support/Adobe/" ];  then
-      echo "==> Correct Permissions Adobe Folder"
+      echo "==> Correct Permissions on Adobe Folder on '/Users/${user}'"
       chown -R ${user} "/Users/${user}/Library/Application Support/Adobe/"
       chmod -R 700 "/Users/${user}/Library/Application Support/Adobe/"
     fi
