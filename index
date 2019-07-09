@@ -33,6 +33,7 @@ Install macOS Mojave.sh
 JAMF Change Password.sh
 JAMF Create Account.sh
 Libre Office Language Pack DE.sh
+Make Dock Non-Immutable.sh
 Oracle Java Security Exception.sh
 Purge Legacy Apple Apps.sh
 Purge Unmanaged Configuration Profiles.sh
