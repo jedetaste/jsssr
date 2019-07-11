@@ -251,27 +251,32 @@
 
   # outset
 
-  echo "==> Install 'outset'"
+  if [ -d "/usr/local/outset" ]; then
 
-  outsetVersion="2.0.6"
+    echo "==> Remove 'outset'"
 
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
+    rm -rf "/usr/local/outset"
 
-  cd "${tmpDir}" && curl -s -O -J -L "https://github.com/chilcote/outset/releases/download/v${outsetVersion}/outset-${outsetVersion}.pkg"
+    rm -rf "/Library/LaunchDaemons/com.github.outset.boot.plist"
+    rm -rf "/Library/LaunchDaemons/com.github.outset.cleanup.plist"
+    rm -rf "/Library/LaunchDaemons/com.github.outset.login-privileged.plist"
 
-  installer -pkg "${tmpDir}/outset-${outsetVersion}.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
+    rm -rf "/Library/LaunchAgents/com.github.outset.on-demand.plist"
+    rm -rf "/Library/LaunchAgents/com.github.outset.login.plist"
+
+  fi
 
   # offset
 
-  echo "==> Install 'offset'"
+  if [ -d "/usr/local/offset" ]; then
 
-  offsetVersion="1.4.2"
+    echo "==> Remove 'offset'"
 
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
+    rm -rf "/usr/local/offset"
 
-  cd "${tmpDir}" && curl -s -O -J -L "https://github.com/aysiu/offset/releases/download/${offsetVersion}/Offset.pkg"
+    rm -rf "/Library/LaunchAgents/com.github.offset.logout.plist"
 
-  installer -pkg "${tmpDir}/Offset.pkg" -target / > /dev/null 2>&1 && rm -rf "${tmpDir}"
+  fi
 
   # SafariBookmarkEditor
 
