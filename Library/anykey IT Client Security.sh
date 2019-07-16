@@ -13,6 +13,9 @@ launchctl unload "/Library/LaunchDaemons/com.pplauncher.plist"
 rm -rf "/Library/Application Support/pplauncher"
 rm -rf "/Library/LaunchDaemons/com.pplauncher.plist"
 
+# Delete OSX/CrescentCore virus pieces
+rm -rf "/Library/com.apple.spotlight.Core"
+rm -rf "/Library/Application Support/com.apple.spotlight.Core"
 
 # Delete the OSX.PROTON virus pieces
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/fr.handbrake.activity_agent.plist"
