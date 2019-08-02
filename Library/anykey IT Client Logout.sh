@@ -1,58 +1,58 @@
 #!/bin/bash
 
-  username=(
-    'gastschule'
-    'gastkonto'
-    'lernende'
-    'lokal'
-    'mittelstufe'
-    'unterstufe'
-    'schueler'
-    'schuler'
-    'sus'
-    'schule'
-    'stud'
-    'student'
-  )
+username=(
+  'gastschule'
+  'gastkonto'
+  'lernende'
+  'lokal'
+  'mittelstufe'
+  'unterstufe'
+  'schueler'
+  'schuler'
+  'sus'
+  'schule'
+  'stud'
+  'student'
+)
 
-  # Set password policy
+# Set password policy
 
-  for ((i = 0; i < "${#username[@]}"; i++)); do
-    if [ -d "/Users/${username[$i]}" ]; then
-      echo "Set password policy for user ${username[$i]}"
-      pwpolicy -u "${username[$i]}" -setpolicy "canModifyPasswordforSelf=0"
-    fi
-  done
-
-  # Create directory geloeschteHomes in Library
-
-  if [ ! -d "/Library/geloeschteHomes/" ]; then
-    mkdir -p "/Library/geloeschteHomes"
+for ((i = 0; i < "${#username[@]}"; i++)); do
+  if [ -d "/Users/${username[$i]}" ]; then
+    echo "Set password policy for user ${username[$i]}"
+    pwpolicy -u "${username[$i]}" -setpolicy "canModifyPasswordforSelf=0"
   fi
+done
 
-  # Move home directory to Library
+# Create directory geloeschteHomes in Library
 
-  timestamp=$(date +%Y-%m-%d-%H-%M-%S)
+if [ ! -d "/Library/geloeschteHomes/" ]; then
+  mkdir -p "/Library/geloeschteHomes"
+fi
 
-  for ((i = 0; i < "${#username[@]}"; i++)); do
-    if [ -d "/Users/${username[$i]}" ]; then
-      echo "Move home directory '/Users/${username[$i]}' to Library"
-      mv "/Users/${username[$i]}" "/Library/geloeschteHomes/${username[$i]}-${timestamp}"
-    fi
-  done
+# Move home directory to Library
 
-  # Set permissions
+timestamp=$(date +%Y-%m-%d-%H-%M-%S)
 
-  chown -R admin "/Library/geloeschteHomes/" && chmod -R 700 "/Library/geloeschteHomes/"
+for ((i = 0; i < "${#username[@]}"; i++)); do
+  if [ -d "/Users/${username[$i]}" ]; then
+    echo "Move home directory '/Users/${username[$i]}' to Library"
+    mv "/Users/${username[$i]}" "/Library/geloeschteHomes/${username[$i]}-${timestamp}"
+  fi
+done
 
-  # Cancel all print jobs
+# Set permissions
 
-  cancel -a
+chown -R admin "/Library/geloeschteHomes/" && chmod -R 700 "/Library/geloeschteHomes/"
 
-  # Restart all disabled printers
+# Cancel all print jobs
 
-  lpstat -p | grep "disabled" | awk '{print $2}' | xargs -n 1 -I{} sudo cupsenable {}
+cancel -a
 
-  # Kill CloudKeychainProxy
+# Restart all disabled printers
 
-  killall CloudKeychainProxy
+lpstat -p | grep "disabled" | awk '{print $2}' | xargs -n 1 -I{} sudo cupsenable {}
+
+# Kill CloudKeychainProxy
+
+killall CloudKeychainProxy
