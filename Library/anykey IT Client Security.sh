@@ -1,8 +1,7 @@
-#!/bin/sh
-# 20180827 - 11:46 - tobiaslinder
+#!/bin/bash
 
 # Get Current User
-consoleuser=$(python -c 'from SystemConfiguration import SCDynamicStoreCopyConsoleUser; import sys; username = (SCDynamicStoreCopyConsoleUser(None, None, None) or [None])[0]; username = [username,""][username in [u"loginwindow", None, u""]]; sys.stdout.write(username + "\n");')
+consoleuser=$(scutil <<<"show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }')
 echo "logged in user is ${consoleuser}"
 
 # Delete Malware und Adware
@@ -224,24 +223,21 @@ defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabl
 
 # Repair Access Rights on Users folder
 echo Reparing Users Folder Access rights
-for i in /Users/*
-do
- u=`echo $i | cut -d/ -f3`
- case $u in
-  Shared)
-   ;;
-  Temporary)
-   ;;
+for i in /Users/*; do
+  u=$(echo "${i}" | cut -d/ -f3)
+  case ${u} in
+  Shared) ;;
+
+  Temporary) ;;
+
   *)
-   /usr/sbin/chown $u:staff $i
-   /bin/chmod 700 $i
-  ;;
- esac
+    chown "${u}":staff "${i}"
+    chmod 700 "${i}"
+    ;;
+  esac
 done
 
 # Repair Access Rights on Shared folder
 echo Reparing Shared Folder Access rights
-/usr/sbin/chown -R root:wheel "/Users/Shared"
-/bin/chmod -R 777 "/Users/Shared"
-
-exit 0
+chown -R root:wheel "/Users/Shared"
+chmod -R 777 "/Users/Shared"
