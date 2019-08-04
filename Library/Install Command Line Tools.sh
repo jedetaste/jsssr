@@ -17,18 +17,18 @@ if [[ "$osx_vers" -ge 9 ]]; then
   # Identify the correct update in the Software Update feed with "Command Line Tools" in the name for the OS version in question.
 
   if [[ "$osx_vers" -gt 9 ]]; then
-     cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | grep "$osx_vers" | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
+    cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | grep "$osx_vers" | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
   elif [[ "$osx_vers" -eq 9 ]]; then
-     cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | grep "Mavericks" | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
+    cmd_line_tools=$(softwareupdate -l | awk '/\*\ Command Line Tools/ { $1=$1;print }' | grep "Mavericks" | sed 's/^[[ \t]]*//;s/[[ \t]]*$//;s/*//' | cut -c 2-)
   fi
 
   # Check to see if the softwareupdate tool has returned more than one Xcode
   # command line tool installation option. If it has, use the last one listed
   # as that should be the latest Xcode command line tool installer.
 
-  if (( $(grep -c . <<<"$cmd_line_tools") > 1 )); then
-     cmd_line_tools_output="$cmd_line_tools"
-     cmd_line_tools=$(printf "$cmd_line_tools_output" | tail -1)
+  if (($(grep -c . <<<"$cmd_line_tools") > 1)); then
+    cmd_line_tools_output="$cmd_line_tools"
+    cmd_line_tools=$(printf "$cmd_line_tools_output" | tail -1)
   fi
 
   #Install the command line tools
@@ -51,24 +51,24 @@ fi
 if [[ "$osx_vers" -eq 7 ]] || [[ "$osx_vers" -eq 8 ]]; then
 
   if [[ "$osx_vers" -eq 7 ]]; then
-      DMGURL=http://devimages.apple.com/downloads/xcode/command_line_tools_for_xcode_os_x_lion_april_2013.dmg
+    DMGURL=http://devimages.apple.com/downloads/xcode/command_line_tools_for_xcode_os_x_lion_april_2013.dmg
   fi
 
   if [[ "$osx_vers" -eq 8 ]]; then
-       DMGURL=http://devimages.apple.com/downloads/xcode/command_line_tools_for_osx_mountain_lion_april_2014.dmg
+    DMGURL=http://devimages.apple.com/downloads/xcode/command_line_tools_for_osx_mountain_lion_april_2014.dmg
   fi
 
-    TOOLS=cltools.dmg
-    curl "$DMGURL" -o "$TOOLS"
-    TMPMOUNT=`/usr/bin/mktemp -d /tmp/clitools.XXXX`
-    hdiutil attach "$TOOLS" -mountpoint "$TMPMOUNT" -nobrowse
-    # The "-allowUntrusted" flag has been added to the installer
-    # command to accomodate for now-expired certificates used
-    # to sign the downloaded command line tools.
-    installer -allowUntrusted -pkg "$(find $TMPMOUNT -name '*.mpkg')" -target /
-    hdiutil detach "$TMPMOUNT"
-    rm -rf "$TMPMOUNT"
-    rm "$TOOLS"
+  TOOLS=cltools.dmg
+  curl "$DMGURL" -o "$TOOLS"
+  TMPMOUNT=$(/usr/bin/mktemp -d /tmp/clitools.XXXX)
+  hdiutil attach "$TOOLS" -mountpoint "$TMPMOUNT" -nobrowse
+  # The "-allowUntrusted" flag has been added to the installer
+  # command to accomodate for now-expired certificates used
+  # to sign the downloaded command line tools.
+  installer -allowUntrusted -pkg "$(find $TMPMOUNT -name '*.mpkg')" -target /
+  hdiutil detach "$TMPMOUNT"
+  rm -rf "$TMPMOUNT"
+  rm "$TOOLS"
 fi
 
 exit 0
