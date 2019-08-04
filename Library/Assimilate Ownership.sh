@@ -12,6 +12,7 @@ applicationPath=(
   '/Applications/Lernprogramme/New Headway'
   '/Applications/ClinDoeil.app'
   '/Applications/Millefeuilles.app'
+  '/Applications/Signal.app'
   '/Applications/Lernprogramme/New Inspiration IC/'
 )
 
