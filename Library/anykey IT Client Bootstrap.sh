@@ -214,24 +214,7 @@ done
 
 echo "==> Hide management account"
 
-casper_added=$(defaults read /Library/Preferences/com.apple.loginwindow.plist HiddenUsersList casper 2>/dev/null)
-admin_added=$(defaults read /Library/Preferences/com.apple.loginwindow.plist HiddenUsersList admin 2>/dev/null)
-
-if [ -n "${casper_added}" ]; then
-  if [ -n "${admin_added}" ]; then
-    defaults delete "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList
-    defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add casper
-    defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add gucken
-    defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add admin
-  else
-    defaults delete "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList
-    defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add casper
-    defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add gucken
-  fi
-else
-  defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add casper
-  defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add gucken
-fi
+defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add casper
 
 # Disable Oracle Java Auto Update
 
