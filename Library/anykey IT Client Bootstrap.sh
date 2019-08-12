@@ -265,7 +265,7 @@ fi
 # Extend threshold for minimal disk space
 
 launchctl stop "com.apple.diskspaced"
-defaults write "com.apple.diskspaced" minFreeSpace 10
+defaults write "com.apple.diskspaced" minFreeSpace 20
 launchctl start "com.apple.diskspaced"
 
 # Delete Adobe Reader Plugins
