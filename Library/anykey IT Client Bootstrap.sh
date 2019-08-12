@@ -262,6 +262,12 @@ if [ -d "/Applications/Adobe Acrobat Reader DC.app/Contents/Plugins/Updater.acro
   rm -rf "/Applications/Adobe Acrobat Reader DC.app/Contents/Plugins/Updater.acroplugin"
 fi
 
+# Extend threshold for minimal disk space
+
+launchctl stop "com.apple.diskspaced"
+defaults write "com.apple.diskspaced" minFreeSpace 10
+launchctl start "com.apple.diskspaced"
+
 # Delete Adobe Reader Plugins
 
 if [ -e "/Library/Internet Plug-Ins/AdobePDFViewer.plugin" ]; then
