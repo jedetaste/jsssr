@@ -23,6 +23,10 @@ fi
 
 free_disk_space=$(diskutil info / | grep "Free Space" | awk '{print $4}')
 
+if [ -z "${free_disk_space}" ]; then
+  free_disk_space=$(diskutil info / | grep "Volume Available Space" | awk '{print $4}')
+fi
+
 if [[ ${free_disk_space%.*} -ge 20 ]]; then
   echo "Disk Check: OK - ${free_disk_space%.*} Free Space Detected"
 else
