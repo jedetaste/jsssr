@@ -1,19 +1,19 @@
 #!/bin/bash
 
-  creationdate=$(date +%Y-%m-%d--%H-%M-%S)
+creationdate=$(date +%Y-%m-%d--%H-%M-%S)
 
-  # Move .anytmp to tmp
+# Move .anytmp to tmp
 
-  if [ -d "/.anytmp" ]; then
-    mv "/.anytmp" "/tmp/.anytmp_${creationdate}"
-  fi
+if [ -d "/.anytmp" ]; then
+  mv "/.anytmp" "/tmp/.anytmp_${creationdate}"
+fi
 
-  # Create directory .anytmp
+# Create directory .anytmp
 
-  mkdir - "/.anytmp"
-  chown -R root:wheel "/.anytmp"
-  chmod -R 770 "/.anytmp"
+mkdir - "/.anytmp"
+chown -R root:wheel "/.anytmp"
+chmod -R 770 "/.anytmp"
 
-  # Move deleted home directories to .anytmp
+# Move deleted home directories to .anytmp
 
-  mv "/Library/geloeschteHomes" "/.anytmp/"
+mv "/Library/geloeschteHomes" "/.anytmp/"
