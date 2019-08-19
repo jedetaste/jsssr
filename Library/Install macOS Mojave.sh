@@ -13,11 +13,11 @@ installer_aky_recipe="installmacosmojave"
 
 if [ "$(sw_vers -productVersion | awk -F. '{print $2}')" -lt 11 ]; then
   if [[ ${user_language} == en* ]]; then
-    echo "This Upgrade cannot be installed on a computer with OS X 10.10 or lower. Please install macOS '${installer_name}' manually."
-    "${jamf_helper}" -windowType "utility" -description "This Upgrade cannot be installed on a computer with OS X 10.10 or lower. Please install macOS '${installer_name}' manually." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -defaultButton "0" -cancelButton "1" && exit 1
+    echo "This Upgrade cannot be installed on a computer with OS X 10.10 or lower. Please install macOS ${installer_name} manually."
+    "${jamf_helper}" -windowType "utility" -description "This Upgrade cannot be installed on a computer with OS X 10.10 or lower. Please install macOS ${installer_name} manually." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -defaultButton "0" -cancelButton "1" && exit 1
   elif [[ ${user_language} == de* ]]; then
-    echo "This Upgrade cannot be installed on a computer with OS X 10.10 or lower. Please install macOS '${installer_name}' manually."
-    "${jamf_helper}" -windowType "utility" -description "Diese Installation ist auf einem Computer mit OS X 10.10 oder älter nicht möglich. Das Upgrade auf macOS '${installer_name}' muss manuell gemacht werden." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -defaultButton "0" -cancelButton "1" && exit 1
+    echo "This Upgrade cannot be installed on a computer with OS X 10.10 or lower. Please install macOS ${installer_name} manually."
+    "${jamf_helper}" -windowType "utility" -description "Diese Installation ist auf einem Computer mit OS X 10.10 oder älter nicht möglich. Das Upgrade auf macOS ${installer_name} muss manuell gemacht werden." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -defaultButton "0" -cancelButton "1" && exit 1
   fi
 fi
 
@@ -28,10 +28,10 @@ if [[ ${free_disk_space%.*} -ge 20 ]]; then
 else
   if [[ ${user_language} == en* ]]; then
     echo "Disk Check: ERROR - ${free_disk_space%.*} Free Space Detected"
-    "${jamf_helper}" -windowType "utility" -description "The Upgrade to macOS '${installer_name}' cannot be installed on a computer with less than 20GB disk space." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -defaultButton "0" -cancelButton "1" && exit 1
+    "${jamf_helper}" -windowType "utility" -description "The Upgrade to macOS ${installer_name} cannot be installed on a computer with less than 20GB disk space." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -defaultButton "0" -cancelButton "1" && exit 1
   elif [[ ${user_language} == de* ]]; then
     echo "Disk Check: ERROR - ${free_disk_space%.*} Free Space Detected"
-    "${jamf_helper}" -windowType "utility" -description "Die Installation von macOS '${installer_name}' ist auf einem Computer mit weniger als 20GB freien Festplattenspeicher nicht möglich." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -defaultButton "0" -cancelButton "1" && exit 1
+    "${jamf_helper}" -windowType "utility" -description "Die Installation von macOS ${installer_name} ist auf einem Computer mit weniger als 20GB freien Festplattenspeicher nicht möglich." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -defaultButton "0" -cancelButton "1" && exit 1
   fi
 fi
 
