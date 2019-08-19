@@ -14,6 +14,7 @@ applicationPath=(
   '/Applications/Millefeuilles.app'
   '/Applications/Signal.app'
   '/Applications/Lernprogramme/New Inspiration IC/'
+  '/Applications/WhatsApp.app'  
 )
 
 for ((i = 0; i < "${#applicationPath[@]}"; i++)); do
