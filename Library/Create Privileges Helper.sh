@@ -1,31 +1,31 @@
 #!/bin/bash
 
-  error=0
+error=0
 
-  helper_path="/Applications/Privileges.app/Contents/Library/LaunchServices/corp.sap.privileges.helper"
+helper_path="/Applications/Privileges.app/Contents/Library/LaunchServices/corp.sap.privileges.helper"
 
-  if [[ -f "${helper_path}" ]]; then
+if [[ -f "${helper_path}" ]]; then
 
-    # Create the target directory if needed
+  # Create the target directory if needed
 
-    if [[ ! -d "/Library/PrivilegedHelperTools" ]]; then
-      mkdir -p "/Library/PrivilegedHelperTools"
-      chmod 755 "/Library/PrivilegedHelperTools"
-      chown -R root:wheel "/Library/PrivilegedHelperTools"
-    fi
+  if [[ ! -d "/Library/PrivilegedHelperTools" ]]; then
+    mkdir -p "/Library/PrivilegedHelperTools"
+    chmod 755 "/Library/PrivilegedHelperTools"
+    chown -R root:wheel "/Library/PrivilegedHelperTools"
+  fi
 
-    # Move the privileged helper into place
+  # Move the privileged helper into place
 
-    cp -f "${helper_path}" "/Library/PrivilegedHelperTools"
+  cp -f "${helper_path}" "/Library/PrivilegedHelperTools"
 
-    if [[ $? -eq 0 ]]; then
-      chmod 755 "/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
+  if [[ $? -eq 0 ]]; then
+    chmod 755 "/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
 
-      # create the launchd plist
+    # create the launchd plist
 
-      plist="/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
+    plist="/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
 
-      cat > "${plist}" << EOF
+    cat >"${plist}" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -45,17 +45,17 @@
 </plist>
 EOF
 
-      chmod 644 "${plist}"
+    chmod 644 "${plist}"
 
-      # Load the launchd plist
+    # Load the launchd plist
 
-      launchctl load -wF "${plist}"
+    launchctl load -wF "${plist}"
 
-    else
-      error=1
-    fi
   else
     error=1
   fi
+else
+  error=1
+fi
 
-  exit ${error}
+exit ${error}
