@@ -27,7 +27,7 @@ OracleUpdateXML="https://javadl-esd-secure.oracle.com/update/mac/au-1.8.0_20.xml
 # Use the XML address defined in the OracleUpdateXML variable to query Oracle via curl
 # for the complete address of the latest Oracle Java 8 installer disk image.
 
-fileURL=`/usr/bin/curl --silent $OracleUpdateXML | awk -F \" /enclosure/'{print $(NF-1)}'`
+fileURL=$(curl --silent $OracleUpdateXML | awk -F \" /enclosure/'{print $(NF-1)}')
 
 # Specify name of downloaded disk image
 
@@ -39,59 +39,59 @@ fi
 
 if [[ ${osvers} -ge 7 ]]; then
 
-    # Download the latest Oracle Java 8 software disk image
-    # The curl -L option is needed because there is a redirect
-    # that the requested page has moved to a different location.
+  # Download the latest Oracle Java 8 software disk image
+  # The curl -L option is needed because there is a redirect
+  # that the requested page has moved to a different location.
 
-    /usr/bin/curl --retry 3 -Lo "$java_eight_dmg" "$fileURL"
+  curl --retry 3 -Lo "$java_eight_dmg" "$fileURL"
 
-    # Specify a /tmp/java_eight.XXXX mountpoint for the disk image
+  # Specify a /tmp/java_eight.XXXX mountpoint for the disk image
 
-    TMPMOUNT=`/usr/bin/mktemp -d /tmp/java_eight.XXXX`
+  TMPMOUNT=$(mktemp -d /tmp/java_eight.XXXX)
 
-    # Mount the latest Oracle Java 8 disk image to /tmp/java_eight.XXXX mountpoint
+  # Mount the latest Oracle Java 8 disk image to /tmp/java_eight.XXXX mountpoint
 
-    hdiutil attach "$java_eight_dmg" -mountpoint "$TMPMOUNT" -nobrowse -noverify -noautoopen
+  hdiutil attach "$java_eight_dmg" -mountpoint "$TMPMOUNT" -nobrowse -noverify -noautoopen
 
-    # Install Oracle Java 8 from the installer package. This installer may
-    # be stored inside an install application on the disk image, or there
-    # may be an installer package available at the root of the mounted disk
-    # image.
+  # Install Oracle Java 8 from the installer package. This installer may
+  # be stored inside an install application on the disk image, or there
+  # may be an installer package available at the root of the mounted disk
+  # image.
 
-    if [[ -e "$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*Java*\.pkg -o -iname \*Java*\.mpkg \))" ]]; then
-      pkg_path="$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*Java*\.pkg -o -iname \*Java*\.mpkg \))"
-    elif [[ -e "$(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*\.app \))" ]]; then
-         oracle_app=`(/usr/bin/find $TMPMOUNT -maxdepth 1 \( -iname \*\.app \))`
-        if [[ -e "$(/usr/bin/find "$oracle_app"/Contents/Resources -maxdepth 1 \( -iname \*Java*\.pkg -o -iname \*Java*\.mpkg \))" ]]; then
-          pkg_path="$(/usr/bin/find "$oracle_app"/Contents/Resources -maxdepth 1 \( -iname \*Java*\.pkg -o -iname \*Java*\.mpkg \))"
-        fi
+  if [[ -e "$(find "$TMPMOUNT" -maxdepth 1 \( -iname '\*Java*\.pkg' -o -iname '\*Java*\.mpkg' \))" ]]; then
+    pkg_path="$(find "$TMPMOUNT" -maxdepth 1 \( -iname '\*Java*\.pkg' -o -iname '\*Java*\.mpkg' \))"
+  elif [[ -e "$(find "$TMPMOUNT" -maxdepth 1 \( -iname \*\.app \))" ]]; then
+    oracle_app=$( (find "$TMPMOUNT" -maxdepth 1 \( -iname \*\.app \)))
+    if [[ -e "$(find "$oracle_app"/Contents/Resources -maxdepth 1 \( -iname '\*Java*\.pkg' -o -iname '\*Java*\.mpkg' \))" ]]; then
+      pkg_path="$(find "$oracle_app"/Contents/Resources -maxdepth 1 \( -iname '\*Java*\.pkg' -o -iname '\*Java*\.mpkg' \))"
     fi
+  fi
 
-    # Before installation, the installer's developer certificate is checked to
-    # see if it has been signed by Oracle's developer certificate. Once the
-    # certificate check has been passed, the package is then installed.
+  # Before installation, the installer's developer certificate is checked to
+  # see if it has been signed by Oracle's developer certificate. Once the
+  # certificate check has been passed, the package is then installed.
 
-    if [[ "${pkg_path}" != "" ]]; then
-        signature_check=`/usr/sbin/pkgutil --check-signature "$pkg_path" | awk /'Developer ID Installer/{ print $5 }'`
-           if [[ ${signature_check} = "Oracle" ]]; then
-             # Install Oracle Java 8 from the installer package stored inside the disk image
-             /usr/sbin/installer -dumplog -verbose -pkg "${pkg_path}" -target "/"
-           fi
+  if [[ "${pkg_path}" != "" ]]; then
+    signature_check=$(pkgutil --check-signature "$pkg_path" | awk /'Developer ID Installer/{ print $5 }')
+    if [[ ${signature_check} == "Oracle" ]]; then
+      # Install Oracle Java 8 from the installer package stored inside the disk image
+      installer -dumplog -verbose -pkg "${pkg_path}" -target "/"
     fi
+  fi
 
-    # Clean-up
+  # Clean-up
 
-    # Unmount the Oracle Java 8 disk image from /tmp/java_eight.XXXX
+  # Unmount the Oracle Java 8 disk image from /tmp/java_eight.XXXX
 
-    /usr/bin/hdiutil detach -force "$TMPMOUNT"
+  hdiutil detach -force "$TMPMOUNT"
 
-    # Remove the /tmp/java_eight.XXXX mountpoint
+  # Remove the /tmp/java_eight.XXXX mountpoint
 
-    /bin/rm -rf "$TMPMOUNT"
+  rm -rf "$TMPMOUNT"
 
-    # Remove the downloaded disk image
+  # Remove the downloaded disk image
 
-    /bin/rm -rf "$java_eight_dmg"
+  rm -rf "$java_eight_dmg"
 fi
 
 exit 0
