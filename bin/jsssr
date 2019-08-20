@@ -1,74 +1,74 @@
 #!/bin/bash
 
-  prog_name=$(basename "$0")
-  prog_version="1.2"
+prog_name=$(basename "$0")
+prog_version="1.2"
 
-  echo "==> ${prog_name} v${prog_version}"
+echo "==> ${prog_name} v${prog_version}"
 
-  script_arg="${1}" && readonly script_arg="${script_arg}"
+script_arg="${1}" && readonly script_arg="${script_arg}"
 
-  if [ -z "${script_arg}" ]; then
-    echo "${prog_name}: Argument missing" && exit 1
-  fi
+if [ -z "${script_arg}" ]; then
+  echo "${prog_name}: Argument missing" && exit 1
+fi
 
-  if [ "$(curl -sL -w "%{http_code}" "http://google.com/" -o /dev/null)" == "200" ]; then
-    online="true"
-  else
-    online="false"
-  fi
+if [ "$(curl -sL -w "%{http_code}" "http://google.com/" -o /dev/null)" == "200" ]; then
+  online="true"
+else
+  online="false"
+fi
 
-  if [ -d "/usr/local/jsssr" ]; then
-    library_exists="true"
-    cdate=$(stat -f%B "/usr/local/jsssr")
-    threshold_timestamp=$(date -j -v -30M +%s)
-  else
-    library_exists="false"
-  fi
+if [ -d "/usr/local/jsssr" ]; then
+  library_exists="true"
+  cdate=$(stat -f%B "/usr/local/jsssr")
+  threshold_timestamp=$(date -j -v -30M +%s)
+else
+  library_exists="false"
+fi
 
-  function update_library() {
+function update_library() {
 
-    if [ "${threshold_timestamp}" -gt "${cdate}" ] || [ ! -d "/usr/local/jsssr" ]; then
+  if [ "${threshold_timestamp}" -gt "${cdate}" ] || [ ! -d "/usr/local/jsssr" ]; then
 
-      tmp_folder=$(getconf DARWIN_USER_TEMP_DIR)
-      rand_string=$(openssl rand -hex 5)
+    tmp_folder=$(getconf DARWIN_USER_TEMP_DIR)
+    rand_string=$(openssl rand -hex 5)
 
-      tmp_dir="${tmp_folder}${rand_string}" && mkdir -p "${tmp_dir}"
+    tmp_dir="${tmp_folder}${rand_string}" && mkdir -p "${tmp_dir}"
 
-      repository_uri="https://raw.githubusercontent.com/jedetaste/jsssr/master"
+    repository_uri="https://raw.githubusercontent.com/jedetaste/jsssr/master"
 
-      if [ -d "/usr/local/jsssr" ]; then
-        rm -rf "/usr/local/jsssr"
-        mkdir -p "/usr/local/jsssr"
-      else
-        mkdir -p "/usr/local/jsssr"
-      fi
-
-      echo "==> Pull latest index"
-      curl -so "${tmp_dir}/index" "${repository_uri}/index"
-
-      echo "==> Parse index"
-      while read -r line && [ -n "${line}" ]; do
-        echo "==> Pull latest '${line}'"
-        line_purged="${line// /%20}"
-        curl -so "/usr/local/jsssr/${line}" "${repository_uri}/Library/${line_purged}"
-        chmod +x "/usr/local/jsssr/${line}"
-      done < "${tmp_dir}/index"
-
+    if [ -d "/usr/local/jsssr" ]; then
+      rm -rf "/usr/local/jsssr"
+      mkdir -p "/usr/local/jsssr"
+    else
+      mkdir -p "/usr/local/jsssr"
     fi
 
-  }
+    echo "==> Pull latest index"
+    curl -so "${tmp_dir}/index" "${repository_uri}/index"
 
-  if [ "${online}" == "true" ] && [ "${threshold_timestamp}" -gt "${cdate}" ]; then
-    update_library
-  elif [ "${online}" == "true" ] && [ "${library_exists}" == "false" ]; then
-    update_library
-  else
-    echo "==> Libray index is up-to-date"
+    echo "==> Parse index"
+    while read -r line && [ -n "${line}" ]; do
+      echo "==> Pull latest '${line}'"
+      line_purged="${line// /%20}"
+      curl -so "/usr/local/jsssr/${line}" "${repository_uri}/Library/${line_purged}"
+      chmod +x "/usr/local/jsssr/${line}"
+    done <"${tmp_dir}/index"
+
   fi
 
-  if [ -s "/usr/local/jsssr/${script_arg}" ]; then
-    echo "==> Run script '${script_arg}'"
-    cd "/usr/local/jsssr" && shift && ./"${script_arg}" "${1}" "${2}" "${3}" "${4}" "${5}" "${6}" "${7}" "${8}" "${9}" "${10}"
-  else
-    echo "Error: Script '${script_arg}' not found" && exit 1
-  fi
+}
+
+if [ "${online}" == "true" ] && [ "${threshold_timestamp}" -gt "${cdate}" ]; then
+  update_library
+elif [ "${online}" == "true" ] && [ "${library_exists}" == "false" ]; then
+  update_library
+else
+  echo "==> Libray index is up-to-date"
+fi
+
+if [ -s "/usr/local/jsssr/${script_arg}" ]; then
+  echo "==> Run script '${script_arg}'"
+  cd "/usr/local/jsssr" && shift && ./"${script_arg}" "${1}" "${2}" "${3}" "${4}" "${5}" "${6}" "${7}" "${8}" "${9}" "${10}"
+else
+  echo "Error: Script '${script_arg}' not found" && exit 1
+fi
