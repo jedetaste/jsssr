@@ -19,5 +19,5 @@ for library_item in "${library[@]}"; do
     echo "=> Remove installer '/tmp/${library_item}.pkg'"
     rm -f "/tmp/${library_item}.pkg"
   fi
-  
+
 done
