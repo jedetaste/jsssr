@@ -4,8 +4,8 @@
   randString=$(/usr/bin/openssl rand -hex 5)
   workDir="${tmpFolder}${randString}" && /bin/mkdir -p "${workDir}"
 
-  version="1.5.3-50"
-  versionDotsToUnderscore="1_5_3-50"
+  version="1.5.6-80"
+  versionDotsToUnderscore="1_5_6-80"
   url="https://download.hin.ch/download/distribution/install/${version}/HINClient_macos_${versionDotsToUnderscore}.dmg"
 
   echo "==> Download '${url}'"
