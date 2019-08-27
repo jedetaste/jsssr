@@ -1,6 +1,6 @@
 #!/bin/bash
 
-workDir=$(/private/tmp)
+workDir=$(/usr/local/bin/tmpDir)
 
 readonly Filepath="${1}.url"
 readonly URL="${2}"
