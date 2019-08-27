@@ -98,6 +98,20 @@ chown root:wheel "/usr/local/bin/defaultbrowser"
 chmod 775 "/usr/local/bin/defaultbrowser"
 chmod +x "/usr/local/bin/defaultbrowser"
 
+# urlgenerator
+
+echo "==> Install 'urlgenerator'"
+
+if [ -s "/usr/local/bin/urlgenerator" ]; then
+  rm -f "/usr/local/bin/urlgenerator"
+fi
+
+curl -so "/usr/local/bin/urlgenerator" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/urlgenerator"
+
+chown root:wheel "/usr/local/bin/urlgenerator"
+chmod 775 "/usr/local/bin/urlgenerator"
+chmod +x "/usr/local/bin/urlgenerator"
+
 # mysides
 
 echo "==> Install 'mysides'"
