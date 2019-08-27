@@ -36,7 +36,7 @@ EOF
 				
 	# Assigning Icon to File
 	echo "Assingning Icon to File"
-	/usr/local/bin/fileicon set "${Filepath}".url ${workDir}/Icon.png"
+	/usr/local/bin/fileicon set "${Filepath}".url "${workDir}"/Icon.png
 	
 	# Remove Working Directory
 	rm -rf "${workDir}"
