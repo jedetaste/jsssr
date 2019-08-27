@@ -12,6 +12,7 @@ if [ ! -s "/usr/local/bin/fileicon" ]; then
 fi
 
 #Create .url File
+echo "Creating URL File" 
 	cat >"${Filepath}".url <<EOF
 [InternetShortcut]
 URL=${URL}
@@ -33,7 +34,8 @@ EOF
 					rm -rf "${workDir}" && exit 1
 				fi		
 				
-	# Assingn Icon to File
+	# Assigning Icon to File
+	echo "Assingning Icon to File"
 	/usr/local/bin/fileicon set "${Filepath}".url ${workDir}/Icon.png"
 	
 	# Remove Working Directory
