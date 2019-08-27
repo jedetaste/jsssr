@@ -501,6 +501,20 @@ chown root:wheel "/usr/local/bin/erase-install"
 chmod 775 "/usr/local/bin/erase-install"
 chmod +x "/usr/local/bin/erase-install"
 
+# fileicon
+
+echo "==> Install 'fileicon'"
+
+if [ -s "/usr/local/bin/fileicon" ]; then
+  rm -f "/usr/local/bin/fileicon"
+fi
+
+curl -so "/usr/local/bin/fileicon" "https://raw.githubusercontent.com/mklement0/fileicon/stable/bin/fileicon"
+
+chown root:wheel "/usr/local/bin/fileicon"
+chmod 775 "/usr/local/bin/fileicon"
+chmod +x "/usr/local/bin/fileicon"
+
 # jpscheck
 
 echo "==> Install 'jpscheck'"
