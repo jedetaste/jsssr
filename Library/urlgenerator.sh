@@ -1,6 +1,6 @@
 #!/bin/bash
 
-workDir=$(/private/tmp)
+workDir=$(/private/tmp/)
 
 readonly Filepath="${1}.url"
 readonly URL="${2}"
@@ -18,7 +18,7 @@ URL="${URL}"
 EOF
 
 # Download and assign Icon
-	echo "==> Downloading '${url}'"
+	echo "==> Downloading '${Icon}'"
 
 	curl \
 		--show-error --fail --location --remote-time \
