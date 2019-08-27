@@ -26,7 +26,7 @@ EOF
 if [ -z "$3" ]; then
 	echo "No Icon supplied. Skipping Icon Creation"
 else
-	# Download and assign Icon
+	# Download and assigning Icon
 	echo "==> Downloading '${Icon}'"
 
 	curl \
