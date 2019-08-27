@@ -11,7 +11,12 @@ if [ ! -s "/usr/local/bin/fileicon" ]; then
 	echo "FileIcon Binary not Found. Exiting" && exit 1
 fi
 
-#Create .url File
+# Remove .URL File if it already exists
+if [ -s "${Filepath}".url ]; then
+	rm -f "${Filepath}".url
+fi
+
+# Create .url File
 echo "Creating URL File"
 cat >"${Filepath}".url <<EOF
 [InternetShortcut]
