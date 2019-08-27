@@ -18,25 +18,29 @@ cat >"${Filepath}".url <<EOF
 URL=${URL}
 EOF
 
-# Download and assign Icon
-echo "==> Downloading '${Icon}'"
-
-curl \
-	--show-error \
-	--output "${workDir}/Icon.png" \
-	--silent \
-	"${Icon}"
-
-if [ -s "${workDir}/Icon.png" ]; then
-	echo "==> Download was successful"
+if [ -z "$Icon" ]; then
+	echo "No Icon supplied. Skipping Icon Creation"
 else
-	echo "==> Download failed, as no appropriate data was found"
-	rm -rf "${workDir}" && exit 1
+	# Download and assign Icon
+	echo "==> Downloading '${Icon}'"
+
+	curl \
+		--show-error \
+		--output "${workDir}/Icon.png" \
+		--silent \
+		"${Icon}"
+
+	if [ -s "${workDir}/Icon.png" ]; then
+		echo "==> Download was successful"
+	else
+		echo "==> Download failed, as no appropriate data was found"
+		rm -rf "${workDir}" && exit 1
+	fi
+
+	# Assigning Icon to File
+	echo "Assingning Icon to File"
+	/usr/local/bin/fileicon set "${Filepath}".url "${workDir}"/Icon.png
+
+	# Remove Working Directory
+	rm -rf "${workDir}"
 fi
-
-# Assigning Icon to File
-echo "Assingning Icon to File"
-/usr/local/bin/fileicon set "${Filepath}".url "${workDir}"/Icon.png
-
-# Remove Working Directory
-rm -rf "${workDir}"
