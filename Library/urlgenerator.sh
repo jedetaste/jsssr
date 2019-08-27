@@ -4,7 +4,7 @@ workDir=$(/private/tmp/)
 
 readonly Filepath="${1}.url"
 readonly URL="${2}"
-readonly Icon="https://github.com/jedetaste/james/blob/master/icons/${3}.png"
+readonly Icon="https://raw.githubusercontent.com/jedetaste/james/master/icons/${3}.png"
 
 # Check if fileicon binary is installed 
 if [ ! -s "/usr/local/bin/sponge" ]; then
