@@ -21,7 +21,7 @@ EOF
 	echo "==> Downloading '${Icon}'"
 
 	curl \
-		--show-error --fail --location --remote-time \
+		--show-error \
 		--output "${workDir}/${3}.png" \
 		--silent \
 		"${Icon}" \
