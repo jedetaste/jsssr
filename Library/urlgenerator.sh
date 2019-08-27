@@ -23,7 +23,7 @@ cat >"${Filepath}".url <<EOF
 URL=${URL}
 EOF
 
-if [ -z "$Icon" ]; then
+if [ -z "$3" ]; then
 	echo "No Icon supplied. Skipping Icon Creation"
 else
 	# Download and assign Icon
