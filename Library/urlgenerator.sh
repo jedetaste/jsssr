@@ -7,14 +7,14 @@ readonly URL="${2}"
 readonly Icon="https://raw.githubusercontent.com/jedetaste/james/master/icons/${3}.png"
 
 # Check if fileicon binary is installed 
-if [ ! -s "/usr/local/bin/sponge" ]; then
+if [ ! -s "/usr/local/bin/fileicon" ]; then
 	echo "FileIcon Binary not Found. Exiting" && exit 1
 fi
 
 #Create .url File
 	cat >"${Filepath}" <<EOF
 [InternetShortcut]
-URL="${URL}"
+URL=${URL}
 EOF
 
 # Download and assign Icon
