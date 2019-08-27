@@ -2,7 +2,7 @@
 
 workDir=$(/usr/local/bin/tmpDir)
 
-readonly Filepath="${1}.url"
+readonly Filepath="${1}"
 readonly URL="${2}"
 readonly Icon="https://raw.githubusercontent.com/jedetaste/james/master/icons/${3}.png"
 
@@ -12,12 +12,12 @@ if [ ! -s "/usr/local/bin/fileicon" ]; then
 fi
 
 #Create .url File
-	cat >"${Filepath}" <<EOF
+	cat >"${Filepath}".url <<EOF
 [InternetShortcut]
 URL=${URL}
 EOF
 
-# Download and assign Icon
+	# Download and assign Icon
 	echo "==> Downloading '${Icon}'"
 
 	curl \
@@ -33,4 +33,8 @@ EOF
 					rm -rf "${workDir}" && exit 1
 				fi		
 				
-				
+	# Assingn Icon to File
+	/usr/local/bin/fileicon set "${Filepath}".url ${workDir}/Icon.png"
+	
+	# Remove Working Directory
+	rm -rf "${workDir}"
