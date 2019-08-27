@@ -24,7 +24,7 @@ EOF
 		--show-error --fail --location --remote-time \
 		--output "${workDir}/${3}.png" \
 		--silent \
-		"${url}" \
+		"${Icon}" \
 		
 		 if [ -s "${workDir}/${3}" ]; then
 					echo "==> Download was successful"
