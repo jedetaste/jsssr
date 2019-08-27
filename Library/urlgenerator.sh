@@ -22,11 +22,11 @@ EOF
 
 	curl \
 		--show-error \
-		--output "${workDir}/${3}.png" \
+		--output "${workDir}/Icon.png" \
 		--silent \
 		"${Icon}" \
 		
-		 if [ -s "${workDir}/${3}" ]; then
+		 if [ -s "${workDir}/Icon.png" ]; then
 					echo "==> Download was successful"
 				else
 					echo "==> Download failed, as no appropriate data was found"
