@@ -8,6 +8,7 @@ defaults write "${property_list}" AutomaticCheckEnabled -bool true
 defaults write "${property_list}" AutomaticDownload -bool true
 defaults write "${property_list}" ConfigDataInstall -bool true
 defaults write "${property_list}" CriticalUpdateInstall -bool true
+defaults write "${property_list}" AllowPreReleaseInstallation -bool false
 
 if [[ "${major_os_version}" -ge 14 ]]; then
   defaults write "${property_list}" AutomaticallyInstallMacOSUpdates -bool true
