@@ -1,74 +1,62 @@
 #!/bin/bash
 
-  tmpFolder=$(getconf DARWIN_USER_TEMP_DIR)
-  randString=$(/usr/bin/openssl rand -hex 5)
-  workDir="${tmpFolder}${randString}" && /bin/mkdir -p "${workDir}"
+version="1.5.6-80"
+version_purged=${version//./_}
 
-  version="1.5.6-80"
-  versionDotsToUnderscore="1_5_6-80"
-  url="https://download.hin.ch/download/distribution/install/${version}/HINClient_macos_${versionDotsToUnderscore}.dmg"
+echo "=> Download 'https://download.hin.ch/download/distribution/install/${version}/HINClient_macos_${version_purged}.dmg'"
 
-  echo "==> Download '${url}'"
+curl -s -o "/tmp/HINClient_macos_${version_purged}.dmg" \
+  "https://download.hin.ch/download/distribution/install/${version}/HINClient_macos_${version_purged}.dmg"
 
-  /usr/bin/curl \
-    --show-error \
-    --fail \
-    --location \
-    --remote-time \
-    --output "${workDir}/HINClient_macos_${versionDotsToUnderscore}.dmg" \
-    --silent \
-    "${url}" \
+if [ -s "/tmp/HINClient_macos_${version_purged}.dmg" ]; then
 
-  if [ -s "${workDir}/${fileName}" ]; then
-    echo "==> Download was successful"
-  else
-    echo "==> Download failed, as no appropriate data was found"
-    rm -rf "${workDir}" && exit 1
-  fi
+  mount_point="/tmp/mount_point"
+  mkdir "${mount_point}"
 
-  echo "==> Prepare DMG '${workDir}/HINClient_macos_${versionDotsToUnderscore}.dmg'"
+  dmg="/tmp/HINClient_macos_${version_purged}.dmg"
 
-  mountPoint="${workDir}/mountPoint" && /bin/mkdir "${mountPoint}"
-  dmg="${workDir}/HINClient_macos_${versionDotsToUnderscore}.dmg"
-  tmpMountPointFile=$(mktemp /${workDir}/dmg.XXX) &&
+  tmp_mount_point_file=$(mktemp /tmp/dmg.XXX) &&
+    hdiutil attach -plist -nobrowse -readonly -noidme -mountrandom "${mount_point}" "${dmg}" >"${tmp_mount_point_file}" &&
+    loc=":system-entities:"
 
-  /usr/bin/hdiutil attach -plist -nobrowse -readonly -noidme -mountrandom "${mountPoint}" "${dmg}" > "${tmpMountPointFile}" &&
+  num=$(/usr/libexec/PlistBuddy -c "Print :system-entities:" "${tmp_mount_point_file}" | grep -c Dict)
 
-  loc=":system-entities:"
-  num=$(/usr/libexec/PlistBuddy -c "Print :system-entities:" ${tmpMountPointFile} | /usr/bin/grep -c Dict 2>/dev/null)
-
-  for i in $(seq 0 $((num-1))) ; do
+  for i in $(seq 0 $((num - 1))); do
     loc=":system-entities:${i}:mount-point"
-    locDevEntry=":system-entities:${i}:dev-entry"
-    volumeName="$(/usr/libexec/PlistBuddy -c "Print ${loc}" "${tmpMountPointFile}" 2>/dev/null)"
-    volumeNameDevEntry="$(/usr/libexec/PlistBuddy -c "Print ${locDevEntry}" "${tmpMountPointFile}" 2>/dev/null)"
-    if [ -n "${volumeName}" -a -z "$(echo ${volumeName} | grep 'Does Not Exist')" ]; then
+    loc_dev_entry=":system-entities:${i}:dev-entry"
+    volume_name=$(/usr/libexec/PlistBuddy -c "Print ${loc}" "${tmp_mount_point_file}" 2>/dev/null)
+    volume_name_dev_entry=$(/usr/libexec/PlistBuddy -c "Print ${loc_dev_entry}" "${tmp_mount_point_file}" 2>/dev/null)
+    if [ -n "${volume_name}" ] && [ -d "${volume_name}" ]; then
       break
     fi
   done
 
-  echo "==> Run Installer '${volumeName}/HIN Client Installationsprogramm.app/Contents/MacOS/JavaApplicationStub'"
+  echo "=> Run install script at '${volume_name}/Install HIN Client.app/Contents/Resources/install.sh'"
+  bash "${volume_name}/Install HIN Client.app/Contents/Resources/install.sh"
 
-  "${volumeName}/HIN Client Installationsprogramm.app/Contents/MacOS/JavaApplicationStub" -q -overwrite
-
-  echo "==> Remove Installer"
-
-  if [ ! -z "${volumeName}" ]; then
-    echo "==> Eject volume '${volumeName}'"
-    /usr/sbin/diskutil eject "${volumeName}" > /dev/null 2>&1
-    until [ ! -d "${volumeName}" ]; do
-      echo "==> Remove Dev-Entry for '${volumeName}'"
-      /usr/sbin/diskutil unmount force "${volumeName}" > /dev/null 2>&1
+  if [ -n "${volume_name}" ]; then
+    diskutil eject "${volume_name}" >/dev/null 2>&1
+    until [ ! -d "${volume_name}" ]; do
+      diskutil unmount force "${volume_name}" >/dev/null 2>&1
     done
   fi
 
-  if [ ! -z "${volumeNameDevEntry}" ]; then
-    echo "==> Eject volume '${volumeNameDevEntry}'"
-    /usr/sbin/diskutil eject "${volumeNameDevEntry}" > /dev/null 2>&1
-    until [ ! -d "${volumeNameDevEntry}" ]; do
-      echo "==> Remove Dev-Entry for '${volumeNameDevEntry}'"
-      /usr/sbin/diskutil unmount force "${volumeNameDevEntry}" > /dev/null 2>&1
+  if [ -n "${volume_name_dev_entry}" ]; then
+    diskutil eject "${volume_name_dev_entry}" >/dev/null 2>&1
+    until [ ! -d "${volume_name_dev_entry}" ]; do
+      diskutil unmount force "${volume_name_dev_entry}" >/dev/null 2>&1
     done
   fi
 
-  /bin/rm -rf "${workDir}"
+  if [ -d "${mount_point}" ]; then
+    rm -rf "${mount_point}"
+  fi
+
+  if [ -s "${tmp_mount_point_file}" ]; then
+    rm -rf "${tmp_mount_point_file}"
+  fi
+
+  echo "=> Remove installer at '${dmg}'"
+  rm -f "${dmg}"
+
+fi
