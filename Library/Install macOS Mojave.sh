@@ -21,20 +21,16 @@ if [ "$(sw_vers -productVersion | awk -F. '{print $2}')" -lt 11 ]; then
   fi
 fi
 
-free_disk_space=$(diskutil info / | grep "Free Space" | awk '{print $4}')
+free_disk_space=$(df -Pk . | column -t | sed 1d | awk '{print $4}')
 
-if [ -z "${free_disk_space}" ]; then
-  free_disk_space=$(diskutil info / | grep "Volume Available Space" | awk '{print $4}')
-fi
-
-if [[ ${free_disk_space%.*} -ge 20 ]]; then
-  echo "Disk Check: OK - ${free_disk_space%.*} Free Space Detected"
+if [[ ${free_disk_space} -ge 20000000 ]]; then
+  echo "Disk Check: OK - ${free_disk_space} KB free disk space detected"
 else
   if [[ ${user_language} == en* ]]; then
-    echo "Disk Check: ERROR - ${free_disk_space%.*} Free Space Detected"
+    echo "Disk Check: ERROR - ${free_disk_space} KB free disk space detected"
     "${jamf_helper}" -windowType "utility" -description "The Upgrade to macOS ${installer_name} cannot be installed on a computer with less than 20GB disk space." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -defaultButton "0" -cancelButton "1" && exit 1
   elif [[ ${user_language} == de* ]]; then
-    echo "Disk Check: ERROR - ${free_disk_space%.*} Free Space Detected"
+    echo "Disk Check: ERROR - ${free_disk_space} KB free disk space detected"
     "${jamf_helper}" -windowType "utility" -description "Die Installation von macOS ${installer_name} ist auf einem Computer mit weniger als 20GB freien Festplattenspeicher nicht möglich." -alignDescription "left" -icon "/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/AlertStopIcon.icns" -button1 "Ok" -defaultButton "0" -cancelButton "1" && exit 1
   fi
 fi
