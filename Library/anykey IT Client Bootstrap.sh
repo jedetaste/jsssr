@@ -255,13 +255,6 @@ echo "AutoUpdateDisable=1" >"/Library/Application Support/Macromedia/mms.cfg" 2>
 echo "SilentAutoUpdateEnable=0" >>"/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
 echo "DisableAnalytics=1" >>"/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
 
-# Disable Auto Update Adobe Acrobat Reader DC
-
-if [ -d "/Applications/Adobe Acrobat Reader DC.app/Contents/Plugins/Updater.acroplugin" ]; then
-  echo "==> Disable Auto Update Adobe Acrobat Reader DC"
-  rm -rf "/Applications/Adobe Acrobat Reader DC.app/Contents/Plugins/Updater.acroplugin"
-fi
-
 # Extend threshold for minimal disk space
 
 launchctl stop "com.apple.diskspaced"
