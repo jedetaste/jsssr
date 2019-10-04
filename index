@@ -9,8 +9,6 @@ Disable Notifications Lock Screen.sh
 Disable Single User Mode.sh
 Enable ARD.sh
 Enable Automatic Apple Software Update.sh
-Firefox Bootstrap.sh
-Google Chrome Bootstrap.sh
 Google Chrome Enable Auto Update.py
 Install Adobe AIR.sh
 Install Adobe Creative Cloud.sh
@@ -49,11 +47,9 @@ Uninstall Adobe AIR.sh
 Uninstall Adobe Flash Player.sh
 Wifi Deactivate.sh
 Xcode Setup.sh
-anykey IT ASU.sh
 anykey IT Client Bootstrap.sh
 anykey IT Client Logout.sh
 anykey IT Client Security.sh
-anykey IT Client Standards.sh
 anykey IT Client Tools.sh
 anykey IT anytmp.sh
 anykey IT jamfHelper.sh

@@ -507,13 +507,19 @@ echo "==> Install 'erase-install'"
 
 if [ -s "/usr/local/bin/erase-install" ]; then
   rm -f "/usr/local/bin/erase-install"
+elif [ -L "/usr/local/bin/erase-install" ]; then
+  unlink "/usr/local/bin/erase-install"
 fi
 
-curl -so "/usr/local/bin/erase-install" "https://raw.githubusercontent.com/grahampugh/erase-install/master/erase-install.sh"
+erase_install_version="0.8.0"
 
-chown root:wheel "/usr/local/bin/erase-install"
-chmod 775 "/usr/local/bin/erase-install"
-chmod +x "/usr/local/bin/erase-install"
+curl -s -L -o "/tmp/erase-install-${erase_install_version}.zip" "https://github.com/grahampugh/erase-install/releases/download/v${erase_install_version}/erase-install-${erase_install_version}.zip"
+
+ditto -x -k "/tmp/erase-install-${erase_install_version}.zip" "/tmp/"
+mv "/tmp/erase-install-${erase_install_version}/erase-install.sh" "/usr/local/bin/erase-install" && chmod +x "/usr/local/bin/erase-install"
+
+rm -rf "/tmp/erase-install-${erase_install_version}"
+rm -f "/tmp/erase-install-${erase_install_version}.zip"
 
 # fileicon
 
