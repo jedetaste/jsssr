@@ -535,6 +535,20 @@ chown root:wheel "/usr/local/bin/fileicon"
 chmod 775 "/usr/local/bin/fileicon"
 chmod +x "/usr/local/bin/fileicon"
 
+# sketchup_serializer
+
+echo "==> Install 'sketchup_serializer'"
+
+if [ -s "/usr/local/bin/sketchup_serializer" ]; then
+  rm -f "/usr/local/bin/sketchup_serializer"
+fi
+
+curl -so "/usr/local/bin/sketchup_serializer" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/sketchup_serializer"
+
+chown root:wheel "/usr/local/bin/sketchup_serializer"
+chmod 775 "/usr/local/bin/sketchup_serializer"
+chmod +x "/usr/local/bin/sketchup_serializer"
+
 # jpscheck
 
 echo "==> Install 'jpscheck'"
