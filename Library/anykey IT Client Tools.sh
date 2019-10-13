@@ -235,20 +235,6 @@ chown root:wheel "/usr/local/bin/Remove2011"
 chmod 775 "/usr/local/bin/Remove2011"
 chmod +x "/usr/local/bin/Remove2011"
 
-# adobe_prtk
-
-echo "==> Install 'adobe_prtk'"
-
-if [ -s "/usr/local/bin/adobe_prtk" ]; then
-  rm -f "/usr/local/bin/adobe_prtk"
-fi
-
-curl -so "/usr/local/bin/adobe_prtk" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/adobe_prtk"
-
-chown root:wheel "/usr/local/bin/adobe_prtk"
-chmod 775 "/usr/local/bin/adobe_prtk"
-chmod +x "/usr/local/bin/adobe_prtk"
-
 # AppStoreXtractor
 
 echo "==> Install 'AppStoreXtractor'"
