@@ -30,6 +30,24 @@ install_wordle() {
   echo "=> Running installer at '${volume_name}/Wordle Installer.app/Contents/MacOS/JavaApplicationStub'"
   "${volume_name}/Wordle Installer.app/Contents/MacOS/JavaApplicationStub" -q -c -overwrite
 
+  echo "=> Reset ownership and permissions on bundle '${dir}/${bundle}'"
+  chmod -RN "/Applications/Wordle.app"
+
+  echo "=> Remove flags and locking on bundle '${dir}/${bundle}'"
+  chflags -R nouchg "/Applications/Wordle.app"
+
+  echo "=> Remove bundle '${dir}/${bundle}' from gatekeeper quarantine"
+  xattr -r -d -s com.apple.quarantine "/Applications/Wordle.app"
+
+  echo "=> Whitelist bundle '${dir}/${bundle}' for execution in the security assessment policy subsystem"
+  spctl --add "/Applications/Wordle.app"
+
+  echo "=> Set ownership on bundle '${dir}/${bundle}'"
+  chown -R root:wheel "/Applications/Wordle.app"
+
+  echo "=> Set permissions on bundle '${dir}/${bundle}'"
+  chmod -R 755 "/Applications/Wordle.app"
+
   echo "=> Remove Installer"
 
   if [ -n "${volume_name}" ]; then
