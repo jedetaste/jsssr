@@ -159,12 +159,14 @@ if [ "${minor}" -ge 7 ]; then
   for user_template in "/System/Library/User Template"/*; do
     defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeCloudSetup -bool true
     defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" GestureMovieSeen none
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenCloudProductVersion "${major}.${minor}.${revision}"
+    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenCloudProductVersion "${major}.${minor}"
     defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenBuddyBuildVersion "$(sw_vers -buildVersion)"
     defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeePrivacy -bool true
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeetrueTonePrivacy -bool true
+    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeTrueTonePrivacy -bool true
     defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeTouchIDSetup -bool true
     defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeSiriSetup -bool true
+    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeActivationLock -bool true
+    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeScreenTime -bool true
   done
 
   for user_home in /Users/*; do
@@ -173,12 +175,14 @@ if [ "${minor}" -ge 7 ]; then
       if [ -d "${user_home}"/Library/Preferences ]; then
         defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeCloudSetup -bool true
         defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" GestureMovieSeen none
-        defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenCloudProductVersion "${major}.${minor}.${revision}"
+        defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenCloudProductVersion "${major}.${minor}"
         defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenBuddyBuildVersion "$(sw_vers -buildVersion)"
         defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeePrivacy -bool true
-        defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeetrueTonePrivacy -bool true
+        defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeTrueTonePrivacy -bool true
         defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeTouchIDSetup -bool true
         defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeSiriSetup -bool true
+        defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeActivationLock -bool true
+        defaults write "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeScreenTime -bool true
         chown "${user_id}" "${user_home}/Library/Preferences/com.apple.SetupAssistant.plist"
       fi
     fi
