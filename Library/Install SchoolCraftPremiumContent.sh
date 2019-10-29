@@ -1,7 +1,7 @@
 #!/bin/bash
 
 version="2019.3.3.17"
-download="https://www.hidrive.strato.com/wget/fsAKDz5r"
+download="http://develop.getschoolcraft.com/download/2019.3/SchoolCraftPremiumContent.pkg"
 
 if [ -s "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle" ]; then
   version_installed=$(cat <"/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle/version.txt" | tr -d '[:space:]')
