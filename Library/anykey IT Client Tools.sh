@@ -42,6 +42,18 @@ chown root:wheel "/usr/local/bin/dockutil"
 chmod 775 "/usr/local/bin/dockutil"
 chmod +x "/usr/local/bin/dockutil"
 
+# docklib
+
+echo "==> Install 'docklib'"
+
+docklib_version="1.0.4"
+
+curl -s -L -o "/tmp/docklib-${docklib_version}.pkg" "https://github.com/homebysix/docklib/releases/download/v${docklib_version}/docklib-${docklib_version}.pkg"
+
+installer -pkg "/tmp/docklib-${docklib_version}.pkg" -target / >/dev/null 2>&1
+
+rm -rf "/tmp/docklib-${docklib_version}.pkg"
+
 # currentuser
 
 echo "==> Install 'currentuser'"
