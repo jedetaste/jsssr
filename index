@@ -35,6 +35,7 @@ JAMF Change Password.sh
 JAMF Create Account.sh
 Libre Office Language Pack DE.sh
 Make Dock Non-Immutable.sh
+Microsoft Office License Removal.sh
 Oracle Java Security Exception.sh
 Purge Legacy Apple Apps.sh
 Purge Unmanaged Configuration Profiles.sh
