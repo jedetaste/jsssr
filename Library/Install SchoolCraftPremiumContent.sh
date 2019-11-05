@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="2019.3.3.17"
+version="2019.3.4.20"
 download="http://develop.getschoolcraft.com/download/2019.3/SchoolCraftPremiumContent.pkg"
 
 if [ -s "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle" ]; then
