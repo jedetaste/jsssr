@@ -18,15 +18,13 @@ fi
 
 echo "==> Install 'appleLoops'"
 
-if [ -s "/usr/local/bin/appleLoops" ]; then
-  rm -f "/usr/local/bin/appleLoops"
-fi
+appleLoops_version="3.0.9"
 
-curl -so "/usr/local/bin/appleLoops" "https://raw.githubusercontent.com/carlashley/appleLoops/master/appleLoops.py"
+curl -s -L -o "/tmp/appleloops-${appleLoops_version}.pkg" "https://github.com/carlashley/appleloops/releases/download/v${appleLoops_version}/appleloops-${appleLoops_version}.pkg"
 
-chown root:wheel "/usr/local/bin/appleLoops"
-chmod 775 "/usr/local/bin/appleLoops"
-chmod +x "/usr/local/bin/appleLoops"
+installer -pkg "/tmp/appleloops-${appleLoops_version}.pkg" -target / >/dev/null 2>&1
+
+rm -rf "/tmp/appleloops-${appleLoops_version}.pkg"
 
 # dockutil
 
