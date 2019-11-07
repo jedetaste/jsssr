@@ -182,20 +182,65 @@ if [ ! -d "/usr/local/bin" ]; then
   mkdir -p "/usr/local/bin"
 fi
 
-aky_binary=(
+aky_binaries=(
   "aky"
   "rg"
   "csc"
-  "jq"
-  "tmpDir"
 )
 
-for ((i = 0; i < "${#aky_binary[@]}"; i++)); do
-  /bin/rm -f "/usr/local/bin/${aky_binary[$i]}"
-  curl -so "/usr/local/bin/${aky_binary[$i]}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aky-src/${aky_binary[$i]}"
-  chown root:wheel "/usr/local/bin/${aky_binary[$i]}"
-  chmod +x "/usr/local/bin/${aky_binary[$i]}"
+for aky_binary in "${aky_binaries[@]}"; do
+  rm -f "/usr/local/bin/${aky_binary}"
+  curl -so "/usr/local/bin/${aky_binary}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aky-src/${aky_binary}"
+  chown root:wheel "/usr/local/bin/${aky_binary}"
+  chmod +x "/usr/local/bin/${aky_binary}"
 done
+
+# jq
+
+echo "==> Install 'jq'"
+
+release="1.6"
+
+curl -s -L -o "/usr/local/bin/jq" "https://github.com/stedolan/jq/releases/download/jq-${release}/jq-osx-amd64"
+
+chmod +x "/usr/local/bin/jq"
+
+# aria2c
+
+echo "==> Install 'aria2c'"
+
+release="1.35.0"
+
+curl -s -L -o "/tmp/aria2-${release}-osx-darwin.tar.bz2" "https://github.com/aria2/aria2/releases/download/release-${release}/aria2-${release}-osx-darwin.tar.bz2"
+
+cd "/tmp/" && tar -xjvf "aria2-${release}-osx-darwin.tar.bz2" >/dev/null 2>&1
+
+mkdir -p "/usr/local/aria2/bin/"
+mv "/private/tmp/aria2-${release}/bin/aria2c" "/usr/local/aria2/bin/aria2c"
+mv "/private/tmp/aria2-${release}/share" "/usr/local/aria2/share"
+
+echo "/usr/local/aria2/share/doc/man" >"/etc/manpaths.d/aria2"
+echo "/usr/local/aria2/bin" >"/etc/paths.d/aria2c"
+
+rm -rf "/tmp/aria2-${release}-osx-darwin.tar.bz2"
+rm -rf "/private/tmp/aria2-${release}"
+
+[ -s "/usr/local/bin/aria2" ] && rm -f "/usr/local/bin/aria2"
+[ -s "/usr/local/bin/openssl" ] && rm -f "/usr/local/bin/openssl"
+
+# tmpDir
+
+echo "==> Install 'tmpDir'"
+
+if [ -s "/usr/local/bin/tmpDir" ]; then
+  rm -f "/usr/local/bin/tmpDir"
+fi
+
+curl -so "/usr/local/bin/tmpDir" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/tmpDir"
+
+chown root:wheel "/usr/local/bin/tmpDir"
+chmod 775 "/usr/local/bin/tmpDir"
+chmod +x "/usr/local/bin/tmpDir"
 
 # Remove2011
 
