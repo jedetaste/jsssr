@@ -174,39 +174,6 @@ chown root:wheel "/usr/local/bin/blueutil"
 chmod 775 "/usr/local/bin/blueutil"
 chmod +x "/usr/local/bin/blueutil"
 
-# Purge legacy aky
-
-echo "==> Purge legacy 'aky'"
-
-if [ -d "/usr/local/aky/" ]; then
-  rm -rf "/usr/local/aky/"
-fi
-
-aky_binary=(
-  "aky"
-  "aria2c@el_capitan"
-  "aria2c@high_sierra"
-  "aria2c@mojave"
-  "aria2c@sierra"
-  "download-helper"
-  "install-helper"
-  "jq"
-  "mas-helper"
-  "notification-helper"
-  "rg"
-  "versioning-helper"
-)
-
-for ((i = 0; i < "${#aky_binary[@]}"; i++)); do
-
-  [ -L "/usr/local/bin/${aky_binary[$i]}" ] && unlink "/usr/local/bin/${aky_binary[$i]}"
-
-  if [ -s "/usr/local/bin/${aky_binary[$i]}" ]; then
-    rm -f "/usr/local/bin/${aky_binary[$i]}"
-  fi
-
-done
-
 # Install aky
 
 echo "==> Install 'aky'"
@@ -220,7 +187,6 @@ aky_binary=(
   "rg"
   "csc"
   "jq"
-  "aria2c"
   "tmpDir"
 )
 
