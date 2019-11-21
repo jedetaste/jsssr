@@ -1,15 +1,12 @@
 #!/bin/bash
 
-current_user=$(scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }')
+current_user=$(scutil <<<"show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }')
 user_language=$(su -l "${current_user}" -c "/usr/libexec/PlistBuddy -c 'print AppleLanguages:0' ~/Library/Preferences/.GlobalPreferences.plist")
 
 jamf_helper="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
-jamf_helper_pid=$!
 
-installer="/Applications/Install macOS Catalina.app"
 installer_name="Catalina"
 installer_version="10.15"
-installer_aky_recipe="installmacoscatalina"
 
 if [ "$(sw_vers -productVersion | awk -F. '{print $2}')" -lt 11 ]; then
   if [[ ${user_language} == en* ]]; then
@@ -36,36 +33,15 @@ else
 fi
 
 if [ -s "/usr/local/bin/erase-install" ]; then
-  /usr/local/bin/erase-install --move --os=${installer_version}
+
+  echo "Download and Install 'First_Boot_Recon.pkg'"
+  curl -s -o "/tmp/First_Boot_Recon.pkg" "https://cdn-clients.anykeyit.ch/Static/First_Boot_Recon.pkg"
+
+  /usr/local/bin/erase-install \
+    --reinstall \
+    --os=${installer_version} \
+    --extras=/tmp/First_Boot_Recon.pkg
+
 else
   echo "Binary 'erase-install' not found." && exit 1
-fi
-
-if [ ! -s "${installer}" ]; then
-  /usr/local/bin/aky "${installer_aky_recipe}"
-fi
-
-finder_running() {
-  pgrep -q Finder && return 0 || return 1
-}
-
-if [ -s "${installer}" ]; then
-  if [ -n "${current_user}" ] && finder_running; then
-
-    if [[ ${user_language} == en* ]]; then
-      "${jamf_helper}" -windowType fs -title "macOS ${installer_name} Upgrade" -alignHeading center -heading "Please wait as we prepare your computer for macOS ${installer_name}" -alignDescription center -description "This process will take approximately 5-10 minutes. Once completed your computer will reboot and begin the upgrade." -icon "${installer}/Contents/Resources/InstallAssistant.icns" &
-    elif [[ ${user_language} == de* ]]; then
-      "${jamf_helper}" -windowType fs -title "macOS ${installer_name} Upgrade " -alignHeading center -heading "Bitte warten, das Upgrade macOS ${installer_name} wird ausgeführt" -alignDescription center -description "Dieser Prozess benötigt ungefähr 5-10 Minuten. Der Mac startet anschliessend neu und beginnt mit dem Update." -icon "${installer}/Contents/Resources/InstallAssistant.icns" &
-    fi
-
-    echo "Download and Install 'First_Boot_Recon.pkg'"
-    curl -s -o "/tmp/First_Boot_Recon.pkg" "https://cdn-clients.anykeyit.ch/Static/First_Boot_Recon.pkg"
-
-    "${installer}/Contents/Resources/startosinstall" --agreetolicense --nointeraction --installpackage "/tmp/First_Boot_Recon.pkg" --pidtosignal "${jamf_helper_pid}" &
-
-  else
-    echo "User is not logged in since the '${installer}/Contents/Resources/startosinstall' binary requires a user to be logged in." && exit 1
-  fi
-else
-  echo "Installer '${installer}' not found." && exit 1
 fi
