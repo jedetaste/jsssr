@@ -132,7 +132,7 @@ display_act_msg() {
   # Create a jamfHelper script that will be called by a LaunchDaemon.
   cat <<EOF >"/private/tmp/$HELPER_SCRIPT"
 #!/bin/bash
-"$JAMFHELPER" -windowType "utility" -windowPosition "ur" -icon "$LOGO" -title "$MSG_ACT_HEADING" -description "$MSG_ACT"
+"$JAMFHELPER" -windowType "utility" -icon "$LOGO" -title "$MSG_ACT_HEADING" -description "$MSG_ACT"
 EOF
   chmod +x "/private/tmp/$HELPER_SCRIPT"
 
@@ -174,7 +174,7 @@ EOF
 run_updates() {
 
   echo "Running $INSTALL_WHICH system updates..."
-  "$JAMFHELPER" -windowType "hud" -windowPosition "ur" -icon "$LOGO" -title "$MSG_UPDATING_HEADING" -description "$MSG_UPDATING" -lockHUD &
+  "$JAMFHELPER" -windowType "hud" -icon "$LOGO" -title "$MSG_UPDATING_HEADING" -description "$MSG_UPDATING" -lockHUD &
   UPDATE_OUTPUT_CAPTURE="$(softwareupdate --install --$INSTALL_WHICH --no-scan 2>&1)"
   echo "Finished running updates."
   killall jamfHelper 2>/dev/null
@@ -404,7 +404,7 @@ if ((DEFER_TIME_LEFT > 0)); then
 
   # Show the install/defer prompt.
   echo "Prompting to install updates now or defer..."
-  PROMPT=$("$JAMFHELPER" -windowType "utility" -windowPosition "ur" -icon "$LOGO" -title "$MSG_ACT_OR_DEFER_HEADING" -description "$MSG_ACT_OR_DEFER" -button1 "Run Updates" -button2 "Defer" -defaultButton 2 -timeout 3600 -startlaunchd 2>/dev/null)
+  PROMPT=$("$JAMFHELPER" -windowType "utility" -icon "$LOGO" -title "$MSG_ACT_OR_DEFER_HEADING" -description "$MSG_ACT_OR_DEFER" -button1 "Run Updates" -button2 "Defer" -defaultButton 2 -timeout 3600 -startlaunchd 2>/dev/null)
   JAMFHELPER_PID=$!
 
   # Make a note of the amount of time the prompt was shown onscreen.
