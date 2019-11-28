@@ -4,7 +4,7 @@
   randString=$(/usr/bin/openssl rand -hex 5)
   workDir="${tmpFolder}${randString}" && /bin/mkdir -p "${workDir}"
 
-  version="2018-09-26_154056"
+  version="2019-10-15_125635"
   url="https://download.hin.ch/video/mac/HIN-Video-Installer_${version}.dmg"
 
   echo "==> Download '${url}'"
