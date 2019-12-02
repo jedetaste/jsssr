@@ -45,16 +45,24 @@ if [ -s "/usr/local/bin/erase-install" ]; then
   curl -s -o "/tmp/First_Boot_Recon.pkg" "https://cdn-clients.anykeyit.ch/Static/First_Boot_Recon.pkg"
 
   if [ "${os_minor}" -lt 13 ]; then
+
+    softwareupdate --reset-ignored
+
     /usr/local/bin/erase-install \
       --reinstall \
       --os=${installer_version} \
       --extras=/tmp/First_Boot_Recon.pkg \
       --catalogurl=https://swscan.apple.com/content/catalogs/others/index-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog
+
   else
+
+    softwareupdate --reset-ignored
+
     /usr/local/bin/erase-install \
       --reinstall \
       --os=${installer_version} \
       --extras=/tmp/First_Boot_Recon.pkg
+      
   fi
 
 else
