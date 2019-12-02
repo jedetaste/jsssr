@@ -62,7 +62,7 @@ if [ -s "/usr/local/bin/erase-install" ]; then
       --reinstall \
       --os=${installer_version} \
       --extras=/tmp/First_Boot_Recon.pkg
-      
+
   fi
 
 else
