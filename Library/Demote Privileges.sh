@@ -2,8 +2,7 @@
 
 # Install Privileges.app
 
-/usr/local/bin/aky "privileges" && /usr/local/bin/jsssr "Create Privileges Helper.sh"
-
+/usr/local/bin/aky "privileges" && /usr/local/bin/jsssr "Create Privileges Helper.sh" && sleep 5
 # Promote privileges for the current user
 
 su -l "$(/usr/local/bin/currentuser)" -c "/Applications/Privileges.app/Contents/Resources/PrivilegesCLI --add"
