@@ -272,20 +272,15 @@ chmod +x "/usr/local/bin/AppStoreXtractor"
 
 # outset
 
-if [ -d "/usr/local/outset" ]; then
+echo "==> Install 'outset'"
 
-  echo "==> Remove 'outset'"
+outset_version="2.0.6"
 
-  rm -rf "/usr/local/outset"
+curl -s -L -o "/tmp/outset-${outset_version}.pkg" "https://github.com/chilcote/outset/releases/download/v${outset_version}/outset-${outset_version}.pkg"
 
-  rm -rf "/Library/LaunchDaemons/com.github.outset.boot.plist"
-  rm -rf "/Library/LaunchDaemons/com.github.outset.cleanup.plist"
-  rm -rf "/Library/LaunchDaemons/com.github.outset.login-privileged.plist"
+installer -pkg "/tmp/outset-${outset_version}.pkg" -target / > /dev/null 2>&1
 
-  rm -rf "/Library/LaunchAgents/com.github.outset.on-demand.plist"
-  rm -rf "/Library/LaunchAgents/com.github.outset.login.plist"
-
-fi
+rm -rf "/tmp/outset-${outset_version}.pkg"
 
 # offset
 
