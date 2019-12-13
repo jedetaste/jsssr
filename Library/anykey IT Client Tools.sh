@@ -553,22 +553,7 @@ chmod +x "/usr/local/bin/sketchup_serializer"
 
 # jpscheck
 
-echo "==> Install 'jpscheck'"
+echo "==> Remove 'jpscheck'"
 
-if [ -s "/Library/LaunchDaemons/ch.anykey.jpscheck.plist" ]; then
-  launchctl unload -w "/Library/LaunchDaemons/ch.anykey.jpscheck.plist"
-  rm -rf "/Library/LaunchDaemons/ch.anykey.jpscheck.plist"
-fi
-
-/usr/local/bin/jamf scheduledTask \
-  -command "/usr/local/bin/jpscheck" \
-  -name "jpscheck" \
-  -user "root" \
-  -runAtLoad "true" \
-  -minute "*/30/"
-
-curl -so "/usr/local/bin/jpscheck" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jpscheck"
-
-chown root:wheel "/usr/local/bin/jpscheck"
-chmod 775 "/usr/local/bin/jpscheck"
-chmod +x "/usr/local/bin/jpscheck"
+[ -s "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist" ] && rm -f "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist"
+[ -s "/usr/local/bin/jpscheck" ] && rm -f "/usr/local/bin/jpscheck"
