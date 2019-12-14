@@ -18,13 +18,13 @@ fi
 
 echo "==> Install 'appleLoops'"
 
-appleLoops_version="3.0.9"
+version="3.1.2"
 
-curl -s -L -o "/tmp/appleloops-${appleLoops_version}.pkg" "https://github.com/carlashley/appleloops/releases/download/v${appleLoops_version}/appleloops-${appleLoops_version}.pkg"
+curl -s -L -o "/tmp/appleloops-${version}.pkg" "https://github.com/carlashley/appleloops/releases/download/v${version}/appleloops-${version}.pkg"
 
-installer -pkg "/tmp/appleloops-${appleLoops_version}.pkg" -target / >/dev/null 2>&1
+installer -pkg "/tmp/appleloops-${version}.pkg" -target / >/dev/null 2>&1
 
-rm -rf "/tmp/appleloops-${appleLoops_version}.pkg"
+rm -rf "/tmp/appleloops-${version}.pkg"
 
 # dockutil
 
@@ -44,13 +44,13 @@ chmod +x "/usr/local/bin/dockutil"
 
 echo "==> Install 'docklib'"
 
-docklib_version="1.0.4"
+version="1.0.4"
 
-curl -s -L -o "/tmp/docklib-${docklib_version}.pkg" "https://github.com/homebysix/docklib/releases/download/v${docklib_version}/docklib-${docklib_version}.pkg"
+curl -s -L -o "/tmp/docklib-${version}.pkg" "https://github.com/homebysix/docklib/releases/download/v${version}/docklib-${version}.pkg"
 
-installer -pkg "/tmp/docklib-${docklib_version}.pkg" -target / >/dev/null 2>&1
+installer -pkg "/tmp/docklib-${version}.pkg" -target / >/dev/null 2>&1
 
-rm -rf "/tmp/docklib-${docklib_version}.pkg"
+rm -rf "/tmp/docklib-${version}.pkg"
 
 # currentuser
 
@@ -126,25 +126,25 @@ chmod +x "/usr/local/bin/urlgenerator"
 
 echo "==> Install 'mysides'"
 
-mysidesVersion="1.0.1"
+version="1.0.1"
 
-tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
+curl -s -L -o "/tmp/mysides-${version}.pkg" "https://github.com/mosen/mysides/releases/download/v${version}/mysides-${version}.pkg"
 
-cd "${tmpDir}" && curl -s -O -J -L "https://github.com/mosen/mysides/releases/download/v${mysidesVersion}/mysides-${mysidesVersion}.pkg"
+installer -pkg "/tmp/mysides-${version}.pkg" -target / >/dev/null 2>&1
 
-installer -pkg "${tmpDir}/mysides-${mysidesVersion}.pkg" -target / >/dev/null 2>&1 && rm -rf "${tmpDir}"
+rm -rf "/tmp/mysides-${version}.pkg"
 
 # desktoppr
 
 echo "==> Install 'desktoppr'"
 
-desktopprVersion="0.1"
+version="0.2"
 
-tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
+curl -s -L -o "/tmp/desktoppr-${version}.pkg" "https://github.com/scriptingosx/desktoppr/releases/download/v${version}/desktoppr-${version}.pkg"
 
-cd "${tmpDir}" && curl -s -O -J -L "https://github.com/scriptingosx/desktoppr/releases/download/v${desktopprVersion}/desktoppr-${desktopprVersion}.pkg"
+installer -pkg "/tmp/desktoppr-${version}.pkg" -target / >/dev/null 2>&1
 
-installer -pkg "${tmpDir}/desktoppr-${desktopprVersion}.pkg" -target / >/dev/null 2>&1 && rm -rf "${tmpDir}"
+rm -rf "/tmp/desktoppr-${version}.pkg"
 
 # pkgfixer
 
@@ -199,6 +199,10 @@ done
 
 echo "==> Install 'jq'"
 
+if [ -s "/usr/local/bin/jq" ]; then
+  rm -f "/usr/local/bin/jq"
+fi
+
 release="1.6"
 
 curl -s -L -o "/usr/local/bin/jq" "https://github.com/stedolan/jq/releases/download/jq-${release}/jq-osx-amd64"
@@ -209,21 +213,21 @@ chmod +x "/usr/local/bin/jq"
 
 echo "==> Install 'aria2c'"
 
-release="1.35.0"
+version="1.35.0"
 
-curl -s -L -o "/tmp/aria2-${release}-osx-darwin.tar.bz2" "https://github.com/aria2/aria2/releases/download/release-${release}/aria2-${release}-osx-darwin.tar.bz2"
+curl -s -L -o "/tmp/aria2-${version}-osx-darwin.tar.bz2" "https://github.com/aria2/aria2/releases/download/release-${version}/aria2-${version}-osx-darwin.tar.bz2"
 
-cd "/tmp/" && tar -xjvf "aria2-${release}-osx-darwin.tar.bz2" >/dev/null 2>&1
+cd "/tmp/" && tar -xjvf "aria2-${version}-osx-darwin.tar.bz2" >/dev/null 2>&1
 
 mkdir -p "/usr/local/aria2/bin/"
-mv "/private/tmp/aria2-${release}/bin/aria2c" "/usr/local/aria2/bin/aria2c"
-mv "/private/tmp/aria2-${release}/share" "/usr/local/aria2/share"
+mv "/private/tmp/aria2-${version}/bin/aria2c" "/usr/local/aria2/bin/aria2c"
+mv "/private/tmp/aria2-${version}/share" "/usr/local/aria2/share"
 
 echo "/usr/local/aria2/share/doc/man" >"/etc/manpaths.d/aria2"
 echo "/usr/local/aria2/bin" >"/etc/paths.d/aria2c"
 
-rm -rf "/tmp/aria2-${release}-osx-darwin.tar.bz2"
-rm -rf "/private/tmp/aria2-${release}"
+rm -rf "/tmp/aria2-${version}-osx-darwin.tar.bz2"
+rm -rf "/private/tmp/aria2-${version}"
 
 [ -s "/usr/local/bin/aria2" ] && rm -f "/usr/local/bin/aria2"
 [ -s "/usr/local/bin/openssl" ] && rm -f "/usr/local/bin/openssl"
@@ -274,13 +278,13 @@ chmod +x "/usr/local/bin/AppStoreXtractor"
 
 echo "==> Install 'outset'"
 
-outset_version="2.0.6"
+version="2.0.6"
 
-curl -s -L -o "/tmp/outset-${outset_version}.pkg" "https://github.com/chilcote/outset/releases/download/v${outset_version}/outset-${outset_version}.pkg"
+curl -s -L -o "/tmp/outset-${version}.pkg" "https://github.com/chilcote/outset/releases/download/v${version}/outset-${version}.pkg"
 
-installer -pkg "/tmp/outset-${outset_version}.pkg" -target / > /dev/null 2>&1
+installer -pkg "/tmp/outset-${version}.pkg" -target / >/dev/null 2>&1
 
-rm -rf "/tmp/outset-${outset_version}.pkg"
+rm -rf "/tmp/outset-${version}.pkg"
 
 # offset
 
@@ -290,7 +294,7 @@ if [ -d "/usr/local/offset" ]; then
 
   rm -rf "/usr/local/offset"
 
-  rm -rf "/Library/LaunchAgents/com.github.offset.logout.plist"
+  rm -f "/Library/LaunchAgents/com.github.offset.logout.plist"
 
 fi
 
@@ -356,13 +360,13 @@ if [ "${minor}" -ge 13 ]; then
 
   echo "==> Install 'mas'"
 
-  masVersion="1.6.3"
+  version="1.6.3"
 
-  tmpFolder=$(getconf DARWIN_USER_CACHE_DIR) && randString=$(openssl rand -hex 5) && tmpDir="${tmpFolder}${randString}" && mkdir -p "${tmpDir}"
+  curl -s -L -o "/tmp/mas-${version}.pkg" "https://github.com/mas-cli/mas/releases/download/v${version}/mas.pkg"
 
-  cd "${tmpDir}" && curl -s -O -J -L "https://github.com/mas-cli/mas/releases/download/v${masVersion}/mas.pkg"
+  installer -pkg "/tmp/mas.pkg" -target / >/dev/null 2>&1
 
-  installer -pkg "${tmpDir}/mas.pkg" -target / >/dev/null 2>&1 && rm -rf "${tmpDir}"
+  rm -rf "/tmp/mas.pkg"
 
 fi
 
@@ -382,49 +386,29 @@ chmod +x "/usr/local/bin/xmlstarlet"
 
 # reattach-to-user-namespace
 
-echo "==> Install 'reattach-to-user-namespace'"
-
 if [ -s "/usr/local/bin/reattach-to-user-namespace" ]; then
+  echo "==> Remove 'reattach-to-user-namespace'"
   rm -f "/usr/local/bin/reattach-to-user-namespace"
 fi
 
-curl -so "/usr/local/bin/reattach-to-user-namespace" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/reattach-to-user-namespace"
-
-chown root:wheel "/usr/local/bin/reattach-to-user-namespace"
-chmod 775 "/usr/local/bin/reattach-to-user-namespace"
-chmod +x "/usr/local/bin/reattach-to-user-namespace"
-
 # RegMAU
 
-echo "==> Install 'RegMAU'"
-
 if [ -s "/usr/local/bin/RegMAU" ]; then
+  echo "==> Remove 'RegMAU'"
   rm -f "/usr/local/bin/RegMAU"
 fi
 
-curl -so "/usr/local/bin/RegMAU" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/RegMAU"
-
-chown root:wheel "/usr/local/bin/RegMAU"
-chmod 775 "/usr/local/bin/RegMAU"
-chmod +x "/usr/local/bin/RegMAU"
-
 # MSUpdateHelper
 
-if [ -s "/usr/local/bin/MSUpdateHelper2019" ]; then
-  rm -f "/usr/local/bin/MSUpdateHelper2019"
-fi
-
-echo "==> Install 'MSUpdateHelper'"
-
 if [ -s "/usr/local/bin/MSUpdateHelper" ]; then
+  echo "==> Remove 'MSUpdateHelper'"
   rm -f "/usr/local/bin/MSUpdateHelper"
 fi
 
-curl -so "/usr/local/bin/MSUpdateHelper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/MSUpdateHelper"
-
-chown root:wheel "/usr/local/bin/MSUpdateHelper"
-chmod 775 "/usr/local/bin/MSUpdateHelper"
-chmod +x "/usr/local/bin/MSUpdateHelper"
+if [ -s "/usr/local/bin/MSUpdateHelper2019" ]; then
+  echo "==> Remove 'MSUpdateHelper2019'"
+  rm -f "/usr/local/bin/MSUpdateHelper2019"
+fi
 
 # alerter
 
@@ -442,17 +426,10 @@ chmod +x "/usr/local/bin/alerter"
 
 # PrinterMapper
 
-echo "==> Install 'PrinterMapper'"
-
 if [ -s "/usr/local/bin/PrinterMapper" ]; then
+  echo "==> Remove 'PrinterMapper'"
   rm -f "/usr/local/bin/PrinterMapper"
 fi
-
-curl -so "/usr/local/bin/PrinterMapper" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/PrinterMapper"
-
-chown root:wheel "/usr/local/bin/PrinterMapper"
-chmod 775 "/usr/local/bin/PrinterMapper"
-chmod +x "/usr/local/bin/PrinterMapper"
 
 # lohelper
 
@@ -482,13 +459,6 @@ chown root:wheel "/usr/local/bin/randomizer"
 chmod 775 "/usr/local/bin/randomizer"
 chmod +x "/usr/local/bin/randomizer"
 
-# installinstallmacos
-
-if [ -s "/usr/local/bin/installinstallmacos" ]; then
-  echo "==> Uninstall 'installinstallmacos'"
-  rm -f "/usr/local/bin/installinstallmacos"
-fi
-
 # assimilateownership
 
 echo "==> Install 'assimilateownership'"
@@ -513,15 +483,15 @@ elif [ -L "/usr/local/bin/erase-install" ]; then
   unlink "/usr/local/bin/erase-install"
 fi
 
-erase_install_version="0.10.1"
+version="0.10.1"
 
-curl -s -L -o "/tmp/erase-install-${erase_install_version}.zip" "https://github.com/grahampugh/erase-install/releases/download/v${erase_install_version}/erase-install-${erase_install_version}.zip"
+curl -s -L -o "/tmp/erase-install-${version}.zip" "https://github.com/grahampugh/erase-install/releases/download/v${version}/erase-install-${version}.zip"
 
-ditto -x -k "/tmp/erase-install-${erase_install_version}.zip" "/tmp/"
-mv "/tmp/erase-install-${erase_install_version}/erase-install.sh" "/usr/local/bin/erase-install" && chmod +x "/usr/local/bin/erase-install"
+ditto -x -k "/tmp/erase-install-${version}.zip" "/tmp/"
+mv "/tmp/erase-install-${version}/erase-install.sh" "/usr/local/bin/erase-install" && chmod +x "/usr/local/bin/erase-install"
 
-rm -rf "/tmp/erase-install-${erase_install_version}"
-rm -f "/tmp/erase-install-${erase_install_version}.zip"
+rm -rf "/tmp/erase-install-${version}"
+rm -f "/tmp/erase-install-${version}.zip"
 
 # fileicon
 
@@ -553,7 +523,5 @@ chmod +x "/usr/local/bin/sketchup_serializer"
 
 # jpscheck
 
-echo "==> Remove 'jpscheck'"
-
-[ -s "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist" ] && rm -f "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist"
-[ -s "/usr/local/bin/jpscheck" ] && rm -f "/usr/local/bin/jpscheck"
+[ -s "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist" ] && echo "==> Remove 'jpscheck'" && rm -f "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist"
+[ -s "/usr/local/bin/jpscheck" ] && echo "==> Remove 'jpscheck'" && rm -f "/usr/local/bin/jpscheck"
