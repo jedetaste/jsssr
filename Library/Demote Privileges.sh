@@ -13,7 +13,7 @@ su -l "$(/usr/local/bin/currentuser)" -c "/Applications/Privileges.app/Contents/
   -command "/Applications/Privileges.app/Contents/Resources/PrivilegesCLI --remove" \
   -name "demoteprivileges" \
   -user "$(/usr/local/bin/currentuser)" \
-  -minute "*/10/"
+  -minute "*/20/"
 
 # Scheduled task for removing Privileges.app
 
@@ -21,7 +21,7 @@ su -l "$(/usr/local/bin/currentuser)" -c "/Applications/Privileges.app/Contents/
   -command "/usr/local/bin/aky --remove privileges" \
   -name "removeprivileges" \
   -user "root" \
-  -minute "*/11/"
+  -minute "*/21/"
 
 # Scheduled task for removing scheduled tasks
 
@@ -29,4 +29,4 @@ su -l "$(/usr/local/bin/currentuser)" -c "/Applications/Privileges.app/Contents/
   -command "rm -f /Library/LaunchDaemons/com.jamfsoftware.task.demoteprivileges.plist /Library/LaunchDaemons/com.jamfsoftware.task.removeprivileges.plist /Library/LaunchDaemons/com.jamfsoftware.task.removescheduledtasks.plist" \
   -name "removescheduledtasks" \
   -user "root" \
-  -minute "*/12/"
+  -minute "*/22/"
