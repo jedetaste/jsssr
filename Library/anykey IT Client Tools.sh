@@ -229,7 +229,7 @@ echo "/usr/local/aria2/bin" >"/etc/paths.d/aria2c"
 rm -rf "/tmp/aria2-${version}-osx-darwin.tar.bz2"
 rm -rf "/private/tmp/aria2-${version}"
 
-[ -s "/usr/local/bin/aria2" ] && rm -f "/usr/local/bin/aria2"
+[ -s "/usr/local/bin/aria2c" ] && rm -f "/usr/local/bin/aria2c"
 [ -s "/usr/local/bin/openssl" ] && rm -f "/usr/local/bin/openssl"
 
 # tmpDir
