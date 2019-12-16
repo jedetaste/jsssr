@@ -220,7 +220,11 @@ curl -s -L -o "/tmp/aria2-${version}-osx-darwin.tar.bz2" "https://github.com/ari
 cd "/tmp/" && tar -xjvf "aria2-${version}-osx-darwin.tar.bz2" >/dev/null 2>&1
 
 mkdir -p "/usr/local/aria2/bin/"
+
+[ -s "/usr/local/aria2/bin/aria2c" ] && rm -rf "/usr/local/aria2/bin/aria2c"
 mv "/private/tmp/aria2-${version}/bin/aria2c" "/usr/local/aria2/bin/aria2c"
+
+[ -s "/usr/local/aria2/share" ] && rm -rf "/usr/local/aria2/share"
 mv "/private/tmp/aria2-${version}/share" "/usr/local/aria2/share"
 
 echo "/usr/local/aria2/share/doc/man" >"/etc/manpaths.d/aria2"
