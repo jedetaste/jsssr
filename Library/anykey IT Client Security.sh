@@ -5,7 +5,7 @@ consoleuser=$(scutil <<<"show State:/Users/ConsoleUser" | awk '/Name :/ && ! /lo
 echo "logged in user is ${consoleuser}"
 
 # Delete Malware und Adware
-echo Removing Malware and Adware if found
+echo "Removing Malware and Adware if found"
 
 # Delete mshelper
 launchctl unload "/Library/LaunchDaemons/com.pplauncher.plist"
@@ -24,10 +24,10 @@ rm -rf "/Users/${consoleuser}/Library/RenderFiles/activity_agent.app"
 rm -rf "/private/etc/launchd.conf"
 rm -rf "/Applications/Genieo.app"
 rm -rf "/Applications/InstallMac.app"
-rm -rf "/Applications/Uninstall\ Genieo.app"
-rm -rf "/Applications/Uninstall\ IM\ Completer.app"
-rm -rf "/Users/${consoleuser}/Library/Application\ Support/com.genieoinnovation.Installer"
-rm -rf "/Users/${consoleuser}/Library/Application\ Support/Genieo/"
+rm -rf "/Applications/Uninstall Genieo.app"
+rm -rf "/Applications/Uninstall IM Completer.app"
+rm -rf "/Users/${consoleuser}/Library/Application Support/com.genieoinnovation.Installer"
+rm -rf "/Users/${consoleuser}/Library/Application Support/Genieo/"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/com.genieo.completer.download.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/com.genieo.completer.update.plist"
 rm -rf "/Users/${consoleuser}/Library/LaunchAgents/com.genieo.completer.ltvbit.plist"
@@ -216,13 +216,13 @@ rm -rf "/Users/${consoleuser}/Library/Application Support/Firefox/Profiles/*/sea
 rm -rf "/Users/${consoleuser}/Library/Safari/Extensions/s1h2m3o4o5p6i.safariextz"
 
 # Forcing XProtect blacklist updates
-echo Forcing XProtect blacklist updates
+echo "Forcing XProtect blacklist updates"
 defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 softwareupdate --background-critical
 defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool false
 
 # Repair Access Rights on Users folder
-echo Reparing Users Folder Access rights
+echo "Reparing Users Folder Access rights"
 for i in /Users/*; do
   u=$(echo "${i}" | cut -d/ -f3)
   case ${u} in
@@ -238,6 +238,6 @@ for i in /Users/*; do
 done
 
 # Repair Access Rights on Shared folder
-echo Reparing Shared Folder Access rights
+echo "Reparing Shared Folder Access rights"
 chown -R root:wheel "/Users/Shared"
 chmod -R 777 "/Users/Shared"
