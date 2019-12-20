@@ -1,46 +1,46 @@
 #!/bin/bash
 
-  username="${1}"
-  realname="${2}"
-  password="${3}"
-  home="${4}"
-  admin="${5}"
+username="${1}"
+realname="${2}"
+password="${3}"
+home="${4}"
+admin="${5}"
 
-  jamf="/usr/local/jamf/bin/jamf"
+jamf="/usr/local/bin/jamf"
 
-  if [ ! -z "$(id -u ${username} 2>/dev/null)" ]; then
+if [ -n "$(id -u "${username}" 2>/dev/null)" ]; then
 
-    echo "User ${username} already exists"
+  echo "User ${username} already exists"
 
-  else
+else
 
-    echo "User ${username} does not exist"
+  echo "User ${username} does not exist"
 
-    if [ ! -z "${admin}" ]; then
+  if [ -n "${admin}" ]; then
 
-      "${jamf}" createAccount \
-        -username "${username}" \
-        -realname "${realname}" \
-        -password "${password}" \
-        -home "/Users/${home}" \
-        -suppressSetupAssistant \
-        -admin
+    "${jamf}" createAccount \
+      -username "${username}" \
+      -realname "${realname}" \
+      -password "${password}" \
+      -home "/Users/${home}" \
+      -suppressSetupAssistant \
+      -admin
 
-      /usr/bin/dscl . delete /Users/${username} jpegphoto
-      /usr/bin/dscl . delete /Users/${username} Picture
+    dscl . delete /Users/"${username}" jpegphoto
+    dscl . delete /Users/"${username}" Picture
 
-    elif [ -z "${admin}" ]; then
+  elif [ -z "${admin}" ]; then
 
-      "${jamf}" createAccount \
-        -username "${username}" \
-        -realname "${realname}" \
-        -password "${password}" \
-        -home "/Users/${home}" \
-        -suppressSetupAssistant
+    "${jamf}" createAccount \
+      -username "${username}" \
+      -realname "${realname}" \
+      -password "${password}" \
+      -home "/Users/${home}" \
+      -suppressSetupAssistant
 
-      /usr/bin/dscl . delete /Users/${username} jpegphoto
-      /usr/bin/dscl . delete /Users/${username} Picture
-
-    fi
+    dscl . delete /Users/"${username}" jpegphoto
+    dscl . delete /Users/"${username}" Picture
 
   fi
+
+fi
