@@ -160,6 +160,20 @@ chown root:wheel "/usr/local/bin/pkgfixer"
 chmod 775 "/usr/local/bin/pkgfixer"
 chmod +x "/usr/local/bin/pkgfixer"
 
+# pkgfixer
+
+echo "==> Install 'dmg-extractor'"
+
+if [ -s "/usr/local/bin/dmg-extractor" ]; then
+  rm -f "/usr/local/bin/dmg-extractor"
+fi
+
+curl -so "/usr/local/bin/dmg-extractor" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/dmg-extractor"
+
+chown root:wheel "/usr/local/bin/dmg-extractor"
+chmod 775 "/usr/local/bin/dmg-extractor"
+chmod +x "/usr/local/bin/dmg-extractor"
+
 # blueutil
 
 echo "==> Install 'blueutil'"
