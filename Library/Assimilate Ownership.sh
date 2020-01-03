@@ -1,6 +1,6 @@
 #!/bin/bash
 
-applicationPath=(
+application_path=(
   '/Applications/Slack.app'
   '/Applications/Scratch 2.app'
   '/Applications/Dropbox.app'
@@ -17,9 +17,9 @@ applicationPath=(
   '/Applications/WhatsApp.app'
 )
 
-for ((i = 0; i < "${#applicationPath[@]}"; i++)); do
-  if [ -s "${applicationPath[$i]}" ]; then
-    echo "Assimilate ownership for '${applicationPath[$i]}'"
-    /usr/local/bin/assimilateownership --path "${applicationPath[$i]}"
+for application in "${application_path[@]}"; do
+  if [ -s "${application}" ]; then
+    echo "Assimilate ownership for '${application}'"
+    /usr/local/bin/assimilateownership --path "${application}"
   fi
 done
