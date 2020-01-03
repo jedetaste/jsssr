@@ -1,7 +1,7 @@
 #!/bin/bash
 
-  # Disable ARD
+# Disable ARD
 
-  kickstart="/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart"
+kickstart="/System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart"
 
-  "${kickstart}" --deactivate
+"${kickstart}" --deactivate
