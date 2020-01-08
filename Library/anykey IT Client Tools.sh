@@ -9,14 +9,14 @@ macos_vers() {
 macos_vers
 
 if [ "${minor}" -gt 11 ]; then
-  echo "==> macOS version is '${major}.${minor}.${revision}'"
+  echo "=> macOS version is '${major}.${minor}.${revision}'"
 else
-  echo "==> OS X version is '${major}.${minor}.${revision}'"
+  echo "=> OS X version is '${major}.${minor}.${revision}'"
 fi
 
 # appleLoops
 
-echo "==> Install 'appleLoops'"
+echo "=> Install 'appleLoops'"
 
 version="3.1.2"
 
@@ -28,7 +28,7 @@ rm -rf "/tmp/appleloops-${version}.pkg"
 
 # dockutil
 
-echo "==> Install 'dockutil'"
+echo "=> Install 'dockutil'"
 
 if [ -s "/usr/local/bin/dockutil" ]; then
   rm -f "/usr/local/bin/dockutil"
@@ -42,7 +42,7 @@ chmod +x "/usr/local/bin/dockutil"
 
 # docklib
 
-echo "==> Install 'docklib'"
+echo "=> Install 'docklib'"
 
 version="1.0.4"
 
@@ -54,7 +54,7 @@ rm -rf "/tmp/docklib-${version}.pkg"
 
 # currentuser
 
-echo "==> Install 'currentuser'"
+echo "=> Install 'currentuser'"
 
 if [ -s "/usr/local/bin/currentuser" ]; then
   rm -f "/usr/local/bin/currentuser"
@@ -68,7 +68,7 @@ chmod +x "/usr/local/bin/currentuser"
 
 # tmpDir
 
-echo "==> Install 'tmpDir'"
+echo "=> Install 'tmpDir'"
 
 if [ -s "/usr/local/bin/tmpDir" ]; then
   rm -f "/usr/local/bin/tmpDir"
@@ -82,7 +82,7 @@ chmod +x "/usr/local/bin/tmpDir"
 
 # csc
 
-echo "==> Install 'csc'"
+echo "=> Install 'csc'"
 
 if [ -s "/usr/local/bin/csc" ]; then
   rm -f "/usr/local/bin/csc"
@@ -96,7 +96,7 @@ chmod +x "/usr/local/bin/csc"
 
 # defaultbrowser
 
-echo "==> Install 'defaultbrowser'"
+echo "=> Install 'defaultbrowser'"
 
 if [ -s "/usr/local/bin/defaultbrowser" ]; then
   rm -f "/usr/local/bin/defaultbrowser"
@@ -110,7 +110,7 @@ chmod +x "/usr/local/bin/defaultbrowser"
 
 # urlgenerator
 
-echo "==> Install 'urlgenerator'"
+echo "=> Install 'urlgenerator'"
 
 if [ -s "/usr/local/bin/urlgenerator" ]; then
   rm -f "/usr/local/bin/urlgenerator"
@@ -124,7 +124,7 @@ chmod +x "/usr/local/bin/urlgenerator"
 
 # mysides
 
-echo "==> Install 'mysides'"
+echo "=> Install 'mysides'"
 
 version="1.0.1"
 
@@ -136,7 +136,7 @@ rm -rf "/tmp/mysides-${version}.pkg"
 
 # desktoppr
 
-echo "==> Install 'desktoppr'"
+echo "=> Install 'desktoppr'"
 
 version="0.2"
 
@@ -148,7 +148,7 @@ rm -rf "/tmp/desktoppr-${version}.pkg"
 
 # pkgfixer
 
-echo "==> Install 'pkgfixer'"
+echo "=> Install 'pkgfixer'"
 
 if [ -s "/usr/local/bin/pkgfixer" ]; then
   rm -f "/usr/local/bin/pkgfixer"
@@ -162,7 +162,7 @@ chmod +x "/usr/local/bin/pkgfixer"
 
 # pkgfixer
 
-echo "==> Install 'dmg-extractor'"
+echo "=> Install 'dmg-extractor'"
 
 if [ -s "/usr/local/bin/dmg-extractor" ]; then
   rm -f "/usr/local/bin/dmg-extractor"
@@ -176,7 +176,7 @@ chmod +x "/usr/local/bin/dmg-extractor"
 
 # blueutil
 
-echo "==> Install 'blueutil'"
+echo "=> Install 'blueutil'"
 
 if [ -s "/usr/local/bin/blueutil" ]; then
   rm -f "/usr/local/bin/blueutil"
@@ -190,7 +190,7 @@ chmod +x "/usr/local/bin/blueutil"
 
 # Install aky
 
-echo "==> Install 'aky'"
+echo "=> Install 'aky'"
 
 if [ ! -d "/usr/local/bin" ]; then
   mkdir -p "/usr/local/bin"
@@ -211,7 +211,7 @@ done
 
 # jq
 
-echo "==> Install 'jq'"
+echo "=> Install 'jq'"
 
 if [ -s "/usr/local/bin/jq" ]; then
   rm -f "/usr/local/bin/jq"
@@ -227,7 +227,7 @@ chmod +x "/usr/local/bin/jq"
 
 if [ -d "/usr/local/aria2" ]; then
 
-  echo "==> Remove 'aria2'"
+  echo "=> Remove 'aria2'"
 
   rm -rf "/usr/local/aria2"
   rm -f "/etc/manpaths.d/aria2"
@@ -237,7 +237,7 @@ fi
 
 # tmpDir
 
-echo "==> Install 'tmpDir'"
+echo "=> Install 'tmpDir'"
 
 if [ -s "/usr/local/bin/tmpDir" ]; then
   rm -f "/usr/local/bin/tmpDir"
@@ -251,7 +251,7 @@ chmod +x "/usr/local/bin/tmpDir"
 
 # Remove2011
 
-echo "==> Install 'Remove2011'"
+echo "=> Install 'Remove2011'"
 
 if [ -s "/usr/local/bin/Remove2011" ]; then
   rm -f "/usr/local/bin/Remove2011"
@@ -265,7 +265,7 @@ chmod +x "/usr/local/bin/Remove2011"
 
 # AppStoreXtractor
 
-echo "==> Install 'AppStoreXtractor'"
+echo "=> Install 'AppStoreXtractor'"
 
 if [ -s "/usr/local/bin/AppStoreXtractor" ]; then
   rm -f "/usr/local/bin/AppStoreXtractor"
@@ -279,7 +279,7 @@ chmod +x "/usr/local/bin/AppStoreXtractor"
 
 # outset
 
-echo "==> Install 'outset'"
+echo "=> Install 'outset'"
 
 version="2.0.6"
 
@@ -293,7 +293,7 @@ rm -rf "/tmp/outset-${version}.pkg"
 
 if [ -d "/usr/local/offset" ]; then
 
-  echo "==> Remove 'offset'"
+  echo "=> Remove 'offset'"
 
   rm -rf "/usr/local/offset"
 
@@ -303,7 +303,7 @@ fi
 
 # SafariBookmarkEditor
 
-echo "==> Install 'SafariBookmarkEditor'"
+echo "=> Install 'SafariBookmarkEditor'"
 
 if [ -s "/usr/local/bin/SafariBookmarkEditor" ]; then
   rm -f "/usr/local/bin/SafariBookmarkEditor"
@@ -317,7 +317,7 @@ chmod +x "/usr/local/bin/SafariBookmarkEditor"
 
 # FinderSidebarEditor
 
-echo "==> Install 'FinderSidebarEditor'"
+echo "=> Install 'FinderSidebarEditor'"
 
 if [ -s "/usr/local/bin/FinderSidebarEditor" ]; then
   rm -f "/usr/local/bin/FinderSidebarEditor"
@@ -331,7 +331,7 @@ chmod +x "/usr/local/bin/FinderSidebarEditor"
 
 # duti
 
-echo "==> Install 'duti'"
+echo "=> Install 'duti'"
 
 if [ -s "/usr/local/bin/duti" ]; then
   rm -f "/usr/local/bin/duti"
@@ -345,7 +345,7 @@ chmod +x "/usr/local/bin/duti"
 
 # ncdu
 
-echo "==> Install 'ncdu'"
+echo "=> Install 'ncdu'"
 
 if [ -s "/usr/local/bin/ncdu" ]; then
   rm -f "/usr/local/bin/ncdu"
@@ -361,7 +361,7 @@ chmod +x "/usr/local/bin/ncdu"
 
 if [ "${minor}" -ge 13 ]; then
 
-  echo "==> Install 'mas'"
+  echo "=> Install 'mas'"
 
   version="1.6.3"
 
@@ -375,7 +375,7 @@ fi
 
 # xmlstarlet
 
-echo "==> Install 'xmlstarlet'"
+echo "=> Install 'xmlstarlet'"
 
 if [ -s "/usr/local/bin/xmlstarlet" ]; then
   rm -f "/usr/local/bin/xmlstarlet"
@@ -390,32 +390,32 @@ chmod +x "/usr/local/bin/xmlstarlet"
 # reattach-to-user-namespace
 
 if [ -s "/usr/local/bin/reattach-to-user-namespace" ]; then
-  echo "==> Remove 'reattach-to-user-namespace'"
+  echo "=> Remove 'reattach-to-user-namespace'"
   rm -f "/usr/local/bin/reattach-to-user-namespace"
 fi
 
 # RegMAU
 
 if [ -s "/usr/local/bin/RegMAU" ]; then
-  echo "==> Remove 'RegMAU'"
+  echo "=> Remove 'RegMAU'"
   rm -f "/usr/local/bin/RegMAU"
 fi
 
 # MSUpdateHelper
 
 if [ -s "/usr/local/bin/MSUpdateHelper" ]; then
-  echo "==> Remove 'MSUpdateHelper'"
+  echo "=> Remove 'MSUpdateHelper'"
   rm -f "/usr/local/bin/MSUpdateHelper"
 fi
 
 if [ -s "/usr/local/bin/MSUpdateHelper2019" ]; then
-  echo "==> Remove 'MSUpdateHelper2019'"
+  echo "=> Remove 'MSUpdateHelper2019'"
   rm -f "/usr/local/bin/MSUpdateHelper2019"
 fi
 
 # alerter
 
-echo "==> Install 'alerter'"
+echo "=> Install 'alerter'"
 
 if [ -s "/usr/local/bin/alerter" ]; then
   rm -f "/usr/local/bin/alerter"
@@ -430,13 +430,13 @@ chmod +x "/usr/local/bin/alerter"
 # PrinterMapper
 
 if [ -s "/usr/local/bin/PrinterMapper" ]; then
-  echo "==> Remove 'PrinterMapper'"
+  echo "=> Remove 'PrinterMapper'"
   rm -f "/usr/local/bin/PrinterMapper"
 fi
 
 # lohelper
 
-echo "==> Install 'lohelper'"
+echo "=> Install 'lohelper'"
 
 if [ -s "/usr/local/bin/lohelper" ]; then
   rm -f "/usr/local/bin/lohelper"
@@ -450,7 +450,7 @@ chmod +x "/usr/local/bin/lohelper"
 
 # randomizer
 
-echo "==> Install 'randomizer'"
+echo "=> Install 'randomizer'"
 
 if [ -s "/usr/local/bin/randomizer" ]; then
   rm -f "/usr/local/bin/randomizer"
@@ -464,7 +464,7 @@ chmod +x "/usr/local/bin/randomizer"
 
 # assimilateownership
 
-echo "==> Install 'assimilateownership'"
+echo "=> Install 'assimilateownership'"
 
 if [ -s "/usr/local/bin/assimilateownership" ]; then
   rm -f "/usr/local/bin/assimilateownership"
@@ -478,7 +478,7 @@ chmod +x "/usr/local/bin/assimilateownership"
 
 # erase-install
 
-echo "==> Install 'erase-install'"
+echo "=> Install 'erase-install'"
 
 if [ -s "/usr/local/bin/erase-install" ]; then
   rm -f "/usr/local/bin/erase-install"
@@ -498,7 +498,7 @@ rm -f "/tmp/erase-install-${version}.zip"
 
 # fileicon
 
-echo "==> Install 'fileicon'"
+echo "=> Install 'fileicon'"
 
 if [ -s "/usr/local/bin/fileicon" ]; then
   rm -f "/usr/local/bin/fileicon"
@@ -512,7 +512,7 @@ chmod +x "/usr/local/bin/fileicon"
 
 # sketchup_serializer
 
-echo "==> Install 'sketchup_serializer'"
+echo "=> Install 'sketchup_serializer'"
 
 if [ -s "/usr/local/bin/sketchup_serializer" ]; then
   rm -f "/usr/local/bin/sketchup_serializer"
@@ -526,5 +526,5 @@ chmod +x "/usr/local/bin/sketchup_serializer"
 
 # jpscheck
 
-[ -s "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist" ] && echo "==> Remove 'jpscheck'" && rm -f "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist"
-[ -s "/usr/local/bin/jpscheck" ] && echo "==> Remove 'jpscheck'" && rm -f "/usr/local/bin/jpscheck"
+[ -s "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist" ] && echo "=> Remove 'jpscheck'" && rm -f "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist"
+[ -s "/usr/local/bin/jpscheck" ] && echo "=> Remove 'jpscheck'" && rm -f "/usr/local/bin/jpscheck"
