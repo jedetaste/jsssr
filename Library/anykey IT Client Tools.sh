@@ -94,6 +94,20 @@ chown root:wheel "/usr/local/bin/csc"
 chmod 775 "/usr/local/bin/csc"
 chmod +x "/usr/local/bin/csc"
 
+# rg
+
+echo "=> Install 'rg'"
+
+if [ -s "/usr/local/bin/rg" ]; then
+  rm -f "/usr/local/bin/rg"
+fi
+
+curl -so "/usr/local/bin/rg" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/rg"
+
+chown root:wheel "/usr/local/bin/rg"
+chmod 775 "/usr/local/bin/rg"
+chmod +x "/usr/local/bin/rg"
+
 # defaultbrowser
 
 echo "=> Install 'defaultbrowser'"
