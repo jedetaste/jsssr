@@ -11,7 +11,7 @@ if [ -z "${script_arg}" ]; then
   echo "${prog_name}: Argument missing" && exit 1
 fi
 
-if [ "$(curl -sL -w "%{http_code}" "http://google.com/" -o /dev/null)" == "200" ]; then
+if [ "$(curl -sL -w "%{http_code}" "https://www.google.com/" -o /dev/null)" == "200" ]; then
   online="true"
 else
   online="false"
