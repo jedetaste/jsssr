@@ -14,8 +14,8 @@ install_abaclient() {
   echo "=> Running installer at '${extract_dir}/AbaClient.pkg'"
   installer -pkg "${extract_dir}/AbaClient.pkg" -target /
 
-  echo "=> Running installer at '${extract_dir}/AbaClientManager.pkg'"
-  installer -pkg "${extract_dir}/AbaClientManager.pkg" -target /
+  # echo "=> Running installer at '${extract_dir}/AbaClientManager.pkg'"
+  # installer -pkg "${extract_dir}/AbaClientManager.pkg" -target /
 
 }
 
