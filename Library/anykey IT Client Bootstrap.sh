@@ -250,6 +250,12 @@ for user_template in "/System/Library/User Template"/*; do
   defaults write "${user_template}/Library/Preferences/com.apple.AppleMultitouchTrackpad.plist" Clicking -bool true
 done
 
+# Disable Auto Update Adobe Acrobat Reader
+
+echo "==> Disable Auto Update Adobe Acrobat Reader"
+
+defaults write "/Library/Preferences/com.adobe.Reader.plist" DC -dict-add "FeatureLockdown" "<dict><key>bUpdater</key><false/></dict>"
+
 # Disable Auto Update Adobe Flash Player
 
 echo "==> Disable Auto Update Adobe Flash Player"
