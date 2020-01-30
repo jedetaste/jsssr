@@ -48,6 +48,7 @@ Purge Legacy Apple Apps.sh
 Purge Unmanaged Configuration Profiles.sh
 Remove All CUPS Printer.sh
 Remove Finder All My Files Favorite.sh
+Remove Oracle Java 8.sh
 Renamehelper.sh
 Set Mail UTI Default Application Outlook.sh
 Set PDF UTI Default Application.sh
