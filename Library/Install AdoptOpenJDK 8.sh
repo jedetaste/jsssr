@@ -1,9 +1,9 @@
 #!/bin/bash
 
 major_version="1.8.0"
-version="232"
-build="09"
-sha256="6a21734cf0aa4e7f5ad74c2d232c9af8426a2e66a9909821b4c4d81be2aee035"
+version="242"
+build="08"
+sha256="b24754532fdefc3ae03c56dce972803fc78fd2243bbab12fb412a93aabf05adc"
 download="https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u${version}-b${build}/OpenJDK8U-jdk_x64_mac_hotspot_8u${version}b${build}.pkg"
 
 tmp_dir=$(/usr/local/bin/tmpDir)
