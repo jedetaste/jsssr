@@ -136,6 +136,20 @@ chown root:wheel "/usr/local/bin/urlgenerator"
 chmod 775 "/usr/local/bin/urlgenerator"
 chmod +x "/usr/local/bin/urlgenerator"
 
+# lang-change
+
+echo "=> Install 'lang-change'"
+
+if [ -s "/usr/local/bin/lang-change" ]; then
+  rm -f "/usr/local/bin/lang-change"
+fi
+
+curl -so "/usr/local/bin/lang-change" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/lang-change"
+
+chown root:wheel "/usr/local/bin/lang-change"
+chmod 775 "/usr/local/bin/lang-change"
+chmod +x "/usr/local/bin/lang-change"
+
 # mysides
 
 echo "=> Install 'mysides'"
