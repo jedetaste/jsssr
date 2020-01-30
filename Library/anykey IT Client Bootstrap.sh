@@ -220,6 +220,15 @@ echo "==> Hide management account"
 
 defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add casper
 
+# Microsoft Office Bootstrap
+
+defaults write "/Library/Preferences/com.microsoft.autoupdate2.plist" AcknowledgedDataCollectionPolicy -string RequiredAndOptionalData
+defaults write "/Library/Preferences/com.microsoft.autoupdate2.plist" HowToCheck -string AutomaticDownload
+
+defaults write "/Library/Preferences/com.microsoft.office.plist" OfficeAutoSignIn -bool true
+defaults write "/Library/Preferences/com.microsoft.office.plist" ShowWhatsNewOnLaunch -bool false
+defaults write "/Library/Preferences/com.microsoft.office.plist" kCUIThemePreferencesThemeKeyPath -bool false
+
 # Disable Oracle Java Auto Update
 
 echo "==> Disable Oracle Java Auto Update"
