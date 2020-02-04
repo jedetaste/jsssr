@@ -17,6 +17,12 @@ install_abaclient() {
   # echo "=> Running installer at '${extract_dir}/AbaClientManager.pkg'"
   # installer -pkg "${extract_dir}/AbaClientManager.pkg" -target /
 
+  echo "=> Remove bundle '/Applications/AbaClient.app' from gatekeeper quarantine"
+  xattr -r -d -s com.apple.quarantine "/Applications/AbaClient.app"
+
+  echo "=> Whitelist bundle '/Applications/AbaClient.app' for execution in the security assessment policy subsystem"
+  spctl --add "/Applications/AbaClient.app"
+
 }
 
 if [ -z "$(defaults read "/Applications/AbaClient.app/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null)" ]; then
