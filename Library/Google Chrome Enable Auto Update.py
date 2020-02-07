@@ -11,6 +11,8 @@ Created by Hannes Juutilainen, hjuutilainen@mac.com
 
 History:
 --------
+2019-08-05, Andy Duss
+- Fix keystone_registration_framework_path to point to correct directory
 
 2017-09-01, Hannes Juutilainen
 - Ignore errors when installing keystone
@@ -39,6 +41,7 @@ import sys
 import os
 import subprocess
 import plistlib
+from distutils.version import LooseVersion
 
 chrome_path = "/Applications/Google Chrome.app"
 info_plist_path = os.path.realpath(os.path.join(chrome_path, 'Contents/Info.plist'))
@@ -86,16 +89,29 @@ def chrome_product_id():
 
 def keystone_registration_framework_path():
     """Returns KeystoneRegistration.framework path"""
-    keystone_registration = os.path.join(chrome_path, 'Contents/Versions')
-    keystone_registration = os.path.join(keystone_registration, chrome_version())
-    keystone_registration = os.path.join(keystone_registration, 'Google Chrome Framework.framework')
-    keystone_registration = os.path.join(keystone_registration, 'Frameworks/KeystoneRegistration.framework')
+    if LooseVersion(chrome_version()) >= LooseVersion("76"):
+        keystone_registration = os.path.join(chrome_path, 'Contents', 'Frameworks')
+        keystone_registration = os.path.join(keystone_registration, 'Google Chrome Framework.framework')
+        keystone_registration = os.path.join(keystone_registration, 'Frameworks', 'KeystoneRegistration.framework')
+        keystone_registration = os.path.join(keystone_registration, 'Versions', 'Current')
+    elif LooseVersion(chrome_version()) >= LooseVersion("75") and LooseVersion(chrome_version()) < LooseVersion("76"):
+        keystone_registration = os.path.join(chrome_path, 'Contents/Frameworks/')
+        keystone_registration = os.path.join(keystone_registration, 'Google Chrome Framework.framework/Versions')
+        keystone_registration = os.path.join(keystone_registration, chrome_version())
+        keystone_registration = os.path.join(keystone_registration, 'Frameworks/KeystoneRegistration.framework')
+    else:
+        keystone_registration = os.path.join(chrome_path, 'Contents/Versions')
+        keystone_registration = os.path.join(keystone_registration, chrome_version())
+        keystone_registration = os.path.join(keystone_registration, 'Google Chrome Framework.framework')
+        keystone_registration = os.path.join(keystone_registration, 'Frameworks/KeystoneRegistration.framework')
     return keystone_registration
 
 
 def keystone_install():
     """Install the current Keystone"""
     install_script = os.path.join(keystone_registration_framework_path(), 'Resources/ksinstall')
+    if LooseVersion(chrome_version()) >= LooseVersion("80"):
+        install_script = os.path.join(keystone_registration_framework_path(), 'Helpers/ksinstall')
     if not os.path.exists(install_script):
         install_script = os.path.join(keystone_registration_framework_path(), 'Resources/install.py')
     keystone_payload = os.path.join(keystone_registration_framework_path(), 'Resources/Keystone.tbz')
