@@ -1,63 +1,63 @@
-	#!/bin/bash
+#!/bin/bash
 
-		download="https://fpdownload.macromedia.com/get/flashplayer/current/support/uninstall_flash_player_osx.dmg"
+  download="https://fpdownload.macromedia.com/get/flashplayer/current/support/uninstall_flash_player_osx.dmg"
 
-		tmpDir=$(/usr/local/bin/tmpDir)
-		
-		echo "=> Download '${download}'"
-		curl -s -o "${tmpDir}/uninstall_flash_player_osx.dmg" "${download}"
+  tmpDir=$(/usr/local/bin/tmpDir)
 
-		filePath=$(/usr/bin/find "${tmpDir}" -name "*.dmg")
+  echo "=> Download '${download}'"
+  curl -s -o "${tmpDir}/uninstall_flash_player_osx.dmg" "${download}"
 
-		fileName=$(/usr/bin/basename "${filePath}")
-		extension="${fileName##*.}"
-		id="${fileName%.*}"
+  filePath=$(/usr/bin/find "${tmpDir}" -name "*.dmg")
 
-		echo "==> Installer downloaded to '${filePath}'"
+  fileName=$(/usr/bin/basename "${filePath}")
+  extension="${fileName##*.}"
+  id="${fileName%.*}"
 
-		/usr/bin/hdiutil convert -quiet "${filePath}" -format UDTO -o "${filePath}.cdr"
+  echo "==> Installer downloaded to '${filePath}'"
 
-		echo "==> Mount CDR '${filePath}.cdr' and grep volume name"
+  /usr/bin/hdiutil convert -quiet "${filePath}" -format UDTO -o "${filePath}.cdr"
 
-		mountPoint="${tmpDir}/mountPoint" && /bin/mkdir "${mountPoint}"
-		cdr="${filePath}.cdr"
-		tmpMountPointFile=$(mktemp /${tmpDir}/cdr.XXX) &&
+  echo "==> Mount CDR '${filePath}.cdr' and grep volume name"
 
-		/usr/bin/hdiutil attach -plist -nobrowse -readonly -noidme -mountrandom "${mountPoint}" "${cdr}" > "${tmpMountPointFile}" &&
+  mountPoint="${tmpDir}/mountPoint" && /bin/mkdir "${mountPoint}"
+  cdr="${filePath}.cdr"
+  tmpMountPointFile=$(mktemp /${tmpDir}/cdr.XXX) &&
 
-		loc=":system-entities:"
-		num=$(/usr/libexec/PlistBuddy -c "Print :system-entities:" ${tmpMountPointFile} | /usr/bin/grep -c Dict 2>/dev/null)
+  /usr/bin/hdiutil attach -plist -nobrowse -readonly -noidme -mountrandom "${mountPoint}" "${cdr}" > "${tmpMountPointFile}" &&
 
-		for i in $(seq 0 $((num-1))) ; do
-			loc=":system-entities:${i}:mount-point"
-			locDevEntry=":system-entities:${i}:dev-entry"
-			volumeName="$(/usr/libexec/PlistBuddy -c "Print ${loc}" "${tmpMountPointFile}" 2>/dev/null)"
-			volumeNameDevEntry="$(/usr/libexec/PlistBuddy -c "Print ${locDevEntry}" "${tmpMountPointFile}" 2>/dev/null)"
-			if [ -n "${volumeName}" -a -z "$(echo ${volumeName} | grep 'Does Not Exist')" ]; then
-				break
-			fi
-		done
+  loc=":system-entities:"
+  num=$(/usr/libexec/PlistBuddy -c "Print :system-entities:" ${tmpMountPointFile} | /usr/bin/grep -c Dict 2>/dev/null)
 
-		echo "==> Running uninstaller at '${volumeName}/Adobe Flash Player Uninstaller.app/Contents/MacOS/Adobe Flash Player Install Manager'"
+  for i in $(seq 0 $((num-1))) ; do
+    loc=":system-entities:${i}:mount-point"
+    locDevEntry=":system-entities:${i}:dev-entry"
+    volumeName="$(/usr/libexec/PlistBuddy -c "Print ${loc}" "${tmpMountPointFile}" 2>/dev/null)"
+    volumeNameDevEntry="$(/usr/libexec/PlistBuddy -c "Print ${locDevEntry}" "${tmpMountPointFile}" 2>/dev/null)"
+    if [ -n "${volumeName}" -a -z "$(echo ${volumeName} | grep 'Does Not Exist')" ]; then
+      break
+    fi
+  done
 
-		"${volumeName}/Adobe Flash Player Uninstaller.app/Contents/MacOS/Adobe Flash Player Install Manager" -uninstall > /dev/null 2>&1
+  echo "==> Running uninstaller at '${volumeName}/Adobe Flash Player Uninstaller.app/Contents/MacOS/Adobe Flash Player Install Manager'"
 
-		if [ ! -z "${volumeName}" ]; then
-			echo "==> Eject volume '${volumeName}'"
-			/usr/sbin/diskutil eject "${volumeName}" > /dev/null 2>&1
-			until [ ! -d "${volumeName}" ]; do
-				echo "==> Remove Dev-Entry for '${volumeName}'"
-				/usr/sbin/diskutil unmount force "${volumeName}" > /dev/null 2>&1
-			done
-		fi
+  "${volumeName}/Adobe Flash Player Uninstaller.app/Contents/MacOS/Adobe Flash Player Install Manager" -uninstall > /dev/null 2>&1
 
-		if [ ! -z "${volumeNameDevEntry}" ]; then
-			echo "==> Eject volume '${volumeNameDevEntry}'"
-			/usr/sbin/diskutil eject "${volumeNameDevEntry}" > /dev/null 2>&1
-			until [ ! -d "${volumeNameDevEntry}" ]; do
-				echo "==> Remove Dev-Entry for '${volumeNameDevEntry}'"
-				/usr/sbin/diskutil unmount force "${volumeNameDevEntry}" > /dev/null 2>&1
-			done
-		fi
+  if [ ! -z "${volumeName}" ]; then
+    echo "==> Eject volume '${volumeName}'"
+    /usr/sbin/diskutil eject "${volumeName}" > /dev/null 2>&1
+    until [ ! -d "${volumeName}" ]; do
+      echo "==> Remove Dev-Entry for '${volumeName}'"
+      /usr/sbin/diskutil unmount force "${volumeName}" > /dev/null 2>&1
+    done
+  fi
 
-		rm -rf "${tmpDir}"
+  if [ ! -z "${volumeNameDevEntry}" ]; then
+    echo "==> Eject volume '${volumeNameDevEntry}'"
+    /usr/sbin/diskutil eject "${volumeNameDevEntry}" > /dev/null 2>&1
+    until [ ! -d "${volumeNameDevEntry}" ]; do
+      echo "==> Remove Dev-Entry for '${volumeNameDevEntry}'"
+      /usr/sbin/diskutil unmount force "${volumeNameDevEntry}" > /dev/null 2>&1
+    done
+  fi
+
+  rm -rf "${tmpDir}"
