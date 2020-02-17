@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="1.5.6-80"
+version="1.5.6-81"
 
 install_hin_client() {
 
