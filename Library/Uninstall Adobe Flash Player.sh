@@ -4,7 +4,8 @@
 
   tmpDir=$(/usr/local/bin/tmpDir)
 
-  cd "${tmpDir}" && /usr/local/bin/aria2c "${download}" > /dev/null 2>&1
+  echo "=> Download '${download}'"
+  curl -s -o "${tmpDir}/uninstall_flash_player_osx.dmg" "${download}"
 
   filePath=$(/usr/bin/find "${tmpDir}" -name "*.dmg")
 
