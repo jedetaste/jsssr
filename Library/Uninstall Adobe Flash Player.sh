@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 echo "=> Download uninstaller 'https://fpdownload.macromedia.com/get/flashplayer/current/support/uninstall_flash_player_osx.dmg'"
 curl -s -o "/tmp/uninstall_flash_player_osx.dmg" "https://fpdownload.macromedia.com/get/flashplayer/current/support/uninstall_flash_player_osx.dmg"
