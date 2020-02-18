@@ -9,4 +9,3 @@ echo "=> Running uninstaller at '${extract_dir}/Adobe Flash Player Uninstaller.a
 "${extract_dir}/Adobe Flash Player Uninstaller.app/Contents/MacOS/Adobe Flash Player Install Manager" -uninstall
 
 rm -rf "/tmp/uninstall_flash_player_osx.dmg"
-rm -rf "${extract_dir}"
