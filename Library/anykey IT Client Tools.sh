@@ -18,7 +18,7 @@ fi
 
 echo "=> Install 'appleLoops'"
 
-version="3.1.2"
+version="3.1.4"
 
 curl -s -L -o "/tmp/appleloops-${version}.pkg" "https://github.com/carlashley/appleloops/releases/download/v${version}/appleloops-${version}.pkg"
 
@@ -44,7 +44,7 @@ chmod +x "/usr/local/bin/dockutil"
 
 echo "=> Install 'docklib'"
 
-version="1.0.4"
+version="1.0.5"
 
 curl -s -L -o "/tmp/docklib-${version}.pkg" "https://github.com/homebysix/docklib/releases/download/v${version}/docklib-${version}.pkg"
 
@@ -514,7 +514,7 @@ elif [ -L "/usr/local/bin/erase-install" ]; then
   unlink "/usr/local/bin/erase-install"
 fi
 
-version="0.11.1"
+version="0.12.0"
 
 curl -s -L -o "/tmp/erase-install-${version}.zip" "https://github.com/grahampugh/erase-install/releases/download/v${version}/erase-install-${version}.zip"
 
