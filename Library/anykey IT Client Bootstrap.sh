@@ -214,12 +214,6 @@ for user_template in "/System/Library/User Template"/*; do
   defaults write "${user_template}/Library/Preferences/com.apple.Safari.plist" LastSafariVersionWithWelcomePage -string "$(defaults read /Applications/Safari.app/Contents/Info.plist CFBundleShortVersionString)"
 done
 
-# Hide management account
-
-echo "==> Hide management account"
-
-defaults write "/Library/Preferences/com.apple.loginwindow.plist" HiddenUsersList -array-add casper
-
 # Microsoft Office Bootstrap
 
 defaults write "/Library/Preferences/com.microsoft.autoupdate2.plist" AcknowledgedDataCollectionPolicy -string RequiredAndOptionalData
