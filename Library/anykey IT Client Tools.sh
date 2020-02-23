@@ -556,3 +556,17 @@ chmod +x "/usr/local/bin/sketchup_serializer"
 
 [ -s "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist" ] && echo "=> Remove 'jpscheck'" && rm -f "/Library/LaunchDaemons/com.jamfsoftware.task.jpscheck.plist"
 [ -s "/usr/local/bin/jpscheck" ] && echo "=> Remove 'jpscheck'" && rm -f "/usr/local/bin/jpscheck"
+
+# urlgenerator
+
+echo "=> Install 'kcpassword'"
+
+if [ -s "/usr/local/bin/kcpassword" ]; then
+  rm -f "/usr/local/bin/kcpassword"
+fi
+
+curl -so "/usr/local/bin/kcpassword" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/kcpassword"
+
+chown root:wheel "/usr/local/bin/kcpassword"
+chmod 775 "/usr/local/bin/kcpassword"
+chmod +x "/usr/local/bin/kcpassword"
