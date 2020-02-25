@@ -2,11 +2,6 @@
 
 IFS='.' read -r os_major os_minor os_revision < <(sw_vers -productVersion)
 
-current_user=$(scutil <<<"show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }')
-user_language=$(su -l "${current_user}" -c "/usr/libexec/PlistBuddy -c 'print AppleLanguages:0' ~/Library/Preferences/.GlobalPreferences.plist")
-
-jamf_helper="/Library/Application Support/JAMF/bin/jamfHelper.app/Contents/MacOS/jamfHelper"
-
 installer_name="Mojave"
 installer_version="10.14"
 
