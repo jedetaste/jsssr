@@ -504,6 +504,25 @@ chown root:wheel "/usr/local/bin/assimilateownership"
 chmod 775 "/usr/local/bin/assimilateownership"
 chmod +x "/usr/local/bin/assimilateownership"
 
+# macosvpn
+
+echo "=> Install 'macosvpn'"
+
+if [ -s "/usr/local/bin/macosvpn" ]; then
+  rm -f "/usr/local/bin/macosvpn"
+elif [ -L "/usr/local/bin/macosvpn" ]; then
+  unlink "/usr/local/bin/macosvpn"
+fi
+
+version="1.0.2"
+
+curl -s -L -o "/usr/local/bin/macosvpn" "https://github.com/halo/macosvpn/releases/download/${version}/macosvpn"
+
+chown root:wheel "/usr/local/bin/macosvpn"
+chmod 775 "/usr/local/bin/macosvpn"
+chmod +x "/usr/local/bin/macosvpn"
+
+
 # erase-install
 
 echo "=> Install 'erase-install'"
