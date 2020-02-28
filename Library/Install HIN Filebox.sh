@@ -4,7 +4,8 @@ version="2.5.3.0"
 
 install_hin_filebox() {
 
-  download="https://download.hin.ch/filebox2/HIN%20Filebox%20Installer.dmg"
+  #download="https://download.hin.ch/filebox2/HIN%20Filebox%20Installer.dmg"
+  download="https://cdn-clients.anykeyit.ch/Static/Filebox_2.5.3_unnotarised.dmg"
 
   echo "=> Download '${download}'"
   curl -s -o "/tmp/HIN Filebox Installer" "${download}"
