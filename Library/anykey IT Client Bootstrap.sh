@@ -121,10 +121,10 @@ echo "==> Enable location services"
 
 if [ "${minor}" -gt 13 ]; then
   defaults write /var/db/locationd/Library/Preferences/ByHost/com.apple.locationd LocationServicesEnabled -int 1
-  defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
+  defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool true
 else
   sudo -u _locationd defaults -currentHost write com.apple.locationd LocationServicesEnabled -int 1
-  defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool YES
+  defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool true
 fi
 
 # Localisation
