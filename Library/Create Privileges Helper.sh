@@ -4,6 +4,8 @@ error=0
 
 helper_path="/Applications/Privileges.app/Contents/XPCServices/PrivilegesXPC.xpc/Contents/Library/LaunchServices/corp.sap.privileges.helper"
 
+plist="/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
+
 if [[ -f "${helper_path}" ]]; then
 
   # Create the target directory if needed
@@ -14,6 +16,10 @@ if [[ -f "${helper_path}" ]]; then
     chown -R root:wheel "/Library/PrivilegedHelperTools"
   fi
 
+  # Unload existing helper tool
+
+  launchctl bootout system "${plist}"
+
   # Move the privileged helper into place
 
   cp -f "${helper_path}" "/Library/PrivilegedHelperTools"
@@ -22,8 +28,6 @@ if [[ -f "${helper_path}" ]]; then
     chmod 755 "/Library/PrivilegedHelperTools/corp.sap.privileges.helper"
 
     # create the launchd plist
-
-    plist="/Library/LaunchDaemons/corp.sap.privileges.helper.plist"
 
     cat >"${plist}" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
