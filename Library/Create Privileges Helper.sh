@@ -2,7 +2,7 @@
 
 error=0
 
-helper_path="/Applications/Privileges.app/Contents/Library/LaunchServices/corp.sap.privileges.helper"
+helper_path="/Applications/Privileges.app/Contents/XPCServices/PrivilegesXPC.xpc/Contents/Library/LaunchServices/corp.sap.privileges.helper"
 
 if [[ -f "${helper_path}" ]]; then
 
@@ -29,19 +29,19 @@ if [[ -f "${helper_path}" ]]; then
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+<dict>
+	<key>Label</key>
+	<string>corp.sap.privileges.helper</string>
+	<key>MachServices</key>
 	<dict>
-		<key>Label</key>
-		<string>corp.sap.privileges.helper</string>
-		<key>MachServices</key>
-		<dict>
-			<key>corp.sap.privileges.helper</key>
-			<true/>
-		</dict>
-		<key>ProgramArguments</key>
-		<array>
-			<string>/Library/PrivilegedHelperTools/corp.sap.privileges.helper</string>
-		</array>
+		<key>corp.sap.privileges.helper</key>
+		<true/>
 	</dict>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/Library/PrivilegedHelperTools/corp.sap.privileges.helper</string>
+	</array>
+</dict>
 </plist>
 EOF
 
@@ -49,7 +49,7 @@ EOF
 
     # Load the launchd plist
 
-    launchctl load -wF "${plist}"
+    launchctl bootstrap system "${plist}"
 
   else
     error=1
