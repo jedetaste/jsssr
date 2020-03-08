@@ -476,6 +476,20 @@ chown root:wheel "/usr/local/bin/lohelper"
 chmod 775 "/usr/local/bin/lohelper"
 chmod +x "/usr/local/bin/lohelper"
 
+# jamf-enroll-manual
+
+echo "=> Install 'jamf-enroll-manual'"
+
+if [ -s "/usr/local/bin/jamf-enroll-manual" ]; then
+  rm -f "/usr/local/bin/jamf-enroll-manual"
+fi
+
+curl -so "/usr/local/bin/jamf-enroll-manual" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/jamf-enroll-manual"
+
+chown root:wheel "/usr/local/bin/jamf-enroll-manual"
+chmod 775 "/usr/local/bin/jamf-enroll-manual"
+chmod +x "/usr/local/bin/jamf-enroll-manual"
+
 # randomizer
 
 echo "=> Install 'randomizer'"
