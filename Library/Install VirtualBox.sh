@@ -2,11 +2,13 @@
 
 /usr/local/bin/aky virtualbox
 
-SET_UID_BINARIES="VBoxNetAdpCtl"
-SET_UID_BINARIES="${SET_UID_BINARIES} VBoxHeadless VirtualBoxVM VBoxNetDHCP VBoxNetNAT"
+chown -R root:admin "/Applications/VirtualBox.app"
+
+SET_UID_BINARIES="MacOS/VBoxNetAdpCtl"
+SET_UID_BINARIES="${SET_UID_BINARIES} MacOS/VBoxHeadless MacOS/VBoxNetDHCP MacOS/VBoxNetNAT Resources/VirtualBoxVM.app/Contents/MacOS/VirtualBoxVM"
 for bin in ${SET_UID_BINARIES}; do
   echo "==> Adjust permissions for '/Applications/VirtualBox.app/Contents/MacOS/${bin}'"
-  chmod u+s "/Applications/VirtualBox.app/Contents/MacOS/${bin}"
+  chmod u+s "/Applications/VirtualBox.app/Contents/${bin}"
 done
 
 version=$(curl --silent --insecure "https://download.virtualbox.org/virtualbox/LATEST.TXT")
