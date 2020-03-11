@@ -220,22 +220,15 @@ chmod +x "/usr/local/bin/blueutil"
 
 echo "=> Install 'aky'"
 
-if [ ! -d "/usr/local/bin" ]; then
-  mkdir -p "/usr/local/bin"
+if [ -s "/usr/local/bin/aky" ]; then
+  rm -f "/usr/local/bin/aky"
 fi
 
-aky_binaries=(
-  "aky"
-  "rg"
-  "csc"
-)
+curl -so "/usr/local/bin/aky" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aky"
 
-for aky_binary in "${aky_binaries[@]}"; do
-  rm -f "/usr/local/bin/${aky_binary}"
-  curl -so "/usr/local/bin/${aky_binary}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aky-src/${aky_binary}"
-  chown root:wheel "/usr/local/bin/${aky_binary}"
-  chmod +x "/usr/local/bin/${aky_binary}"
-done
+chown root:wheel "/usr/local/bin/aky"
+chmod 775 "/usr/local/bin/aky"
+chmod +x "/usr/local/bin/aky"
 
 # jq
 
