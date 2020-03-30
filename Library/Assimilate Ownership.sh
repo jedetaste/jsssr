@@ -2,6 +2,8 @@
 
 application_path=(
   '/Applications/Slack.app'
+  '/Applications/Spotify.app'
+  '/Applications/WhatsApp.app'
   '/Applications/Scratch 2.app'
   '/Applications/Dropbox.app'
   '/Applications/Minecraft.app'
@@ -14,7 +16,6 @@ application_path=(
   '/Applications/Millefeuilles.app'
   '/Applications/Signal.app'
   '/Applications/Lernprogramme/New Inspiration IC/'
-  '/Applications/WhatsApp.app'
 )
 
 for application in "${application_path[@]}"; do
