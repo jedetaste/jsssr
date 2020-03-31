@@ -15,6 +15,7 @@ application_path=(
   '/Applications/ClinDoeil.app'
   '/Applications/Millefeuilles.app'
   '/Applications/Signal.app'
+  '/Applications/WhatsApp.app'
   '/Applications/Lernprogramme/New Inspiration IC/'
 )
 
