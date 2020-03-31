@@ -16,7 +16,6 @@ application_path=(
   '/Applications/ClinDoeil.app'
   '/Applications/Millefeuilles.app'
   '/Applications/Signal.app'
-  '/Applications/WhatsApp.app'
 )
 
 for application in "${application_path[@]}"; do
