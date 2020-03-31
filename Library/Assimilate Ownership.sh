@@ -12,11 +12,11 @@ application_path=(
   '/Applications/Lernprogramme/Clin dœil.app'
   '/Applications/Lernprogramme/Mille feuilles.app'
   '/Applications/Lernprogramme/New Headway'
+  '/Applications/Lernprogramme/New Inspiration IC/'
   '/Applications/ClinDoeil.app'
   '/Applications/Millefeuilles.app'
   '/Applications/Signal.app'
   '/Applications/WhatsApp.app'
-  '/Applications/Lernprogramme/New Inspiration IC/'
 )
 
 for application in "${application_path[@]}"; do
