@@ -1,6 +1,7 @@
 #!/bin/bash -x
 
 set_uid() {
+  echo "==> Set setuid bit for system proxy helper"
   proxysettings_wrapper_path="/Applications/HIN Client.app/Contents/Resources/app/proxysettings"
   proxysettings_script_path="/Applications/HIN Client.app/Contents/Resources/app/proxysettings.sh"
   chown 0:0 "${proxysettings_wrapper_path}"
