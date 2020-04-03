@@ -13,5 +13,6 @@ if [ "${1}" = "update" ]; then
   /usr/local/bin/aky --update "hinclient"
   [ -d "/Applications/HIN Client.app" ] && set_uid
 else
-  /usr/local/bin/aky "hinclient" && set_uid
+  /usr/local/bin/aky "hinclient"
+  set_uid
 fi
