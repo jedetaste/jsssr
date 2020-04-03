@@ -1,6 +1,10 @@
 #!/bin/bash
 
-/usr/local/bin/aky "hinclient"
+if [ "${1}" = "update" ]; then
+  /usr/local/bin/aky --update "hinclient"
+else
+  /usr/local/bin/aky "hinclient"
+fi
 
 proxysettings_wrapper_path="/Applications/HIN Client.app/Contents/Resources/app/proxysettings"
 proxysettings_script_path="/Applications/HIN Client.app/Contents/Resources/app/proxysettings.sh"
