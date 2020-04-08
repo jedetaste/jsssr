@@ -33,7 +33,6 @@ if [ -s "/usr/local/bin/erase-install" ]; then
     /usr/local/bin/erase-install \
       --reinstall \
       --os=${installer_version} \
-      --overwrite \
       --extras=/tmp/First_Boot_Recon.pkg
 
   fi
