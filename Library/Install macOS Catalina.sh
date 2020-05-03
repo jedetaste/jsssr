@@ -24,7 +24,6 @@ if [ -s "/usr/local/bin/erase-install" ]; then
     /usr/local/bin/erase-install \
       --reinstall \
       --os=${installer_version} \
-      --overwrite \
       --extras=/tmp/First_Boot_Recon.pkg \
       --catalogurl=https://swscan.apple.com/content/catalogs/others/index-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog
 
