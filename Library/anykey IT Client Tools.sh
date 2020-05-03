@@ -511,6 +511,20 @@ chown root:wheel "/usr/local/bin/assimilateownership"
 chmod 775 "/usr/local/bin/assimilateownership"
 chmod +x "/usr/local/bin/assimilateownership"
 
+# osversion
+
+echo "=> Install 'osversion'"
+
+if [ -s "/usr/local/bin/osversion" ]; then
+  rm -f "/usr/local/bin/osversion"
+fi
+
+curl -so "/usr/local/bin/osversion" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/osversion"
+
+chown root:wheel "/usr/local/bin/osversion"
+chmod 775 "/usr/local/bin/osversion"
+chmod +x "/usr/local/bin/osversion"
+
 # macosvpn
 
 echo "=> Install 'macosvpn'"
