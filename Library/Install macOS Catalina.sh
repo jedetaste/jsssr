@@ -17,6 +17,8 @@ if [ -s "/usr/local/bin/erase-install" ]; then
 
   if [ "${os_minor}" -lt 13 ]; then
 
+    caffeinate -d -i -m -s &
+
     softwareupdate --reset-ignored
 
     /usr/local/bin/erase-install \
@@ -26,7 +28,11 @@ if [ -s "/usr/local/bin/erase-install" ]; then
       --extras=/tmp/First_Boot_Recon.pkg \
       --catalogurl=https://swscan.apple.com/content/catalogs/others/index-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog
 
+    killall caffeinate
+
   else
+
+    caffeinate -d -i -m -s &
 
     softwareupdate --reset-ignored
 
@@ -34,6 +40,8 @@ if [ -s "/usr/local/bin/erase-install" ]; then
       --reinstall \
       --os=${installer_version} \
       --extras=/tmp/First_Boot_Recon.pkg
+
+    killall caffeinate
 
   fi
 
