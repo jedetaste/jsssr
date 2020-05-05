@@ -1,6 +1,6 @@
 #!/bin/bash
 
-spruce_version="3.0.0b5"
+spruce_version="3.0.0"
 
 curl \
   -s \
