@@ -17,10 +17,10 @@ install_adobe_air() {
 
 }
 
-if [ -z $(defaults read "/Applications/Utilities/Adobe AIR Application Installer.app/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null) ]; then
+if [ -z "$(defaults read "/Applications/Utilities/Adobe AIR Application Installer.app/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null)" ]; then
   echo "=> Adobe AIR not installed"
   install_adobe_air
-elif [ ! $(defaults read "/Applications/Utilities/Adobe AIR Application Installer.app/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null) = "${version}" ]; then
+elif [ ! "$(defaults read "/Applications/Utilities/Adobe AIR Application Installer.app/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null)" = "${version}" ]; then
   echo "=> Adobe AIR outdated"
   install_adobe_air
 else
