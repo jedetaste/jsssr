@@ -384,7 +384,7 @@ if [ "${minor}" -ge 13 ]; then
 
   echo "=> Install 'mas'"
 
-  version="1.6.3"
+  version="1.7.0"
 
   curl -s -L -o "/tmp/mas-${version}.pkg" "https://github.com/mas-cli/mas/releases/download/v${version}/mas.pkg"
 
