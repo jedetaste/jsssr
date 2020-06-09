@@ -6,6 +6,8 @@ application_path=(
   '/Applications/WhatsApp.app'
   '/Applications/Scratch 2.app'
   '/Applications/Dropbox.app'
+  '/Applications/Citrix Workspace.app'
+  '/Applications/Signal.app'
   '/Applications/Minecraft.app'
   '/Applications/Lernprogramme/TastaBasta Training/'
   '/Applications/Lernprogramme/Blitzrechnen/'
@@ -15,7 +17,6 @@ application_path=(
   '/Applications/Lernprogramme/New Inspiration IC/'
   '/Applications/ClinDoeil.app'
   '/Applications/Millefeuilles.app'
-  '/Applications/Signal.app'
 )
 
 for application in "${application_path[@]}"; do
