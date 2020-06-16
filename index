@@ -7,10 +7,12 @@ Demote Privileges.sh
 Disable ARD.sh
 Disable Adobe Flash Player Auto Update.sh
 Disable AutoUpdate ActivInspire.sh
+Disable Automatic Apple Software Update.sh
 Disable Notifications Lock Screen.sh
 Disable Single User Mode.sh
 Enable ARD.sh
 Enable Automatic Apple Software Update.sh
+Enable Trackpad Tap To Click.sh
 Google Chrome Enable Auto Update.py
 Install AbaClient.sh
 Install Adobe AIR.sh
