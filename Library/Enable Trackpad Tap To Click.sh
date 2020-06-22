@@ -1,6 +1,6 @@
 #/bin/bash
 
-su -l "$(/usr/local/bin/currentuser)" -c "defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true"
+su -l "$(/usr/local/bin/currentuser)" -c "defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true && killall cfprefsd"
 
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 
