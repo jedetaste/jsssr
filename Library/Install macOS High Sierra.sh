@@ -11,6 +11,8 @@ if [ "${os_minor}" -lt 11 ]; then
 fi
 
 if [ -s "/usr/local/bin/erase-install" ]; then
+  
+  [ -d "/Applications/Install macOS Sierra.app" ] && rm -rf "/Applications/Install macOS Sierra.app"
 
   echo "Download and Install 'First_Boot_Recon.pkg'"
   curl -s -o "/tmp/First_Boot_Recon.pkg" "https://cdn-clients.anykeyit.ch/Static/First_Boot_Recon.pkg"
