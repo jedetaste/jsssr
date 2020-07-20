@@ -12,6 +12,10 @@ fi
 
 if [ -s "/usr/local/bin/erase-install" ]; then
 
+  [ -d "/Applications/Install macOS Mojave.app" ] && rm -rf "/Applications/Install macOS Mojave.app"
+  [ -d "/Applications/Install macOS High Sierra.app" ] && rm -rf "/Applications/Install macOS High Sierra.app"
+  [ -d "/Applications/Install macOS Sierra.app" ] && rm -rf "/Applications/Install macOS Sierra.app"
+
   echo "Download and Install 'First_Boot_Recon.pkg'"
   curl -s -o "/tmp/First_Boot_Recon.pkg" "https://cdn-clients.anykeyit.ch/Static/First_Boot_Recon.pkg"
 
