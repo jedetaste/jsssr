@@ -20,7 +20,7 @@ readonly suffix="${3}"
 
 csvPath="/private/tmp/computernames.csv"
 
-# If first argument is "serialnumber" use serial to set computername
+# If first argument is "serialnumber" we are assigning the Serial as Computername
 
 if [ "${1}" == "serialnumber" ]; then
   echo "==> Use serialnumber as name..."
@@ -32,7 +32,7 @@ else
   if [ -f "${csvPath}" ]; then
     echo "==> CSV File found, continuing with local copy..."
   else
-    echo "==> CSV File no found, downloading..."
+    echo "==> No local CSV File found, downloading from URL..."
     curl -L -o "${csvPath}" "${csvURL}"
   fi
 
@@ -40,7 +40,7 @@ else
 
   jamf setComputerName -fromFile "${csvPath}"
 
-  # Delete the computernames.csv
+  # Delete the computernames.csv File
 
   rm -f "${csvPath}"
 
@@ -48,4 +48,4 @@ fi
 
 # Update computer inventory
 
-/usr/local/bin/jamf "recon"
+/usr/local/bin/jamf recon
