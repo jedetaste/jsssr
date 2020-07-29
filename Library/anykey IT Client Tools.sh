@@ -166,7 +166,7 @@ rm -rf "/tmp/mysides-${version}.pkg"
 
 echo "=> Install 'desktoppr'"
 
-version="0.2"
+version="0.3"
 
 curl -s -L -o "/tmp/desktoppr-${version}.pkg" "https://github.com/scriptingosx/desktoppr/releases/download/v${version}/desktoppr-${version}.pkg"
 
