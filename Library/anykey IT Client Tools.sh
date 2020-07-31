@@ -554,7 +554,7 @@ elif [ -L "/usr/local/bin/erase-install" ]; then
   unlink "/usr/local/bin/erase-install"
 fi
 
-version="0.15.3"
+version="0.15.4"
 
 curl -s -L -o "/tmp/erase-install-${version}.zip" "https://github.com/grahampugh/erase-install/releases/download/v${version}/erase-install-${version}.zip"
 
