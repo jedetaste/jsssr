@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="18"
+version="19"
 
 curl -s -o "/tmp/ptmx${version}.dmg" \
   "https://www.steueramt.zh.ch/content/dam/finanzdirektion/ksta/steuererklaerung/software/install/ptmx${version}.dmg"
