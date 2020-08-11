@@ -3,7 +3,7 @@
 version="19"
 
 curl -s -o "/tmp/ptmx${version}.dmg" \
-  "https://www.steueramt.zh.ch/content/dam/finanzdirektion/ksta/steuererklaerung/software/install/ptmx${version}.dmg"
+  "https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/steuern-finanzen/steuern/natuerlichepersonen/release_installer/ptmx${version}.dmg"
 
 if [ -s "/tmp/ptmx${version}.dmg" ]; then
 
