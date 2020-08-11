@@ -2,6 +2,8 @@
 
 version="19"
 
+version_name="2019"
+
 curl -s -o "/tmp/ptmx${version}.dmg" \
   "https://www.zh.ch/content/dam/zhweb/bilder-dokumente/themen/steuern-finanzen/steuern/natuerlichepersonen/release_installer/ptmx${version}.dmg"
 
@@ -28,7 +30,7 @@ if [ -s "/tmp/ptmx${version}.dmg" ]; then
     fi
   done
 
-  "${volume_name}/Private Tax 2018 installieren.app/Contents/MacOS/JavaApplicationStub" -q
+  "${volume_name}/Private Tax ${version_name} installieren.app/Contents/MacOS/JavaApplicationStub" -q
 
   if [ -n "${volume_name}" ]; then
     diskutil eject "${volume_name}" >/dev/null 2>&1
