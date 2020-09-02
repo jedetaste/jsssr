@@ -1,7 +1,7 @@
 #!/bin/bash
 
-version="2020.1.7.93"
-download="http://develop.getschoolcraft.com/download/2020.1/SchoolCraftPremiumContent.pkg"
+version="2020.1.9.107"
+download="https://dl.cleverbridge.com/1010/rv7lo6-27027-63E0AFDA-236868974/SchoolCraftPremiumContent.pkg"
 
 if [ -s "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle" ]; then
   version_installed=$(cat <"/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle/version.txt" | tr -d '[:space:]')
