@@ -103,18 +103,6 @@ if [ -e "/mach_kernel" ]; then
   fi
 fi
 
-# Configure time settings
-
-echo "==> Set time server to 'time.euro.apple.com'"
-
-if [ "${minor}" -gt 13 ]; then
-  systemsetup -setusingnetworktime on
-  sntp -sS "time.euro.apple.com"
-else
-  systemsetup -setusingnetworktime on
-  ntpdate -u "time.euro.apple.com"
-fi
-
 # Enable location services
 
 echo "==> Enable location services"
