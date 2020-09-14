@@ -20,37 +20,33 @@ fi
 
 echo "==> Symlink useful applications"
 
-echo "Symlink 'Directory Utility.app'"
-if [[ ! -e "/Applications/Utilities/Directory Utility.app" ]]; then
-  ln -s "/System/Library/CoreServices/Applications/Directory Utility.app" "/Applications/Utilities/Directory Utility.app"
-fi
+symlink_applications=(
+  "/Applications/Utilities/Directory Utility.app"
+  "/Applications/Utilities/Network Utility.app"
+  "/Applications/Utilities/Screen Sharing.app"
+  "/System/Library/CoreServices/Applications/Directory Utility.app"
+  "/System/Library/CoreServices/Applications/Network Utility.app"
+  "/System/Library/CoreServices/Applications/Screen Sharing.app"
+  "/System/Library/CoreServices/Applications/DVD Player.app"
+)
 
-if [[ -L "/Applications/Utilities/Directory Utility.app" ]]; then
-  rm "/Applications/Utilities/Directory Utility.app"
-  ln -s "/System/Library/CoreServices/Applications/Directory Utility.app" "/Applications/Utilities/Directory Utility.app"
-fi
+for application in "${symlink_applications[@]}"; do
+  if [ -d "${application}" ]; then
 
-echo "Symlink 'Network Utility.app'"
-if [[ ! -e "/Applications/Utilities/Network Utility.app" ]]; then
-  ln -s "/System/Library/CoreServices/Applications/Network Utility.app" "/Applications/Utilities/Network Utility.app"
-fi
+    if [ -L "/Applications/Utilities/$(basename "${application}")" ]; then
+      echo "Unlink '/Applications/Utilities/$(basename "${application}")'"
+      unlink "/Applications/Utilities/$(basename "${application}")"
+    fi
 
-if [[ -L "/Applications/Utilities/Network Utility.app" ]]; then
-  rm "/Applications/Utilities/Network Utility.app"
-  ln -s "/System/Library/CoreServices/Applications/Network Utility.app" "/Applications/Utilities/Network Utility.app"
-fi
-
-echo "Symlink 'Screen Sharing.app'"
-if [[ ! -e "/Applications/Utilities/Screen Sharing.app" ]]; then
-  ln -s "/System/Library/CoreServices/Applications/Screen Sharing.app" "/Applications/Utilities/Screen Sharing.app"
-fi
-
-if [[ -L "/Applications/Utilities/Screen Sharing.app" ]]; then
-  rm "/Applications/Utilities/Screen Sharing.app"
-  ln -s "/System/Library/CoreServices/Applications/Screen Sharing.app" "/Applications/Utilities/Screen Sharing.app"
-fi
+    if [ ! -e "/Applications/Utilities/$(basename "${application}")" ]; then
+      echo "Link '${application}' to '/Applications/Utilities/'"
+      ln -s "${application}" "/Applications/Utilities/"
+    fi
+  fi
+done
 
 echo "Symlink 'jamf.log'"
+
 if [[ ! -e "/Users/admin/Desktop/jamf.log" ]]; then
   ln -s "/var/log/jamf.log" "/Users/admin/Desktop/jamf.log"
 fi
