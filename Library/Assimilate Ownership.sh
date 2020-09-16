@@ -18,6 +18,7 @@ application_path=(
   "/Applications/Lernprogramme/New Inspiration IC/"
   "/Applications/ClinDoeil.app"
   "/Applications/Millefeuilles.app"
+  "/Applications/Autodesk Fusion 360.app"
 )
 
 for application in "${application_path[@]}"; do
