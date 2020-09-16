@@ -27,7 +27,6 @@ symlink_applications=(
   "/System/Library/CoreServices/Applications/Directory Utility.app"
   "/System/Library/CoreServices/Applications/Network Utility.app"
   "/System/Library/CoreServices/Applications/Screen Sharing.app"
-  "/System/Library/CoreServices/Applications/DVD Player.app"
 )
 
 for application in "${symlink_applications[@]}"; do
@@ -41,6 +40,25 @@ for application in "${symlink_applications[@]}"; do
     if [ ! -e "/Applications/Utilities/$(basename "${application}")" ]; then
       echo "Link '${application}' to '/Applications/Utilities/'"
       ln -s "${application}" "/Applications/Utilities/"
+    fi
+  fi
+done
+
+symlink_applications=(
+  "/System/Library/CoreServices/Applications/DVD Player.app"
+)
+
+for application in "${symlink_applications[@]}"; do
+  if [ -d "${application}" ]; then
+
+    if [ -L "/Applications/Utilities/$(basename "${application}")" ]; then
+      echo "Unlink '/Applications/Utilities/$(basename "${application}")'"
+      unlink "/Applications/Utilities/$(basename "${application}")"
+    fi
+
+    if [ ! -e "/Applications/$(basename "${application}")" ]; then
+      echo "Link '${application}' to '/Applications/'"
+      ln -s "${application}" "/Applications/"
     fi
   fi
 done
