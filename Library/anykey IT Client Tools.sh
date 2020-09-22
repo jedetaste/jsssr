@@ -224,6 +224,8 @@ if [ -s "/usr/local/bin/aky" ]; then
   rm -f "/usr/local/bin/aky"
 fi
 
+mkdir -p "/usr/local/bin/"
+
 curl -so "/usr/local/bin/aky" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aky"
 
 chown root:wheel "/usr/local/bin/aky"
