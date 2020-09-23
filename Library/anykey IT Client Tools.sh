@@ -18,7 +18,7 @@ fi
 
 echo "=> Install 'appleLoops'"
 
-version="3.1.8"
+version="3.1.9"
 
 curl -s -L -o "/tmp/appleloops-${version}.pkg" "https://github.com/carlashley/appleloops/releases/download/v${version}/appleloops-${version}.pkg"
 
