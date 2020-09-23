@@ -11,9 +11,9 @@ if [ -d "/Applications/GarageBand.app" ]; then
 
   if [ -n "${caching_server}" ]; then
     if [ "${1}" = "optional" ]; then
-      "/usr/local/bin/appleLoops" --deployment -m -o --cache-server "https://${caching_server}"
+      "/usr/local/bin/appleLoops" --deployment -m -o --cache-server "http://${caching_server}"
     else
-      "/usr/local/bin/appleLoops" --deployment -m --cache-server "https://${caching_server}"
+      "/usr/local/bin/appleLoops" --deployment -m --cache-server "http://${caching_server}"
     fi
   else
     if [ "${1}" = "optional" ]; then
