@@ -306,6 +306,13 @@ if [ -s "/Remove2011.log" ]; then
   rm -f "/Remove2011.log"
 fi
 
+# Allow enable TimeMachine for standard users
+
+echo "==> Allow enable TimeMachine for standard users"
+
+security authorizationdb write system.preferences allow
+security authorizationdb write system.preferences.timemachine allow
+
 # Disable Security Update 2020-005
 # https://mrmacintosh.com/mojave-2020-005-security-update-causing-major-problems-updated/?utm_source=rss&utm_medium=rss&utm_campaign=mojave-2020-005-security-update-causing-major-problems-updated
 
