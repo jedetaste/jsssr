@@ -305,3 +305,8 @@ if [ -s "/Remove2011.log" ]; then
   echo "==> Remove wrongly saved Remove2011.log"
   rm -f "/Remove2011.log"
 fi
+
+# Disable Security Update 2020-005
+# https://mrmacintosh.com/mojave-2020-005-security-update-causing-major-problems-updated/?utm_source=rss&utm_medium=rss&utm_campaign=mojave-2020-005-security-update-causing-major-problems-updated
+
+softwareupdate --ignore "Security Update 2020-005"
