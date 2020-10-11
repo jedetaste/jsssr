@@ -386,7 +386,7 @@ if [ "${minor}" -ge 13 ]; then
 
   echo "=> Install 'mas'"
 
-  version="1.7.0"
+  version="1.7.1"
 
   curl -s -L -o "/tmp/mas-${version}.pkg" "https://github.com/mas-cli/mas/releases/download/v${version}/mas.pkg"
 
@@ -556,7 +556,7 @@ elif [ -L "/usr/local/bin/erase-install" ]; then
   unlink "/usr/local/bin/erase-install"
 fi
 
-version="0.15.4"
+version="0.15.5"
 
 curl -s -L -o "/tmp/erase-install-${version}.zip" "https://github.com/grahampugh/erase-install/releases/download/v${version}/erase-install-${version}.zip"
 
