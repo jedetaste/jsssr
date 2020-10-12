@@ -17,7 +17,7 @@ if [ -d "/Applications/GarageBand.app" ]; then
     fi
   else
     if [ "${1}" = "optional" ]; then
-      "/usr/local/bin/appleLoops" --deployment -m -o
+      "/usr/local/bin/appleLoops" --deployment -m -o -q
     else
       "/usr/local/bin/appleLoops" --deployment -m
     fi
