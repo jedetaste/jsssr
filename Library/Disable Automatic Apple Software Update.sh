@@ -23,7 +23,8 @@ fi
 
 property_list="/Library/Preferences/com.apple.commerce.plist"
 
+defaults write "${property_list}" AutoUpdate -bool false
+
 if [[ (${osvers_major} -eq 10 && (${osvers_minor} -ge 10 && ${osvers_minor} -lt 14)) ]]; then
   defaults write "${property_list}" AutoUpdateRestartRequired -bool false
-  defaults write "${property_list}" AutoUpdate -bool false
 fi
