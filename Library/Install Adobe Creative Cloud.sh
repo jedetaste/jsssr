@@ -10,7 +10,7 @@ echo "=> Extract '/tmp/adobe-creative-cloud.dmg'"
 
 extract_dir=$(dmg-extractor "/tmp/adobe-creative-cloud.dmg")
 
-echo "=> "
+echo "=> Run installer '${extract_dir}/Install.app/Contents/MacOS/Install'"
 
 sudo "${extract_dir}/Install.app/Contents/MacOS/Install" --mode=silent
 
