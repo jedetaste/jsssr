@@ -2,4 +2,4 @@
 
 /usr/local/bin/aky adobecreativecloudinstaller
 
-sudo -E /tmp/Install.app/Contents/MacOS/Install --mode=silent
+sudo /tmp/Install.app/Contents/MacOS/Install --mode=silent
