@@ -217,9 +217,7 @@ rm -rf "/Users/${consoleuser}/Library/Safari/Extensions/s1h2m3o4o5p6i.safariextz
 
 # Forcing XProtect blacklist updates
 echo "Forcing XProtect blacklist updates"
-defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
 softwareupdate --background-critical
-defaults write /Library/Preferences/com.apple.SoftwareUpdate AutomaticCheckEnabled -bool false
 
 # Repair Access Rights on Users folder
 echo "Reparing Users Folder Access rights"
