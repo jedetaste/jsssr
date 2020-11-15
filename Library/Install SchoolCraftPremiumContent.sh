@@ -2,7 +2,7 @@
 
 if [ -d "/Applications/WorksheetCrafter.app" ]; then
 
-  version="2020.1.9.107"
+  version="2020.1.11.119"
   download="https://dl.cleverbridge.com/1010/rv7lo6-27027-63E0AFDA-236868974/SchoolCraftPremiumContent.pkg"
 
   if [ -s "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle" ]; then
@@ -12,15 +12,15 @@ if [ -d "/Applications/WorksheetCrafter.app" ]; then
     fi
   fi
 
-  tmpDir=$(/usr/local/bin/tmpDir)
+  tmp_dir="/tmp/schoolcraft" && mkdir -p "${tmp_dir}"
 
   echo "=> Download '${download}'"
-  curl -s -o "${tmpDir}/SchoolCraftPremiumContent.pkg" "${download}"
+  curl -s -o "${tmp_dir}/SchoolCraftPremiumContent.pkg" "${download}"
 
-  if [ -s "${tmpDir}/SchoolCraftPremiumContent.pkg" ]; then
+  if [ -s "${tmp_dir}/SchoolCraftPremiumContent.pkg" ]; then
 
-    echo "=> Prepare '${tmpDir}/SchoolCraftPremiumContent.pkg'"
-    pkgutil --expand-full "${tmpDir}/SchoolCraftPremiumContent.pkg" "${tmpDir}/SchoolCraftPremiumContent-expanded.pkg"
+    echo "=> Prepare '${tmp_dir}/SchoolCraftPremiumContent.pkg'"
+    pkgutil --expand-full "${tmp_dir}/SchoolCraftPremiumContent.pkg" "${tmp_dir}/SchoolCraftPremiumContent-expanded.pkg"
 
     echo "=> Extract Payload 'SchoolCraft Premium Content.bundle'"
     if [ -s "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle" ]; then
@@ -29,7 +29,7 @@ if [ -d "/Applications/WorksheetCrafter.app" ]; then
 
     mkdir -p "/Library/Application Support/WorksheetCrafter"
 
-    mv "${tmpDir}/SchoolCraftPremiumContent-expanded.pkg/SchoolCraftPremiumContent.pkg/Payload/tmp/SchoolCraft Premium Content.bundle" "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle"
+    mv "${tmp_dir}/SchoolCraftPremiumContent-expanded.pkg/SchoolCraftPremiumContent.pkg/Payload/tmp/SchoolCraft Premium Content.bundle" "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle"
     chmod -R 755 "/Library/Application Support/WorksheetCrafter/SchoolCraft Premium Content.bundle"
 
     for user in /Users/*; do
@@ -47,7 +47,7 @@ if [ -d "/Applications/WorksheetCrafter.app" ]; then
 
   fi
 
-  rm -rf "${tmpDir}"
+  rm -rf "${tmp_dir}"
 
 else
   echo "=> WorksheetCrafter.app is not installed"
