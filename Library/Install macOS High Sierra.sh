@@ -1,20 +1,19 @@
 #!/bin/bash
-# shellcheck disable=SC2034
-
-IFS='.' read -r os_major os_minor os_revision < <(sw_vers -productVersion)
+# shellcheck disable=SC2071
 
 installer_version="10.13"
 
-if [ "${os_minor}" -lt 11 ]; then
-  echo "Error: Please run upgrade manually, as macOS Upgrade from OS X 10.10 or less is not supported"
-  exit 1
+if [[ "$(sw_vers -buildVersion)" < "15" ]]; then
+  echo "Error: Please run upgrade manually, as macOS Upgrade from OS X 10.10 or less is not supported" && exit 1
 fi
 
 if [ -s "/usr/local/bin/erase-install" ]; then
 
   [ -d "/Applications/Install macOS Sierra.app" ] && rm -rf "/Applications/Install macOS Sierra.app"
 
-  if [ "${os_minor}" -lt 13 ]; then
+  if [[ "$(sw_vers -buildVersion)" < "17" ]]; then
+
+    softwareupdate --reset-ignored
 
     /usr/local/bin/erase-install \
       --reinstall \
