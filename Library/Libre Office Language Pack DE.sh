@@ -1,8 +1,7 @@
 #!/bin/bash
 
-language="de"
-version="7.0.3"
-url="https://download.documentfoundation.org/libreoffice/stable/${version}/mac/x86_64/LibreOffice_${version}_MacOS_x86-64_langpack_${language}.dmg"
+version="$(curl -s -L "https://formulae.brew.sh/api/cask/libreoffice-language-pack.json" | jq -r '.version')"
+url="https://download.documentfoundation.org/libreoffice/stable/${version}/mac/x86_64/LibreOffice_${version}_MacOS_x86-64_langpack_de.dmg"
 
 curl -s -L -o "/tmp/libreoffice-langpack-de.dmg" "${url}"
 
