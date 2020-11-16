@@ -2,17 +2,8 @@
 
 # Determine macOS Version
 
-macos_vers() {
-  IFS='.' read -r major minor revision < <(sw_vers -productVersion)
-}
-
-macos_vers
-
-if [ "${minor}" -gt 11 ]; then
-  echo "=> macOS version is '${major}.${minor}.${revision}'"
-else
-  echo "=> OS X version is '${major}.${minor}.${revision}'"
-fi
+echo "=> Determine macOS Version"
+echo "=> Mac is running Darwin $(sw_vers -buildVersion)"
 
 # appleLoops
 
@@ -382,7 +373,7 @@ chmod +x "/usr/local/bin/ncdu"
 
 # mas
 
-if [ "${minor}" -ge 13 ]; then
+if [[ "$(sw_vers -buildVersion)" > "18" ]]; then
 
   echo "=> Install 'mas'"
 
