@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="2019.2"
+version="$(curl -s -L "https://formulae.brew.sh/api/cask/gpg-suite.json" | jq -r '.version')"
 
 echo "=> Download 'https://releases.gpgtools.org/GPG_Suite-${version}.dmg'"
 
