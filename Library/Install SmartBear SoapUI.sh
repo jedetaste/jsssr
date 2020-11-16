@@ -1,7 +1,7 @@
 #!/bin/bash
 # shellcheck disable=SC2154
 
-version="5.5.0"
+version="$(curl -s -L "https://formulae.brew.sh/api/cask/soapui.json" | jq -r '.version')"
 
 install_soapui() {
 
