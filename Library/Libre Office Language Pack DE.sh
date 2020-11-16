@@ -1,7 +1,7 @@
 #!/bin/bash
 
 language="de"
-version="6.4.5"
+version="7.0.3"
 url="https://download.documentfoundation.org/libreoffice/stable/${version}/mac/x86_64/LibreOffice_${version}_MacOS_x86-64_langpack_${language}.dmg"
 
 curl -s -L -o "/tmp/libreoffice-langpack-de.dmg" "${url}"
