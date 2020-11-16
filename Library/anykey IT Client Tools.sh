@@ -9,7 +9,7 @@ echo "=> Mac is running Darwin $(sw_vers -buildVersion)"
 
 echo "=> Install 'appleLoops'"
 
-version="3.1.9"
+version="3.2.1"
 
 curl -s -L -o "/tmp/appleloops-${version}.pkg" "https://github.com/carlashley/appleloops/releases/download/v${version}/appleloops-${version}.pkg"
 
