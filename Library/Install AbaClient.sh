@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version="2.0.439"
+version="2.2.672"
 
 install_abaclient() {
 
@@ -13,9 +13,6 @@ install_abaclient() {
 
   echo "=> Running installer at '${extract_dir}/AbaClient.pkg'"
   installer -pkg "${extract_dir}/AbaClient.pkg" -target /
-
-  # echo "=> Running installer at '${extract_dir}/AbaClientManager.pkg'"
-  # installer -pkg "${extract_dir}/AbaClientManager.pkg" -target /
 
   echo "=> Remove bundle '/Applications/AbaClient.app' from gatekeeper quarantine"
   xattr -r -d -s com.apple.quarantine "/Applications/AbaClient.app"
