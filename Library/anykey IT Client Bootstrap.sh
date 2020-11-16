@@ -1,24 +1,14 @@
 #!/bin/bash
+# shellcheck disable=SC2071,SC2034
 
 # Determine OS version and build version
 
-echo "==> Determine macOS Version"
-
-macos_vers() {
-  IFS='.' read -r major minor revision < <(/usr/bin/sw_vers -productVersion)
-}
-
-macos_vers
-
-if [ "${minor}" -gt 11 ]; then
-  echo "==> Mac is running macOS ${major}.${minor}.${revision} ($(sw_vers -buildVersion))"
-else
-  echo "==> Mac is running OS X ${major}.${minor}.${revision} ($(sw_vers -buildVersion))"
-fi
+echo "=> Determine macOS Version"
+echo "=> Mac is running Darwin $(sw_vers -buildVersion)"
 
 # Symlink useful applications
 
-echo "==> Symlink useful applications"
+echo "=> Symlink useful applications"
 
 symlink_applications=(
   "/Applications/Utilities/Directory Utility.app"
@@ -71,19 +61,19 @@ fi
 
 # Enable SSH
 
-echo "==> Enable SSH"
+echo "=> Enable SSH"
 
 systemsetup -setremotelogin on
 
 # Enable Gatekeeper
 
-echo "==> Enable Gatekeeper"
+echo "=> Enable Gatekeeper"
 
 spctl --master-enable
 
 # Disable printer sharing on all printers
 
-echo "==> Disable printer sharing on all printers"
+echo "=> Disable printer sharing on all printers"
 
 cupsctl --no-share-printers
 
@@ -95,7 +85,7 @@ done
 
 # Adds all users to print admin group
 
-echo "==> Add all users to 'lpadmin' group"
+echo "=> Add all users to 'lpadmin' group"
 
 security authorizationdb write system.preferences.printing allow
 security authorizationdb write system.print.operator allow
@@ -104,24 +94,15 @@ dseditgroup -o edit -n /Local/Default -a everyone -t group _lpadmin
 
 # Enable CUPS web interface
 
-echo "==> Enable CUPS web interface"
+echo "=> Enable CUPS web interface"
 
 cupsctl WebInterface=yes
 
-# Make mach_kernel invisible
-
-if [ -e "/mach_kernel" ]; then
-  if ! ls -lO /mach_kernel | grep hidden >/dev/null; then
-    echo "==> /mach_kernel not set to be hidden. Re-hiding."
-    chflags hidden "/mach_kernel"
-  fi
-fi
-
 # Enable location services
 
-echo "==> Enable location services"
+echo "=> Enable location services"
 
-if [ "${minor}" -gt 13 ]; then
+if [[ "$(sw_vers -buildVersion)" > "16" ]]; then
   defaults write /var/db/locationd/Library/Preferences/ByHost/com.apple.locationd LocationServicesEnabled -int 1
   defaults write /Library/Preferences/com.apple.locationmenu "ShowSystemServices" -bool true
   launchctl kickstart -k system/com.apple.locationd
@@ -149,27 +130,31 @@ elif [ "${1}" == "No Localisation" ]; then
 fi
 
 if [ "${localisation}" == "true" ]; then
-  echo "==> Run localisation to '${langSystem}'"
+  echo "=> Run localisation to '${langSystem}'"
   languagesetup -langspec "${langSystem}"
 fi
 
 # Disable iCloud, Data & Privacy, Diagnostic, Touch ID and Siri pop-up settings
 
-echo "==> Disable iCloud, Data & Privacy, Diagnostic, Touch ID and Siri pop-up settings"
+if [[ "$(sw_vers -buildVersion)" > "10" ]]; then
 
-if [ "${minor}" -ge 7 ]; then
+  echo "=> Disable iCloud, Data & Privacy, Diagnostic, Touch ID and Siri pop-up settings"
+
+  IFS='.' read -r major minor revision < <(sw_vers -productVersion)
 
   for user_template in "/System/Library/User Template"/*; do
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeCloudSetup -bool true
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" GestureMovieSeen none
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenCloudProductVersion "${major}.${minor}"
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenBuddyBuildVersion "$(sw_vers -buildVersion)"
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeePrivacy -bool true
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeTrueTonePrivacy -bool true
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeTouchIDSetup -bool true
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeSiriSetup -bool true
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeActivationLock -bool true
-    defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeScreenTime -bool true
+    if [ -d "${user_template}" ]; then
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeCloudSetup -bool true
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" GestureMovieSeen none
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenCloudProductVersion "${major}.${minor}"
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" LastSeenBuddyBuildVersion "$(sw_vers -buildVersion)"
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeePrivacy -bool true
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeTrueTonePrivacy -bool true
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeTouchIDSetup -bool true
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeSiriSetup -bool true
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeActivationLock -bool true
+      defaults write "${user_template}/Library/Preferences/com.apple.SetupAssistant.plist" DidSeeScreenTime -bool true
+    fi
   done
 
   for user_home in /Users/*; do
@@ -195,7 +180,7 @@ fi
 
 # Install filter.anykey.ch SSL Root certificate
 
-echo "==> Install filter.anykey.ch SSL Root certificate"
+echo "=> Install filter.anykey.ch SSL Root certificate"
 
 curl -so "/private/tmp/NetAlerts.cer" "https://filter.anykey.ch/certs/NetAlerts.cer"
 security add-trusted-cert -d -r trustRoot -p ssl -p basic -k "/Library/Keychains/System.keychain" "/private/tmp/NetAlerts.cer"
@@ -203,18 +188,20 @@ rm -f "/private/tmp/NetAlerts.cer"
 
 # Reset admin user picture
 
-echo "==> Reset admin user picture"
+echo "=> Reset admin user picture"
 
 dscl . delete /Users/admin jpegphoto
 dscl . delete /Users/admin Pictures
 
 # Disable Safari setup assistent in all User Template
 
-echo "==> Disable Safari setup assistent in all user template"
+echo "=> Disable Safari setup assistent in all user template"
 
 for user_template in "/System/Library/User Template"/*; do
-  defaults write "${user_template}/Library/Preferences/com.apple.Safari.plist" LastOSVersionSafariWasLaunchedOn -string "${minor}"
-  defaults write "${user_template}/Library/Preferences/com.apple.Safari.plist" LastSafariVersionWithWelcomePage -string "$(defaults read /Applications/Safari.app/Contents/Info.plist CFBundleShortVersionString)"
+  if [ -d "${user_template}" ]; then
+    defaults write "${user_template}/Library/Preferences/com.apple.Safari.plist" LastOSVersionSafariWasLaunchedOn -string "${minor}"
+    defaults write "${user_template}/Library/Preferences/com.apple.Safari.plist" LastSafariVersionWithWelcomePage -string "$(defaults read /Applications/Safari.app/Contents/Info.plist CFBundleShortVersionString)"
+  fi
 done
 
 # Microsoft Office Bootstrap
@@ -228,43 +215,49 @@ defaults write "/Library/Preferences/com.microsoft.office.plist" kCUIThemePrefer
 
 # Disable Oracle Java Auto Update
 
-echo "==> Disable Oracle Java Auto Update"
+echo "=> Disable Oracle Java Auto Update"
 
 defaults write "/Library/Preferences/com.oracle.java.Java-Updater.plist" JavaAutoUpdateEnabled -bool false
 
 # Enable right click on AppleHIDMouse
 
-echo "==> Enable right click on AppleHIDMouse"
+echo "=> Enable right click on AppleHIDMouse"
 
 for user_template in "/System/Library/User Template"/*; do
-  defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleHIDMouse.plist" Button2 -int 2
+  if [ -d "${user_template}" ]; then
+    defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleHIDMouse.plist" Button2 -int 2
+  fi
 done
 
 # Enable right click on AppleBluetoothMultitouch
 
-echo "==> Enable right click on AppleBluetoothMultitouch"
+echo "=> Enable right click on AppleBluetoothMultitouch"
 
 for user_template in "/System/Library/User Template"/*; do
-  defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleBluetoothMultitouch.mouse.plist" MouseButtonMode -string TwoButton
+  if [ -d "${user_template}" ]; then
+    defaults write "${user_template}/Library/Preferences/com.apple.driver.AppleBluetoothMultitouch.mouse.plist" MouseButtonMode -string TwoButton
+  fi
 done
 
 # Enable tap to click on trackpad
 
-echo "==> Enable tap to click on trackpad"
+echo "=> Enable tap to click on trackpad"
 
 for user_template in "/System/Library/User Template"/*; do
-  defaults write "${user_template}/Library/Preferences/com.apple.AppleMultitouchTrackpad.plist" Clicking -bool true
+  if [ -d "${user_template}" ]; then
+    defaults write "${user_template}/Library/Preferences/com.apple.AppleMultitouchTrackpad.plist" Clicking -bool true
+  fi
 done
 
 # Disable Auto Update Adobe Acrobat Reader
 
-echo "==> Disable Auto Update Adobe Acrobat Reader"
+echo "=> Disable Auto Update Adobe Acrobat Reader"
 
 defaults write "/Library/Preferences/com.adobe.Reader.plist" DC -dict-add "FeatureLockdown" "<dict><key>bUpdater</key><false/></dict>"
 
 # Disable Auto Update Adobe Flash Player
 
-echo "==> Disable Auto Update Adobe Flash Player"
+echo "=> Disable Auto Update Adobe Flash Player"
 
 mkdir -p "/Library/Application Support/Macromedia/" 2>/dev/null
 echo "AutoUpdateDisable=1" >"/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
@@ -273,6 +266,8 @@ echo "DisableAnalytics=1" >>"/Library/Application Support/Macromedia/mms.cfg" 2>
 
 # Extend threshold for minimal disk space
 
+echo "=> Extend threshold for minimal disk space"
+
 launchctl stop "com.apple.diskspaced"
 defaults write "com.apple.diskspaced" minFreeSpace 20
 launchctl start "com.apple.diskspaced"
@@ -280,35 +275,25 @@ launchctl start "com.apple.diskspaced"
 # Delete Adobe Reader Plugins
 
 if [ -e "/Library/Internet Plug-Ins/AdobePDFViewer.plugin" ]; then
-  echo "==> Delete Adobe Reader Plugin 'AdobePDFViewer.plugin'"
+  echo "=> Delete Adobe Reader Plugin 'AdobePDFViewer.plugin'"
   rm -rf "/Library/Internet Plug-Ins/AdobePDFViewer.plugin"
 fi
 
 if [ -e "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin" ]; then
-  echo "==> Delete Adobe Reader Plugins 'AdobePDFViewerNPAPI'"
+  echo "=> Delete Adobe Reader Plugins 'AdobePDFViewerNPAPI'"
   rm -rf "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin"
 fi
-
-# Correct Permissions Adobe Folder
-
-for user in $(ls /Users | grep -v Shared | grep -v Guest | grep -v '.localized'); do
-  if [ -d "/Users/${user}/Library/Application Support/Adobe/" ]; then
-    echo "==> Correct Permissions on Adobe Folder on '/Users/${user}'"
-    chown -R "${user}" "/Users/${user}/Library/Application Support/Adobe/"
-    chmod -R 700 "/Users/${user}/Library/Application Support/Adobe/"
-  fi
-done
 
 # Remove wrongly saved Remove2011.log
 
 if [ -s "/Remove2011.log" ]; then
-  echo "==> Remove wrongly saved Remove2011.log"
+  echo "=> Remove wrongly saved Remove2011.log"
   rm -f "/Remove2011.log"
 fi
 
 # Allow enable TimeMachine for standard users
 
-echo "==> Allow enable TimeMachine for standard users"
+echo "=> Allow enable TimeMachine for standard users"
 
 security authorizationdb write system.preferences allow
 security authorizationdb write system.preferences.timemachine allow
