@@ -19,7 +19,6 @@ Install Adobe AIR.sh
 Install Adobe Creative Cloud.sh
 Install Adobe Flash Player PPAPI.sh
 Install AdoptOpenJDK 8.sh
-Install ClinDoeil.sh
 Install Command Line Tools.sh
 Install Docker.sh
 Install GPG Suite.sh
@@ -29,7 +28,6 @@ Install HIN Client.sh
 Install HIN Filebox.sh
 Install HIN Video.sh
 Install Lame Library for Audacity.sh
-Install Millefeuilles.sh
 Install Parallels Desktop.sh
 Install Private Tax.sh
 Install SchoolCraftPremiumContent.sh
@@ -39,6 +37,7 @@ Install VirtualBox.sh
 Install Wordle.sh
 Install aky Patch Management.sh
 Install join.me.sh
+Install macOS Big Sur.sh
 Install macOS Catalina.sh
 Install macOS High Sierra.sh
 Install macOS Mojave.sh
@@ -47,7 +46,6 @@ JAMF Create Account.sh
 Libre Office Language Pack DE.sh
 Make Dock Non-Immutable.sh
 Microsoft Office License Removal.sh
-Oracle Java Security Exception.sh
 Purge Legacy Apple Apps.sh
 Purge Unmanaged Configuration Profiles.sh
 Remove All CUPS Printer.sh
