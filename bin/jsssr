@@ -42,13 +42,13 @@ function update_library() {
   fi
 
   echo "=> Pull latest index"
-  curl -so "${tmp_dir}/index" "${repository_uri}/index"
+  curl -s -L -H "Cache-Control: no-cache" -o "${tmp_dir}/index" "${repository_uri}/index"
 
   echo "=> Parse index"
   while read -r line && [ -n "${line}" ]; do
     echo "=> Pull latest '${line}'"
     line_purged="${line// /%20}"
-    curl -so "/usr/local/jsssr/${line}" "${repository_uri}/Library/${line_purged}"
+    curl -s -L -H "Cache-Control: no-cache" -o "/usr/local/jsssr/${line}" "${repository_uri}/Library/${line_purged}"
     chmod +x "/usr/local/jsssr/${line}"
   done <"${tmp_dir}/index"
 
