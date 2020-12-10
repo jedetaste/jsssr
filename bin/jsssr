@@ -27,13 +27,6 @@ fi
 
 function update_library() {
 
-  tmp_folder=$(getconf DARWIN_USER_TEMP_DIR)
-  rand_string=$(openssl rand -hex 5)
-
-  tmp_dir="${tmp_folder}${rand_string}" && mkdir -p "${tmp_dir}"
-
-  repository_uri="https://raw.githubusercontent.com/jedetaste/jsssr/master"
-
   if [ -d "/usr/local/jsssr" ]; then
     rm -rf "/usr/local/jsssr"
     mkdir -p "/usr/local/jsssr"
@@ -41,16 +34,22 @@ function update_library() {
     mkdir -p "/usr/local/jsssr"
   fi
 
-  echo "=> Pull latest index"
-  curl -s -L -H "Cache-Control: no-cache" -o "${tmp_dir}/index" "${repository_uri}/index"
+  echo "=> Pull latest master"
 
-  echo "=> Parse index"
-  while read -r line && [ -n "${line}" ]; do
-    echo "=> Pull latest '${line}'"
-    line_purged="${line// /%20}"
-    curl -s -L -H "Cache-Control: no-cache" -o "/usr/local/jsssr/${line}" "${repository_uri}/Library/${line_purged}"
-    chmod +x "/usr/local/jsssr/${line}"
-  done <"${tmp_dir}/index"
+  curl -s -L -H "Cache-Control: no-cache" -o "/tmp/jsssr-master.zip" "https://github.com/jedetaste/jsssr/archive/master.zip"
+
+  echo "=> Prepare library"
+
+  ditto -x -k "/tmp/jsssr-master.zip" "/tmp/jsssr-master"
+
+  mv "/tmp/jsssr-master/jsssr-master/Library/"* "/usr/local/jsssr/"
+
+  for object in /usr/local/jsssr/*; do
+    chmod +x "${object}"
+  done
+
+  rm -rf "/tmp/jsssr-master"
+  rm -f "/tmp/jsssr-master.zip"
 
 }
 
