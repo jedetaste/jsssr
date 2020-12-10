@@ -547,9 +547,9 @@ elif [ -L "/usr/local/bin/erase-install" ]; then
   unlink "/usr/local/bin/erase-install"
 fi
 
-version="0.15.6"
+version="0.16.0"
 
-curl -s -L -o "/tmp/erase-install-${version}.zip" "https://github.com/grahampugh/erase-install/releases/download/v${version}/erase-install-${version}.zip"
+curl -s -L -o "/tmp/erase-install-${version}.zip" "https://github.com/grahampugh/erase-install/archive/v${version}.zip"
 
 ditto -x -k "/tmp/erase-install-${version}.zip" "/tmp/"
 mv "/tmp/erase-install-${version}/erase-install.sh" "/usr/local/bin/erase-install" && chmod +x "/usr/local/bin/erase-install"
