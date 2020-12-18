@@ -1,11 +1,10 @@
 #!/bin/bash
 
-arch=$(/usr/bin/arch)
-if [ "$arch" == "arm64" ]; then
-    echo "Apple Silicon - Installing Rosetta"
-    /usr/sbin/softwareupdate --install-rosetta --agree-to-license
-elif [ "$arch" == "i386" ]; then
-    echo "Intel - Skipping Rosetta"
+if [ "$(/usr/bin/arch)" = "arm64" ]; then
+  echo "=> This Mac runs on Apple Silicon, installing Rosetta..."
+  /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+elif [ "$(/usr/bin/arch)" = "i386" ]; then
+  echo "=> This Mac runs on Intel"
 else
-    echo "Unknown Architecture"
+  echo "=> Unknown architecture"
 fi
