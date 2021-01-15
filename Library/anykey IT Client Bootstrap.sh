@@ -180,11 +180,15 @@ fi
 
 # Install filter.anykey.ch SSL Root certificate
 
-echo "=> Install filter.anykey.ch SSL Root certificate"
+if [[ "$(sw_vers -buildVersion)" < "20" ]]; then
 
-curl -so "/private/tmp/NetAlerts.cer" "https://filter.anykey.ch/certs/NetAlerts.cer"
-security add-trusted-cert -d -r trustRoot -p ssl -p basic -k "/Library/Keychains/System.keychain" "/private/tmp/NetAlerts.cer"
-rm -f "/private/tmp/NetAlerts.cer"
+  echo "=> Install filter.anykey.ch SSL Root certificate"
+
+  curl -so "/private/tmp/NetAlerts.cer" "https://filter.anykey.ch/certs/NetAlerts.cer"
+  security add-trusted-cert -d -r trustRoot -p ssl -p basic -k "/Library/Keychains/System.keychain" "/private/tmp/NetAlerts.cer"
+  rm -f "/private/tmp/NetAlerts.cer"
+
+fi
 
 # Reset admin user picture
 
