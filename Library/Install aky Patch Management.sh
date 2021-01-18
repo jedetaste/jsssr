@@ -1,54 +1,20 @@
 #!/bin/bash
 
-# Remove existing aky binaries
+[ ! -d "/usr/local/bin/" ] && mkdir -p "/usr/local/bin/"
+[ -s "/usr/local/bin/aky" ] && rm -f "/usr/local/bin/aky"
 
-if [ -d "/usr/local/aky/" ]; then
-  rm -rf "/usr/local/aky/"
-fi
+curl -so "/usr/local/bin/aky" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aky"
 
-aky_binary=(
-  "aky"
-  "aria2c@el_capitan"
-  "aria2c@high_sierra"
-  "aria2c@mojave"
-  "aria2c@sierra"
-  "download-helper"
-  "install-helper"
-  "jq"
-  "mas-helper"
-  "notification-helper"
-  "rg"
-  "versioning-helper"
-)
+chown root:wheel "/usr/local/bin/aky"
+chmod 775 "/usr/local/bin/aky"
+chmod +x "/usr/local/bin/aky"
 
-for ((i = 0; i < "${#aky_binary[@]}"; i++)); do
+[ -s "/usr/local/bin/jq" ] && rm -f "/usr/local/bin/jq"
 
-  [ -L "/usr/local/bin/${aky_binary[$i]}" ] && unlink "/usr/local/bin/${aky_binary[$i]}"
+release="1.6"
 
-  if [ -s "/usr/local/bin/${aky_binary[$i]}" ]; then
-    rm -f "/usr/local/bin/${aky_binary[$i]}"
-  fi
+curl -s -L -o "/usr/local/bin/jq" "https://github.com/stedolan/jq/releases/download/jq-${release}/jq-osx-amd64"
 
-done
-
-# Install aky binaries
-
-if [ ! -d "/usr/local/bin" ]; then
-  mkdir -p "/usr/local/bin"
-fi
-
-aky_binary=(
-  "aky"
-  "rg"
-  "csc"
-  "jq"
-  "aria2c"
-  "tmpDir"
-)
-
-for ((i = 0; i < "${#aky_binary[@]}"; i++)); do
-  rm -f "/usr/local/bin/${aky_binary[$i]}"
-  curl -so "/usr/local/bin/${aky_binary[$i]}" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/aky-src/${aky_binary[$i]}"
-  chown root:wheel "/usr/local/bin/${aky_binary[$i]}"
-  chmod +x "/usr/local/bin/${aky_binary[$i]}"
-done
+chown root:wheel "/usr/local/bin/jq"
+chmod 775 "/usr/local/bin/jq"
+chmod +x "/usr/local/bin/jq"
