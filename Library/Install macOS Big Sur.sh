@@ -35,7 +35,7 @@ EOF
 
 }
 
-installer_version="11.0"
+installer_version="11"
 
 if [[ "$(sw_vers -buildVersion)" < "15" ]]; then
   echo "Error: Please run upgrade manually, as macOS Upgrade from OS X 10.10 or less is not supported" && exit 1
