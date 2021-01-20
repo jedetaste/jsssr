@@ -1,18 +1,18 @@
 #!/bin/bash
 
 username=(
-  'gastschule'
-  'gastkonto'
-  'lernende'
-  'lokal'
-  'mittelstufe'
-  'unterstufe'
-  'schueler'
-  'schuler'
-  'sus'
-  'schule'
-  'stud'
-  'student'
+  "gastschule"
+  "gastkonto"
+  "lernende"
+  "lokal"
+  "mittelstufe"
+  "unterstufe"
+  "schueler"
+  "schuler"
+  "sus"
+  "schule"
+  "stud"
+  "student"
 )
 
 # Set password policy
