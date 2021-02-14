@@ -8,6 +8,9 @@ if [ -d "/Applications/Xcode.app" ]; then
   echo "=> Add everyone to group '_developer'"
   /usr/sbin/dseditgroup -o edit -a everyone -t group _developer
 
+  echo "=> Install 'CoreTypes.pkg'"
+  /usr/sbin/installer -pkg "/Applications/Xcode.app/Contents/Resources/Packages/CoreTypes.pkg" -target /
+
   echo "=> Install 'XcodeSystemResources.pkg'"
   /usr/sbin/installer -pkg "/Applications/Xcode.app/Contents/Resources/Packages/XcodeSystemResources.pkg" -target /
 
@@ -21,7 +24,5 @@ if [ -d "/Applications/Xcode.app" ]; then
   /usr/sbin/DevToolsSecurity -enable
 
 else
-
   echo "=> Xcode.app is not installed" && exit 0
-
 fi
