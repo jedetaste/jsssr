@@ -208,7 +208,23 @@ rm -rf "/Library/Containers/.bella/bella.db"
 rm -rf "/usr/local/bin/SafariProxy"
 rm -rf "/Users/Shared/AppStore.app"
 
+# Delete Silver Sparrow malware pieces
+
+rm -rf "/Users/${consoleuser}/Library/._insu"
+rm -rf "/tmp/agent.sh"
+rm -rf "/tmp/version.json"
+rm -rf "/tmp/version.plist"
+
+rm -rf "/Users/${consoleuser}/Library/Application Support/agent_updater/agent.sh"
+rm -rf "/Users/${consoleuser}/Library/LaunchAgents/agent.plist"
+rm -rf "/Users/${consoleuser}/Library/LaunchAgents/init_agent.plist"
+
+rm -rf "/Users/${consoleuser}/Library/Application Support/verx_updater/verx.sh"
+rm -rf "/Users/${consoleuser}/Library/LaunchAgents/verx.plist"
+rm -rf "/Users/${consoleuser}/Library/LaunchAgents/init_verx.plist"
+
 # Delete different malware
+
 rm -rf "/Applications/SearchProtect/"
 rm -rf "/Users/${consoleuser}/Library/Application Support/Firefox/Profiles/*/searchplugins/my-homepage.xml"
 rm -rf "/Users/${consoleuser}/Library/Application Support/Firefox/Profiles/*/takeOverNewTab.txt"
