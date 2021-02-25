@@ -12,7 +12,6 @@ echo "=> Symlink useful applications"
 
 symlink_applications=(
   "/Applications/Utilities/Directory Utility.app"
-  "/Applications/Utilities/Network Utility.app"
   "/Applications/Utilities/Screen Sharing.app"
   "/System/Library/CoreServices/Applications/Directory Utility.app"
   "/System/Library/CoreServices/Applications/Network Utility.app"
@@ -258,15 +257,6 @@ done
 echo "=> Disable Auto Update Adobe Acrobat Reader"
 
 defaults write "/Library/Preferences/com.adobe.Reader.plist" DC -dict-add "FeatureLockdown" "<dict><key>bUpdater</key><false/></dict>"
-
-# Disable Auto Update Adobe Flash Player
-
-echo "=> Disable Auto Update Adobe Flash Player"
-
-mkdir -p "/Library/Application Support/Macromedia/" 2>/dev/null
-echo "AutoUpdateDisable=1" >"/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
-echo "SilentAutoUpdateEnable=0" >>"/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
-echo "DisableAnalytics=1" >>"/Library/Application Support/Macromedia/mms.cfg" 2>/dev/null
 
 # Extend threshold for minimal disk space
 
