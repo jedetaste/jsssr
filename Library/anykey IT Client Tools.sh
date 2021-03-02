@@ -35,7 +35,7 @@ chmod +x "/usr/local/bin/dockutil"
 
 echo "=> Install 'docklib'"
 
-version="1.0.5"
+version="1.2.1"
 
 curl -s -L -o "/tmp/docklib-${version}.pkg" "https://github.com/homebysix/docklib/releases/download/v${version}/docklib-${version}.pkg"
 
