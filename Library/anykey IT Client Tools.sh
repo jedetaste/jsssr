@@ -1,9 +1,26 @@
 #!/bin/bash
+# shellcheck disable=SC2071
 
 # Determine macOS Version
 
 echo "=> Determine macOS Version"
 echo "=> Mac is running Darwin $(sw_vers -buildVersion)"
+
+# Rosetta 2
+
+if [ "$(/usr/bin/arch)" = "arm64" ]; then
+  if [[ ! -f "/Library/Apple/System/Library/LaunchDaemons/com.apple.oahd.plist" ]]; then
+    echo "=> This Mac runs on Apple Silicon, installing Rosetta 2..."
+    /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+  else
+    echo "Rosetta 2 is already installed. Nothing to do."
+  fi
+
+elif [ "$(/usr/bin/arch)" = "i386" ]; then
+  echo "=> This Mac runs on Intel"
+else
+  echo "=> Unknown architecture"
+fi
 
 # appleLoops
 
@@ -535,7 +552,6 @@ curl -s -L -o "/usr/local/bin/macosvpn" "https://github.com/halo/macosvpn/releas
 chown root:wheel "/usr/local/bin/macosvpn"
 chmod 775 "/usr/local/bin/macosvpn"
 chmod +x "/usr/local/bin/macosvpn"
-
 
 # erase-install
 
