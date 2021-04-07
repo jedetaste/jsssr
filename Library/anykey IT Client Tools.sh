@@ -22,17 +22,19 @@ else
   echo "=> Unknown architecture"
 fi
 
-# appleLoops
+# appleloops
 
-echo "=> Install 'appleLoops'"
+echo "=> Install 'appleloops'"
 
-version="3.2.1"
+if [ -s "/usr/local/bin/appleloops" ]; then
+  rm -f "/usr/local/bin/appleloops"
+fi
 
-curl -s -L -o "/tmp/appleloops-${version}.pkg" "https://github.com/carlashley/appleloops/releases/download/v${version}/appleloops-${version}.pkg"
+curl -so "/usr/local/bin/appleloops" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/appleloops"
 
-installer -pkg "/tmp/appleloops-${version}.pkg" -target / >/dev/null 2>&1
-
-rm -rf "/tmp/appleloops-${version}.pkg"
+chown root:wheel "/usr/local/bin/appleloops"
+chmod 775 "/usr/local/bin/appleloops"
+chmod +x "/usr/local/bin/appleloops"
 
 # dockutil
 
