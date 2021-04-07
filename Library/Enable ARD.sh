@@ -22,4 +22,8 @@ fi
 
 # Deactivate Screen Sharing Request Login
 
-defaults write "/Library/Preferences/com.apple.RemoteManagement" ScreenSharingReqPermEnabled -bool NO
+defaults write "/Library/Preferences/com.apple.RemoteManagement" ScreenSharingReqPermEnabled -bool false
+
+# Reset ScreenCapture in privacy database
+
+tccutil reset "ScreenCapture"
