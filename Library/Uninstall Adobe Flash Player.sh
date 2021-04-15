@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=SC2181
 
 # This script uninstalls Adobe Flash software
 
@@ -61,7 +62,7 @@ AdobeFlashUninstall() {
   #Remove receipts
 
   rm -Rf /Library/Receipts/*FlashPlayer*
-  pkgutil --forget com.adobe.pkg.FlashPlayer 2>&1 >/dev/null
+  pkgutil --forget com.adobe.pkg.FlashPlayer
 
   # Remove Adobe Flash Player Install Manager.app
 
