@@ -8,7 +8,7 @@ echo "=> Mac is running Darwin $(sw_vers -buildVersion)"
 
 # Configure time settings
 
-echo "==> Set time server to 'time.euro.apple.com'"
+echo "=> Set time server to 'time.euro.apple.com'"
 
 if [[ "$(sw_vers -buildVersion)" > "17" ]]; then
   systemsetup -setusingnetworktime on
