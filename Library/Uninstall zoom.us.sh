@@ -26,7 +26,7 @@ for user_home in "/Users"/*; do
 
     for item in "${array[@]}"; do
       if [ -d "${user_home}/${item}" ]; then
-	    echo "=> Remove '${user_home:?}/${item:?}'"
+        echo "=> Remove '${user_home:?}/${item:?}'"
         rm -rf "${user_home:?}/${item:?}"
       elif [ -s "${user_home}/${item}" ]; then
         echo "=> Remove '${user_home:?}/${item:?}'"
