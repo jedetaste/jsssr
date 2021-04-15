@@ -1,8 +1,9 @@
 #!/bin/bash
+# shellcheck disable=SC2126
 
 IFS=$'\n'
 
-currentuser=$(/usr/local/bin/currentuser)
+currentuser="$(/usr/local/bin/currentuser)"
 
 # Location of the notification center preferences plist for the current user
 
