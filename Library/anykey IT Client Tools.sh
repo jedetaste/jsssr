@@ -36,6 +36,20 @@ chown root:wheel "/usr/local/bin/appleloops"
 chmod 775 "/usr/local/bin/appleloops"
 chmod +x "/usr/local/bin/appleloops"
 
+# telnet
+
+echo "=> Install 'telnet'"
+
+if [ -s "/usr/local/bin/telnet" ]; then
+  rm -f "/usr/local/bin/telnet"
+fi
+
+curl -so "/usr/local/bin/telnet" "https://raw.githubusercontent.com/jedetaste/helper/master/bin/telnet"
+
+chown root:wheel "/usr/local/bin/telnet"
+chmod 775 "/usr/local/bin/telnet"
+chmod +x "/usr/local/bin/telnet"
+
 # dockutil
 
 echo "=> Install 'dockutil'"
