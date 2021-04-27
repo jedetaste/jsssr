@@ -278,6 +278,12 @@ if [ -e "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin" ]; then
   rm -rf "/Library/Internet Plug-Ins/AdobePDFViewerNPAPI.plugin"
 fi
 
+# Deactivate content caching
+
+echo "=> Deactivate content caching"
+
+/usr/bin/AssetCacheManagerUtil deactivate
+
 # Remove wrongly saved Remove2011.log
 
 if [ -s "/Remove2011.log" ]; then
