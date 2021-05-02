@@ -1,8 +1,10 @@
 #!/bin/bash
 
-version="32.0"
+# https://blog.adobe.com/en/publish/2019/05/30/the-future-of-adobe-air.html#gs.znji62
 
-download="https://airdownload.adobe.com/air/mac/download/${version}/AdobeAIR.dmg"
+version="$(curl -s https://airsdk.harman.com/api/config-settings/download | jq -r '.latestVersion.supVersion')"
+
+download="https://airsdk.harman.com/assets/downloads/AdobeAIR.dmg"
 
 install_adobe_air() {
 
@@ -17,10 +19,10 @@ install_adobe_air() {
 
 }
 
-if [ -z "$(defaults read "/Applications/Utilities/Adobe AIR Application Installer.app/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null)" ]; then
+if [ -z "$(defaults read "/Applications/Adobe AIR Installer.app/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null)" ]; then
   echo "=> Adobe AIR not installed"
   install_adobe_air
-elif [ ! "$(defaults read "/Applications/Utilities/Adobe AIR Application Installer.app/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null)" = "${version}" ]; then
+elif [ ! "$(defaults read "/Applications/Adobe AIR Installer.app/Contents/Info.plist" CFBundleShortVersionString 2>/dev/null)" = "${version}" ]; then
   echo "=> Adobe AIR outdated"
   install_adobe_air
 else
