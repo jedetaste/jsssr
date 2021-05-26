@@ -66,9 +66,10 @@ systemsetup -setremotelogin on
 
 # Enable Gatekeeper
 
-echo "=> Enable Gatekeeper"
-
-spctl --master-enable
+if [[ "$(sw_vers -buildVersion)" < "20" ]]; then
+  echo "=> Enable Gatekeeper"
+  spctl --master-enable
+fi
 
 # Disable printer sharing on all printers
 
