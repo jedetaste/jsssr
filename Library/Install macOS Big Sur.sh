@@ -56,6 +56,7 @@ if [ -s "/usr/local/bin/erase-install" ]; then
       --reinstall \
       --force-curl \
       --overwrite \
+      --min-drive-space "36" \
       --os=${installer_version} \
       --catalogurl=https://swscan.apple.com/content/catalogs/others/index-10.12-10.11-10.10-10.9-mountainlion-lion-snowleopard-leopard.merged-1.sucatalog
 
@@ -69,6 +70,7 @@ if [ -s "/usr/local/bin/erase-install" ]; then
       --reinstall \
       --force-curl \
       --overwrite \
+      --min-drive-space "36" \
       --os=${installer_version}
 
     recon_after_upgrade
