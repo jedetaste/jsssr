@@ -4,27 +4,29 @@ declare -r docker_bundle_dir="/Applications/Docker.app/Contents"
 declare -r privtools="/Library/PrivilegedHelperTools"
 declare -r usr_local_bin="/usr/local/bin"
 
-[[ ! -d "${usr_local_bin}" ]] && /bin/mkdir -p ${usr_local_bin}
+if [ -s "${docker_bundle_dir}" ]; then
 
-chmod 1755 "${usr_local_bin}"
+  [[ ! -d "${usr_local_bin}" ]] && /bin/mkdir -p ${usr_local_bin}
 
-for tool in docker docker-compose docker-diagnose docker-machine notary; do
-  /bin/ln -sf "${docker_bundle_dir}/Resources/bin/${tool}" "/usr/local/bin"
-done
+  chmod 1755 "${usr_local_bin}"
 
-[[ ! -d "${privtools}" ]] && mkdir -p "${privtools}"
+  for tool in docker docker-compose docker-diagnose docker-machine notary; do
+    /bin/ln -sf "${docker_bundle_dir}/Resources/bin/${tool}" "/usr/local/bin"
+  done
 
-chmod 1755 "${privtools}"
+  [[ ! -d "${privtools}" ]] && mkdir -p "${privtools}"
 
-# unload com.docker.vmnetd if present
+  chmod 1755 "${privtools}"
 
-if [[ -e "/Library/LaunchDaemons/com.docker.vmnetd.plist" ]]; then
-  launchctl unload "/Library/LaunchDaemons/com.docker.vmnetd.plist"
-fi
+  # unload com.docker.vmnetd if present
 
-install -m 0544 -o root -g wheel "${docker_bundle_dir}/Library/LaunchServices/com.docker.vmnetd" "${privtools}"
+  if [[ -e "/Library/LaunchDaemons/com.docker.vmnetd.plist" ]]; then
+    launchctl unload "/Library/LaunchDaemons/com.docker.vmnetd.plist"
+  fi
 
-/bin/cat >"/Library/LaunchDaemons/com.docker.vmnetd.plist" <<EOF
+  install -m 0544 -o root -g wheel "${docker_bundle_dir}/Library/LaunchServices/com.docker.vmnetd" "${privtools}"
+
+  /bin/cat >"/Library/LaunchDaemons/com.docker.vmnetd.plist" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -53,11 +55,13 @@ install -m 0544 -o root -g wheel "${docker_bundle_dir}/Library/LaunchServices/co
 </plist>
 EOF
 
-chmod 644 "/Library/LaunchDaemons/com.docker.vmnetd.plist"
+  chmod 644 "/Library/LaunchDaemons/com.docker.vmnetd.plist"
 
-VERSION=$(defaults read "/Applications/Docker.app/Contents/Info.plist" VmnetdVersion)
+  VERSION=$(defaults read "/Applications/Docker.app/Contents/Info.plist" VmnetdVersion)
 
-defaults write "/Library/LaunchDaemons/com.docker.vmnetd.plist" Version -string "${VERSION}"
-plutil -convert xml1 "/Library/LaunchDaemons/com.docker.vmnetd.plist"
-chmod 0644 "/Library/LaunchDaemons/com.docker.vmnetd.plist"
-launchctl load "/Library/LaunchDaemons/com.docker.vmnetd.plist"
+  defaults write "/Library/LaunchDaemons/com.docker.vmnetd.plist" Version -string "${VERSION}"
+  plutil -convert xml1 "/Library/LaunchDaemons/com.docker.vmnetd.plist"
+  chmod 0644 "/Library/LaunchDaemons/com.docker.vmnetd.plist"
+  launchctl load "/Library/LaunchDaemons/com.docker.vmnetd.plist"
+
+fi
