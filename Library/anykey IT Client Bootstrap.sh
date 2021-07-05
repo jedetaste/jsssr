@@ -126,25 +126,25 @@ fi
 
 # Localisation
 
-if [ "${1}" == "Swiss German" ] || [ -z "${1}" ]; then
-  langSystem="German"
+if [ "${1}" = "Swiss German" ] || [ -z "${1}" ]; then
+  lang_system="de"
   localisation="true"
-elif [ "${1}" == "Swiss French" ]; then
-  langSystem="French"
+elif [ "${1}" = "Swiss French" ]; then
+  lang_system="fr"
   localisation="true"
-elif [ "${1}" == "English" ]; then
-  langSystem="English"
+elif [ "${1}" = "English" ]; then
+  lang_system="en"
   localisation="true"
-elif [ "${1}" == "British" ]; then
-  langSystem="English"
+elif [ "${1}" = "British" ]; then
+  lang_system="en-GB"
   localisation="true"
-elif [ "${1}" == "No Localisation" ]; then
+elif [ "${1}" = "No Localisation" ]; then
   localisation="false"
 fi
 
-if [ "${localisation}" == "true" ]; then
-  echo "=> Run localisation to '${langSystem}'"
-  languagesetup -langspec "${langSystem}"
+if [ "${localisation}" = "true" ]; then
+  echo "=> Run localisation to '${lang_system}'"
+  languagesetup -langspec "${lang_system}"
 fi
 
 # Disable iCloud, Data & Privacy, Diagnostic, Touch ID and Siri pop-up settings
